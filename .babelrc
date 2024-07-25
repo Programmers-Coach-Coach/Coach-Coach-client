@@ -1,0 +1,15 @@
+// babel-jest 사용하여 ES 모듈 지원 추가 (선택사항)
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "esmodules": true
+        }
+      }
+    ],
+    "@babel/preset-react",
+    "@babel/preset-typescript"
+  ]
+}
