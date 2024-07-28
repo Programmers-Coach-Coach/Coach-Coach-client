@@ -4,11 +4,13 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./style/theme";
+import { GlobalStyle } from "./style/global";
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
