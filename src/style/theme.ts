@@ -5,14 +5,16 @@ export type ColorKey =
   | "white"
   | "gray1"
   | "gray2"
-  | "gray3";
+  | "gray3"
+  | "semiTransparentBlack"
+  | "lightTransparentBlack";
 
 export type FontSize = "large" | "medium" | "small";
 export type FontWeight = "bold" | "normal";
 export type ButtonSize = "large" | "small";
 export type ProfileImageSize = "small" | "medium" | "large";
 export type ModalSize = "default";
-
+export type PaddingSize = "default";
 interface Theme {
   color: Record<ColorKey, string>;
   fontSize: Record<FontSize, string>;
@@ -39,6 +41,9 @@ interface Theme {
       width: string;
     };
   };
+  padding: {
+    [key in PaddingSize]: string;
+  };
 }
 
 export const theme: Theme = {
@@ -49,7 +54,9 @@ export const theme: Theme = {
     white: "#F8F9FA",
     gray1: "#E1E1E1",
     gray2: "#D9D9D9",
-    gray3: "#808080"
+    gray3: "#808080",
+    semiTransparentBlack: "rgba(0, 0, 0, 0.8)",
+    lightTransparentBlack: "rgba(0, 0, 0, 0.3)"
   },
   fontSize: {
     large: "20px",
@@ -93,5 +100,8 @@ export const theme: Theme = {
     default: {
       width: "352px"
     }
+  },
+  padding: {
+    default: "50px"
   }
 };

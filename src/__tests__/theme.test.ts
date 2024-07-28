@@ -16,6 +16,8 @@ describe("Theme Object", () => {
     expect(theme.color.gray1).toBe("#E1E1E1");
     expect(theme.color.gray2).toBe("#D9D9D9");
     expect(theme.color.gray3).toBe("#808080");
+    expect(theme.color.semiTransparentBlack).toBe("rgba(0, 0, 0, 0.8)");
+    expect(theme.color.lightTransparentBlack).toBe("rgba(0, 0, 0, 0.3)");
   });
 
   it("should have correct fontSize values", () => {
@@ -59,5 +61,9 @@ describe("Theme Object", () => {
 
   it("should have correct modal value", () => {
     expect(theme.modal.default.width).toBe("352px");
+  });
+
+  it("should have correct padding value", () => {
+    expect(theme.padding.default).toBe("50px");
   });
 });
