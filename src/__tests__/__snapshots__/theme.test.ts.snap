@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Theme Object should match the theme snapshot 1`] = `
+{
+  "borderRadius": {
+    "default": "20px",
+  },
+  "boxShadow": "0 10px 40px 0 rgba(0, 0, 0, 0.03)",
+  "button": {
+    "large": {
+      "height": "48px",
+      "padding": "16px",
+      "width": "100%",
+    },
+    "small": {
+      "height": "32px",
+      "padding": "16px",
+    },
+  },
+  "color": {
+    "background": "#234257",
+    "black": "#000000",
+    "gray1": "#E1E1E1",
+    "gray2": "#D9D9D9",
+    "gray3": "#808080",
+    "white": "#F8F9FA",
+    "yellow": "#FEAF29",
+  },
+  "fontSize": {
+    "large": "20px",
+    "medium": "16px",
+    "small": "12px",
+  },
+  "fontWeight": {
+    "bold": "700",
+    "normal": "400",
+  },
+  "modal": {
+    "default": {
+      "width": "352px",
+    },
+  },
+  "profileImage": {
+    "large": {
+      "height": "140px",
+      "width": "316px",
+    },
+    "medium": {
+      "height": "114px",
+      "width": "114px",
+    },
+    "small": {
+      "height": "86px",
+      "width": "86px",
+    },
+  },
+}
+`;
