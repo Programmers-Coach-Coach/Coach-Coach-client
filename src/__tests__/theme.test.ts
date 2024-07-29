@@ -1,44 +1,64 @@
 import "jest-styled-components";
 import { theme } from "../style/theme";
-
+import {
+  ColorKey,
+  FontSize,
+  FontWeight,
+  ButtonSize,
+  ProfileImageSize
+} from "../style/theme";
 describe("Theme Object", () => {
-  // Snapshot Testing
   it("should match the theme snapshot", () => {
     expect(theme).toMatchSnapshot();
   });
 
-  // Unit Testing
-  it("should have correct color values", () => {
-    expect(theme.color.background).toBe("#234257");
-    expect(theme.color.yellow).toBe("#FEAF29");
-    expect(theme.color.black).toBe("#000000");
-    expect(theme.color.white).toBe("#F8F9FA");
-    expect(theme.color.gray1).toBe("#E1E1E1");
-    expect(theme.color.gray2).toBe("#D9D9D9");
-    expect(theme.color.gray3).toBe("#808080");
-    expect(theme.color.semiTransparentBlack).toBe("rgba(0, 0, 0, 0.8)");
-    expect(theme.color.lightTransparentBlack).toBe("rgba(0, 0, 0, 0.3)");
-  });
+  test.each([
+    ["background", "#234257"],
+    ["yellow", "#FEAF29"],
+    ["black", "#000000"],
+    ["white", "#F8F9FA"],
+    ["gray1", "#E1E1E1"],
+    ["gray2", "#D9D9D9"],
+    ["gray3", "#808080"],
+    ["semiTransparentBlack", "rgba(0, 0, 0, 0.8)"],
+    ["lightTransparentBlack", "rgba(0, 0, 0, 0.3)"]
+  ] as [ColorKey, string][])(
+    "should have correct color value for %s",
+    (colorKey, expectedValue) => {
+      expect(theme.color[colorKey]).toBe(expectedValue);
+    }
+  );
 
-  it("should have correct fontSize values", () => {
-    expect(theme.fontSize.large).toBe("20px");
-    expect(theme.fontSize.medium).toBe("16px");
-    expect(theme.fontSize.small).toBe("12px");
-  });
+  test.each([
+    ["large", "20px"],
+    ["medium", "16px"],
+    ["small", "12px"]
+  ] as [FontSize, string][])(
+    "should have correct fontSize value for %s",
+    (fontSize, expectedValue) => {
+      expect(theme.fontSize[fontSize]).toBe(expectedValue);
+    }
+  );
 
-  it("should have correct fontWeight values", () => {
-    expect(theme.fontWeight.bold).toBe("700");
-    expect(theme.fontWeight.normal).toBe("400");
-  });
+  test.each([
+    ["bold", "700"],
+    ["normal", "400"]
+  ] as [FontWeight, string][])(
+    "should have correct fontWeight value for %s",
+    (fontWeight, expectedValue) => {
+      expect(theme.fontWeight[fontWeight]).toBe(expectedValue);
+    }
+  );
 
-  it("should have correct button values", () => {
-    expect(theme.button.large.padding).toBe("16px");
-    expect(theme.button.large.height).toBe("48px");
-    expect(theme.button.large.width).toBe("100%");
-
-    expect(theme.button.small.padding).toBe("16px");
-    expect(theme.button.small.height).toBe("32px");
-  });
+  test.each([
+    ["large", { padding: "16px", height: "48px", width: "100%" }],
+    ["small", { padding: "16px", height: "32px" }]
+  ] as [ButtonSize, { padding: string; height: string; width?: string }][])(
+    "should have correct button value for %s",
+    (buttonSize, expectedValue) => {
+      expect(theme.button[buttonSize]).toEqual(expectedValue);
+    }
+  );
 
   it("should have correct borderRadius value", () => {
     expect(theme.borderRadius.default).toBe("20px");
@@ -48,17 +68,16 @@ describe("Theme Object", () => {
     expect(theme.boxShadow).toBe("0 10px 40px 0 rgba(0, 0, 0, 0.03)");
   });
 
-  it("should have correct profileImage values", () => {
-    expect(theme.profileImage.small.width).toBe("86px");
-    expect(theme.profileImage.small.height).toBe("86px");
-
-    expect(theme.profileImage.medium.width).toBe("114px");
-    expect(theme.profileImage.medium.height).toBe("114px");
-
-    expect(theme.profileImage.large.width).toBe("316px");
-    expect(theme.profileImage.large.height).toBe("140px");
-  });
-
+  test.each([
+    ["small", { width: "86px", height: "86px" }],
+    ["medium", { width: "114px", height: "114px" }],
+    ["large", { width: "316px", height: "140px" }]
+  ] as [ProfileImageSize, { width: string; height: string }][])(
+    "should have correct profileImage value for %s",
+    (profileImageSize, expectedValue) => {
+      expect(theme.profileImage[profileImageSize]).toEqual(expectedValue);
+    }
+  );
   it("should have correct modal value", () => {
     expect(theme.modal.default.width).toBe("352px");
   });
