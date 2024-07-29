@@ -20,14 +20,34 @@ const FooterPickerStyle = styled.div`
   width: 100%;
 `;
 
-const Item = ({ item }: { item: { name: string; link: string } }) => {
-  return <ItemStyle>{item.name}</ItemStyle>;
+const Item = ({
+  item
+}: {
+  item: { name: string; link: string; icon: JSX.Element };
+}) => {
+  return (
+    <ItemStyle>
+      {item.icon}
+      {item.name}
+    </ItemStyle>
+  );
 };
 
 const ItemStyle = styled.div`
   display: flex;
+  align-items: center;
   gap: 22px;
   padding: 10px 34px;
   cursor: pointer;
+
+  /** todo: bold_body 공통 컴포넌트 제작 후 변경 */
+  font-size: 16px;
+  line-height: 32px;
+  font-weight: bold;
+
+  svg {
+    width: 30px;
+    height: 30px;
+  }
 `;
 export default FooterPicker;

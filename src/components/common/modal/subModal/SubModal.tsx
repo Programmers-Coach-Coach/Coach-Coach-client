@@ -4,6 +4,7 @@ import styled from "styled-components";
 interface Props {
   children: React.ReactNode;
 }
+
 const SubModal = ({ children }: Props) => {
   return <SubModalStyle>{children}</SubModalStyle>;
 };

@@ -8,9 +8,10 @@ interface Props {
 
 const CenterModal = ({ children, schema }: Props) => {
   const { button } = modalData[schema];
+
   return (
     <CenterModalStyle>
-      {children}
+      <Main>{children}</Main>
       <Footer>
         <button>취소</button>
         <button>{button}</button>
@@ -29,6 +30,8 @@ const CenterModalStyle = styled.div`
   border-radius: 20px;
   background-color: ${({ theme }) => theme.color.semiTransparentBlack};
 `;
+
+const Main = styled.div``;
 
 const Footer = styled.div`
   display: flex;
