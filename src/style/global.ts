@@ -5,13 +5,10 @@ export const GlobalStyle = createGlobalStyle`
         font-family: 'Pretendard';
         font-style: normal;
         font-weight: 400;
-        src: url('https://cdn.jsdelivr.net/npm/pretendard@1.3.5/dist/web/static/pretendard.css');
+        src: url('https://cdn.jsdelivr.net/npm/pretendard@1.3.5/dist/web/static/pretendard.css') format('font-woff2');
     }
-    body {
+    * {
+        margin : 0;
         padding : 0;
-        max-width: 600px;
-        margin: 0 auto;
-        background-color: ${({ theme }) => theme.color.background};
-        font-family: 'Pretendard', sans-serif;
     }
 `;
