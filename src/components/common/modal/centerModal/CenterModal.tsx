@@ -17,15 +17,15 @@ const CenterModal = ({ children, schema, closeModal }: Props) => {
     }
   };
 
-  const { button } = modalData[schema];
+  const { primaryButton, secondaryButton } = modalData[schema];
 
   return (
     <CenterModalStyle onClick={overlayClick}>
       <Contents ref={modalRef}>
         <Main>{children}</Main>
         <Footer>
-          <button onClick={closeModal}>취소</button>
-          <button>{button}</button>
+          <button onClick={closeModal}>{secondaryButton}</button>
+          <button>{primaryButton}</button>
         </Footer>
       </Contents>
     </CenterModalStyle>

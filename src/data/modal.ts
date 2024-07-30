@@ -14,7 +14,8 @@ export type TFooterPicker = "profile" | "routine";
 export type TRoutinePicker = "write";
 
 export interface IModalData {
-  button: string;
+  primaryButton: string;
+  secondaryButton: string;
   onClick: () => void;
 }
 
@@ -31,35 +32,43 @@ export interface IRoutinePickerData {
 
 export const modal: Record<TModal, IModalData> = {
   "star-enroll": {
-    button: "등록하기",
+    primaryButton: "등록하기",
+    secondaryButton: "취소",
     onClick: () => {}
   },
   "routine-enroll": {
-    button: "등록하기",
+    primaryButton: "등록하기",
+    secondaryButton: "취소",
     onClick: () => {}
   },
   "routine-modify": {
-    button: "수정하기",
+    primaryButton: "수정하기",
+    secondaryButton: "취소",
     onClick: () => {}
   },
   "coach-switch": {
-    button: "전환하기",
+    primaryButton: "전환하기",
+    secondaryButton: "취소",
     onClick: () => {}
   },
   "category-enroll": {
-    button: "등록하기",
+    primaryButton: "등록하기",
+    secondaryButton: "취소",
     onClick: () => {}
   },
   "category-modify": {
-    button: "수정하기",
+    primaryButton: "수정하기",
+    secondaryButton: "취소",
     onClick: () => {}
   },
   "sports-enroll": {
-    button: "등록하기",
+    primaryButton: "등록하기",
+    secondaryButton: "취소",
     onClick: () => {}
   },
   "sports-modify": {
-    button: "수정하기",
+    primaryButton: "수정하기",
+    secondaryButton: "취소",
     onClick: () => {}
   }
 };
