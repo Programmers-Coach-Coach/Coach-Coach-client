@@ -1,6 +1,11 @@
 import { TextField } from "@mui/material";
-import { AuthInputProps } from "src/models/auth.model";
 import styled from "styled-components";
+
+interface AuthInputProps {
+  label: string;
+  name: string;
+  helperText?: string;
+}
 
 const AuthInput = (props: AuthInputProps) => {
   return (
