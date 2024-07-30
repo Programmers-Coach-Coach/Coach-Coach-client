@@ -31,7 +31,7 @@ const FooterStyle = styled.footer`
   bottom: 0;
   width: 100%;
   max-width: 600px;
-  height: 20px;
+  height: 60px;
 
   .HomeIcon svg {
     width: 20px;
