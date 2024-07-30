@@ -15,6 +15,7 @@ export type TRoutinePicker = "write";
 
 export interface IModalData {
   button: string;
+  onClick: () => void;
 }
 
 export interface IFooterPickerData {
@@ -30,28 +31,36 @@ export interface IRoutinePickerData {
 
 export const modal: Record<TModal, IModalData> = {
   "star-enroll": {
-    button: "등록하기"
+    button: "등록하기",
+    onClick: () => {}
   },
   "routine-enroll": {
-    button: "등록하기"
+    button: "등록하기",
+    onClick: () => {}
   },
   "routine-modify": {
-    button: "수정하기"
+    button: "수정하기",
+    onClick: () => {}
   },
   "coach-switch": {
-    button: "전환하기"
+    button: "전환하기",
+    onClick: () => {}
   },
   "category-enroll": {
-    button: "등록하기"
+    button: "등록하기",
+    onClick: () => {}
   },
   "category-modify": {
-    button: "수정하기"
+    button: "수정하기",
+    onClick: () => {}
   },
   "sports-enroll": {
-    button: "등록하기"
+    button: "등록하기",
+    onClick: () => {}
   },
   "sports-modify": {
-    button: "수정하기"
+    button: "수정하기",
+    onClick: () => {}
   }
 };
 

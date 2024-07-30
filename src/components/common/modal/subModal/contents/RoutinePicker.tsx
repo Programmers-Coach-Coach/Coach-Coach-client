@@ -1,4 +1,8 @@
-import { routinePicker, TRoutinePicker } from "../../../../../data/modal";
+import {
+  IRoutinePickerData,
+  routinePicker,
+  TRoutinePicker
+} from "../../../../../data/modal";
 import styled from "styled-components";
 
 interface Props {
@@ -21,7 +25,7 @@ const RoutinePickerStyle = styled.div`
   width: 100%;
 `;
 
-const Item = ({ item }: { item: { name: string; onClick: () => void } }) => {
+const Item = ({ item }: { item: IRoutinePickerData }) => {
   return <ItemStyle onClick={item.onClick}>{item.name}</ItemStyle>;
 };
 

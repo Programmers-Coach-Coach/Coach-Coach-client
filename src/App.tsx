@@ -1,22 +1,12 @@
 import styled, { ThemeProvider } from "styled-components";
 import { theme } from "./style/theme";
 import { GlobalStyle } from "./style/global";
-import CenterModal from "./components/common/modal/centerModal/CenterModal";
-import SubModal from "./components/common/modal/subModal/SubModal";
-import FooterPicker from "./components/common/modal/subModal/contents/FooterPicker";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Container>
-        <CenterModal schema="coach-switch">
-          트레이너로 전환하시겠어요?
-        </CenterModal>
-        <SubModal>
-          <FooterPicker schema="profile" />
-        </SubModal>
-      </Container>
+      <Container></Container>
     </ThemeProvider>
   );
 }

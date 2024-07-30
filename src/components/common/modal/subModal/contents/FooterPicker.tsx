@@ -1,4 +1,8 @@
-import { footerPicker, TFooterPicker } from "./../../../../../data/modal";
+import {
+  footerPicker,
+  IFooterPickerData,
+  TFooterPicker
+} from "./../../../../../data/modal";
 import styled from "styled-components";
 
 interface Props {
@@ -20,11 +24,7 @@ const FooterPickerStyle = styled.div`
   width: 100%;
 `;
 
-const Item = ({
-  item
-}: {
-  item: { name: string; link: string; icon: JSX.Element };
-}) => {
+const Item = ({ item }: { item: IFooterPickerData }) => {
   return (
     <ItemStyle>
       {item.icon}
