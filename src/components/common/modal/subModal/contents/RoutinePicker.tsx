@@ -2,7 +2,7 @@ import {
   IRoutinePickerData,
   routinePicker,
   TRoutinePicker
-} from "../../../../../data/modal";
+} from "@/data/modal";
 import styled from "styled-components";
 
 interface Props {
