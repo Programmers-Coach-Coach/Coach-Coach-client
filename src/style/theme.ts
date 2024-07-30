@@ -60,6 +60,8 @@ interface Theme {
       fontSize: string;
       lineHeight: string;
       bold: string;
+    };
+  };
   buttonVariant: {
     contained: {
       backgroundColor: string;
@@ -161,6 +163,8 @@ export const theme: Theme = {
       fontSize: "16px",
       lineHeight: "32px",
       bold: "800"
+    }
+  },
   buttonVariant: {
     contained: {
       backgroundColor: "#FEAF29",
