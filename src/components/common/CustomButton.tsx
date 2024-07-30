@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 interface CustomButtonProps {
   size: "small" | "large";
   variant: "contained" | "outlined";
-  children: string;
+  children: React.ReactNode;
   onClick?: () => void;
 }
 
