@@ -1,9 +1,6 @@
 import { styled } from "styled-components";
-import { GrHomeRounded } from "react-icons/gr";
-import { CiDumbbell } from "react-icons/ci";
-import { CiBellOn } from "react-icons/ci";
-import { RxPerson } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
+import { ICONS } from "../../../constants/assets";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -14,10 +11,12 @@ const Footer = () => {
 
   return (
     <FooterStyle>
-      <GrHomeRounded size="20px" color="#F8F9FA" onClick={onClickHome} />
-      <CiDumbbell size="30px" color="#F8F9FA" />
-      <CiBellOn size="30px" color="#F8F9FA" />
-      <RxPerson size="25px" color="#F8F9FA" />
+      <div className="HomeIcon" onClick={onClickHome}>
+        {ICONS.home}
+      </div>
+      <div className="RoutineIcon">{ICONS.routine}</div>
+      <div className="AlarmIcon">{ICONS.alarm}</div>
+      <div className="ProfileIcon">{ICONS.human.profile}</div>
     </FooterStyle>
   );
 };
@@ -31,7 +30,28 @@ const FooterStyle = styled.footer`
   position: fixed;
   bottom: 0;
   width: 100%;
-  max-width: 560px;
+  max-width: 600px;
   height: 20px;
+
+  .HomeIcon svg {
+    width: 20px;
+    height: 20px;
+  }
+  .RoutineIcon svg {
+    width: 30px;
+    height: 30px;
+  }
+  .AlarmIcon svg {
+    width: 30px;
+    height: 30px;
+  }
+  .ProfileIcon svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  svg {
+    color: ${({ theme }) => theme.color.white};
+  }
 `;
 export default Footer;

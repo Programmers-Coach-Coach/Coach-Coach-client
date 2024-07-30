@@ -60,6 +60,18 @@ interface Theme {
       fontSize: string;
       lineHeight: string;
       bold: string;
+  buttonVariant: {
+    contained: {
+      backgroundColor: string;
+      color: string;
+      border: string;
+      borderHoverColor: string;
+    };
+    outlined: {
+      backgroundColor: string;
+      color: string;
+      border: string;
+      borderHoverColor: string;
     };
   };
 }
@@ -89,7 +101,7 @@ export const theme: Theme = {
     large: {
       padding: "16px",
       height: "48px",
-      width: "100%"
+      width: "314px"
     },
     small: {
       padding: "16px",
@@ -149,6 +161,18 @@ export const theme: Theme = {
       fontSize: "16px",
       lineHeight: "32px",
       bold: "800"
+  buttonVariant: {
+    contained: {
+      backgroundColor: "#FEAF29",
+      color: "#F8F9FA",
+      border: "none",
+      borderHoverColor: "#FEAF29"
+    },
+    outlined: {
+      backgroundColor: "transparent",
+      color: "#FEAF29",
+      border: "1px solid #FEAF29",
+      borderHoverColor: "#FEAF29"
     }
   }
 };
