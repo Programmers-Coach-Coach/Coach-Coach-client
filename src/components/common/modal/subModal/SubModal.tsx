@@ -1,21 +1,18 @@
+import useOverlayClick from "@/hooks/useOverlayClick";
 import React from "react";
-import { useRef } from "react";
-
 import styled from "styled-components";
 
 interface Props {
   children: React.ReactNode;
   closeModal: () => void;
+  overlayDisabled?: boolean; // TRUE: 사용자가 모달 외부의 오버레이 영역을 클릭해도 안닫힌다, FALSE: 닫힌다.
 }
 
-const SubModal = ({ children, closeModal }: Props) => {
-  const modalRef = useRef<HTMLDivElement | null>(null);
-
-  const overlayClick = (e: React.MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-      closeModal();
-    }
-  };
+const SubModal = ({ children, closeModal, overlayDisabled = false }: Props) => {
+  const { modalRef, overlayClick } = useOverlayClick(
+    closeModal,
+    overlayDisabled
+  );
 
   return (
     <SubModalStyle onClick={overlayClick}>

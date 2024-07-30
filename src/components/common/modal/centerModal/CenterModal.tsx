@@ -1,23 +1,25 @@
 import styled from "styled-components";
 import { TModal, modal as modalData } from "../../../../data/modal";
-import { useRef } from "react";
+import useOverlayClick from "@/hooks/useOverlayClick";
 
 interface Props {
   children: React.ReactNode;
   schema: TModal;
   closeModal: () => void;
+  overlayDisabled?: boolean; // TRUE: 사용자가 모달 외부의 오버레이 영역을 클릭해도 안닫힌다, FALSE: 닫힌다.
 }
 
-const CenterModal = ({ children, schema, closeModal }: Props) => {
-  const modalRef = useRef<HTMLDivElement | null>(null);
-
-  const overlayClick = (e: React.MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-      closeModal();
-    }
-  };
-
+const CenterModal = ({
+  children,
+  schema,
+  closeModal,
+  overlayDisabled = false
+}: Props) => {
   const { primaryButton, secondaryButton } = modalData[schema];
+  const { modalRef, overlayClick } = useOverlayClick(
+    closeModal,
+    overlayDisabled
+  );
 
   return (
     <CenterModalStyle onClick={overlayClick}>
