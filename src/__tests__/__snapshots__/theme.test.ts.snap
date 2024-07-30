@@ -10,11 +10,25 @@ exports[`Theme Object should match the theme snapshot 1`] = `
     "large": {
       "height": "48px",
       "padding": "16px",
-      "width": "100%",
+      "width": "314px",
     },
     "small": {
       "height": "32px",
       "padding": "16px",
+    },
+  },
+  "buttonVariant": {
+    "contained": {
+      "backgroundColor": "#FEAF29",
+      "border": "none",
+      "borderHoverColor": "#FEAF29",
+      "color": "#F8F9FA",
+    },
+    "outlined": {
+      "backgroundColor": "transparent",
+      "border": "1px solid #FEAF29",
+      "borderHoverColor": "#FEAF29",
+      "color": "#FEAF29",
     },
   },
   "color": {

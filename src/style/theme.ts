@@ -44,6 +44,20 @@ interface Theme {
   padding: {
     [key in PaddingSize]: string;
   };
+  buttonVariant: {
+    contained: {
+      backgroundColor: string;
+      color: string;
+      border: string;
+      borderHoverColor: string;
+    };
+    outlined: {
+      backgroundColor: string;
+      color: string;
+      border: string;
+      borderHoverColor: string;
+    };
+  };
 }
 
 export const theme: Theme = {
@@ -71,7 +85,7 @@ export const theme: Theme = {
     large: {
       padding: "16px",
       height: "48px",
-      width: "100%"
+      width: "314px"
     },
     small: {
       padding: "16px",
@@ -103,5 +117,19 @@ export const theme: Theme = {
   },
   padding: {
     default: "50px"
+  },
+  buttonVariant: {
+    contained: {
+      backgroundColor: "#FEAF29",
+      color: "#F8F9FA",
+      border: "none",
+      borderHoverColor: "#FEAF29" // 호버 시 색상
+    },
+    outlined: {
+      backgroundColor: "transparent",
+      color: "#FEAF29",
+      border: "1px solid #FEAF29",
+      borderHoverColor: "#FEAF29" // 호버 시 색상
+    }
   }
 };

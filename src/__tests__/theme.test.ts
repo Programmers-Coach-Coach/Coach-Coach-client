@@ -7,6 +7,7 @@ import {
   ButtonSize,
   ProfileImageSize
 } from "../style/theme";
+
 describe("Theme Object", () => {
   it("should match the theme snapshot", () => {
     expect(theme).toMatchSnapshot();
@@ -51,7 +52,7 @@ describe("Theme Object", () => {
   );
 
   test.each([
-    ["large", { padding: "16px", height: "48px", width: "100%" }],
+    ["large", { padding: "16px", height: "48px", width: "314px" }],
     ["small", { padding: "16px", height: "32px" }]
   ] as [ButtonSize, { padding: string; height: string; width?: string }][])(
     "should have correct button value for %s",
@@ -78,6 +79,7 @@ describe("Theme Object", () => {
       expect(theme.profileImage[profileImageSize]).toEqual(expectedValue);
     }
   );
+
   it("should have correct modal value", () => {
     expect(theme.modal.default.width).toBe("352px");
   });
@@ -85,4 +87,38 @@ describe("Theme Object", () => {
   it("should have correct padding value", () => {
     expect(theme.padding.default).toBe("50px");
   });
+
+  test.each([
+    [
+      "contained",
+      {
+        backgroundColor: "#FEAF29",
+        color: "#F8F9FA",
+        border: "none",
+        borderHoverColor: "#FEAF29"
+      }
+    ],
+    [
+      "outlined",
+      {
+        backgroundColor: "transparent",
+        color: "#FEAF29",
+        border: "1px solid #FEAF29",
+        borderHoverColor: "#FEAF29"
+      }
+    ]
+  ] as [
+    keyof typeof theme.buttonVariant,
+    {
+      backgroundColor: string;
+      color: string;
+      border: string;
+      borderHoverColor: string;
+    }
+  ][])(
+    "should have correct buttonVariant value for %s",
+    (variant, expectedValue) => {
+      expect(theme.buttonVariant[variant]).toEqual(expectedValue);
+    }
+  );
 });
