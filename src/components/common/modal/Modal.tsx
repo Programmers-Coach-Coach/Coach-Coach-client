@@ -1,21 +1,21 @@
 import styled from "styled-components";
-import { TModal, modal as modalData } from "../../../../data/modal";
 import useOverlayClick from "@/hooks/useOverlayClick";
+
+type Position = "center" | "footer-above";
 
 interface Props {
   children: React.ReactNode;
-  schema: TModal;
   closeModal: () => void;
+  position: Position; // 모달을 띄울 위치
   overlayDisabled?: boolean; // TRUE: 사용자가 모달 외부의 오버레이 영역을 클릭해도 안닫힌다, FALSE: 닫힌다.
 }
 
-const CenterModal = ({
+const Modal = ({
   children,
-  schema,
   closeModal,
+  position,
   overlayDisabled = false
 }: Props) => {
-  const { primaryButton, secondaryButton } = modalData[schema];
   const { modalRef, overlayClick } = useOverlayClick(
     closeModal,
     overlayDisabled
@@ -23,13 +23,12 @@ const CenterModal = ({
 
   return (
     <CenterModalStyle onClick={overlayClick}>
-      <Contents ref={modalRef}>
-        <Main>{children}</Main>
-        <Footer>
-          <button onClick={closeModal}>{secondaryButton}</button>
-          <button>{primaryButton}</button>
-        </Footer>
-      </Contents>
+      {position === "center" && (
+        <CenterContents ref={modalRef}>{children}</CenterContents>
+      )}
+      {position === "footer-above" && (
+        <FooterAboveContents ref={modalRef}>{children}</FooterAboveContents>
+      )}
     </CenterModalStyle>
   );
 };
@@ -42,7 +41,7 @@ const CenterModalStyle = styled.div`
   height: 100vh;
 `;
 
-const Contents = styled.div`
+const CenterContents = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -58,19 +57,18 @@ const Contents = styled.div`
   z-index: 1000;
 `;
 
-const Main = styled.div``;
-
-const Footer = styled.div`
+const FooterAboveContents = styled.div`
   display: flex;
-  justify-content: flex-end;
-  gap: 20px;
+  flex-direction: column;
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translate(-50%);
 
-  button:first-of-type {
-    color: inherit;
-  }
-  button:nth-of-type(2) {
-    color: ${({ theme }) => theme.color.yellow};
-  }
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+  background-color: ${({ theme }) => theme.color.semiTransparentBlack};
+  z-index: 1000;
 `;
 
-export default CenterModal;
+export default Modal;
