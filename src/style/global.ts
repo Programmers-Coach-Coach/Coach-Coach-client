@@ -10,5 +10,15 @@ export const GlobalStyle = createGlobalStyle`
     * {
         margin : 0;
         padding : 0;
+        box-sizing: border-box;
+    }
+    body {
+        color: ${({ theme }) => theme.color.white}
+    }
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: inherit;
     }
 `;

@@ -2,6 +2,7 @@ import styled, { ThemeProvider } from "styled-components";
 import { theme } from "./style/theme";
 import { GlobalStyle } from "./style/global";
 import SelectBox from "./components/common/SelectBox";
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
