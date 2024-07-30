@@ -15,6 +15,10 @@ export type ButtonSize = "large" | "small";
 export type ProfileImageSize = "small" | "medium" | "large";
 export type ModalSize = "default";
 export type PaddingSize = "default";
+
+export type TitleSize = "t1" | "t2";
+export type BodySize = "b1" | "b2" | "b3";
+
 interface Theme {
   color: Record<ColorKey, string>;
   fontSize: Record<FontSize, string>;
@@ -44,6 +48,18 @@ interface Theme {
   padding: {
     [key in PaddingSize]: string;
   };
+  titleSize: {
+    [key in TitleSize]: {
+      fontSize: string;
+      lineHeight: string;
+      bold: string;
+    };
+  };
+  bodySize: {
+    [key in BodySize]: {
+      fontSize: string;
+      lineHeight: string;
+      bold: string;
   buttonVariant: {
     contained: {
       backgroundColor: string;
@@ -118,18 +134,45 @@ export const theme: Theme = {
   padding: {
     default: "50px"
   },
+  titleSize: {
+    t1: {
+      fontSize: "20px",
+      lineHeight: "36px",
+      bold: "800"
+    },
+    t2: {
+      fontSize: "16px",
+      lineHeight: "24px",
+      bold: "800"
+    }
+  },
+  bodySize: {
+    b1: {
+      fontSize: "16px",
+      lineHeight: "16px",
+      bold: "400"
+    },
+    b2: {
+      fontSize: "12px",
+      lineHeight: "16px",
+      bold: "400"
+    },
+    b3: {
+      fontSize: "16px",
+      lineHeight: "32px",
+      bold: "800"
   buttonVariant: {
     contained: {
       backgroundColor: "#FEAF29",
       color: "#F8F9FA",
       border: "none",
-      borderHoverColor: "#FEAF29" // 호버 시 색상
+      borderHoverColor: "#FEAF29"
     },
     outlined: {
       backgroundColor: "transparent",
       color: "#FEAF29",
       border: "1px solid #FEAF29",
-      borderHoverColor: "#FEAF29" // 호버 시 색상
+      borderHoverColor: "#FEAF29"
     }
   }
 };

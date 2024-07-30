@@ -1,5 +1,5 @@
 import "jest-styled-components";
-import { theme } from "../style/theme";
+import { theme, BodySize, TitleSize } from "../style/theme";
 import {
   ColorKey,
   FontSize,
@@ -89,6 +89,23 @@ describe("Theme Object", () => {
   });
 
   test.each([
+    ["t1", { fontSize: "20px", lineHeight: "36px", bold: "800" }],
+    ["t2", { fontSize: "16px", lineHeight: "24px", bold: "800" }]
+  ] as [TitleSize, { fontSize: string; lineHeight: string; bold: string }][])(
+    "should have correct titleSize value for %s",
+    (titleSize, expectedValue) => {
+      expect(theme.titleSize[titleSize]).toEqual(expectedValue);
+    }
+  );
+
+  test.each([
+    ["b1", { fontSize: "16px", lineHeight: "16px", bold: "400" }],
+    ["b2", { fontSize: "12px", lineHeight: "16px", bold: "400" }],
+    ["b3", { fontSize: "16px", lineHeight: "32px", bold: "800" }]
+  ] as [BodySize, { fontSize: string; lineHeight: string; bold: string }][])(
+    "should have correct titleSize value for %s",
+    (bodySize, expectedValue) => {
+      expect(theme.bodySize[bodySize]).toEqual(expectedValue);
     [
       "contained",
       {

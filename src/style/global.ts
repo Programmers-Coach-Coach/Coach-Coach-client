@@ -21,4 +21,33 @@ export const GlobalStyle = createGlobalStyle`
         cursor: pointer;
         color: inherit;
     }
+    h1 {
+        font-size: ${({ theme }) => theme.titleSize.t1.fontSize};
+        line-height: ${({ theme }) => theme.titleSize.t1.lineHeight};
+        font-weight: ${({ theme }) => theme.titleSize.t1.bold};
+    }
+    h2 {
+        font-size: ${({ theme }) => theme.titleSize.t2.fontSize};
+        line-height: ${({ theme }) => theme.titleSize.t2.lineHeight};
+        font-weight: ${({ theme }) => theme.titleSize.t2.bold};
+    }
+    
+    .b1 {
+        font-size: ${({ theme }) => theme.bodySize.b1.fontSize};
+        line-height: ${({ theme }) => theme.bodySize.b1.lineHeight};
+        font-weight: ${({ theme }) => theme.bodySize.b1.bold};
+    }
+
+    .b2 {
+        font-size: ${({ theme }) => theme.bodySize.b2.fontSize};
+        line-height: ${({ theme }) => theme.bodySize.b2.lineHeight};
+        font-weight: ${({ theme }) => theme.bodySize.b2.bold};
+    }
+
+    .b3 {
+        font-size: ${({ theme }) => theme.bodySize.b3.fontSize};
+        line-height: ${({ theme }) => theme.bodySize.b3.lineHeight};
+        font-weight: ${({ theme }) => theme.bodySize.b3.bold};
+    }
+
 `;
