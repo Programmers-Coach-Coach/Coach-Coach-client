@@ -1,13 +1,15 @@
 import axios, { AxiosRequestConfig } from "axios";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
+const API_BASE_URL =
+  import.meta.env.MODE === "development" ? `${BASE_URL}/api` : `${BASE_URL}`;
 const DEFAULT_TIMEOUT = 30000;
 
 type RequestMethod = "get" | "post" | "put" | "delete";
 
 export const createClient = (config?: AxiosRequestConfig) => {
   const axiosInstance = axios.create({
-    baseURL: BASE_URL,
+    baseURL: API_BASE_URL,
     timeout: DEFAULT_TIMEOUT,
     headers: {
       "Content-Type": "application/json"
