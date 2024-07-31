@@ -1,4 +1,19 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
+
+interface WhiteSpaceProps {
+  $width?: number;
+  $height?: number;
+}
+interface BackgroundDimmedProps {
+  $borderRadius?: string;
+}
+
+interface LineClamp {
+  $line: number;
+  $fontSize?: string;
+  $color?: string;
+  $lineHeight?: string;
+}
 
 export const GlobalStyle = createGlobalStyle`
     @font-face {
@@ -56,4 +71,29 @@ export const GlobalStyle = createGlobalStyle`
         cursor: pointer;
     }
 
+`;
+
+export const WhiteSpace = styled.div<WhiteSpaceProps>`
+  width: ${({ $width }) => ($width ? `${$width}px` : "100%")};
+  height: ${({ $height }) => ($height ? `${$height}px` : "100%")};
+`;
+
+export const BackgroundDimmed = styled.div<BackgroundDimmedProps>`
+  position: absolute;
+  inset: 0;
+  background-color: ${({ theme }) => theme.color.lightTransparentBlack};
+  border-radius: ${({ $borderRadius, theme }) =>
+    $borderRadius || theme.borderRadius.default};
+`;
+
+export const LineClamp = styled.p<LineClamp>`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: ${({ $line }) => $line};
+  -webkit-box-orient: vertical;
+
+  font-size: ${({ $fontSize = "inherit" }) => $fontSize};
+  color: ${({ $color = "inherit" }) => $color};
+  line-height: ${({ $lineHeight = "normal" }) => $lineHeight};
 `;
