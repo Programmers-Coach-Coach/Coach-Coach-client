@@ -103,9 +103,13 @@ describe("Theme Object", () => {
     ["b2", { fontSize: "12px", lineHeight: "16px", bold: "400" }],
     ["b3", { fontSize: "16px", lineHeight: "32px", bold: "800" }]
   ] as [BodySize, { fontSize: string; lineHeight: string; bold: string }][])(
-    "should have correct titleSize value for %s",
+    "should have correct bodySize value for %s",
     (bodySize, expectedValue) => {
       expect(theme.bodySize[bodySize]).toEqual(expectedValue);
+    }
+  );
+
+  test.each([
     [
       "contained",
       {

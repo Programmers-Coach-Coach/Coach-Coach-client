@@ -1,13 +1,10 @@
-import {
-  footerPicker,
-  IFooterPickerData,
-  TFooterPicker
-} from "./../../../../../data/modal";
+import { footerPicker, IFooterPickerData, TFooterPicker } from "@/data/modal";
 import styled from "styled-components";
 
 interface Props {
   schema: TFooterPicker;
 }
+
 const FooterPicker = ({ schema }: Props) => {
   return (
     <FooterPickerStyle>
