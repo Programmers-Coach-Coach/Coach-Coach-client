@@ -50,4 +50,10 @@ export const GlobalStyle = createGlobalStyle`
         font-weight: ${({ theme }) => theme.bodySize.b3.bold};
     }
 
+    a {
+        color: inherit;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
 `;
