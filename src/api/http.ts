@@ -1,4 +1,9 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, {
+  AxiosRequestConfig,
+  AxiosResponse,
+  AxiosError,
+  InternalAxiosRequestConfig
+} from "axios";
 import { getToken, removeTokens } from "../store/authStore";
 
 const BASE_URL = "http://api.coach-coach.site";
@@ -16,21 +21,21 @@ export const createClient = (config?: AxiosRequestConfig) => {
   });
 
   axiosInstance.interceptors.request.use(
-    (config) => {
+    (config: InternalAxiosRequestConfig) => {
       const token = getToken();
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
       return config;
     },
-    (error) => {
+    (error: AxiosError) => {
       return Promise.reject(error);
     }
   );
 
   axiosInstance.interceptors.response.use(
-    (response) => response,
-    (error) => {
+    (response: AxiosResponse) => response,
+    (error: AxiosError) => {
       if (error.response && error.response.status === 401) {
         removeTokens();
         window.location.href = "/login";
