@@ -5,14 +5,12 @@ import ListItemText from "@mui/material/ListItemText";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 import { OutlinedInput } from "@mui/material";
-import { theme } from "../../style/theme"; // theme.ts에서 theme를 임포트
-
-const ITEM_HEIGHT = 40;
+import { theme } from "../../style/theme";
 
 const MenuProps = {
   PaperProps: {
     style: {
-      maxHeight: ITEM_HEIGHT * 4.5
+      maxHeight: 200
     }
   }
 };
@@ -44,7 +42,7 @@ export default function SelectBox() {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: "55%" }}>
+      <FormControl sx={{ m: 1, width: "200px" }}>
         <Select
           multiple
           value={sports}
@@ -67,7 +65,13 @@ export default function SelectBox() {
           MenuProps={MenuProps}
         >
           {names.map((name) => (
-            <MenuItem key={name} value={name}>
+            <MenuItem
+              key={name}
+              value={name}
+              sx={{
+                height: 30
+              }}
+            >
               <Checkbox
                 checked={sports.indexOf(name) > -1}
                 sx={{
