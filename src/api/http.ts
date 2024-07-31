@@ -28,7 +28,6 @@ export const createClient = (config?: AxiosRequestConfig) => {
     }
   );
 
-  // 응답 인터셉터 설정
   axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
