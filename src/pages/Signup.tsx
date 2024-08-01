@@ -6,13 +6,12 @@ import { Link } from "react-router-dom";
 const Container = styled.div`
   width: 100%;
   max-width: 600px;
-  height: 100vh;
+  height: calc(100vh - 136px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  background-color: ${({ theme }) => theme.color.background};
+  padding: 0 20px;
   margin: 0 auto;
   box-sizing: border-box;
 `;

@@ -23,7 +23,7 @@ const LayoutStyle = styled.main`
   width: 100%;
   margin: 0 auto;
   max-width: 600px;
-  padding: 20px;
+  padding: 0 20px;
 `;
 
 export default Layout;
