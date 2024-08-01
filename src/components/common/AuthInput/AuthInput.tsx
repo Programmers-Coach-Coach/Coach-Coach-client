@@ -4,7 +4,9 @@ import styled from "styled-components";
 interface AuthInputProps {
   label: string;
   name: string;
+  type?: string;
   helperText?: string;
+  width?: string;
 }
 
 const AuthInput = (props: AuthInputProps) => {
@@ -16,7 +18,9 @@ const AuthInput = (props: AuthInputProps) => {
         name={props.name}
         margin="normal"
         autoFocus
+        type={props.type}
         helperText={props.helperText}
+        width={props.width}
       />
     </InputContainer>
   );
@@ -25,9 +29,10 @@ const AuthInput = (props: AuthInputProps) => {
 const InputContainer = styled.div`
   display: flex;
   justify-content: center;
+  width: 100%; /* Ensure container takes full width */
 `;
 
-const TextFieldWrapper = styled(TextField)`
+const TextFieldWrapper = styled(TextField)<{ width?: string }>`
   & .MuiInputBase-input {
     color: ${({ theme }) => theme.color.white};
   }
@@ -40,6 +45,10 @@ const TextFieldWrapper = styled(TextField)`
   & .MuiOutlinedInput-root {
     & .MuiOutlinedInput-notchedOutline {
       border-color: ${({ theme }) => theme.color.white};
+      transition: border-color 0.5s ease;
+    }
+    &:hover .MuiOutlinedInput-notchedOutline {
+      border-color: ${({ theme }) => theme.color.white};
     }
     &.Mui-focused .MuiOutlinedInput-notchedOutline {
       border-color: ${({ theme }) => theme.color.yellow};
@@ -51,7 +60,7 @@ const TextFieldWrapper = styled(TextField)`
   & .MuiFormHelperText-root {
     color: red;
   }
-  width: 60%;
+  width: ${({ width }) => width || "314px"};
   text-align: center;
 `;
 
