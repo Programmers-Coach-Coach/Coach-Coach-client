@@ -9,22 +9,22 @@ import Error from "./pages/Error";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: (
-      <Layout>
-        <Home />
-      </Layout>
-    ),
-    errorElement: <Error />
-  },
-  {
-    path: "/detail",
-    element: (
-      <Layout title="Detail">
-        <Detail />
-      </Layout>
-    ),
-    errorElement: <Error />
+    element: <Layout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "/",
+        element: <Home />
+      },
+      {
+        path: "detail",
+        element: <Detail />
+      },
+      {
+        path: "login",
+        element: <Detail />
+      }
+    ]
   }
 ]);
 
