@@ -6,7 +6,7 @@ import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import Error from "./pages/Error";
-
+import Signup from "./pages/Signup";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,6 +22,15 @@ const router = createBrowserRouter([
     element: (
       <Layout title="Detail">
         <Detail />
+      </Layout>
+    ),
+    errorElement: <Error />
+  },
+  {
+    path: "/signup",
+    element: (
+      <Layout title="Signup">
+        <Signup />
       </Layout>
     ),
     errorElement: <Error />
