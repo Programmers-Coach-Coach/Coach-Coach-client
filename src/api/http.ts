@@ -1,15 +1,13 @@
 import axios, { AxiosRequestConfig } from "axios";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-const API_BASE_URL =
-  import.meta.env.MODE === "development" ? `${BASE_URL}/api` : `${BASE_URL}`;
 const DEFAULT_TIMEOUT = 30000;
 
-type RequestMethod = "get" | "post" | "put" | "delete";
+type RequestMethod = "get" | "post" | "put" | "delete" | "patch";
 
 export const createClient = (config?: AxiosRequestConfig) => {
   const axiosInstance = axios.create({
-    baseURL: API_BASE_URL,
+    baseURL: `${BASE_URL}/api/v1`,
     timeout: DEFAULT_TIMEOUT,
     headers: {
       "Content-Type": "application/json"
@@ -38,6 +36,9 @@ export const requestHandler = async <T>(
       break;
     case "put":
       response = await httpClient.put(url, payload);
+      break;
+    case "patch":
+      response = await httpClient.patch(url, payload);
       break;
     case "delete":
       response = await httpClient.delete(url);
