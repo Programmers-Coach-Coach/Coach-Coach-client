@@ -91,7 +91,7 @@ const PopularCoachStyle = styled.div`
 `;
 
 const RemovePadding = styled.div`
-  margin: 0 -20px 0 0;
+  margin: 0 -20px;
 `;
 
 const CoachStyle = styled.div`
@@ -124,16 +124,6 @@ const CoachStyle = styled.div`
     border: none;
     padding: 5px;
     border-radius: 5px;
-
-    /* i {
-      width: 20px;
-      height: 20px;
-
-      svg {
-        width: 100%;
-        height: 100%;
-      }
-    } */
   }
 `;
 
