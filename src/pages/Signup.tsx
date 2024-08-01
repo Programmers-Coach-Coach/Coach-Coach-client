@@ -42,7 +42,7 @@ const FlexContainer = styled.div`
   width: 314px;
 `;
 
-function Login() {
+function Signup() {
   return (
     <>
       <Container>
@@ -77,4 +77,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Signup;
