@@ -6,25 +6,30 @@ import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import Error from "./pages/Error";
+import Signup from "./pages/Signup";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: (
-      <Layout>
-        <Home />
-      </Layout>
-    ),
-    errorElement: <Error />
-  },
-  {
-    path: "/detail",
-    element: (
-      <Layout title="Detail">
-        <Detail />
-      </Layout>
-    ),
-    errorElement: <Error />
+    element: <Layout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "/",
+        element: <Home />
+      },
+      {
+        path: "detail",
+        element: <Detail />
+      },
+      {
+        path: "login",
+        element: <Detail />
+      },
+      {
+        path: "signup",
+        element: <Signup />
+      }
+    ]
   }
 ]);
 
