@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import Error from "./pages/Error";
 import Signup from "./pages/Signup";
+
 const router = createBrowserRouter([
   {
     path: "/",

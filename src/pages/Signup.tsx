@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import image from "./assets/image.png";
+import Logo from "../assets/images/Logo.png";
 import AuthInput from "@/components/common/AuthInput/AuthInput";
 import CustomButton from "@/components/common/CustomButton";
 import { Link } from "react-router-dom";
@@ -43,7 +43,7 @@ function Login() {
   return (
     <>
       <Container>
-        <ImageWrapper className="logo" src={image} />
+        <ImageWrapper className="logo" src={Logo} />
         <FlexContainer>
           <AuthInput label="닉네임" name="nickname" type="text" width="212px" />
           <CustomButton size="small" variant="outlined">
