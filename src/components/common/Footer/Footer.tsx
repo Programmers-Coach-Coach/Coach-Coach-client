@@ -30,22 +30,5 @@ const FooterStyle = styled.footer`
   width: 100%;
   max-width: 600px;
   height: 60px;
-
-  .HomeIcon svg {
-    width: 20px;
-    height: 20px;
-  }
-  .RoutineIcon svg {
-    width: 30px;
-    height: 30px;
-  }
-  .AlarmIcon svg {
-    width: 30px;
-    height: 30px;
-  }
-  .ProfileIcon svg {
-    width: 25px;
-    height: 25px;
-  }
 `;
 export default Footer;
