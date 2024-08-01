@@ -19,7 +19,7 @@ module.exports = {
   moduleNameMapper: {
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",
     "^/public/(.*)$": "<rootDir>/public/$1", // public 디렉토리의 모든 파일 매핑
-    "^@/(.*)$": "<rootDir>/src/$1", // tsconfig에서 설정한 alias를 Jest에서 매핑
-    "^.+\\.(png|jpg|jpeg|gif|svg)$": "jest-transform-stub" // 기타 이미지 파일 매핑
+    "^.+\\.(png|jpg|jpeg|gif|svg)$": "jest-transform-stub", // 기타 이미지 파일 매핑
+    "^@/(.*)$": "<rootDir>/src/$1" // jest alias 설정
   }
 };
