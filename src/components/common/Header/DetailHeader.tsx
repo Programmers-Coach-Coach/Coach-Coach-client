@@ -33,14 +33,6 @@ const DetailHeaderStyle = styled.div`
     position: absolute;
     left: 20px;
   }
-
-  h1 {
-    margin: 0;
-    color: ${({ theme }) => theme.color.white};
-    font-size: ${({ theme }) => theme.fontSize.large};
-    font-weight: ${({ theme }) => theme.fontWeight.bold};
-    line-height: 36px;
-  }
 `;
 
 export default DetailHeader;
