@@ -14,6 +14,7 @@ const Container = styled.div`
   padding: 0 20px;
   margin: 0 auto;
   box-sizing: border-box;
+  gap: 15px;
 `;
 
 const ImageWrapper = styled.img`
@@ -24,6 +25,9 @@ const ImageWrapper = styled.img`
 `;
 
 const LinkWrapper = styled.div`
+  a {
+    text-decoration: none;
+  }
   .login {
     color: ${({ theme }) => theme.color.yellow};
     text-decoration: none;

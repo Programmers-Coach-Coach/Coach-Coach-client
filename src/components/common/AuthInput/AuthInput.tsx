@@ -57,6 +57,9 @@ const TextFieldWrapper = styled(TextField)<{ width?: string }>`
   }
   width: ${({ width }) => width || "314px"};
   text-align: center;
+  &.css-1rv3ei8-MuiFormControl-root-MuiTextField-root {
+    margin-top: 0;
+  }
 `;
 
 export default AuthInput;
