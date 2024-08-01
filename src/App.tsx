@@ -6,6 +6,7 @@ import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import Error from "./pages/Error";
+import Signup from "./pages/Signup";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Detail />
+      },
+      {
+        path: "signup",
+        element: <Signup />
       }
     ]
   }
@@ -43,7 +48,7 @@ const Container = styled.div`
   padding: 0;
   width: 100%;
   max-width: 600px;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0 auto;
   background-color: ${({ theme }) => theme.color.background};
   font-family: "Pretendard", sans-serif;

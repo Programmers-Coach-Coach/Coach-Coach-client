@@ -4,7 +4,9 @@ import styled from "styled-components";
 interface AuthInputProps {
   label: string;
   name: string;
+  type?: string;
   helperText?: string;
+  width?: string;
 }
 
 const AuthInput = (props: AuthInputProps) => {
@@ -16,7 +18,9 @@ const AuthInput = (props: AuthInputProps) => {
         name={props.name}
         margin="normal"
         autoFocus
+        type={props.type}
         helperText={props.helperText}
+        width={props.width}
       />
     </InputContainer>
   );
@@ -27,7 +31,7 @@ const InputContainer = styled.div`
   justify-content: center;
 `;
 
-const TextFieldWrapper = styled(TextField)`
+const TextFieldWrapper = styled(TextField)<{ width?: string }>`
   & .MuiInputBase-input {
     color: ${({ theme }) => theme.color.white};
   }
@@ -51,8 +55,11 @@ const TextFieldWrapper = styled(TextField)`
   & .MuiFormHelperText-root {
     color: red;
   }
-  width: 60%;
+  width: ${({ width }) => width || "314px"};
   text-align: center;
+  &.css-1rv3ei8-MuiFormControl-root-MuiTextField-root {
+    margin-top: 0;
+  }
 `;
 
 export default AuthInput;
