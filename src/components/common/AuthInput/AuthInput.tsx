@@ -29,6 +29,7 @@ const AuthInput = (props: AuthInputProps) => {
 const InputContainer = styled.div`
   display: flex;
   justify-content: center;
+  width: 100%; /* Ensure container takes full width */
 `;
 
 const TextFieldWrapper = styled(TextField)<{ width?: string }>`
@@ -43,6 +44,10 @@ const TextFieldWrapper = styled(TextField)<{ width?: string }>`
   }
   & .MuiOutlinedInput-root {
     & .MuiOutlinedInput-notchedOutline {
+      border-color: ${({ theme }) => theme.color.white};
+      transition: border-color 0.5s ease;
+    }
+    &:hover .MuiOutlinedInput-notchedOutline {
       border-color: ${({ theme }) => theme.color.white};
     }
     &.Mui-focused .MuiOutlinedInput-notchedOutline {
