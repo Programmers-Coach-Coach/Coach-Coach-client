@@ -53,7 +53,7 @@ const CenterContents = styled.div`
   width: 352px;
   padding: 30px;
   border-radius: 20px;
-  background-color: ${({ theme }) => theme.color.semiTransparentBlack};
+  background-color: ${({ theme }) => theme.color.background};
   z-index: 1000;
 `;
 
@@ -67,7 +67,7 @@ const FooterAboveContents = styled.div`
 
   width: 100%;
   border-radius: 20px 20px 0 0;
-  background-color: ${({ theme }) => theme.color.semiTransparentBlack};
+  background-color: ${({ theme }) => theme.color.box};
   z-index: 1000;
 `;
 

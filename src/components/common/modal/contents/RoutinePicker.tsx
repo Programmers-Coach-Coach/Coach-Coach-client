@@ -40,10 +40,10 @@ const ItemStyle = styled.div`
   line-height: 36px;
   font-weight: bold;
 
-  border-bottom: 1px solid ${({ theme }) => theme.color.gray3};
+  border-bottom: 1px solid ${({ theme }) => theme.color.box};
 
   &:last-child {
-    color: ${({ theme }) => theme.color.yellow};
+    color: ${({ theme }) => theme.color.primary};
     border-bottom: 0;
   }
 `;

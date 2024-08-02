@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Logo from "../assets/images/Logo.png";
-import AuthInput from "@/components/common/AuthInput/AuthInput";
-import CustomButton from "@/components/common/CustomButton";
+import AuthInput from "@/components/common/InputField/Text/AuthInput";
+import CustomButton from "@/components/common/Button/CustomButton";
 import { Link } from "react-router-dom";
-import KakaoLogin from "@/components/KakaoLogin";
+import KakaoLogin from "@/components/common/Button/KakaoLogin";
 
 function Login() {
   return (
@@ -20,7 +20,7 @@ function Login() {
         <KakaoLogin></KakaoLogin>
         <LinkWrapper className="b1">
           계정이 없으신가요?{" "}
-          <Link to="/auth/signup">
+          <Link to="/signup">
             <span className="signup b1">회원가입 하러가기</span>
           </Link>
         </LinkWrapper>
@@ -56,7 +56,7 @@ const LinkWrapper = styled.div`
     text-decoration: none;
   }
   .signup {
-    color: ${({ theme }) => theme.color.yellow};
+    color: ${({ theme }) => theme.color.primary};
     text-decoration: none;
   }
 `;

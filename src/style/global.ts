@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
     }
     body {
-        color: ${({ theme }) => theme.color.white};
+        color: ${({ theme }) => theme.color.text};
         font-family: 'Pretendard', sans-serif;
     }
     button {

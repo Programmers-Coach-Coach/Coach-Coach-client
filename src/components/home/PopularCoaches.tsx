@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { LineClamp } from "@/style/global";
-import Heart from "../common/Heart";
+import Heart from "../common/InputField/CheckBox/Heart";
 
 interface Props {
   popularCoaches: IPopularCoach[];
@@ -154,7 +154,7 @@ const BoxText = styled.div`
   flex-direction: column;
   padding: 0 10px 10px 20px;
   z-index: 10;
-  color: #fff;
+  color: ${({ theme }) => theme.color.text};
 
   .desc {
     width: 100%;
@@ -171,7 +171,7 @@ const BoxText = styled.div`
       font-size: 9px;
       padding: 4px 9px;
       border-radius: ${({ theme }) => theme.borderRadius.default};
-      background-color: ${({ theme }) => theme.color.gray3};
+      background-color: ${({ theme }) => theme.color.box};
     }
   }
 `;
