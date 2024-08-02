@@ -51,7 +51,7 @@ const TextFieldWrapper = styled(TextField)<{ width?: string }>`
     }
   }
   & .MuiInputBase-input::placeholder {
-    color: ${({ theme }) => theme.color.box};
+    color: ${({ theme }) => theme.color.text};
   }
   & .MuiFormHelperText-root {
     color: ${({ theme }) => theme.color.error};
