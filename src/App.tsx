@@ -51,7 +51,6 @@ const Container = styled.div`
   min-height: 100vh;
   margin: 0 auto;
   background-color: ${({ theme }) => theme.color.background};
-  font-family: "Pretendard", sans-serif;
 `;
 
 export default App;
