@@ -11,8 +11,18 @@ function Login() {
       <Container>
         <ImageWrapper className="logo" src={Logo} />
 
-        <AuthInput label="이메일" name="email" type="email" />
-        <AuthInput label="비밀번호" name="password" type="password" />
+        <AuthInput
+          label="이메일"
+          name="email"
+          type="email"
+          placeholder="example@naver.com"
+        />
+        <AuthInput
+          label="비밀번호"
+          name="password"
+          type="password"
+          placeholder="비밀번호"
+        />
 
         <CustomButton size="large" variant="contained">
           로그인
