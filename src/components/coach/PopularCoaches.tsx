@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import HomeHeader from "./common/HomeHeader";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -22,10 +21,7 @@ interface CoachProps {
 const PopularCoaches = ({ popularCoaches }: Props) => {
   return (
     <PopularCoachStyle>
-      <HomeHeader
-        title="Popular Coach"
-        subTitle="코치코치에 가장 인기있는 코치와 함께 운동해보세요!"
-      />
+      <h1>Popular Coach</h1>
       <CoachesSlider popularCoaches={popularCoaches} />
     </PopularCoachStyle>
   );

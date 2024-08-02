@@ -1,5 +1,5 @@
-import PopularCoaches from "@/components/home/PopularCoaches";
-import SportsList from "@/components/home/SportsList";
+import PopularCoaches from "@/components/coach/PopularCoaches";
+import SportsList from "@/components/sports/SportsList";
 import useHome from "@/hooks/useHome";
 import { WhiteSpace } from "@/style/global";
 import styled from "styled-components";
