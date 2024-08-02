@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import HomeHeader from "./common/HomeHeader";
-import { IPopularCoach } from "@/models/home.model";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { LineClamp } from "@/style/global";
 import Heart from "../common/InputField/CheckBox/Heart";
+import { IPopularCoach } from "@/models/coach.model";
 
 interface Props {
   popularCoaches: IPopularCoach[];
@@ -51,7 +51,7 @@ const CoachesSlider = ({ popularCoaches }: CoachesSliderProps) => {
   return (
     <RemovePadding>
       <CoachesSliderStyle {...settings}>
-        {popularCoaches.map((coach) => (
+        {popularCoaches?.map((coach) => (
           <Coach key={coach.coachId} coach={coach} />
         ))}
       </CoachesSliderStyle>
@@ -65,7 +65,7 @@ const Coach = ({ coach }: CoachProps) => {
       <img src={coach.coachImageUrl} alt={coach.coachName} />
       <button>
         <Heart checked={true} size="small" />
-        <p className="b3">{coach.likes}</p>
+        <p className="b3">{coach.countOfLikes}</p>
       </button>
       <BoxText>
         <LineClamp $line={1} className="b3">
@@ -73,7 +73,7 @@ const Coach = ({ coach }: CoachProps) => {
         </LineClamp>
         <ul className="coaching-sports">
           {coach.coachingSports.map((item) => (
-            <li key={item.sportsId}>#{item.sportsName}</li>
+            <li key={item.sportId}>#{item.sportName}</li>
           ))}
         </ul>
         <LineClamp $line={2} className="b2 desc">

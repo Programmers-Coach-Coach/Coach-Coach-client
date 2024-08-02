@@ -1,14 +1,16 @@
-import { ISports } from "@/models/home.model";
+import { ISport } from "@/models/sports.model";
 import styled from "styled-components";
 import HomeHeader from "./common/HomeHeader";
-import { sportsList } from "@/data/sportsList";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { BackgroundDimmed } from "@/style/global";
 
-const SportsList = () => {
+interface Props {
+  sportsList: ISport[];
+}
+const SportsList = ({ sportsList }: Props) => {
   return (
     <SportsListStyle>
       <HomeHeader
@@ -22,7 +24,7 @@ const SportsList = () => {
 };
 
 interface SportsSliderProps {
-  sportsList: ISports[];
+  sportsList: ISport[];
 }
 const SportsSlider = ({ sportsList }: SportsSliderProps) => {
   const SLIDE_WIDTH = 120; // 슬라이드 고정 너비
@@ -46,8 +48,8 @@ const SportsSlider = ({ sportsList }: SportsSliderProps) => {
   };
   return (
     <SportSliderStyle {...settings}>
-      {sportsList.map((item, index) => (
-        <SportComponent key={index} item={item} />
+      {sportsList?.map((item) => (
+        <SportComponent key={item.sportId} item={item} />
       ))}
     </SportSliderStyle>
   );
@@ -76,15 +78,15 @@ const SportsListStyle = styled.div`
 `;
 
 interface SportComponentProps {
-  item: ISports;
+  item: ISport;
 }
 
 const SportComponent = ({ item }: SportComponentProps) => {
-  const { sportsName, sportsImageUrl } = item;
+  const { sportName, sportImageUrl } = item;
   return (
     <SportComponentStyle to="/" onClick={() => {}}>
-      <img src={sportsImageUrl} alt={sportsName} />
-      <p>{sportsName}</p>
+      <img src={sportImageUrl} alt={sportName} />
+      <p>{sportName}</p>
       <BackgroundDimmed />
     </SportComponentStyle>
   );

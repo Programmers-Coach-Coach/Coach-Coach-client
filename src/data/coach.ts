@@ -1,4 +1,4 @@
-import { IPopularCoach } from "@/models/home.model";
+import { IPopularCoach } from "@/models/coach.model";
 
 export const popularCoaches: IPopularCoach[] = [
   {
@@ -8,10 +8,11 @@ export const popularCoaches: IPopularCoach[] = [
       "https://res.heraldm.com/content/image/2024/04/12/20240412050389_0.jpg",
     description:
       "몸은 거짓말을 하지 않는다. 1회당 100만원으로 싸게 모시겠습니다.",
-    likes: 1,
+    countOfLikes: 1,
+    liked: false,
     coachingSports: [
-      { sportsId: 0, sportsName: "헬스" },
-      { sportsId: 9, sportsName: "크로스핏" }
+      { sportId: 0, sportName: "헬스" },
+      { sportId: 9, sportName: "크로스핏" }
     ]
   },
   {
@@ -21,8 +22,9 @@ export const popularCoaches: IPopularCoach[] = [
       "https://res.heraldm.com/content/image/2024/04/12/20240412050389_0.jpg",
     description:
       "몸은 거짓말을 하지 않는다. 1회당 100만원으로 싸게 모시겠습니다. 사실 구라고요. 1회당 300만원으로 모시겠습니다.",
-    likes: 100,
-    coachingSports: [{ sportsId: 2, sportsName: "요가" }]
+    countOfLikes: 1,
+    liked: true,
+    coachingSports: [{ sportId: 2, sportName: "요가" }]
   },
   {
     coachId: 2,
@@ -31,11 +33,12 @@ export const popularCoaches: IPopularCoach[] = [
       "https://res.heraldm.com/content/image/2024/04/12/20240412050389_0.jpg",
     description:
       "몸은 거짓말을 하지 않는다. 1회당 100만원으로 싸게 모시겠습니다. 사실 구라고요. 1회당 300만원으로 모시겠습니다.",
-    likes: 20,
+    countOfLikes: 1,
+    liked: false,
     coachingSports: [
-      { sportsId: 10, sportsName: "배드민턴" },
-      { sportsId: 9, sportsName: "크로스핏" },
-      { sportsId: 7, sportsName: "테니스" }
+      { sportId: 10, sportName: "배드민턴" },
+      { sportId: 9, sportName: "크로스핏" },
+      { sportId: 7, sportName: "테니스" }
     ]
   }
 ];

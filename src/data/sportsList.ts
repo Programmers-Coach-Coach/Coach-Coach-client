@@ -1,76 +1,76 @@
-import { ISports } from "@/models/home.model";
+import { ISport } from "@/models/sports.model";
 
-export const sportsList: ISports[] = [
+export const sportsList: ISport[] = [
   {
-    sportsId: 0,
-    sportsName: "헬스",
-    sportsImageUrl:
+    sportId: 0,
+    sportName: "헬스",
+    sportImageUrl:
       "https://i.namu.wiki/i/1t39KxvHryQtFMaBo6W2PGCQqOo-swptDvkfz5r_y7vgC-ppXQDmiM91m6SypKmKSjM1icbGU1s4GXtUtNbOAw.webp"
   },
   {
-    sportsId: 1,
-    sportsName: "수영",
-    sportsImageUrl:
+    sportId: 1,
+    sportName: "수영",
+    sportImageUrl:
       "https://i.namu.wiki/i/1t39KxvHryQtFMaBo6W2PGCQqOo-swptDvkfz5r_y7vgC-ppXQDmiM91m6SypKmKSjM1icbGU1s4GXtUtNbOAw.webp"
   },
   {
-    sportsId: 2,
-    sportsName: "요가",
-    sportsImageUrl:
+    sportId: 2,
+    sportName: "요가",
+    sportImageUrl:
       "https://i.namu.wiki/i/1t39KxvHryQtFMaBo6W2PGCQqOo-swptDvkfz5r_y7vgC-ppXQDmiM91m6SypKmKSjM1icbGU1s4GXtUtNbOAw.webp"
   },
   {
-    sportsId: 3,
-    sportsName: "필라테스",
-    sportsImageUrl:
+    sportId: 3,
+    sportName: "필라테스",
+    sportImageUrl:
       "https://i.namu.wiki/i/1t39KxvHryQtFMaBo6W2PGCQqOo-swptDvkfz5r_y7vgC-ppXQDmiM91m6SypKmKSjM1icbGU1s4GXtUtNbOAw.webp"
   },
   {
-    sportsId: 4,
-    sportsName: "클라이밍",
-    sportsImageUrl:
+    sportId: 4,
+    sportName: "클라이밍",
+    sportImageUrl:
       "https://i.namu.wiki/i/1t39KxvHryQtFMaBo6W2PGCQqOo-swptDvkfz5r_y7vgC-ppXQDmiM91m6SypKmKSjM1icbGU1s4GXtUtNbOAw.webp"
   },
   {
-    sportsId: 5,
-    sportsName: "발레",
-    sportsImageUrl:
+    sportId: 5,
+    sportName: "발레",
+    sportImageUrl:
       "https://i.namu.wiki/i/1t39KxvHryQtFMaBo6W2PGCQqOo-swptDvkfz5r_y7vgC-ppXQDmiM91m6SypKmKSjM1icbGU1s4GXtUtNbOAw.webp"
   },
   {
-    sportsId: 6,
-    sportsName: "골프",
-    sportsImageUrl:
+    sportId: 6,
+    sportName: "골프",
+    sportImageUrl:
       "https://i.namu.wiki/i/1t39KxvHryQtFMaBo6W2PGCQqOo-swptDvkfz5r_y7vgC-ppXQDmiM91m6SypKmKSjM1icbGU1s4GXtUtNbOAw.webp"
   },
   {
-    sportsId: 7,
-    sportsName: "테니스",
-    sportsImageUrl:
+    sportId: 7,
+    sportName: "테니스",
+    sportImageUrl:
       "https://i.namu.wiki/i/1t39KxvHryQtFMaBo6W2PGCQqOo-swptDvkfz5r_y7vgC-ppXQDmiM91m6SypKmKSjM1icbGU1s4GXtUtNbOAw.webp"
   },
   {
-    sportsId: 8,
-    sportsName: "복싱",
-    sportsImageUrl:
+    sportId: 8,
+    sportName: "복싱",
+    sportImageUrl:
       "https://i.namu.wiki/i/1t39KxvHryQtFMaBo6W2PGCQqOo-swptDvkfz5r_y7vgC-ppXQDmiM91m6SypKmKSjM1icbGU1s4GXtUtNbOAw.webp"
   },
   {
-    sportsId: 9,
-    sportsName: "크로스핏",
-    sportsImageUrl:
+    sportId: 9,
+    sportName: "크로스핏",
+    sportImageUrl:
       "https://i.namu.wiki/i/1t39KxvHryQtFMaBo6W2PGCQqOo-swptDvkfz5r_y7vgC-ppXQDmiM91m6SypKmKSjM1icbGU1s4GXtUtNbOAw.webp"
   },
   {
-    sportsId: 10,
-    sportsName: "배드민턴",
-    sportsImageUrl:
+    sportId: 10,
+    sportName: "배드민턴",
+    sportImageUrl:
       "https://i.namu.wiki/i/1t39KxvHryQtFMaBo6W2PGCQqOo-swptDvkfz5r_y7vgC-ppXQDmiM91m6SypKmKSjM1icbGU1s4GXtUtNbOAw.webp"
   },
   {
-    sportsId: 11,
-    sportsName: "러닝",
-    sportsImageUrl:
+    sportId: 11,
+    sportName: "러닝",
+    sportImageUrl:
       "https://i.namu.wiki/i/1t39KxvHryQtFMaBo6W2PGCQqOo-swptDvkfz5r_y7vgC-ppXQDmiM91m6SypKmKSjM1icbGU1s4GXtUtNbOAw.webp"
   }
 ];
