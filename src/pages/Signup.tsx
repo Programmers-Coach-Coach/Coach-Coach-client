@@ -15,7 +15,7 @@ const Container = styled.div`
   padding: 0 20px;
   margin: 0 auto;
   box-sizing: border-box;
-  gap: 15px;
+  gap: 20px;
 `;
 
 const ImageWrapper = styled.img`
