@@ -41,7 +41,7 @@ const TextFieldWrapper = styled(TextField)<{ width?: string }>`
       transition: border-color 0.5s ease;
     }
     &:hover .MuiOutlinedInput-notchedOutline {
-      border-color: ${({ theme }) => theme.color.box};
+      border-color: ${({ theme }) => theme.color.primary};
     }
     &.Mui-focused .MuiOutlinedInput-notchedOutline {
       border-color: ${({ theme }) => theme.color.primary};
