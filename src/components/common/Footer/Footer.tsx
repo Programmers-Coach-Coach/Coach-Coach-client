@@ -11,10 +11,10 @@ const Footer = () => {
 
   return (
     <FooterStyle>
-      <Icon name="home" size="20px" color="white" onClick={onClickHome} />
-      <Icon name="routine" size="30px" color="white" />
-      <Icon name="alarm" size="30px" color="white" />
-      <Icon name="profile" size="25px" color="white" />
+      <Icon name="home" size="20px" color="text" onClick={onClickHome} />
+      <Icon name="routine" size="30px" color="text" />
+      <Icon name="alarm" size="30px" color="text" />
+      <Icon name="profile" size="25px" color="text" />
     </FooterStyle>
   );
 };
@@ -23,7 +23,7 @@ const FooterStyle = styled.footer`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: ${({ theme }) => theme.color.semiTransparentBlack};
+  background-color: ${({ theme }) => theme.color.box};
   padding: 20px;
   position: fixed;
   bottom: 0;

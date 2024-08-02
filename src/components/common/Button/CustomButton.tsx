@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import { theme } from "../../style/theme"; // theme.ts 파일 경로
+import { theme } from "../../../style/theme"; // theme.ts 파일 경로
 
 interface CustomButtonProps {
   size: "small" | "large";

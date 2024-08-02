@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
-import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import Icon from "@/components/Icon/Icon";
 
 interface DetailHeaderProps {
   title: string;
@@ -15,7 +15,7 @@ const DetailHeader = ({ title }: DetailHeaderProps) => {
 
   return (
     <DetailHeaderStyle>
-      <IoIosArrowBack size="24px" color="#F8F9FA" onClick={onClickBack} />
+      <Icon name="back" size="24px" color="text" onClick={onClickBack} />
       <h1>{title}</h1>
     </DetailHeaderStyle>
   );

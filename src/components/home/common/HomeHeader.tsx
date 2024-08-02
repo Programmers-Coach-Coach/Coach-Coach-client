@@ -21,7 +21,7 @@ const HomeHeaderStyle = styled.div`
   gap: 8px;
   position: relative;
   width: 100%;
-  color: ${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.color.text};
 
   .showall {
     position: absolute;

@@ -5,8 +5,8 @@ import ListItemText from "@mui/material/ListItemText";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 import { OutlinedInput } from "@mui/material";
-import { theme } from "../../style/theme";
-import { SPORTS_NAMES } from "../../constants/sportsConstants";
+import { theme } from "../../../../style/theme";
+import { SPORTS_NAMES } from "../../../../constants/sportsConstants";
 
 const MenuProps = {
   PaperProps: {
@@ -36,13 +36,13 @@ export default function SelectBox() {
           input={
             <OutlinedInput
               sx={{
-                backgroundColor: theme.color.white,
+                backgroundColor: theme.color.box,
                 height: "36px",
                 "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: theme.color.white + " !important"
+                  borderColor: theme.color.box + " !important"
                 },
                 "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor: theme.color.yellow + " !important"
+                  borderColor: theme.color.primary + " !important"
                 }
               }}
             />
@@ -61,9 +61,9 @@ export default function SelectBox() {
               <Checkbox
                 checked={sports.indexOf(name) > -1}
                 sx={{
-                  color: theme.color.yellow,
+                  color: theme.color.primary,
                   "&.Mui-checked": {
-                    color: theme.color.yellow
+                    color: theme.color.primary
                   }
                 }}
               />

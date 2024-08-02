@@ -33,7 +33,7 @@ const Footer = styled.div`
     color: inherit;
   }
   button:nth-of-type(2) {
-    color: ${({ theme }) => theme.color.yellow};
+    color: ${({ theme }) => theme.color.primary};
   }
 `;
 export default ActionModalInner;

@@ -25,7 +25,7 @@ const FooterPickerStyle = styled.div`
 const Item = ({ item }: { item: IFooterPickerData }) => {
   return (
     <ItemStyle>
-      <Icon name={item.icon} size="30px" color="white" />
+      <Icon name={item.icon} size="30px" color="text" />
       {item.name}
     </ItemStyle>
   );

@@ -33,32 +33,25 @@ const InputContainer = styled.div`
 `;
 
 const TextFieldWrapper = styled(TextField)<{ width?: string }>`
-  & .MuiInputBase-input {
-    color: ${({ theme }) => theme.color.white};
-  }
-  & .MuiFormLabel-root {
-    color: ${({ theme }) => theme.color.white};
-  }
   & .MuiFormLabel-root.Mui-focused {
-    color: ${({ theme }) => theme.color.yellow};
+    color: ${({ theme }) => theme.color.primary};
   }
   & .MuiOutlinedInput-root {
     & .MuiOutlinedInput-notchedOutline {
-      border-color: ${({ theme }) => theme.color.white};
       transition: border-color 0.5s ease;
     }
     &:hover .MuiOutlinedInput-notchedOutline {
-      border-color: ${({ theme }) => theme.color.white};
+      border-color: ${({ theme }) => theme.color.box};
     }
     &.Mui-focused .MuiOutlinedInput-notchedOutline {
-      border-color: ${({ theme }) => theme.color.yellow};
+      border-color: ${({ theme }) => theme.color.primary};
     }
   }
   & .MuiInputBase-input::placeholder {
-    color: ${({ theme }) => theme.color.white};
+    color: ${({ theme }) => theme.color.box};
   }
   & .MuiFormHelperText-root {
-    color: red;
+    color: ${({ theme }) => theme.color.error};
   }
   width: ${({ width }) => width || "314px"};
   text-align: center;

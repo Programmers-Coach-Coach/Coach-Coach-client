@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Logo from "../assets/images/Logo.png";
-import AuthInput from "@/components/common/AuthInput/AuthInput";
-import CustomButton from "@/components/common/CustomButton";
+import AuthInput from "@/components/common/InputField/Text/AuthInput";
+import CustomButton from "@/components/common/Button/CustomButton";
 import { Link } from "react-router-dom";
 const Container = styled.div`
   width: 100%;
@@ -29,10 +29,10 @@ const LinkWrapper = styled.div`
     text-decoration: none;
   }
   .login {
-    color: ${({ theme }) => theme.color.yellow};
+    color: ${({ theme }) => theme.color.primary};
     text-decoration: none;
   }
-  color: white;
+  color: ${({ theme }) => theme.color.text};
 `;
 
 const FlexContainer = styled.div`

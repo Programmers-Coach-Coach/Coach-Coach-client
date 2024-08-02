@@ -37,7 +37,7 @@ const HeartStyle = styled.div<{ $size: Size }>``;
 // todo : 호버 색상 제거
 const CheckboxStyle = styled(Checkbox)`
   & .MuiSvgIcon-root {
-    color: ${({ theme }) => theme.color.yellow}; // 기본 색상
+    color: ${({ theme }) => theme.color.likes}; // 기본 색상
   }
 
   // Hover 상태 배경 색상 제거
@@ -47,7 +47,7 @@ const CheckboxStyle = styled(Checkbox)`
 
   // 리플 색상 제거
   & .MuiTouchRipple-root {
-    color: ${({ theme }) => theme.color.yellow}; // 기본 색상
+    color: ${({ theme }) => theme.color.likes}; // 기본 색상
   }
 `;
 
