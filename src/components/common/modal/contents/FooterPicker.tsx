@@ -1,3 +1,4 @@
+import Icon from "@/components/Icon/Icon";
 import { footerPicker, IFooterPickerData, TFooterPicker } from "@/data/modal";
 import styled from "styled-components";
 
@@ -24,7 +25,7 @@ const FooterPickerStyle = styled.div`
 const Item = ({ item }: { item: IFooterPickerData }) => {
   return (
     <ItemStyle>
-      {item.icon}
+      <Icon name={item.icon} size="30px" color="white" />
       {item.name}
     </ItemStyle>
   );
@@ -41,10 +42,5 @@ const ItemStyle = styled.div`
   font-size: 16px;
   line-height: 32px;
   font-weight: bold;
-
-  svg {
-    width: 30px;
-    height: 30px;
-  }
 `;
 export default FooterPicker;

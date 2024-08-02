@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { ICONS } from "../../../constants/assets";
+import Icon from "@/components/Icon/Icon";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -11,12 +11,10 @@ const Footer = () => {
 
   return (
     <FooterStyle>
-      <div className="HomeIcon" onClick={onClickHome}>
-        {ICONS.home}
-      </div>
-      <div className="RoutineIcon">{ICONS.routine}</div>
-      <div className="AlarmIcon">{ICONS.alarm}</div>
-      <div className="ProfileIcon">{ICONS.human.profile}</div>
+      <Icon name="home" size="20px" color="white" onClick={onClickHome} />
+      <Icon name="routine" size="30px" color="white" />
+      <Icon name="alarm" size="30px" color="white" />
+      <Icon name="profile" size="25px" color="white" />
     </FooterStyle>
   );
 };
@@ -32,26 +30,5 @@ const FooterStyle = styled.footer`
   width: 100%;
   max-width: 600px;
   height: 60px;
-
-  .HomeIcon svg {
-    width: 20px;
-    height: 20px;
-  }
-  .RoutineIcon svg {
-    width: 30px;
-    height: 30px;
-  }
-  .AlarmIcon svg {
-    width: 30px;
-    height: 30px;
-  }
-  .ProfileIcon svg {
-    width: 25px;
-    height: 25px;
-  }
-
-  svg {
-    color: ${({ theme }) => theme.color.white};
-  }
 `;
 export default Footer;
