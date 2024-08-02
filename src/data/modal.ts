@@ -1,4 +1,3 @@
-import { IconType } from "react-icons";
 import { ICONS } from "../constants/assets"; // 수정된 import 경로
 
 export type TModal =
@@ -23,7 +22,7 @@ export interface IModalData {
 export interface IFooterPickerData {
   name: string;
   link: string;
-  icon: IconType;
+  icon: keyof typeof ICONS;
 }
 
 export interface IRoutinePickerData {
@@ -76,21 +75,21 @@ export const modal: Record<TModal, IModalData> = {
 
 export const footerPicker: Record<TFooterPicker, IFooterPickerData[]> = {
   profile: [
-    { name: "내 프로필", link: "/", icon: ICONS.person },
+    { name: "내 프로필", link: "/", icon: "person" },
     {
       name: "매칭 회원 리스트",
       link: "",
-      icon: ICONS.twins
+      icon: "twins"
     },
-    { name: "내 기록", link: "/", icon: ICONS.record },
-    { name: "로그아웃", link: "/", icon: ICONS.logout }
+    { name: "내 기록", link: "/", icon: "record" },
+    { name: "로그아웃", link: "/", icon: "logout" }
   ],
   routine: [
-    { name: "내 루틴", link: "/", icon: ICONS.person },
+    { name: "내 루틴", link: "/", icon: "person" },
     {
       name: "내 코치 루틴",
       link: "/",
-      icon: ICONS.coach
+      icon: "coach"
     }
   ]
 };
