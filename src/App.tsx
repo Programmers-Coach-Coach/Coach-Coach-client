@@ -4,7 +4,6 @@ import { GlobalStyle } from "./style/global";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
-import Detail from "./pages/Detail";
 import Error from "./pages/Error";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
@@ -17,10 +16,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />
-      },
-      {
-        path: "detail",
-        element: <Detail />
       },
       {
         path: "login",
