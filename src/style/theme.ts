@@ -115,7 +115,8 @@ export const theme: Theme = {
     },
     small: {
       padding: "16px",
-      height: "32px"
+      height: "32px",
+      width: "105px"
     }
   },
   borderRadius: {
