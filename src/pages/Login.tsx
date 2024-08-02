@@ -4,6 +4,31 @@ import AuthInput from "@/components/common/AuthInput/AuthInput";
 import CustomButton from "@/components/common/CustomButton";
 import { Link } from "react-router-dom";
 import KakaoLogin from "@/components/KakaoLogin";
+
+function Login() {
+  return (
+    <>
+      <Container>
+        <ImageWrapper className="logo" src={Logo} />
+
+        <AuthInput label="이메일" name="email" type="email" />
+        <AuthInput label="비밀번호" name="password" type="password" />
+
+        <CustomButton size="large" variant="contained">
+          로그인
+        </CustomButton>
+        <KakaoLogin></KakaoLogin>
+        <LinkWrapper className="b1">
+          계정이 없으신가요?{" "}
+          <Link to="/auth/signup">
+            <span className="signup b1">회원가입 하러가기</span>
+          </Link>
+        </LinkWrapper>
+      </Container>
+    </>
+  );
+}
+
 const Container = styled.div`
   width: 100%;
   max-width: 600px;
@@ -35,29 +60,5 @@ const LinkWrapper = styled.div`
     text-decoration: none;
   }
 `;
-
-function Login() {
-  return (
-    <>
-      <Container>
-        <ImageWrapper className="logo" src={Logo} />
-
-        <AuthInput label="이메일" name="email" type="email" />
-        <AuthInput label="비밀번호" name="password" type="password" />
-
-        <CustomButton size="large" variant="contained">
-          로그인
-        </CustomButton>
-        <KakaoLogin></KakaoLogin>
-        <LinkWrapper>
-          계정이 없으신가요?{" "}
-          <Link to="/auth/signup">
-            <span className="signup">회원가입 하러가기</span>
-          </Link>
-        </LinkWrapper>
-      </Container>
-    </>
-  );
-}
 
 export default Login;
