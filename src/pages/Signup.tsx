@@ -51,19 +51,41 @@ function Signup() {
       <Container>
         <ImageWrapper className="logo" src={Logo} />
         <FlexContainer>
-          <AuthInput label="닉네임" name="nickname" type="text" width="212px" />
+          <AuthInput
+            label="닉네임"
+            name="nickname"
+            type="text"
+            width="212px"
+            placeholder="닉네임을 입력하세요"
+          />
           <CustomButton size="small" variant="outlined">
             <span className="b2">중복확인</span>
           </CustomButton>
         </FlexContainer>
         <FlexContainer>
-          <AuthInput label="이메일" name="email" type="email" width="212px" />
+          <AuthInput
+            label="이메일"
+            name="email"
+            type="email"
+            width="212px"
+            placeholder="example@naver.com"
+          />
           <CustomButton size="small" variant="outlined">
             <span className="b2">중복확인</span>
           </CustomButton>
         </FlexContainer>
-        <AuthInput label="비밀번호" name="password" type="password" />
-        <AuthInput label="비밀번호 확인" name="passwordCheck" type="password" />
+        <AuthInput
+          label="비밀번호"
+          name="password"
+          type="password"
+          placeholder="비밀번호"
+        />
+        <AuthInput
+          label="비밀번호 확인"
+          name="passwordCheck"
+          type="password"
+          placeholder="비밀번호 확인"
+        />
 
         <CustomButton size="large" variant="contained">
           가입하기
