@@ -33,9 +33,13 @@ const InputContainer = styled.div`
 `;
 
 const TextFieldWrapper = styled(TextField)<{ width?: string }>`
+  && {
+    margin: 0;
+  }
   & .MuiFormLabel-root.Mui-focused {
     color: ${({ theme }) => theme.color.primary};
   }
+
   & .MuiOutlinedInput-root {
     & .MuiOutlinedInput-notchedOutline {
       transition: border-color 0.5s ease;
