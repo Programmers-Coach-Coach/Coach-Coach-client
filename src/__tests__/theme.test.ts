@@ -14,15 +14,18 @@ describe("Theme Object", () => {
   });
 
   test.each([
-    ["background", "#234257"],
-    ["yellow", "#FEAF29"],
-    ["black", "#212121"],
-    ["white", "#FFFFFF"],
+    ["background", "#FFFFFF"],
     ["box", "#F8F9FA"],
+    ["primary", "#5271FF"],
+    ["secondary", "#9CABEF"],
+    ["third", "#AECDFF"],
+    ["error", "#F22455"],
+    ["likes", "#ABDEE6"],
+    ["review", "#FEAF29"],
+    ["text", "#212121"],
     ["gray1", "#E1E1E1"],
     ["gray2", "#D9D9D9"],
     ["gray3", "#808080"],
-    ["semiTransparentBlack", "rgba(0, 0, 0, 0.8)"],
     ["lightTransparentBlack", "rgba(0, 0, 0, 0.3)"]
   ] as [ColorKey, string][])(
     "should have correct color value for %s",
@@ -114,19 +117,19 @@ describe("Theme Object", () => {
     [
       "contained",
       {
-        backgroundColor: "#FEAF29",
-        color: "#F8F9FA",
+        backgroundColor: "#5271FF",
+        color: "#FFFFFF",
         border: "none",
-        borderHoverColor: "#FEAF29"
+        borderHoverColor: "#5271FF"
       }
     ],
     [
       "outlined",
       {
         backgroundColor: "transparent",
-        color: "#FEAF29",
-        border: "1px solid #FEAF29",
-        borderHoverColor: "#FEAF29"
+        color: "#5271FF",
+        border: "1px solid #5271FF",
+        borderHoverColor: "#5271FF"
       }
     ]
   ] as [
