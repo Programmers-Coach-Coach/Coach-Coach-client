@@ -3,6 +3,7 @@ import Logo from "../assets/images/Logo.png";
 import AuthInput from "@/components/common/InputField/Text/AuthInput";
 import CustomButton from "@/components/common/Button/CustomButton";
 import { Link } from "react-router-dom";
+
 const Container = styled.div`
   width: 100%;
   max-width: 600px;
@@ -33,13 +34,15 @@ const LinkWrapper = styled.div`
     text-decoration: none;
   }
   color: ${({ theme }) => theme.color.text};
+  margin-top: 10px;
 `;
 
 const FlexContainer = styled.div`
+  width: 314px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 314px;
+  gap: 20px;
 `;
 
 function Signup() {
@@ -50,13 +53,13 @@ function Signup() {
         <FlexContainer>
           <AuthInput label="닉네임" name="nickname" type="text" width="212px" />
           <CustomButton size="small" variant="outlined">
-            중복확인
+            <span className="b2">중복확인</span>
           </CustomButton>
         </FlexContainer>
         <FlexContainer>
           <AuthInput label="이메일" name="email" type="email" width="212px" />
           <CustomButton size="small" variant="outlined">
-            중복확인
+            <span className="b2">중복확인</span>
           </CustomButton>
         </FlexContainer>
         <AuthInput label="비밀번호" name="password" type="password" />
