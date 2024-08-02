@@ -3,6 +3,7 @@ export type ColorKey =
   | "yellow"
   | "black"
   | "white"
+  | "box"
   | "gray1"
   | "gray2"
   | "gray3"
@@ -82,8 +83,9 @@ export const theme: Theme = {
   color: {
     background: "#234257",
     yellow: "#FEAF29",
-    black: "#000000",
+    black: "#212121",
     white: "#F8F9FA",
+    box: "#F8F9FA",
     gray1: "#E1E1E1",
     gray2: "#D9D9D9",
     gray3: "#808080",
