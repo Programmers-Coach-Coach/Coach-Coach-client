@@ -1,69 +1,59 @@
-import { TextField } from "@mui/material";
+import { forwardRef } from "react";
+import { TextField, TextFieldProps } from "@mui/material";
 import styled from "styled-components";
 
-interface AuthInputProps {
-  placeholder: string;
-  label: string;
-  name: string;
-  type?: string;
-  helperText?: string;
+export type AuthInputProps = {
   width?: string;
-}
+} & TextFieldProps;
 
-const AuthInput = (props: AuthInputProps) => {
+const AuthInput = forwardRef<HTMLInputElement, AuthInputProps>((props, ref) => {
+  const { width, ...rest } = props;
+
   return (
-    <InputContainer>
-      <TextFieldWrapper
-        label={props.label}
-        type={props.type}
-        helperText={props.helperText}
-        width={props.width}
-        name={props.name}
-        placeholder={props.placeholder}
-        margin="normal"
-        required
-        autoFocus
-        multiline
-      />
-    </InputContainer>
+    <Container>
+      <InputContainer>
+        <TextFieldWrapper width={width} inputRef={ref} {...rest} />
+      </InputContainer>
+    </Container>
   );
-};
+});
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const InputContainer = styled.div`
   display: flex;
   justify-content: center;
-  width: 100%; /* Ensure container takes full width */
+  width: 100%;
 `;
 
 const TextFieldWrapper = styled(TextField)<{ width?: string }>`
-  && {
-    margin: 0;
+  width: ${({ width }) => width || "314px"};
+  & .MuiInputBase-input {
+    color: ${({ theme }) => theme.color.white};
+  }
+  & .MuiFormLabel-root {
+    color: ${({ theme }) => theme.color.white};
   }
   & .MuiFormLabel-root.Mui-focused {
-    color: ${({ theme }) => theme.color.primary};
+    color: ${({ theme }) => theme.color.yellow};
   }
-
   & .MuiOutlinedInput-root {
     & .MuiOutlinedInput-notchedOutline {
+      border-color: ${({ theme }) => theme.color.white};
       transition: border-color 0.5s ease;
     }
     &:hover .MuiOutlinedInput-notchedOutline {
-      border-color: ${({ theme }) => theme.color.primary};
+      border-color: ${({ theme }) => theme.color.white};
     }
     &.Mui-focused .MuiOutlinedInput-notchedOutline {
-      border-color: ${({ theme }) => theme.color.primary};
+      border-color: ${({ theme }) => theme.color.yellow};
     }
   }
   & .MuiInputBase-input::placeholder {
-    color: ${({ theme }) => theme.color.text};
-  }
-  & .MuiFormHelperText-root {
-    color: ${({ theme }) => theme.color.error};
-  }
-  width: ${({ width }) => width || "314px"};
-  text-align: center;
-  &.css-1rv3ei8-MuiFormControl-root-MuiTextField-root {
-    margin-top: 0;
+    color: ${({ theme }) => theme.color.white};
   }
 `;
 
