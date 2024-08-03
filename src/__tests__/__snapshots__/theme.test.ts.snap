@@ -32,6 +32,7 @@ exports[`Theme Object should match the theme snapshot 1`] = `
     "small": {
       "height": "32px",
       "padding": "16px",
+      "width": "105px",
     },
   },
   "buttonVariant": {
