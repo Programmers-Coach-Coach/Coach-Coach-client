@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Error from "./pages/Error";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <Toaster />
       <GlobalStyle />
       <Container>
         <RouterProvider router={router} />

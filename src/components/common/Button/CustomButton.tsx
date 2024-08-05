@@ -7,6 +7,7 @@ interface CustomButtonProps {
   variant: "contained" | "outlined";
   children: React.ReactNode;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 const StyledButton = styled(Button)<{
@@ -36,10 +37,16 @@ const CustomButton = ({
   size,
   variant,
   children,
-  onClick
+  onClick,
+  disabled
 }: CustomButtonProps) => {
   return (
-    <StyledButton size={size} variant={variant} onClick={onClick}>
+    <StyledButton
+      disabled={disabled}
+      size={size}
+      variant={variant}
+      onClick={onClick}
+    >
       {children}
     </StyledButton>
   );

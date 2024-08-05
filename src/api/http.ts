@@ -15,7 +15,6 @@ export const createClient = (config?: AxiosRequestConfig) => {
     withCredentials: true,
     ...config
   });
-
   return axiosInstance;
 };
 
