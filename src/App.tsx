@@ -7,6 +7,9 @@ import Home from "./pages/Home";
 import Error from "./pages/Error";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./api/queryClient";
 
 const router = createBrowserRouter([
   {
@@ -31,12 +34,15 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Container>
-        <RouterProvider router={router} />
-      </Container>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Container>
+          <RouterProvider router={router} />
+        </Container>
+      </ThemeProvider>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
 }
 
