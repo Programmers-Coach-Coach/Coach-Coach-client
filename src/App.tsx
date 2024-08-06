@@ -4,7 +4,6 @@ import { GlobalStyle } from "./style/global";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
-import Error from "./pages/Error";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -15,7 +14,6 @@ import CoachList from "./pages/CoachList";
 const router = createBrowserRouter([
   {
     element: <Layout />,
-    errorElement: <Error />,
     children: [
       {
         path: "/",
