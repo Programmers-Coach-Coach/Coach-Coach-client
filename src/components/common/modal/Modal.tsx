@@ -1,5 +1,6 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import useOverlayClick from "@/hooks/useOverlayClick";
+import { slideAnimation } from "@/utils/animation";
 
 type Position = "center" | "footer-above";
 
@@ -57,22 +58,12 @@ const CenterContents = styled.div`
   z-index: 1000;
 `;
 
-// 키프레임 애니메이션 정의
-const slide = keyframes`
-  from {
-    transform: translateY(50%);
-  }
-  to {
-    transform: translateY(0);
-  }
-`;
-
 const FooterAboveContents = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
   bottom: 60px;
-  animation: ${slide} 0.3s forwards;
+  animation: ${slideAnimation("50%", 0)} 0.3s forwards;
 
   width: 100%;
   border-radius: 20px 20px 0 0;
