@@ -2,6 +2,7 @@ import { TextField } from "@mui/material";
 import styled from "styled-components";
 
 interface AuthInputProps {
+  placeholder: string;
   label: string;
   name: string;
   type?: string;
@@ -14,13 +15,15 @@ const AuthInput = (props: AuthInputProps) => {
     <InputContainer>
       <TextFieldWrapper
         label={props.label}
-        required
-        name={props.name}
-        margin="normal"
-        autoFocus
         type={props.type}
         helperText={props.helperText}
         width={props.width}
+        name={props.name}
+        placeholder={props.placeholder}
+        margin="normal"
+        required
+        autoFocus
+        multiline
       />
     </InputContainer>
   );
@@ -33,22 +36,26 @@ const InputContainer = styled.div`
 `;
 
 const TextFieldWrapper = styled(TextField)<{ width?: string }>`
+  && {
+    margin: 0;
+  }
   & .MuiFormLabel-root.Mui-focused {
     color: ${({ theme }) => theme.color.primary};
   }
+
   & .MuiOutlinedInput-root {
     & .MuiOutlinedInput-notchedOutline {
       transition: border-color 0.5s ease;
     }
     &:hover .MuiOutlinedInput-notchedOutline {
-      border-color: ${({ theme }) => theme.color.box};
+      border-color: ${({ theme }) => theme.color.primary};
     }
     &.Mui-focused .MuiOutlinedInput-notchedOutline {
       border-color: ${({ theme }) => theme.color.primary};
     }
   }
   & .MuiInputBase-input::placeholder {
-    color: ${({ theme }) => theme.color.box};
+    color: ${({ theme }) => theme.color.text};
   }
   & .MuiFormHelperText-root {
     color: ${({ theme }) => theme.color.error};

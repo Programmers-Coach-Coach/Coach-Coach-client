@@ -20,11 +20,18 @@ Sentry.init({
   replaysOnErrorSampleRate: 1.0
 });
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
+async function enableMocking() {
+  if (import.meta.env.MODE !== "development") {
+    return;
+  }
+  const { worker } = await import("./mocks/browser");
+  return worker.start();
+}
+
+enableMocking().then(() => {
+  ReactDOM.createRoot(document.getElementById("root")!).render(
+    <React.StrictMode>
       <App />
-      <ReactQueryDevtools />
-    </QueryClientProvider>
-  </React.StrictMode>
-);
+    </React.StrictMode>
+  );
+});

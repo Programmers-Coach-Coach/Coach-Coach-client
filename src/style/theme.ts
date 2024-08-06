@@ -23,6 +23,8 @@ export type PaddingSize = "default";
 export type TitleSize = "t1" | "t2";
 export type BodySize = "b1" | "b2" | "b3";
 
+export type Sports = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+
 interface Theme {
   color: Record<ColorKey, string>;
   fontSize: Record<FontSize, string>;
@@ -80,6 +82,9 @@ interface Theme {
       borderHoverColor: string;
     };
   };
+  sports: {
+    [key in Sports]: string;
+  };
 }
 
 export const theme: Theme = {
@@ -115,7 +120,8 @@ export const theme: Theme = {
     },
     small: {
       padding: "16px",
-      height: "32px"
+      height: "32px",
+      width: "105px"
     }
   },
   borderRadius: {
@@ -186,5 +192,19 @@ export const theme: Theme = {
       border: "1px solid #5271FF",
       borderHoverColor: "#5271FF"
     }
+  },
+  sports: {
+    0: "#F0C40E",
+    1: "#B6D9DD",
+    2: "#8369C2",
+    3: "#4D8AA6",
+    4: "#D1AA8D",
+    5: "#F85F51",
+    6: "#AAC77A",
+    7: "#FFC1C2",
+    8: "#2E4B77",
+    9: "#B2CBE7",
+    10: "#0496D1",
+    11: "#5A4097"
   }
 };

@@ -1,17 +1,7 @@
-export interface ISports {
-  sportsId: number;
-  sportsName: string;
-  sportsImageUrl: string;
-}
+import { IPopularCoach } from "./coach.model";
+import { ISport } from "./sports.model";
 
-export interface IPopularCoach {
-  coachId: number;
-  coachName: string;
-  coachImageUrl: string;
-  description: string;
-  likes: number;
-  coachingSports: {
-    sportsId: number;
-    sportsName: string;
-  }[];
+export interface IHomeData {
+  sports: ISport[];
+  coaches: IPopularCoach[];
 }

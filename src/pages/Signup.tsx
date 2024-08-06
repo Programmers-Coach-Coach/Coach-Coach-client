@@ -3,6 +3,7 @@ import Logo from "../assets/images/Logo.png";
 import AuthInput from "@/components/common/InputField/Text/AuthInput";
 import CustomButton from "@/components/common/Button/CustomButton";
 import { Link } from "react-router-dom";
+
 const Container = styled.div`
   width: 100%;
   max-width: 600px;
@@ -14,7 +15,7 @@ const Container = styled.div`
   padding: 0 20px;
   margin: 0 auto;
   box-sizing: border-box;
-  gap: 15px;
+  gap: 20px;
 `;
 
 const ImageWrapper = styled.img`
@@ -33,13 +34,15 @@ const LinkWrapper = styled.div`
     text-decoration: none;
   }
   color: ${({ theme }) => theme.color.text};
+  margin-top: 10px;
 `;
 
 const FlexContainer = styled.div`
+  width: 314px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 314px;
+  gap: 20px;
 `;
 
 function Signup() {
@@ -48,19 +51,41 @@ function Signup() {
       <Container>
         <ImageWrapper className="logo" src={Logo} />
         <FlexContainer>
-          <AuthInput label="닉네임" name="nickname" type="text" width="212px" />
+          <AuthInput
+            label="닉네임"
+            name="nickname"
+            type="text"
+            width="212px"
+            placeholder="닉네임을 입력하세요"
+          />
           <CustomButton size="small" variant="outlined">
-            중복확인
+            <span className="b2">중복확인</span>
           </CustomButton>
         </FlexContainer>
         <FlexContainer>
-          <AuthInput label="이메일" name="email" type="email" width="212px" />
+          <AuthInput
+            label="이메일"
+            name="email"
+            type="email"
+            width="212px"
+            placeholder="example@naver.com"
+          />
           <CustomButton size="small" variant="outlined">
-            중복확인
+            <span className="b2">중복확인</span>
           </CustomButton>
         </FlexContainer>
-        <AuthInput label="비밀번호" name="password" type="password" />
-        <AuthInput label="비밀번호 확인" name="passwordCheck" type="password" />
+        <AuthInput
+          label="비밀번호"
+          name="password"
+          type="password"
+          placeholder="비밀번호"
+        />
+        <AuthInput
+          label="비밀번호 확인"
+          name="passwordCheck"
+          type="password"
+          placeholder="비밀번호 확인"
+        />
 
         <CustomButton size="large" variant="contained">
           가입하기
