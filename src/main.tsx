@@ -5,7 +5,6 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { queryClient } from "./api/queryClient.ts";
 import * as Sentry from "@sentry/react";
-import ErrorBoundary from "./components/Error/ErrorBoundary.tsx";
 
 Sentry.init({
   dsn: import.meta.env.VITE_SENTRY_DSN,
@@ -23,11 +22,9 @@ Sentry.init({
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ErrorBoundary>
-      <QueryClientProvider client={queryClient}>
-        <App />
-        <ReactQueryDevtools />
-      </QueryClientProvider>
-    </ErrorBoundary>
+    <QueryClientProvider client={queryClient}>
+      <App />
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   </React.StrictMode>
 );
