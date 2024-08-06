@@ -1,4 +1,3 @@
-import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { theme } from "./style/theme";
 import { GlobalStyle } from "./style/global";
@@ -7,7 +6,6 @@ import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import BuggyButton from "./BuggyButton";
 
 const router = createBrowserRouter([
   {
@@ -24,10 +22,6 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <Signup />
-      },
-      {
-        path: "error",
-        element: <BuggyButton />
       }
     ]
   }
