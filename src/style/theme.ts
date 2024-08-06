@@ -16,6 +16,7 @@ export type ColorKey =
 export type FontSize = "large" | "medium" | "small";
 export type FontWeight = "bold" | "normal";
 export type ButtonSize = "large" | "small";
+export type CustomButtonType = "contained" | "outlined";
 export type ProfileImageSize = "small" | "medium" | "large";
 export type ModalSize = "default";
 export type PaddingSize = "default";
@@ -69,13 +70,7 @@ interface Theme {
     };
   };
   buttonVariant: {
-    contained: {
-      backgroundColor: string;
-      color: string;
-      border: string;
-      borderHoverColor: string;
-    };
-    outlined: {
+    [key in CustomButtonType]: {
       backgroundColor: string;
       color: string;
       border: string;
