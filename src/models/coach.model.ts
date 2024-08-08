@@ -28,3 +28,13 @@ export interface ICoachList {
   totalCount: number;
   currentPage: number;
 }
+
+export interface IAllCoachList {
+  page: number;
+  sports?: string; // 종목
+  search?: string; // 검색어
+  latest?: boolean; // 최신순
+  review?: boolean; // 리뷰순
+  liked?: boolean; // 좋아요순
+  my?: boolean; // 내 코치
+}
