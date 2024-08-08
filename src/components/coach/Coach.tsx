@@ -66,10 +66,10 @@ const Text = styled.div`
     li {
       display: inline-flex;
       font-size: 9px;
-      padding: 3px;
+      padding: 4px 6px;
       border-radius: ${({ theme }) => theme.borderRadius.default};
-
-      background-color: ${({ theme }) => theme.color.gray1};
+      color: ${({ theme }) => theme.color.background};
+      background-color: ${({ theme }) => theme.color.secondary};
     }
   }
 `;
