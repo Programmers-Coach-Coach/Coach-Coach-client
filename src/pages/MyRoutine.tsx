@@ -21,7 +21,7 @@ const MyRoutine = () => {
           overlayDisabled={isSelect}
           position="center"
         >
-          <ActionModalInner schema="category-enroll" closeModal={closeModal}>
+          <ActionModalInner schema="routine-enroll" closeModal={closeModal}>
             <RoutineContents setIsSelect={setIsSelect} />
           </ActionModalInner>
         </Modal>
