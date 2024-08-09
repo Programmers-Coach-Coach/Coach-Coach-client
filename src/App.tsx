@@ -10,6 +10,8 @@ import Login from "./pages/Login";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./api/queryClient";
+import Mypage from "./pages/Mypage";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <Signup />
+      },
+      {
+        path: "mypage",
+        element: <Mypage />
       }
     ]
   }
@@ -36,6 +42,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
+        <Toaster />
         <GlobalStyle />
         <Container>
           <RouterProvider router={router} />
