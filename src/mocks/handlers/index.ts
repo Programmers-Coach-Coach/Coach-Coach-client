@@ -1,3 +1,8 @@
 import { handlers as homeHandlers } from "./home";
-
-export const handlers = [...homeHandlers];
+import { handlers as profileHandlers } from "./myDetail";
+import { handlers as getCoachProfileData } from "./myCoachDetail";
+export const handlers = [
+  ...homeHandlers,
+  ...profileHandlers,
+  ...getCoachProfileData
+];
