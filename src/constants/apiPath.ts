@@ -1,3 +1,5 @@
 export const API_PATH = {
-  main: "/main"
+  main: "/main",
+  mypage: "/auth/user/me",
+  coachMypage: "/coaches"
 };
