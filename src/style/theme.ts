@@ -1,6 +1,7 @@
 export type ColorKey =
   | "background"
   | "box"
+  | "border"
   | "primary"
   | "secondary"
   | "third"
@@ -86,6 +87,7 @@ export const theme: Theme = {
   color: {
     background: "#FFFFFF",
     box: "#F8F9FA",
+    border: "#BDBDBD",
     primary: "#5271FF",
     secondary: "#9CABEF",
     third: "#AECDFF",
@@ -122,7 +124,7 @@ export const theme: Theme = {
   borderRadius: {
     default: "20px"
   },
-  boxShadow: "0 10px 40px 0 rgba(0, 0, 0, 0.03)",
+  boxShadow: "0 10px 40px 0 rgba(0, 0, 0, 0.1)",
   profileImage: {
     small: {
       width: "86px",
