@@ -10,6 +10,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./api/queryClient";
 import CoachList from "./pages/CoachList";
+import MyRoutine from "./pages/MyRoutine";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "coach-list",
         element: <CoachList />
+      },
+      {
+        path: "routine",
+        element: <MyRoutine />
       }
     ]
   }

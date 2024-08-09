@@ -22,7 +22,7 @@ exports[`Theme Object should match the theme snapshot 1`] = `
   "borderRadius": {
     "default": "20px",
   },
-  "boxShadow": "0 10px 40px 0 rgba(0, 0, 0, 0.03)",
+  "boxShadow": "0 10px 40px 0 rgba(0, 0, 0, 0.1)",
   "button": {
     "large": {
       "height": "48px",
@@ -51,6 +51,7 @@ exports[`Theme Object should match the theme snapshot 1`] = `
   },
   "color": {
     "background": "#FFFFFF",
+    "border": "#BDBDBD",
     "box": "#F8F9FA",
     "error": "#F22455",
     "gray1": "#E1E1E1",

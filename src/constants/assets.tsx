@@ -6,6 +6,8 @@ import { PiSunglassesBold } from "react-icons/pi";
 import { GrHomeRounded } from "react-icons/gr";
 import { CiDumbbell, CiBellOn } from "react-icons/ci";
 import { RxPerson } from "react-icons/rx";
+import { LuPencilLine } from "react-icons/lu";
+import { RiDeleteBin5Line } from "react-icons/ri";
 
 export const ICONS = {
   person: IoMdPerson,
@@ -17,5 +19,7 @@ export const ICONS = {
   back: IoIosArrowBack,
   home: GrHomeRounded,
   routine: CiDumbbell,
-  alarm: CiBellOn
+  alarm: CiBellOn,
+  modify: LuPencilLine,
+  delete: RiDeleteBin5Line
 };
