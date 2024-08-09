@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 interface AuthInputProps {
   placeholder: string;
-  label: string;
+  label?: string;
   name: string;
   type?: string;
   helperText?: string;
