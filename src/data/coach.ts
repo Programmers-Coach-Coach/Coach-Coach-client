@@ -45,7 +45,7 @@ export const coachPagination: ICoachList[] = Array.from({
   length: TOTAL_PAGE
 }).map((_, i) => ({
   data: Array.from({ length: PER_PAGE }).map((_, j) => ({
-    coachId: (i + 1) * 10 + j, // 중복되지 않도록 설정
+    coachId: (i + 1) * 100 + j, // 중복되지 않도록 설정
     coachName: faker.fullname(),
     localInfo: faker.local(),
     profileImageUrl: faker.imageUrl(),

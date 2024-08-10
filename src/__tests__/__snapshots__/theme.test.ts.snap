@@ -24,10 +24,20 @@ exports[`Theme Object should match the theme snapshot 1`] = `
   },
   "boxShadow": "0 10px 40px 0 rgba(0, 0, 0, 0.03)",
   "button": {
+    "full": {
+      "height": "48px",
+      "padding": "16px",
+      "width": "100%",
+    },
     "large": {
       "height": "48px",
       "padding": "16px",
       "width": "314px",
+    },
+    "mini": {
+      "height": "32px",
+      "padding": "16px",
+      "width": "86px",
     },
     "small": {
       "height": "32px",
