@@ -1,30 +1,30 @@
 import styled from "styled-components";
 import Button from "@mui/material/Button";
-import { theme } from "../../../style/theme"; // theme.ts 파일 경로
+import { ButtonSize, CustomButtonType } from "@/style/theme"; // theme.ts 파일 경로
 
 interface CustomButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  size: "small" | "large" | "full" | "mini";
-  variant: "contained" | "outlined";
+  size: ButtonSize;
+  variant: CustomButtonType;
   children: React.ReactNode;
   onClick?: () => void;
 }
 
 const StyledButton = styled(Button)<CustomButtonProps>`
   && {
-    background-color: ${({ variant }) =>
+    background-color: ${({ variant, theme }) =>
       theme.buttonVariant[variant].backgroundColor};
-    color: ${({ variant }) => theme.buttonVariant[variant].color};
-    border: ${({ variant }) => theme.buttonVariant[variant].border};
-    border-radius: ${theme.borderRadius.default};
-    padding: ${({ size }) => theme.button[size].padding};
-    height: ${({ size }) => theme.button[size].height};
-    width: ${({ size }) => theme.button[size].width || "auto"};
+    color: ${({ variant, theme }) => theme.buttonVariant[variant].color};
+    border: ${({ variant, theme }) => theme.buttonVariant[variant].border};
+    border-radius: ${({ theme }) => theme.borderRadius.default};
+    padding: ${({ size, theme }) => theme.button[size].padding};
+    height: ${({ size, theme }) => theme.button[size].height};
+    width: ${({ size, theme }) => theme.button[size].width || "auto"};
 
     &:hover {
-      background-color: ${({ variant }) =>
+      background-color: ${({ variant, theme }) =>
         theme.buttonVariant[variant].backgroundColor};
-      border-color: ${({ variant }) =>
+      border-color: ${({ variant, theme }) =>
         theme.buttonVariant[variant].borderHoverColor};
     }
   }
