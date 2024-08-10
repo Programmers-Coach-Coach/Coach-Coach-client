@@ -9,8 +9,9 @@ import Login from "./pages/Login";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./api/queryClient";
+import Mypage from "./pages/Mypage";
+import { Toaster } from "react-hot-toast";
 import CoachList from "./pages/CoachList";
-
 const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
         element: <Signup />
       },
       {
+        path: "mypage",
+        element: <Mypage />
+      },
+      {
         path: "coach-list",
         element: <CoachList />
       }
@@ -39,6 +44,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
+        <Toaster />
         <GlobalStyle />
         <Container>
           <RouterProvider router={router} />

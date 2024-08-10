@@ -1,4 +1,3 @@
-import * as React from "react";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import ListItemText from "@mui/material/ListItemText";
@@ -16,62 +15,55 @@ const MenuProps = {
   }
 };
 
-export default function SelectBox() {
-  const [sports, setSports] = React.useState<string[]>([]);
+interface SelectBoxProps {
+  value: string[];
+  onChange: (event: SelectChangeEvent<string[]>) => void;
+}
 
-  const handleChange = (event: SelectChangeEvent<typeof sports>) => {
-    const {
-      target: { value }
-    } = event;
-    setSports(typeof value === "string" ? value.split(",") : value);
-  };
-
+const SelectBox = ({ value, onChange }: SelectBoxProps) => {
   return (
-    <div>
-      <FormControl sx={{ m: 1, width: "200px" }}>
-        <Select
-          multiple
-          value={sports}
-          onChange={handleChange}
-          input={
-            <OutlinedInput
+    <FormControl sx={{ width: "70%" }}>
+      <Select
+        multiple
+        value={value}
+        onChange={onChange}
+        input={
+          <OutlinedInput
+            sx={{
+              backgroundColor: theme.color.background,
+              height: "36px",
+              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                borderColor: theme.color.primary
+              }
+            }}
+          />
+        }
+        renderValue={(selected) => selected.join(", ")}
+        MenuProps={MenuProps}
+      >
+        {SPORTS_NAMES.map((name: string) => (
+          <MenuItem
+            key={name}
+            value={name}
+            sx={{
+              height: 30
+            }}
+          >
+            <Checkbox
+              checked={value.indexOf(name) > -1}
               sx={{
-                backgroundColor: theme.color.box,
-                height: "36px",
-                "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: theme.color.box + " !important"
-                },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor: theme.color.primary + " !important"
+                color: theme.color.primary,
+                "&.Mui-checked": {
+                  color: theme.color.primary
                 }
               }}
             />
-          }
-          renderValue={(selected) => selected.join(", ")}
-          MenuProps={MenuProps}
-        >
-          {SPORTS_NAMES.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              sx={{
-                height: 30
-              }}
-            >
-              <Checkbox
-                checked={sports.indexOf(name) > -1}
-                sx={{
-                  color: theme.color.primary,
-                  "&.Mui-checked": {
-                    color: theme.color.primary
-                  }
-                }}
-              />
-              <ListItemText primary={name} />
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
+            <ListItemText primary={name} />
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
-}
+};
+
+export default SelectBox;
