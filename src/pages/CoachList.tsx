@@ -1,5 +1,5 @@
-import CoachDataList from "@/components/coach/CoachDataList";
-import { coachList } from "@/data/coach";
+import Coaches from "@/components/coach/CoachList";
+// import { coachList } from "@/data/coach";
 import styled from "styled-components";
 
 const CoachList = () => {
@@ -7,7 +7,7 @@ const CoachList = () => {
     <CoachListStyle>
       <div className="search"></div>
       <div className="filter"></div>
-      <CoachDataList coachList={coachList.data} />
+      <Coaches />
     </CoachListStyle>
   );
 };

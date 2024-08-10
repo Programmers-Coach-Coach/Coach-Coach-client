@@ -61,5 +61,5 @@ export const coachPagination: ICoachList[] = Array.from({
     countOfLikes: faker.randomNumber(1000)
   })),
   totalCount: TOTAL_PAGE * PER_PAGE,
-  currentPage: i
+  currentPage: i + 1
 }));
