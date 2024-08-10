@@ -1,7 +1,7 @@
-import BasicTabs from "@/components/mypage/BasicTabs";
 import CoachProfileSection from "@/components/mypage/CoachProfileSection";
 import ProfileSection from "@/components/mypage/ProfileSection";
-import React, { useState } from "react";
+import BasicTabs from "@/components/tab/BasicTabs";
+import { useState } from "react";
 import styled from "styled-components";
 
 const Mypage = () => {

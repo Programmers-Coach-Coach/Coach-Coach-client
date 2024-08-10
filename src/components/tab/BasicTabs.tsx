@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -15,7 +14,7 @@ const BasicTabs = ({ value, onTabChange }: BasicTabsProps) => {
         value={value}
         textColor="primary"
         indicatorColor="primary"
-        onChange={(event, newValue) => onTabChange(newValue)}
+        onChange={(_, newValue) => onTabChange(newValue)}
       >
         <Tab label="내 프로필" />
         <Tab label="코치 전용 프로필" />
