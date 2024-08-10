@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import useOverlayClick from "@/hooks/useOverlayClick";
+import { slideAnimation } from "@/utils/animation";
 
 type Position = "center" | "footer-above";
 
@@ -62,8 +63,7 @@ const FooterAboveContents = styled.div`
   flex-direction: column;
   position: absolute;
   bottom: 60px;
-  left: 50%;
-  transform: translate(-50%);
+  animation: ${slideAnimation("50%", 0)} 0.3s forwards;
 
   width: 100%;
   border-radius: 20px 20px 0 0;

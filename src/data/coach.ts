@@ -1,44 +1,39 @@
-import { IPopularCoach } from "@/models/coach.model";
+import { ICoachList, IPopularCoach } from "@/models/coach.model";
+import * as faker from "@/utils/faker";
 
-export const popularCoaches: IPopularCoach[] = [
-  {
-    coachId: 0,
-    coachName: "김코치",
-    coachImageUrl:
-      "https://res.heraldm.com/content/image/2024/04/12/20240412050389_0.jpg",
-    description:
-      "몸은 거짓말을 하지 않는다. 1회당 100만원으로 싸게 모시겠습니다.",
-    countOfLikes: 1,
-    liked: false,
+export const popularCoaches: IPopularCoach[] = Array.from({ length: 3 }).map(
+  (_, i) => ({
+    coachId: i,
+    coachName: faker.fullname(),
+    coachImageUrl: faker.imageUrl(),
+    description: faker.paragraph(),
+    countOfLikes: faker.randomNumber(1000),
+    liked: faker.boolean(),
     coachingSports: [
-      { sportId: 0, sportName: "헬스" },
-      { sportId: 9, sportName: "크로스핏" }
+      { sportId: faker.randomNumber(1000), sportName: "헬스" },
+      { sportId: faker.randomNumber(1000), sportName: "크로스핏" }
     ]
-  },
-  {
-    coachId: 1,
-    coachName: "이코치",
-    coachImageUrl:
-      "https://res.heraldm.com/content/image/2024/04/12/20240412050389_0.jpg",
-    description:
-      "몸은 거짓말을 하지 않는다. 1회당 100만원으로 싸게 모시겠습니다. 사실 구라고요. 1회당 300만원으로 모시겠습니다.",
-    countOfLikes: 1,
-    liked: true,
-    coachingSports: [{ sportId: 2, sportName: "요가" }]
-  },
-  {
-    coachId: 2,
-    coachName: "박코치코치코치야",
-    coachImageUrl:
-      "https://res.heraldm.com/content/image/2024/04/12/20240412050389_0.jpg",
-    description:
-      "몸은 거짓말을 하지 않는다. 1회당 100만원으로 싸게 모시겠습니다. 사실 구라고요. 1회당 300만원으로 모시겠습니다.",
-    countOfLikes: 1,
-    liked: false,
+  })
+);
+
+const LEN = 10;
+export const coachList: ICoachList = {
+  data: Array.from({ length: LEN }).map((_, i) => ({
+    coachId: i,
+    coachName: faker.fullname(),
+    localInfo: faker.local(),
+    profileImageUrl: faker.imageUrl(),
+    coachIntroduction: faker.paragraph(),
     coachingSports: [
-      { sportId: 10, sportName: "배드민턴" },
-      { sportId: 9, sportName: "크로스핏" },
-      { sportId: 7, sportName: "테니스" }
-    ]
-  }
-];
+      { sportId: faker.randomNumber(1000), sportName: "배드민턴" },
+      { sportId: faker.randomNumber(1000), sportName: "크로스핏" },
+      { sportId: faker.randomNumber(1000), sportName: "테니스" }
+    ],
+    countOfReviews: faker.randomNumber(1000),
+    rating: faker.rating(),
+    liked: faker.boolean(),
+    countOfLikes: faker.randomNumber(1000)
+  })),
+  totalCount: LEN,
+  currentPage: 1
+};
