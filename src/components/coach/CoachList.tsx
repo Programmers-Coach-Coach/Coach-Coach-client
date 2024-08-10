@@ -1,7 +1,7 @@
+import useCoachList from "@/hooks/useCoachList";
+import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 import styled from "styled-components";
 import Coach from "./Coach";
-import useIntersectionObserver from "@/hooks/useIntersectionObserver";
-import useCoachList from "@/hooks/useCoachList";
 
 const CoachList = () => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useCoachList(
@@ -36,7 +36,7 @@ const CoachList = () => {
 const CoachListStyle = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 30px;
   margin-bottom: 90px;
 `;
 

@@ -68,8 +68,8 @@ const Text = styled.div`
       font-size: 9px;
       padding: 4px 6px;
       border-radius: ${({ theme }) => theme.borderRadius.default};
-      color: ${({ theme }) => theme.color.background};
-      background-color: ${({ theme }) => theme.color.secondary};
+      color: ${({ theme }) => theme.color.text};
+      background-color: ${({ theme }) => theme.color.gray1};
     }
   }
 `;
