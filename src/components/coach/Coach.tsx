@@ -9,7 +9,7 @@ interface Props {
 const Coach = ({ coach }: Props) => {
   return (
     <CoachStyle>
-      <Image src={coach.profileImageUrl || undefined} alt="" />
+      <Image src={coach.profileImageUrl || undefined} alt={coach.coachName} />
       <Text>
         <LineClamp $line={1} className="b3">
           {coach.coachName}

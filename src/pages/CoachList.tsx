@@ -5,6 +5,7 @@ import styled from "styled-components";
 const CoachList = () => {
   return (
     <CoachListStyle>
+      {/* TODO: 검색란 필터 구현 */}
       <div className="search"></div>
       <div className="filter"></div>
       <Coaches />
