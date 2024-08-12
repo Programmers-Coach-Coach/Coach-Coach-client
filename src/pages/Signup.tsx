@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Logo from "../assets/images/Logo.png";
-import AuthInput from "@/components/common/InputField/Text/AuthInput";
 import CustomButton from "@/components/common/Button/CustomButton";
 import { Link } from "react-router-dom";
+import AuthInput from "@/components/common/InputField/Text/AuthInput";
 
 const Container = styled.div`
   width: 100%;
