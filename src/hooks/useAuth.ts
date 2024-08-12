@@ -8,37 +8,21 @@ import {
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-export const TOAST_MESSAGE = {
-  signup: {
-    success: "회원가입 성공",
-    error: "회원가입 실패"
-  },
-  nicknameDuplication: {
-    success: "사용 가능한 닉네임입니다.",
-    error: "사용 불가능한 닉네임입니다."
-  },
-  emailDuplication: {
-    success: "사용 가능한 이메일입니다.",
-    error: "사용 불가능한 이메일입니다."
-  }
-};
-
 export const useAuth = () => {
   const navigate = useNavigate();
-  const [isEmailError, setIsEmailError] = useState<boolean>(false);
+  const [isEmailError, setIsEmailError] = useState<boolean>(false); //과정에서 오류가 있었는지 확인하는 상태
   const [isNicknameError, setIsNicknameError] = useState<boolean>(false);
-  const [emailChecked, setEmailChecked] = useState<boolean>(false);
+  const [emailChecked, setEmailChecked] = useState<boolean>(false); //이메일 중복 확인이 완료되었는지 여부
   const [nicknameChecked, setNicknameChecked] = useState<boolean>(false);
 
   const userSignup = (formData: ISignup) => {
     signup(formData)
       .then(() => {
         navigate("/login");
-        toast.success(TOAST_MESSAGE.signup.success);
+        toast.success("회원가입 성공");
       })
       .catch((error) => {
         toast.error(error.response.data.message);
-        toast.error(TOAST_MESSAGE.signup.error);
       });
   };
 
@@ -47,12 +31,12 @@ export const useAuth = () => {
       .then(() => {
         setIsEmailError(false);
         setEmailChecked(true); // 이메일 중복 확인 완료
-        toast.success(TOAST_MESSAGE.emailDuplication.success);
+        toast.success("사용가능한 이메일입니다.");
       })
-      .catch(() => {
+      .catch((error) => {
         setIsEmailError(true);
         setEmailChecked(false); // 이메일 중복 확인 실패
-        toast.error(TOAST_MESSAGE.emailDuplication.error);
+        toast.error(error.response.data.message);
       });
   };
 
@@ -61,12 +45,12 @@ export const useAuth = () => {
       .then(() => {
         setIsNicknameError(false);
         setNicknameChecked(true); // 닉네임 중복 확인 완료
-        toast.success(TOAST_MESSAGE.nicknameDuplication.success);
+        toast.success("사용가능한 닉네임입니다.");
       })
-      .catch(() => {
+      .catch((error) => {
         setIsNicknameError(true);
         setNicknameChecked(false); // 닉네임 중복 확인 실패
-        toast.error(TOAST_MESSAGE.nicknameDuplication.error);
+        toast.error(error.response.data.message);
       });
   };
 
