@@ -1,22 +1,16 @@
 import { Button, ButtonProps } from "@mui/material";
 import styled from "styled-components";
 import kakao from "@/assets/images/kakaoLogin.png";
-import { theme } from "../../../style/theme";
 
 const KakaoButton = styled(Button)<ButtonProps>(() => ({
   width: "314px",
   height: "48px",
   backgroundImage: `url(${kakao})`,
-  backgroundSize: "cover",
+  backgroundSize: "314px",
   backgroundPosition: "center",
-  borderRadius: `${theme.borderRadius.default}`,
-  textTransform: "none",
+  borderRadius: "20px",
   "&:hover": {
-    backgroundImage: `url(${kakao})`,
-    backgroundColor: "transparent"
-  },
-  "& .MuiButton-label": {
-    color: "transparent"
+    borderRadius: "20px"
   }
 }));
 
