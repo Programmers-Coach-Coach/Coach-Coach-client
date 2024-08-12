@@ -3,7 +3,7 @@ import Logo from "../assets/images/Logo.png";
 import { Link } from "react-router-dom";
 import SignupForm from "@/components/signup/SignupForm";
 
-export const Signup = () => {
+const Signup = () => {
   return (
     <Container>
       <ImageWrapper className="logo" src={Logo} />
@@ -47,3 +47,5 @@ const LinkWrapper = styled.div`
   color: ${({ theme }) => theme.color.text};
   margin-top: 10px;
 `;
+
+export default Signup;
