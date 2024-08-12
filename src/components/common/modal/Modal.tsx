@@ -1,6 +1,6 @@
-import styled from "styled-components";
 import useOverlayClick from "@/hooks/useOverlayClick";
 import { slideAnimation } from "@/utils/animation";
+import styled from "styled-components";
 
 type Position = "center" | "footer-above";
 
@@ -23,23 +23,24 @@ const Modal = ({
   );
 
   return (
-    <CenterModalStyle onClick={overlayClick}>
+    <ModalStyle onClick={overlayClick}>
       {position === "center" && (
         <CenterContents ref={modalRef}>{children}</CenterContents>
       )}
       {position === "footer-above" && (
         <FooterAboveContents ref={modalRef}>{children}</FooterAboveContents>
       )}
-    </CenterModalStyle>
+    </ModalStyle>
   );
 };
 
-const CenterModalStyle = styled.div`
+const ModalStyle = styled.div`
   position: fixed;
   inset: 0;
   max-width: 600px;
   margin: 0 auto;
   height: 100vh;
+  z-index: 1000;
 `;
 
 const CenterContents = styled.div`
