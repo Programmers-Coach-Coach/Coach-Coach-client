@@ -11,10 +11,19 @@ const useModal = () => {
     setIsModal(false);
   };
 
+  const handleModal = () => {
+    if (isModal) {
+      closeModal();
+    } else {
+      openModal();
+    }
+  };
+
   return {
     isModal,
     openModal,
-    closeModal
+    closeModal,
+    handleModal
   };
 };
 
