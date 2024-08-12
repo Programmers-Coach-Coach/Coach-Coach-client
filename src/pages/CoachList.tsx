@@ -1,13 +1,17 @@
+import CoachListFilter from "@/components/coach/CaochListFilter";
 import Coaches from "@/components/coach/CoachList";
+import { WhiteSpace } from "@/style/global";
 // import { coachList } from "@/data/coach";
 import styled from "styled-components";
 
 const CoachList = () => {
   return (
     <CoachListStyle>
-      {/* TODO: 검색란 필터 구현 */}
+      {/* TODO: 검색란 */}
       <div className="search"></div>
-      <div className="filter"></div>
+      <WhiteSpace $height={30} />
+      <CoachListFilter />
+      <WhiteSpace $height={30} />
       <Coaches />
     </CoachListStyle>
   );

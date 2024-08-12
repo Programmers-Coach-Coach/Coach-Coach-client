@@ -13,7 +13,7 @@ export interface IPopularCoach {
 export interface ICoach {
   coachId: number;
   coachName: string;
-  localInfo: string;
+  localInfo: string; // localAddress로 변경
   profileImageUrl: string | null;
   coachIntroduction: string;
   coachingSports: ICoachingSports[];
