@@ -5,35 +5,13 @@ interface AuthInputProps {
   placeholder: string;
   label: string;
   name: string;
-  type?: string;
+  type: string;
   helperText?: string;
   width?: string;
 }
-
 const AuthInput = (props: AuthInputProps) => {
-  return (
-    <InputContainer>
-      <TextFieldWrapper
-        label={props.label}
-        type={props.type}
-        helperText={props.helperText}
-        width={props.width}
-        name={props.name}
-        placeholder={props.placeholder}
-        margin="normal"
-        required
-        autoFocus
-        multiline
-      />
-    </InputContainer>
-  );
+  return <TextFieldWrapper helperText={props.helperText} {...props} />;
 };
-
-const InputContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%; /* Ensure container takes full width */
-`;
 
 const TextFieldWrapper = styled(TextField)<{ width?: string }>`
   && {
@@ -66,5 +44,4 @@ const TextFieldWrapper = styled(TextField)<{ width?: string }>`
     margin-top: 0;
   }
 `;
-
 export default AuthInput;
