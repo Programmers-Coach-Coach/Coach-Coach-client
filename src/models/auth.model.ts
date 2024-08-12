@@ -18,3 +18,7 @@ export interface IMyPageFormValues {
   introduction: string;
   gender: string;
 }
+export interface ILogin {
+  email: string;
+  password: string;
+}
