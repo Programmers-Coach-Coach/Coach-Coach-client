@@ -42,12 +42,7 @@ const LoginForm = () => {
         )}
       />
 
-      <CustomButton
-        size="large"
-        variant="contained"
-        onClick={handleSubmit(onSubmit)}
-        type="submit"
-      >
+      <CustomButton size="large" variant="contained" type="submit">
         로그인
       </CustomButton>
     </FormWrapper>
