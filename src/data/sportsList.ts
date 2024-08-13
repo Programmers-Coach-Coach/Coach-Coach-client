@@ -76,20 +76,20 @@ export const sportsList: ISport[] = [
 ];
 
 export const sportList: ICoachingSports[] = [
-  { sportId: 12, sportName: "전체" },
-  { sportId: 0, sportName: "헬스" },
-  { sportId: 1, sportName: "수영" },
-  { sportId: 2, sportName: "요가" },
-  { sportId: 3, sportName: "필라테스" },
-  { sportId: 4, sportName: "클라이밍" },
-  { sportId: 5, sportName: "발레" },
-  { sportId: 6, sportName: "골프" },
-  { sportId: 7, sportName: "테니스" },
-  { sportId: 8, sportName: "복싱" },
-  { sportId: 9, sportName: "크로스핏" },
-  { sportId: 10, sportName: "배드민턴" },
-  { sportId: 11, sportName: "러닝" }
+  { sportId: 1, sportName: "헬스" },
+  { sportId: 2, sportName: "수영" },
+  { sportId: 3, sportName: "요가" },
+  { sportId: 4, sportName: "필라테스" },
+  { sportId: 5, sportName: "클라이밍" },
+  { sportId: 6, sportName: "발레" },
+  { sportId: 7, sportName: "골프" },
+  { sportId: 8, sportName: "테니스" },
+  { sportId: 9, sportName: "복싱" },
+  { sportId: 10, sportName: "크로스핏" },
+  { sportId: 11, sportName: "배드민턴" },
+  { sportId: 12, sportName: "러닝" }
 ];
+
 export const filterList: IFilter[] = [
   { id: 0, name: "최신순" },
   { id: 1, name: "리뷰순" },
