@@ -25,7 +25,7 @@ const httpClient = createClient();
 export const requestHandler = async <T>(
   method: RequestMethod,
   url: string,
-  payload?: T
+  payload?: unknown
 ) => {
   let response;
   switch (method) {
@@ -45,5 +45,5 @@ export const requestHandler = async <T>(
       response = await httpClient.delete(url);
       break;
   }
-  return response.data;
+  return response.data as T;
 };
