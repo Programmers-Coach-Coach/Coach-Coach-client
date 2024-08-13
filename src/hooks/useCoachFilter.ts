@@ -1,9 +1,10 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-const useCoachFilter = () => {
+const useCoachFilter = (id: number | undefined) => {
+  console.log(id);
   const [filterId, setFilterId] = useState<number>(0);
 
-  const [sportsIdList, setSportsIdList] = useState<number[]>([0]);
+  const [sportsIdList, setSportsIdList] = useState<number[]>([id ?? 0]);
 
   const singleFilter = (id: number) => {
     setFilterId(id);

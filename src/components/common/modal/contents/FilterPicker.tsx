@@ -21,7 +21,7 @@ const FilterPicker = ({
     <FilterPickerStyle>
       <Text>
         <h1>정렬</h1>
-        <p className="b2">정렬 순은 한개만 선택할 수 있어요</p>
+        <p className="b2">*한 개만 선택할 수 있어요</p>
       </Text>
       <Filters>
         {filterList.map((filter) => (
@@ -34,10 +34,9 @@ const FilterPicker = ({
           </Filter>
         ))}
       </Filters>
-      <hr />
       <Text>
         <h1>종목</h1>
-        <p className="b2">운동 종목은 여러개 선택할 수 있어요</p>
+        <p className="b2">*여러 개 선택할 수 있어요</p>
       </Text>
       <Filters>
         {sportListWithTotal.map((sport) => (
@@ -55,7 +54,7 @@ const FilterPicker = ({
 };
 
 const FilterPickerStyle = styled.div`
-  padding: 0 10px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -70,7 +69,7 @@ const Text = styled.div`
 
   p {
     position: absolute;
-    top: 8px;
+    top: 20px;
     right: 0;
   }
 `;

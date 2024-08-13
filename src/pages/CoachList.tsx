@@ -2,11 +2,16 @@ import CoachListFilter from "@/components/coach/CaochListFilter";
 import Coaches from "@/components/coach/CoachList";
 import useCoachFilter from "@/hooks/useCoachFilter";
 import { WhiteSpace } from "@/style/global";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const CoachList = () => {
+  const location = useLocation();
+  const sportId = location.state.sportId;
+
   const { filterId, sportsIdList, singleFilter, multiFilter } =
-    useCoachFilter();
+    useCoachFilter(sportId);
+
   return (
     <CoachListStyle>
       <div className="search"></div>
