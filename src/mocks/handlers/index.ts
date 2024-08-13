@@ -1,3 +1,4 @@
 import { handlers as homeHandlers } from "./home";
+import { handlers as routineHandlers } from "./routine";
 
-export const handlers = [...homeHandlers];
+export const handlers = [...homeHandlers, ...routineHandlers];
