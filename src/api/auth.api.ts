@@ -1,4 +1,4 @@
-import { ILogin } from "@/models/auth.model";
+import { ILogin, IUserProfile } from "@/models/auth.model";
 import { createClient, requestHandler } from "./http";
 import { API_PATH } from "@/constants/apiPath";
 import {
@@ -6,13 +6,14 @@ import {
   ICheckEmailDuplication,
   ICheckNicknameDuplication
 } from "@/models/auth.model";
+import { ICoachDetail } from "@/models/coach.model";
 
 export const getProfile = () => {
-  return requestHandler("get", API_PATH.mypage);
+  return requestHandler<IUserProfile>("get", API_PATH.mypage);
 };
 
 export const getCoachProfile = () => {
-  return requestHandler("get", API_PATH.coachMypage);
+  return requestHandler<ICoachDetail>("get", API_PATH.coachMypage);
 };
 
 export const login = (formData: ILogin) => {

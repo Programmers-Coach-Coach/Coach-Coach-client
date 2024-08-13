@@ -1,7 +1,7 @@
 import { API_PATH } from "@/constants/apiPath";
 import { requestHandler } from "./http";
 import qs from "qs";
-import { IAllCoachList } from "@/models/coach.model";
+import { IAllCoachList, ICoachList } from "@/models/coach.model";
 
 export const getCoachAll = ({ filter, page }: IAllCoachList) => {
   const { sports, search, latest, review, liked, my } = filter;
@@ -15,5 +15,5 @@ export const getCoachAll = ({ filter, page }: IAllCoachList) => {
     page
   });
 
-  return requestHandler("get", `${API_PATH.getCoachAll}?${query}`);
+  return requestHandler<ICoachList>("get", `${API_PATH.getCoachAll}?${query}`);
 };
