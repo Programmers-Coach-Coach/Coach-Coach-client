@@ -22,6 +22,6 @@ export const ICONS = {
   routine: CiDumbbell,
   alarm: CiBellOn,
   modify: LuPencilLine,
-  delete: RiDeleteBin5Line
+  delete: RiDeleteBin5Line,
   filter: TbArrowsExchange2
 };
