@@ -8,3 +8,8 @@ export interface ICoachingSports {
   sportId: number;
   sportName: string;
 }
+
+export interface IFilter {
+  id: number;
+  name: string;
+}

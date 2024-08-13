@@ -2,17 +2,15 @@ import styled from "styled-components";
 import Button from "@mui/material/Button";
 import { ButtonSize, CustomButtonType } from "@/style/theme"; // theme.ts 파일 경로
 
-interface CustomButtonProps {
+interface CustomButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size: ButtonSize;
   variant: CustomButtonType;
   children: React.ReactNode;
   onClick?: () => void;
 }
 
-const StyledButton = styled(Button)<{
-  size: ButtonSize;
-  variant: CustomButtonType;
-}>`
+const StyledButton = styled(Button)<CustomButtonProps>`
   && {
     background-color: ${({ variant, theme }) =>
       theme.buttonVariant[variant].backgroundColor};
@@ -32,14 +30,15 @@ const StyledButton = styled(Button)<{
   }
 `;
 
-const CustomButton = ({
+const CustomButton: React.FC<CustomButtonProps> = ({
   size,
   variant,
   children,
-  onClick
-}: CustomButtonProps) => {
+  onClick,
+  ...rest
+}) => {
   return (
-    <StyledButton size={size} variant={variant} onClick={onClick}>
+    <StyledButton size={size} variant={variant} onClick={onClick} {...rest}>
       {children}
     </StyledButton>
   );

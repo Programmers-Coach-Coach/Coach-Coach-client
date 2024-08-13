@@ -60,7 +60,7 @@ const Coach = ({ coach }: CoachProps) => {
     <CoachStyle>
       <img src={coach.coachImageUrl} alt={coach.coachName} />
       <button>
-        <Heart checked={true} size="small" />
+        <Heart checked={coach.liked} size="small" />
         <p className="b3">{coach.countOfLikes}</p>
       </button>
       <BoxText>

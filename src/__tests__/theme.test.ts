@@ -58,7 +58,9 @@ describe("Theme Object", () => {
 
   test.each([
     ["large", { padding: "16px", height: "48px", width: "314px" }],
-    ["small", { padding: "16px", height: "32px", width: "105px" }]
+    ["small", { padding: "16px", height: "32px", width: "105px" }],
+    ["full", { padding: "16px", height: "48px", width: "100%" }],
+    ["mini", { padding: "16px", height: "32px", width: "86px" }]
   ] as [ButtonSize, { padding: string; height: string; width?: string }][])(
     "should have correct button value for %s",
     (buttonSize, expectedValue) => {
