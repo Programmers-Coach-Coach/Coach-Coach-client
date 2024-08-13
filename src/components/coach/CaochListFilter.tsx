@@ -1,15 +1,24 @@
 import { filterList, sportList } from "@/data/sportsList";
-import useCoachFilter from "@/hooks/useCoachFilter";
 import useModal from "@/hooks/useModal";
 import styled from "styled-components";
 import Icon from "../Icon/Icon";
 import Modal from "../common/modal/Modal";
 import FilterPicker from "../common/modal/contents/FilterPicker";
 
-const CoachListFilter = () => {
+interface Props {
+  filterId: number;
+  sportsIdList: number[];
+  singleFilter: (id: number) => void;
+  multiFilter: (id: number) => void;
+}
+
+const CoachListFilter = ({
+  filterId,
+  sportsIdList,
+  singleFilter,
+  multiFilter
+}: Props) => {
   const { isModal, closeModal, handleModal } = useModal();
-  const { filterId, sportsIdList, singleFilter, multiFilter } =
-    useCoachFilter();
 
   // 종목 필터에 "전체" 추가한 배열
   const SPORT_LIST_WITH_TOTAL = [
@@ -19,20 +28,28 @@ const CoachListFilter = () => {
 
   return (
     <CoachListFilterStyle>
-      <Icon name="filter" size="20px" color="text" onClick={handleModal} />
+      <Icon name="filter" size="18px" color="text" onClick={handleModal} />
       {/* 정렬 필터*/}
-      <Filter>
+      <SortFilter>
         {filterList.find((filter) => filterId === filter.id)?.name}
-      </Filter>
+      </SortFilter>
       {/* 종목 필터 */}
-      {sportsIdList.map((id) => (
-        <Filter key={id}>
-          {
-            SPORT_LIST_WITH_TOTAL.find((sport) => sport.sportId === id)
-              ?.sportName
-          }
-        </Filter>
-      ))}
+      <SportsFilter>
+        {sportsIdList.map((id) => (
+          <Filter key={id}>
+            {
+              SPORT_LIST_WITH_TOTAL.find((sport) => sport.sportId === id)
+                ?.sportName
+            }
+            <Icon
+              name="x"
+              size="14px"
+              color="primary"
+              onClick={() => multiFilter(id)}
+            />
+          </Filter>
+        ))}
+      </SportsFilter>
       {isModal && (
         <Modal position="footer-above" closeModal={closeModal}>
           <FilterPicker
@@ -50,14 +67,28 @@ const CoachListFilter = () => {
 
 const CoachListFilterStyle = styled.div`
   display: flex;
-  gap: 10px;
   overflow: auto;
+  padding: 0.5rem 0;
+`;
+
+const SortFilter = styled.button`
+  flex-shrink: 0;
+  font-size: 12px;
+  margin: 0 10px 0 4px;
+`;
+
+const SportsFilter = styled.div`
+  display: flex;
+  gap: 10px;
 `;
 
 const Filter = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 8px;
   flex-shrink: 0;
   font-size: 12px;
-  padding: 0.25rem 1rem;
+  padding: 0.25rem 0.5rem 0.25rem 1rem;
   color: ${({ theme }) => theme.color.primary};
   background-color: ${({ theme }) => theme.color.background};
   border-radius: ${({ theme }) => theme.borderRadius.default};

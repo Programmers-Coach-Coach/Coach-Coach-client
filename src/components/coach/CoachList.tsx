@@ -3,10 +3,14 @@ import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 import styled from "styled-components";
 import Coach from "./Coach";
 
-const CoachList = () => {
+interface Props {
+  filterId: number;
+  sportsIdList: number[];
+}
+const CoachList = ({ filterId, sportsIdList }: Props) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useCoachList(
     {
-      filter: {}
+      filter: { filterId, sportsIdList }
     }
   );
 

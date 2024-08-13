@@ -3,11 +3,11 @@ import { FaPeoplePulling } from "react-icons/fa6";
 import { GrHomeRounded } from "react-icons/gr";
 import { HiChartBar } from "react-icons/hi2";
 import { IoIosArrowBack, IoMdPerson } from "react-icons/io";
-import { IoLogOutOutline } from "react-icons/io5";
-import { PiSunglassesBold } from "react-icons/pi";
-import { RxPerson } from "react-icons/rx";
+import { IoClose, IoLogOutOutline } from "react-icons/io5";
 import { LuPencilLine } from "react-icons/lu";
+import { PiSunglassesBold } from "react-icons/pi";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import { RxPerson } from "react-icons/rx";
 import { TbArrowsExchange2 } from "react-icons/tb";
 
 export const ICONS = {
@@ -23,5 +23,6 @@ export const ICONS = {
   alarm: CiBellOn,
   modify: LuPencilLine,
   delete: RiDeleteBin5Line,
-  filter: TbArrowsExchange2
+  filter: TbArrowsExchange2,
+  x: IoClose
 };
