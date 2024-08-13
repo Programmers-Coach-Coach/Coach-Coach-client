@@ -3,17 +3,21 @@ import {
   routinePicker,
   TRoutinePicker
 } from "@/data/modal";
+import { routineDB } from "@/data/routine";
+import { useDeleteRoutine } from "@/hooks/useRoutine";
+import { useModalInfo } from "@/store/modalInfo.store";
 import styled from "styled-components";
 
 interface Props {
   schema: TRoutinePicker;
+  closeModal: () => void;
 }
 
-const RoutinePicker = ({ schema }: Props) => {
+const RoutinePicker = ({ schema, closeModal }: Props) => {
   return (
     <RoutinePickerStyle>
       {routinePicker[schema].map((item, i) => (
-        <Item item={item} key={i} />
+        <Item item={item} key={i} closeModal={closeModal} />
       ))}
     </RoutinePickerStyle>
   );
@@ -25,8 +29,27 @@ const RoutinePickerStyle = styled.div`
   width: 100%;
 `;
 
-const Item = ({ item }: { item: IRoutinePickerData }) => {
-  return <ItemStyle onClick={item.onClick}>{item.name}</ItemStyle>;
+const Item = ({
+  item,
+  closeModal
+}: {
+  item: IRoutinePickerData;
+  closeModal: () => void;
+}) => {
+  const deleteRoutineResponse = useDeleteRoutine();
+  const routineId = useModalInfo((state) => state.routineId);
+
+  const onClickHandler = () => {
+    if (item.name === "루틴 삭제") {
+      deleteRoutineResponse.mutateAsync(routineId);
+      routineDB.delete(routineId);
+      closeModal();
+    } else if (item.name === "취소") {
+      closeModal();
+    }
+  };
+
+  return <ItemStyle onClick={onClickHandler}>{item.name}</ItemStyle>;
 };
 
 const ItemStyle = styled.div`
