@@ -1,4 +1,4 @@
-import { ISport } from "@/models/sports.model";
+import { ICoachingSports, IFilter, ISport } from "@/models/sports.model";
 
 export const sportsList: ISport[] = [
   {
@@ -73,4 +73,26 @@ export const sportsList: ISport[] = [
     sportImageUrl:
       "https://prgrms.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Fe937a7f9-dece-4540-8e1e-3c5966896424%2F6c6844ac-1656-4ee0-918f-035161b89c37%2Ftraining.png?table=block&id=1e96629d-c9c2-414a-b0e2-68c8d771123c&spaceId=e937a7f9-dece-4540-8e1e-3c5966896424&width=1020&userId=&cache=v2"
   }
+];
+
+export const sportList: ICoachingSports[] = [
+  { sportId: 12, sportName: "전체" },
+  { sportId: 0, sportName: "헬스" },
+  { sportId: 1, sportName: "수영" },
+  { sportId: 2, sportName: "요가" },
+  { sportId: 3, sportName: "필라테스" },
+  { sportId: 4, sportName: "클라이밍" },
+  { sportId: 5, sportName: "발레" },
+  { sportId: 6, sportName: "골프" },
+  { sportId: 7, sportName: "테니스" },
+  { sportId: 8, sportName: "복싱" },
+  { sportId: 9, sportName: "크로스핏" },
+  { sportId: 10, sportName: "배드민턴" },
+  { sportId: 11, sportName: "러닝" }
+];
+export const filterList: IFilter[] = [
+  { id: 0, name: "최신순" },
+  { id: 1, name: "리뷰순" },
+  { id: 2, name: "좋아요순" },
+  { id: 3, name: "MY" }
 ];
