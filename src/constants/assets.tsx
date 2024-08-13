@@ -6,6 +6,8 @@ import { IoIosArrowBack, IoMdPerson } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
 import { PiSunglassesBold } from "react-icons/pi";
 import { RxPerson } from "react-icons/rx";
+import { LuPencilLine } from "react-icons/lu";
+import { RiDeleteBin5Line } from "react-icons/ri";
 import { TbArrowsExchange2 } from "react-icons/tb";
 
 export const ICONS = {
@@ -19,5 +21,7 @@ export const ICONS = {
   home: GrHomeRounded,
   routine: CiDumbbell,
   alarm: CiBellOn,
+  modify: LuPencilLine,
+  delete: RiDeleteBin5Line
   filter: TbArrowsExchange2
 };

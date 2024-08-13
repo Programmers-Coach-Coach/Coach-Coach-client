@@ -11,7 +11,9 @@ import { queryClient } from "./api/queryClient";
 import Mypage from "./pages/Mypage";
 import { Toaster } from "react-hot-toast";
 import CoachList from "./pages/CoachList";
+import MyRoutine from "./pages/MyRoutine";
 import Signup from "./pages/Signup";
+
 const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -35,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "coach-list",
         element: <CoachList />
+      },
+      {
+        path: "routine",
+        element: <MyRoutine />
       }
     ]
   }

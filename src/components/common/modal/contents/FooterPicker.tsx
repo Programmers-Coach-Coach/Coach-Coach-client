@@ -1,5 +1,6 @@
 import Icon from "@/components/Icon/Icon";
 import { footerPicker, IFooterPickerData, TFooterPicker } from "@/data/modal";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 interface Props {
@@ -7,10 +8,11 @@ interface Props {
 }
 
 const FooterPicker = ({ schema }: Props) => {
+  const navigate = useNavigate();
   return (
     <FooterPickerStyle>
       {footerPicker[schema].map((item, i) => (
-        <Item item={item} key={i} />
+        <Item item={item} key={i} onClick={() => navigate(item.link)} />
       ))}
     </FooterPickerStyle>
   );
@@ -22,9 +24,14 @@ const FooterPickerStyle = styled.div`
   width: 100%;
 `;
 
-const Item = ({ item }: { item: IFooterPickerData }) => {
+interface itemProp {
+  item: IFooterPickerData;
+  onClick?: () => void;
+}
+
+const Item = ({ item, onClick }: itemProp) => {
   return (
-    <ItemStyle>
+    <ItemStyle onClick={onClick}>
       <Icon name={item.icon} size="30px" color="text" />
       {item.name}
     </ItemStyle>

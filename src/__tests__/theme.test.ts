@@ -16,6 +16,7 @@ describe("Theme Object", () => {
   test.each([
     ["background", "#FFFFFF"],
     ["box", "#F8F9FA"],
+    ["border", "#BDBDBD"],
     ["primary", "#5271FF"],
     ["secondary", "#9CABEF"],
     ["third", "#AECDFF"],
@@ -72,7 +73,7 @@ describe("Theme Object", () => {
   });
 
   it("should have correct boxShadow value", () => {
-    expect(theme.boxShadow).toBe("0 10px 40px 0 rgba(0, 0, 0, 0.03)");
+    expect(theme.boxShadow).toBe("0 10px 40px 0 rgba(0, 0, 0, 0.1)");
   });
 
   test.each([

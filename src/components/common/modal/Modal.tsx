@@ -54,8 +54,10 @@ const CenterContents = styled.div`
 
   width: 352px;
   padding: 30px;
-  border-radius: 20px;
-  background-color: ${({ theme }) => theme.color.background};
+  background-color: ${({ theme }) => theme.color.box};
+  border-radius: ${({ theme }) => theme.borderRadius.default};
+  border: 1px solid ${({ theme }) => theme.color.border};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   z-index: 1000;
 `;
 
