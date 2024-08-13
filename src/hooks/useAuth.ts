@@ -1,3 +1,8 @@
+import { login } from "@/api/auth.api";
+import { ILogin } from "@/models/auth.model";
+import { useAuthStore } from "@/store/authStore";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { emailDuplicate, nicknameDuplicate, signup } from "@/api/auth.api";
 import {
@@ -5,8 +10,8 @@ import {
   ICheckNicknameDuplication,
   ISignup
 } from "@/models/auth.model";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+
+
 
 export const useAuth = () => {
   const navigate = useNavigate();
@@ -14,6 +19,7 @@ export const useAuth = () => {
   const [isNicknameError, setIsNicknameError] = useState<boolean>(false);
   const [emailChecked, setEmailChecked] = useState<boolean>(false); //이메일 중복 확인이 완료되었는지 여부
   const [nicknameChecked, setNicknameChecked] = useState<boolean>(false);
+  const { storeLogin } = useAuthStore();
 
   const userSignup = (formData: ISignup) => {
     signup(formData)
@@ -26,6 +32,18 @@ export const useAuth = () => {
       });
   };
 
+  const userLogin = (formData: ILogin) => {
+    login(formData)
+      .then(() => {
+        storeLogin();
+        navigate("/");
+        toast.success("로그인 성공");
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+      });
+  };
+  
   const emailDuplication = (formData: ICheckEmailDuplication) => {
     emailDuplicate(formData)
       .then(() => {
@@ -55,6 +73,7 @@ export const useAuth = () => {
   };
 
   return {
+    userLogin,
     userSignup,
     emailDuplication,
     nicknameDuplication,
@@ -64,3 +83,9 @@ export const useAuth = () => {
     nicknameChecked
   };
 };
+
+
+
+    
+
+export default useAuth;

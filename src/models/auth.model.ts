@@ -19,6 +19,11 @@ export interface IMyPageFormValues {
   gender: string;
 }
 
+export interface ILogin {
+  email: string;
+  password: string;
+}
+
 export interface ISignup {
   nickname: string;
   email: string;
