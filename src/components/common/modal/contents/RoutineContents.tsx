@@ -1,18 +1,22 @@
 import { styled } from "styled-components";
-import AuthInput from "../../InputField/Text/AuthInput";
-import SelectBox from "../../InputField/Select/SelectBox";
+import SelectBoxInModal from "../../InputField/Select/SelectBoxInModal";
+import InputInModal from "../../InputField/Text/InputInModal";
+import { useModalInfo } from "@/store/modalInfo.store";
 
 interface RoutineContentsProps {
   setIsSelect: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const RoutineContents = ({ setIsSelect }: RoutineContentsProps) => {
+  const routineName = useModalInfo((state) => state.routineName);
+  const setRoutineName = useModalInfo((state) => state.setRoutineName);
+
   return (
     <RoutineContentsStyle>
       <h2>루틴명</h2>
-      <AuthInput placeholder="a" name="c" />
+      <InputInModal name={routineName} content="종목" setFn={setRoutineName} />
       <h2>종목</h2>
-      <SelectBox setIsSelect={setIsSelect} />
+      <SelectBoxInModal setIsSelect={setIsSelect} />
     </RoutineContentsStyle>
   );
 };
