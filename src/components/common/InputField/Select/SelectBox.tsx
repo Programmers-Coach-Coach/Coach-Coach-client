@@ -16,11 +16,7 @@ const MenuProps = {
   }
 };
 
-interface SelectBoxProps {
-  setIsSelect: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export default function SelectBox({ setIsSelect }: SelectBoxProps) {
+export default function SelectBox() {
   const [sports, setSports] = React.useState<string[]>([]);
 
   const handleChange = (event: SelectChangeEvent<typeof sports>) => {
@@ -30,14 +26,6 @@ export default function SelectBox({ setIsSelect }: SelectBoxProps) {
     setSports(typeof value === "string" ? value.split(",") : value);
   };
 
-  const handleOpen = () => {
-    setIsSelect(true);
-  };
-
-  const handleClose = () => {
-    setIsSelect(false);
-  };
-
   return (
     <div>
       <FormControl sx={{ m: 1, width: "200px" }}>
@@ -45,8 +33,6 @@ export default function SelectBox({ setIsSelect }: SelectBoxProps) {
           multiple
           value={sports}
           onChange={handleChange}
-          onOpen={handleOpen}
-          onClose={handleClose}
           input={
             <OutlinedInput
               sx={{
