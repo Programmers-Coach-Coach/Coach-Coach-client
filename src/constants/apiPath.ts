@@ -1,3 +1,4 @@
 export const API_PATH = {
-  main: "/main"
+  main: "/main",
+  routine: "/routines"
 };
