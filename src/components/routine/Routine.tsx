@@ -6,33 +6,58 @@ import { useState } from "react";
 import Modal from "@/components/common/modal/Modal";
 import ActionModalInner from "@/components/common/modal/contents/ActionModalInner";
 import RoutineContents from "@/components/common/modal/contents/RoutineContents";
+import { SPORTS_NAMES } from "@/constants/sportsConstants";
+import { useModalInfo } from "@/store/modalInfo.store";
+import RoutinePicker from "../common/modal/contents/RoutinePicker";
 
-const Routine = () => {
-  const { isModal, openModal, closeModal } = useModal();
+interface RoutineProps {
+  id: number;
+  name: string;
+  sportId: number;
+}
+
+const Routine = ({ id, name, sportId }: RoutineProps) => {
+  const modifyModal = useModal();
+  const deleteModal = useModal();
   const [isSelect, setIsSelect] = useState<boolean>(false);
+  const setRoutineId = useModalInfo((state) => state.setRoutineId);
 
   const onClickModify = () => {
-    openModal();
+    setRoutineId(id);
+    modifyModal.openModal();
+  };
+
+  const onClickDelete = () => {
+    setRoutineId(id);
+    deleteModal.openModal();
   };
 
   return (
     <>
-      {isModal && (
+      {modifyModal.isModal && (
         <Modal
-          closeModal={closeModal}
+          closeModal={modifyModal.closeModal}
           overlayDisabled={isSelect}
           position="center"
         >
-          <ActionModalInner schema="routine-modify" closeModal={closeModal}>
+          <ActionModalInner
+            schema="routine-modify"
+            closeModal={modifyModal.closeModal}
+          >
             <RoutineContents setIsSelect={setIsSelect} />
           </ActionModalInner>
+        </Modal>
+      )}
+      {deleteModal.isModal && (
+        <Modal closeModal={deleteModal.closeModal} position="footer-above">
+          <RoutinePicker schema="delete" closeModal={deleteModal.closeModal} />
         </Modal>
       )}
       <Card>
         <RoutineStyle>
           <RoutineTextStyle>
-            <h2>3대 500</h2>
-            <p className="b2">헬스</p>
+            <h2>{name}</h2>
+            <p className="b2">{SPORTS_NAMES[sportId]}</p>
           </RoutineTextStyle>
           <RoutineIconStyle>
             <Icon
@@ -41,7 +66,12 @@ const Routine = () => {
               color="review"
               onClick={onClickModify}
             />
-            <Icon name="delete" size="20px" color="error" />
+            <Icon
+              name="delete"
+              size="20px"
+              color="error"
+              onClick={onClickDelete}
+            />
           </RoutineIconStyle>
         </RoutineStyle>
       </Card>
