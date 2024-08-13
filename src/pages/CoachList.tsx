@@ -1,13 +1,16 @@
-import CoachDataList from "@/components/coach/CoachDataList";
-import { coachList } from "@/data/coach";
+import CoachListFilter from "@/components/coach/CaochListFilter";
+import Coaches from "@/components/coach/CoachList";
+import { WhiteSpace } from "@/style/global";
 import styled from "styled-components";
 
 const CoachList = () => {
   return (
     <CoachListStyle>
       <div className="search"></div>
-      <div className="filter"></div>
-      <CoachDataList coachList={coachList.data} />
+      <WhiteSpace $height={30} />
+      <CoachListFilter />
+      <WhiteSpace $height={30} />
+      <Coaches />
     </CoachListStyle>
   );
 };

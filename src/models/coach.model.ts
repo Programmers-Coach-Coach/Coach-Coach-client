@@ -13,7 +13,7 @@ export interface IPopularCoach {
 export interface ICoach {
   coachId: number;
   coachName: string;
-  localInfo: string;
+  localInfo: string; // localAddress로 변경
   profileImageUrl: string | null;
   coachIntroduction: string;
   coachingSports: ICoachingSports[];
@@ -27,6 +27,19 @@ export interface ICoachList {
   data: ICoach[];
   totalCount: number;
   currentPage: number;
+}
+
+export interface IAllCoachList {
+  filter: {
+    sports?: string; // 종목
+    search?: string; // 검색어
+    latest?: boolean; // 최신순
+    review?: boolean; // 리뷰순
+    liked?: boolean; // 좋아요순
+    my?: boolean; // 내 코치
+  };
+
+  page: number;
 }
 
 export interface IMyPageCoachFormValues {
