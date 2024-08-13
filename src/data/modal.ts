@@ -85,7 +85,7 @@ export const footerPicker: Record<TFooterPicker, IFooterPickerData[]> = {
     { name: "로그아웃", link: "/", icon: "logout" }
   ],
   routine: [
-    { name: "내 루틴", link: "/", icon: "person" },
+    { name: "내 루틴", link: "/routine", icon: "person" },
     {
       name: "내 코치 루틴",
       link: "/",
