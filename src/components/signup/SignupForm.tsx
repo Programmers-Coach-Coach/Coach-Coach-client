@@ -3,8 +3,8 @@ import styled from "styled-components";
 import AuthInput from "@/components/common/InputField/Text/AuthInput";
 import CustomButton from "@/components/common/Button/CustomButton";
 import { ISignup } from "@/models/auth.model";
-import { useAuth } from "@/hooks/useAuth";
 import { AUTH_REGEX } from "@/constants/regex";
+import useAuth from "@/hooks/useAuth";
 
 const SignupForm = () => {
   const {

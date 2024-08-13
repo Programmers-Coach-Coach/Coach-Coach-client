@@ -82,7 +82,7 @@ const ProfileSection = () => {
   };
 
   if (isLoading) return <div>로딩 중...</div>;
-  if (isFetchError)
+  if (isFetchError || !profile)
     return <div>프로필 정보를 가져오는 중 오류가 발생했습니다.</div>;
 
   return (

@@ -11,9 +11,7 @@ import {
   ISignup
 } from "@/models/auth.model";
 
-
-
-export const useAuth = () => {
+const useAuth = () => {
   const navigate = useNavigate();
   const [isEmailError, setIsEmailError] = useState<boolean>(false); //과정에서 오류가 있었는지 확인하는 상태
   const [isNicknameError, setIsNicknameError] = useState<boolean>(false);
@@ -43,17 +41,17 @@ export const useAuth = () => {
         toast.error(error.response.data.message);
       });
   };
-  
+
   const emailDuplication = (formData: ICheckEmailDuplication) => {
     emailDuplicate(formData)
       .then(() => {
         setIsEmailError(false);
-        setEmailChecked(true); // 이메일 중복 확인 완료
+        setEmailChecked(true);
         toast.success("사용가능한 이메일입니다.");
       })
       .catch((error) => {
         setIsEmailError(true);
-        setEmailChecked(false); // 이메일 중복 확인 실패
+        setEmailChecked(false);
         toast.error(error.response.data.message);
       });
   };
@@ -62,12 +60,12 @@ export const useAuth = () => {
     nicknameDuplicate(formData)
       .then(() => {
         setIsNicknameError(false);
-        setNicknameChecked(true); // 닉네임 중복 확인 완료
+        setNicknameChecked(true);
         toast.success("사용가능한 닉네임입니다.");
       })
       .catch((error) => {
         setIsNicknameError(true);
-        setNicknameChecked(false); // 닉네임 중복 확인 실패
+        setNicknameChecked(false);
         toast.error(error.response.data.message);
       });
   };
@@ -83,9 +81,5 @@ export const useAuth = () => {
     nicknameChecked
   };
 };
-
-
-
-    
 
 export default useAuth;
