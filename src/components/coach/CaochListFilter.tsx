@@ -1,4 +1,4 @@
-import { filterList, sportsList } from "@/data/sportsList";
+import { filterList, sportList } from "@/data/sportsList";
 import useCoachFilter from "@/hooks/useCoachFilter";
 import useModal from "@/hooks/useModal";
 import styled from "styled-components";
@@ -11,15 +11,26 @@ const CoachListFilter = () => {
   const { filterId, sportsIdList, singleFilter, multiFilter } =
     useCoachFilter();
 
+  // 종목 필터에 "전체" 추가한 배열
+  const SPORT_LIST_WITH_TOTAL = [
+    { sportId: 0, sportName: "전체" },
+    ...sportList
+  ];
+
   return (
     <CoachListFilterStyle>
       <Icon name="filter" size="20px" color="text" onClick={handleModal} />
+      {/* 정렬 필터*/}
       <Filter>
         {filterList.find((filter) => filterId === filter.id)?.name}
       </Filter>
+      {/* 종목 필터 */}
       {sportsIdList.map((id) => (
         <Filter key={id}>
-          {sportsList.find((sport) => sport.sportId === id)?.sportName}
+          {
+            SPORT_LIST_WITH_TOTAL.find((sport) => sport.sportId === id)
+              ?.sportName
+          }
         </Filter>
       ))}
       {isModal && (
@@ -27,6 +38,7 @@ const CoachListFilter = () => {
           <FilterPicker
             filterId={filterId}
             sportsIdList={sportsIdList}
+            sportListWithTotal={SPORT_LIST_WITH_TOTAL}
             singleFilter={singleFilter}
             multiFilter={multiFilter}
           />

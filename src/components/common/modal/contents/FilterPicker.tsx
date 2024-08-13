@@ -1,9 +1,11 @@
-import { filterList, sportList } from "@/data/sportsList";
+import { filterList } from "@/data/sportsList";
+import { ICoachingSports } from "@/models/sports.model";
 import styled from "styled-components";
 
 interface Props {
   filterId: number;
   sportsIdList: number[];
+  sportListWithTotal: ICoachingSports[]; // "전체"를 포함한 종목 필터
   singleFilter: (id: number) => void;
   multiFilter: (id: number) => void;
 }
@@ -11,6 +13,7 @@ interface Props {
 const FilterPicker = ({
   filterId,
   sportsIdList,
+  sportListWithTotal,
   singleFilter,
   multiFilter
 }: Props) => {
@@ -37,7 +40,7 @@ const FilterPicker = ({
         <p className="b2">운동 종목은 여러개 선택할 수 있어요</p>
       </Text>
       <Filters>
-        {sportList.map((sport) => (
+        {sportListWithTotal.map((sport) => (
           <Filter
             key={sport.sportId}
             $active={sportsIdList.includes(sport.sportId)}
