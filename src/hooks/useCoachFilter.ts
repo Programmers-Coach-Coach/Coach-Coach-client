@@ -10,6 +10,7 @@ const useCoachFilter = () => {
   };
 
   const multiFilter = (id: number) => {
+    console.log(id);
     if (sportsIdList.includes(id)) {
       // id 제거
       sportsIdList.length >= 2
@@ -17,7 +18,13 @@ const useCoachFilter = () => {
         : toast.error("반드시 한개 이상 선택해주세요");
     } else {
       // id 추가
-      setSportsIdList([...sportsIdList, id]);
+      if (id === 0) {
+        setSportsIdList([0]);
+      } else if (sportsIdList.includes(0)) {
+        setSportsIdList([id]);
+      } else {
+        setSportsIdList([...sportsIdList, id]);
+      }
     }
   };
 
