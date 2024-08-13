@@ -7,7 +7,7 @@ import styled from "styled-components";
 
 const CoachList = () => {
   const location = useLocation();
-  const sportId = location.state.sportId;
+  const sportId = location.state?.sportId ?? 0; // 코치 리스트를 url로 치고 들어왔을 때는 기본 종목 '전체(0)'
 
   const { filterId, sportsIdList, singleFilter, multiFilter } =
     useCoachFilter(sportId);

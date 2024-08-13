@@ -1,17 +1,16 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-const useCoachFilter = (id: number | undefined) => {
-  console.log(id);
+
+const useCoachFilter = (sportId: number) => {
   const [filterId, setFilterId] = useState<number>(0);
 
-  const [sportsIdList, setSportsIdList] = useState<number[]>([id ?? 0]);
+  const [sportsIdList, setSportsIdList] = useState<number[]>([sportId]);
 
   const singleFilter = (id: number) => {
     setFilterId(id);
   };
 
   const multiFilter = (id: number) => {
-    console.log(id);
     if (sportsIdList.includes(id)) {
       // id 제거
       sportsIdList.length >= 2
