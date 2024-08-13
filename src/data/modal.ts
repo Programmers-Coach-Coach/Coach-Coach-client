@@ -1,7 +1,7 @@
 import { ICONS } from "../constants/assets"; // 수정된 import 경로
 
 export type TModal =
-  | "start-enroll"
+  | "star-enroll"
   | "routine-enroll"
   | "routine-modify"
   | "coach-switch"
@@ -11,7 +11,7 @@ export type TModal =
   | "sports-modify";
 
 export type TFooterPicker = "profile" | "routine";
-export type TRoutinePicker = "write";
+export type TRoutinePicker = "write" | "delete";
 
 export interface IModalData {
   primaryButton: string;
@@ -31,7 +31,7 @@ export interface IRoutinePickerData {
 }
 
 export const modal: Record<TModal, IModalData> = {
-  "start-enroll": {
+  "star-enroll": {
     primaryButton: "등록하기",
     secondaryButton: "취소",
     onClick: () => {}
@@ -85,7 +85,7 @@ export const footerPicker: Record<TFooterPicker, IFooterPickerData[]> = {
     { name: "로그아웃", link: "/", icon: "logout" }
   ],
   routine: [
-    { name: "내 루틴", link: "/routine", icon: "person" },
+    { name: "내 루틴", link: "/", icon: "person" },
     {
       name: "내 코치 루틴",
       link: "/",
@@ -98,5 +98,9 @@ export const routinePicker: Record<TRoutinePicker, IRoutinePickerData[]> = {
   write: [
     { name: "루틴 작성", onClick: () => {} },
     { name: "삭제", onClick: () => {} }
+  ],
+  delete: [
+    { name: "루틴 삭제", onClick: () => {} },
+    { name: "취소", onClick: () => {} }
   ]
 };
