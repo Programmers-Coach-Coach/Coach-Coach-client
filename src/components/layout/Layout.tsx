@@ -1,4 +1,3 @@
-import useAnalytics from "@/hooks/useAnalytics";
 import { getTitle } from "@/utils/getTitle";
 import { isAuthPage } from "@/utils/isAuthPage";
 import { Outlet, useLocation } from "react-router-dom";
@@ -12,8 +11,6 @@ const Layout = () => {
   const location = useLocation();
   const title = getTitle(location.pathname);
   const isAuth = isAuthPage(location.pathname);
-
-  useAnalytics();
 
   return (
     <ErrorBoundary>
