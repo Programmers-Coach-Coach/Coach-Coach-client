@@ -1,9 +1,11 @@
-import { filterList, sportList } from "@/data/sportsList";
+import { filterList } from "@/data/sportsList";
+import { ICoachingSports } from "@/models/sports.model";
 import styled from "styled-components";
 
 interface Props {
   filterId: number;
   sportsIdList: number[];
+  sportListWithTotal: ICoachingSports[]; // "전체"를 포함한 종목 필터
   singleFilter: (id: number) => void;
   multiFilter: (id: number) => void;
 }
@@ -11,6 +13,7 @@ interface Props {
 const FilterPicker = ({
   filterId,
   sportsIdList,
+  sportListWithTotal,
   singleFilter,
   multiFilter
 }: Props) => {
@@ -18,7 +21,7 @@ const FilterPicker = ({
     <FilterPickerStyle>
       <Text>
         <h1>정렬</h1>
-        <p className="b2">정렬 순은 한개만 선택할 수 있어요</p>
+        <p className="b2">*한 개만 선택할 수 있어요</p>
       </Text>
       <Filters>
         {filterList.map((filter) => (
@@ -31,13 +34,12 @@ const FilterPicker = ({
           </Filter>
         ))}
       </Filters>
-      <hr />
       <Text>
         <h1>종목</h1>
-        <p className="b2">운동 종목은 여러개 선택할 수 있어요</p>
+        <p className="b2">*여러 개 선택할 수 있어요</p>
       </Text>
       <Filters>
-        {sportList.map((sport) => (
+        {sportListWithTotal.map((sport) => (
           <Filter
             key={sport.sportId}
             $active={sportsIdList.includes(sport.sportId)}
@@ -52,7 +54,7 @@ const FilterPicker = ({
 };
 
 const FilterPickerStyle = styled.div`
-  padding: 0 10px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -67,7 +69,7 @@ const Text = styled.div`
 
   p {
     position: absolute;
-    top: 8px;
+    top: 20px;
     right: 0;
   }
 `;

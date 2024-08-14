@@ -1,9 +1,10 @@
 import { ISport } from "@/models/sports.model";
+import { useNavigate } from "react-router-dom";
 import {
-  Slider,
-  SportStyle,
   Half,
+  Slider,
   SportsListStyle,
+  SportStyle,
   Wrapper
 } from "./SportsList.css";
 
@@ -50,8 +51,14 @@ const SportsSlider = ({ sportsList }: SportsSliderProps) => {
 
 const Sport = ({ item }: SportProps) => {
   const { sportId, sportName, sportImageUrl } = item;
+  const navigate = useNavigate();
+
+  const handleLocation = (sportId: number) => {
+    navigate("/coach-list", { state: { sportId } });
+  };
+
   return (
-    <SportStyle $id={sportId} to="/" onClick={() => {}}>
+    <SportStyle $id={sportId} onClick={() => handleLocation(sportId)}>
       <img src={sportImageUrl} alt={sportName} />
       <p>{sportName}</p>
     </SportStyle>

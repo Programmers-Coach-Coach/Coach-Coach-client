@@ -1,5 +1,5 @@
 import { ICONS } from "@/constants/assets";
-import { theme, ColorKey } from "@/style/theme";
+import { ColorKey, theme } from "@/style/theme";
 import { styled } from "styled-components";
 
 interface IconProps {
@@ -19,6 +19,10 @@ const Icon = ({ name, size, color, onClick }: IconProps) => {
   );
 };
 
-const IconStyle = styled.div``;
+const IconStyle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export default Icon;
