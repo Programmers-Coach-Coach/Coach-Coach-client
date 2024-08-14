@@ -13,6 +13,7 @@ import { Toaster } from "react-hot-toast";
 import CoachList from "./pages/CoachList";
 import MyRoutine from "./pages/MyRoutine";
 import Signup from "./pages/Signup";
+import CheckPassword from "./pages/CheckPassword";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "routine",
         element: <MyRoutine />
+      },
+      {
+        path: "check-password",
+        element: <CheckPassword />
       }
     ]
   }

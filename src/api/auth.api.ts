@@ -1,4 +1,4 @@
-import { ILogin, IUserProfile } from "@/models/auth.model";
+import { ICheckPassword, ILogin, IUserProfile } from "@/models/auth.model";
 import { createClient, requestHandler } from "./http";
 import { API_PATH } from "@/constants/apiPath";
 import {
@@ -17,11 +17,11 @@ export const getCoachProfile = () => {
 };
 
 export const login = (formData: ILogin) => {
-  return requestHandler("post", "/auth/login", formData);
+  return requestHandler("post", API_PATH.login, formData);
 };
 
 export const signup = (formData: ISignup) => {
-  return requestHandler("post", "auth/signup", formData);
+  return requestHandler("post", API_PATH.signup, formData);
 };
 
 export const emailDuplicate = async (formData: ICheckEmailDuplication) => {
@@ -30,7 +30,7 @@ export const emailDuplicate = async (formData: ICheckEmailDuplication) => {
       email: formData.email
     }
   });
-  return await client.get("/auth/check-email");
+  return await client.get(API_PATH.checkEmail);
 };
 
 export const nicknameDuplicate = async (
@@ -41,5 +41,9 @@ export const nicknameDuplicate = async (
       nickname: formData.nickname
     }
   });
-  return await client.get("/auth/check-nickname");
+  return await client.get(API_PATH.checkNickname);
+};
+
+export const checkPassword = async (formData: ICheckPassword) => {
+  return requestHandler("post", API_PATH.checkPassword, formData);
 };
