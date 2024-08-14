@@ -71,6 +71,7 @@
     "msw": "^2.3.5",
     "prettier": "^3.3.3",
     "ts-jest": "^29.2.3",
+    "ts-jest-mock-import-meta": "^1.2.0",
     "typescript": "^5.2.2",
     "vite": "^5.3.4",
     "vite-plugin-radar": "^0.9.6",
