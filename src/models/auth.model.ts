@@ -38,3 +38,7 @@ export interface ICheckEmailDuplication {
 export interface ICheckNicknameDuplication {
   nickname: string;
 }
+
+export interface ICheckPassword {
+  password: string;
+}
