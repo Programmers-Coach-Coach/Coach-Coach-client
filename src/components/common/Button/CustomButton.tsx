@@ -1,10 +1,7 @@
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 import { ButtonSize, CustomButtonType } from "@/style/theme"; // theme.ts 파일 경로
-import {
-  Button as MuiButton,
-  ButtonProps as MuiButtonProps
-} from "@mui/material";
+
 interface CustomButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size: ButtonSize;
