@@ -36,7 +36,7 @@ const NotificationCard = ({
 
   return (
     <ReviewCardStyle>
-      <img src={getImageSrc()} alt="" />
+      <img src={getImageSrc()} alt={relationFunction} />
       <div className="message">{message}</div>
       <button
         onClick={() => {
