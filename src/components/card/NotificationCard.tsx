@@ -3,6 +3,7 @@ import Message from "@/assets/images/notice-message.png";
 import Speaker from "@/assets/images/notice-speaker.png";
 
 import { TNotificationType } from "@/models/notification.model";
+import { timeAgo } from "@/utils/format";
 import styled from "styled-components";
 import Icon from "../Icon/Icon";
 
@@ -46,7 +47,7 @@ const NotificationCard = ({
       >
         <Icon name="x" size="18px" color="gray3" />
       </button>
-      <div className="timestamp">{createdAt}</div>
+      <div className="timestamp">{timeAgo(createdAt)}</div>
     </ReviewCardStyle>
   );
 };

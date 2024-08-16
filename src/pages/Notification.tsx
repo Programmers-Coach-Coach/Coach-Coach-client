@@ -12,6 +12,7 @@ const Notification = () => {
       <div className="contents">
         {notification.map((item) => (
           <NotificationCard
+            key={item.noticeId}
             noticeId={item.noticeId}
             message={item.message}
             relationFunction={item.relationFunction}
