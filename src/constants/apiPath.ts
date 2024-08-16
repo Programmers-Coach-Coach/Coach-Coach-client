@@ -8,5 +8,6 @@ export const API_PATH = {
   checkPassword: "/auth/check-password",
   checkEmail: "/auth/check-email",
   checkNickname: "/auth/check-nickname",
-  signup: "/auth/signup"
+  signup: "/auth/signup",
+  withdraw: "/users/me"
 };
