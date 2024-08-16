@@ -19,7 +19,7 @@ const PHYSICAL_RECORDS = [
   },
   {
     label: "BMI",
-    value: 25.0
+    value: 1125.0
   }
 ];
 
@@ -33,7 +33,6 @@ const PhysicalRecordInputs = ({ disabled = false }: Props) => {
             <Input
               defaultValue={record.value?.toFixed(1)}
               disabled={disabled}
-              type="number"
               $disabled={disabled}
               placeholder="-"
             />
@@ -48,6 +47,7 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
+  width: 100%;
   height: 116px;
 `;
 
@@ -73,13 +73,11 @@ const InputContainer = styled.div`
 
 const Input = styled.input<{ $disabled: boolean }>`
   font-weight: 800;
-  width: 90px;
+  width: 100%;
   text-align: center;
   border: none;
   outline: none;
   padding: 4px;
-  position: relative;
-  left: 5px;
 
   ${({ $disabled }) =>
     !$disabled &&
