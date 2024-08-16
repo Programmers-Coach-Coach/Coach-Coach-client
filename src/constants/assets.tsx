@@ -3,7 +3,7 @@ import { FaPeoplePulling } from "react-icons/fa6";
 import { GrHomeRounded } from "react-icons/gr";
 import { HiChartBar } from "react-icons/hi2";
 import { IoIosArrowBack, IoMdPerson } from "react-icons/io";
-import { IoClose, IoLogOutOutline } from "react-icons/io5";
+import { IoClose, IoLogOutOutline, IoSearch } from "react-icons/io5";
 import { LuPencilLine } from "react-icons/lu";
 import { PiSunglassesBold } from "react-icons/pi";
 import { RiDeleteBin5Line } from "react-icons/ri";
@@ -24,5 +24,6 @@ export const ICONS = {
   modify: LuPencilLine,
   delete: RiDeleteBin5Line,
   filter: TbArrowsExchange2,
-  x: IoClose
+  x: IoClose,
+  search: IoSearch
 };

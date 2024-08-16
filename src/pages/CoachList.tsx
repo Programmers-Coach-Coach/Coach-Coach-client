@@ -1,5 +1,6 @@
 import CoachListFilter from "@/components/coach/CaochListFilter";
 import Coaches from "@/components/coach/CoachList";
+import Search from "@/components/common/InputField/search/Search";
 import useCoachFilter from "@/hooks/useCoachFilter";
 import { WhiteSpace } from "@/style/global";
 import { useLocation } from "react-router-dom";
@@ -14,7 +15,7 @@ const CoachList = () => {
 
   return (
     <CoachListStyle>
-      <div className="search"></div>
+      <Search placeholder="코치명을 검색하세요" />
       <WhiteSpace $height={30} />
       <CoachListFilter
         filterId={filterId}
