@@ -2,7 +2,7 @@ export interface IUserProfile {
   email: string;
   nickname: string;
   profileImageUrl: string;
-  gender: string;
+  gender: "M" | "W";
   address: string;
   addressDetail: string;
   introduction: string;
