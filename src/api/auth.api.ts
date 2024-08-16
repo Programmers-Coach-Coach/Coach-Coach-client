@@ -8,20 +8,24 @@ import {
 } from "@/models/auth.model";
 import { ICoachDetail } from "@/models/coach.model";
 
-export const getProfile = () => {
-  return requestHandler<IUserProfile>("get", API_PATH.mypage);
+export const getProfile = async () => {
+  return await requestHandler<IUserProfile>("get", API_PATH.mypage);
 };
 
-export const getCoachProfile = () => {
-  return requestHandler<ICoachDetail>("get", API_PATH.coachMypage);
+export const getCoachProfile = async () => {
+  return await requestHandler<ICoachDetail>("get", API_PATH.coachMypage);
 };
 
-export const login = (formData: ILogin) => {
-  return requestHandler("post", API_PATH.login, formData);
+export const login = async (formData: ILogin) => {
+  return await requestHandler("post", API_PATH.login, formData);
 };
 
-export const signup = (formData: ISignup) => {
-  return requestHandler("post", API_PATH.signup, formData);
+export const signup = async (formData: ISignup) => {
+  return await requestHandler("post", API_PATH.signup, formData);
+};
+
+export const withdraw = async () => {
+  return await requestHandler("delete", API_PATH.withdraw);
 };
 
 export const emailDuplicate = async (formData: ICheckEmailDuplication) => {
@@ -45,5 +49,5 @@ export const nicknameDuplicate = async (
 };
 
 export const checkPassword = async (formData: ICheckPassword) => {
-  return requestHandler("post", API_PATH.checkPassword, formData);
+  return await requestHandler("post", API_PATH.checkPassword, formData);
 };
