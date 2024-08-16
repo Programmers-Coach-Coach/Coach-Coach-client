@@ -11,7 +11,7 @@ const PhysicalRecord = () => {
     <Wrapper>
       <Header>
         <h2>오늘의 신체 정보</h2>
-        <CustomButton size="mini" variant="contained" onClick={openModal}>
+        <CustomButton size="super-mini" variant="contained" onClick={openModal}>
           변경
         </CustomButton>
       </Header>

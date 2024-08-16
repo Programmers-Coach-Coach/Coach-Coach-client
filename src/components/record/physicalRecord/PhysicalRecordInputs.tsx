@@ -6,24 +6,20 @@ interface Props {
 
 const PHYSICAL_RECORDS = [
   {
-    label: "체중",
-    value: 55.0,
-    unit: "kg"
+    label: "체중(kg)",
+    value: null
   },
   {
-    label: "골격근량",
-    value: 20.2,
-    unit: "kg"
+    label: "골격근량(kg)",
+    value: 20.2
   },
   {
-    label: "체지방률",
-    value: 22.0,
-    unit: "%"
+    label: "체지방률(%)",
+    value: 22.0
   },
   {
     label: "BMI",
-    value: 55.0,
-    unit: ""
+    value: 25.0
   }
 ];
 
@@ -35,12 +31,12 @@ const PhysicalRecordInputs = ({ disabled = false }: Props) => {
           <Label>{record.label}</Label>
           <InputContainer>
             <Input
-              defaultValue={record.value.toFixed(1)}
+              defaultValue={record.value?.toFixed(1)}
               disabled={disabled}
               type="number"
               $disabled={disabled}
+              placeholder="-"
             />
-            <Unit>{record.unit}</Unit>
           </InputContainer>
         </InputWithLabel>
       ))}
@@ -77,24 +73,20 @@ const InputContainer = styled.div`
 
 const Input = styled.input<{ $disabled: boolean }>`
   font-weight: 800;
-  width: 60px;
+  width: 90px;
   text-align: center;
   border: none;
   outline: none;
   padding: 4px;
+  position: relative;
+  left: 5px;
 
   ${({ $disabled }) =>
     !$disabled &&
     css`
       border: 1px solid #ccc;
       border-radius: 4px;
-    `}
-`;
-
-const Unit = styled.span`
-  font-size: 12px;
-  font-weight: 800;
-  line-height: 1.5;
+    `};
 `;
 
 export default PhysicalRecordInputs;

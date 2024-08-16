@@ -7,8 +7,8 @@ const PhysicalRecordInner = () => {
     <Wrapper>
       <Header>
         <h1>오늘의 신체 정보</h1>
-        <CustomButton size="mini" variant="contained" onClick={() => {}}>
-          변경
+        <CustomButton size="super-mini" variant="contained" onClick={() => {}}>
+          저장
         </CustomButton>
       </Header>
       <PhysicalRecordInputs />
