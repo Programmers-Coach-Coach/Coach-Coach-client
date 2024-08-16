@@ -33,6 +33,7 @@ const NotificationCard = ({
 
   const handleDelete = (id: number) => {
     // TODO: 알림 개별 삭제
+    console.log(id);
   };
 
   return (
