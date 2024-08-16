@@ -16,7 +16,7 @@ export type ColorKey =
 
 export type FontSize = "large" | "medium" | "small";
 export type FontWeight = "bold" | "normal";
-export type ButtonSize = "large" | "small" | "full" | "mini";
+export type ButtonSize = "large" | "small" | "full" | "mini" | "super-mini";
 export type CustomButtonType = "contained" | "outlined";
 export type ProfileImageSize = "small" | "medium" | "large";
 export type ModalSize = "default";
@@ -129,6 +129,11 @@ export const theme: Theme = {
       padding: "16px",
       height: "32px",
       width: "86px"
+    },
+    "super-mini": {
+      padding: "3px",
+      height: "auto",
+      width: "auto"
     }
   },
   borderRadius: {
