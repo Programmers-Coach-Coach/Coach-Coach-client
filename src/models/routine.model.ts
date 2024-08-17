@@ -6,9 +6,6 @@ export interface IRoutine {
 
 export interface IRoutines {
   routineList: IRoutine[];
-}
-
-export interface IResponseMessage {
-  statusCode: number;
-  message: string;
+  totalCount: number;
+  currentPage: number;
 }
