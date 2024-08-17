@@ -18,7 +18,28 @@ export const coachProfile: ICoachDetail = {
       userName: "이현철",
       contents: "참 좋은 코치",
       stars: 5,
-      createdAt: "리뷰생성일"
+      createdAt: "2024-08-15"
+    },
+    {
+      userId: 1,
+      userName: "이현철",
+      contents: "참 좋은 코치",
+      stars: 4,
+      createdAt: "2024-08-15"
+    },
+    {
+      userId: 1,
+      userName: "이현철",
+      contents: "참 좋은 코치",
+      stars: 3,
+      createdAt: "2024-08-15"
+    },
+    {
+      userId: 1,
+      userName: "이현철",
+      contents: "참 좋은 코치",
+      stars: 3,
+      createdAt: "2024-08-15"
     }
   ],
   isOpen: true,

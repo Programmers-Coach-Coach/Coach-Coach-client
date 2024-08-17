@@ -1,4 +1,4 @@
-import { checkPassword, login } from "@/api/auth.api";
+import { checkPassword, login, withdraw } from "@/api/auth.api";
 import { ICheckPassword, ILogin } from "@/models/auth.model";
 import { useAuthStore } from "@/store/authStore";
 import toast from "react-hot-toast";
@@ -82,8 +82,20 @@ const useAuth = () => {
       });
   };
 
+  const withdrawUser = () => {
+    withdraw()
+      .then(() => {
+        toast.success("회원탈퇴 완료");
+        navigate("/login");
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+      });
+  };
+
   return {
     userLogin,
+    withdrawUser,
     userSignup,
     emailDuplication,
     nicknameDuplication,

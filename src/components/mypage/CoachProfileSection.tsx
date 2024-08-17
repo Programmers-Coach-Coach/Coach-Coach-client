@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import CustomButton from "../common/Button/CustomButton";
 import { Switch, TextField } from "@mui/material";
 import SelectBox from "../common/InputField/Select/SelectBox";
-import DaumPostcode, { Address } from "react-daum-postcode";
 import { useForm, Controller } from "react-hook-form";
 import useFetchCoachProfile from "@/hooks/queries/useFetchCoachProfile";
 import { IMyPageCoachFormValues } from "@/models/coach.model";
-
+import { getGenderLabel } from "@/utils/genderUtils";
+import Loading from "../loading/Loading";
+import AddressSearchField from "./AddressSearchField";
+import ReviewCard from "../common/Card/ReviewCard.tsx/ReviewCard";
 interface CoachProfileSectionProps {
   onTabChange: (newValue: number) => void;
 }
@@ -26,8 +28,6 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
     }
   });
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
   useEffect(() => {
     if (coachProfile) {
       setValue("coachingSports", coachProfile.coachingSports);
@@ -45,22 +45,14 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
     console.log(data);
   };
 
-  const completeHandler = (data: Address) => {
-    setValue("activeCenter", data.address);
-    setIsOpen(false);
-  };
-
-  const handleOpen = () => {
-    setIsOpen(!isOpen);
-  };
-
   const handleCancel = () => {
     onTabChange(0);
   };
 
-  if (isLoading) return <div>로딩 중...</div>;
+  if (isLoading) return <Loading />;
   if (isFetchError || !coachProfile)
     return <div>프로필 정보를 가져오는 중 오류가 발생했습니다.</div>;
+
   return (
     <ProfileWrapper>
       <BasicInfoWrapper>
@@ -77,7 +69,7 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
           </NameWrapper>
           <GenderWrapper>
             <SubtitleWrapper>성별</SubtitleWrapper>
-            <div>{coachProfile.coachGender === "M" ? "남성" : "여성"}</div>
+            <div>{getGenderLabel(coachProfile.coachGender)}</div>
           </GenderWrapper>
         </NameGenderWrapper>
       </BasicInfoWrapper>
@@ -106,25 +98,15 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
             <TextField {...field} multiline minRows={3} maxRows={3} />
           )}
         />
-
-        <BasicWrapper>
-          <SubtitleWrapper>활동중인 센터</SubtitleWrapper>
-          <CustomButton variant="outlined" size="small" onClick={handleOpen}>
-            주소 검색
-          </CustomButton>
-        </BasicWrapper>
         <Controller
           name="activeCenter"
           control={control}
           render={({ field }) => (
-            <>
-              <TextField {...field} maxRows={1} disabled />
-              {isOpen && (
-                <div>
-                  <DaumPostcode onComplete={completeHandler} />
-                </div>
-              )}
-            </>
+            <AddressSearchField
+              label="활동중인 센터"
+              value={field.value}
+              onAddressSelect={(address) => field.onChange(address)}
+            />
           )}
         />
         <Controller
@@ -132,6 +114,7 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
           control={control}
           render={({ field }) => <TextField {...field} maxRows={1} />}
         />
+
         <SubtitleWrapper>문의 가능 시간</SubtitleWrapper>
         <Controller
           name="activeHours"
@@ -145,6 +128,9 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
           control={control}
           render={({ field }) => <TextField {...field} maxRows={1} />}
         />
+        <SubtitleWrapper>리뷰</SubtitleWrapper>
+        <ReviewCard coachProfile={coachProfile} />
+
         <Controller
           name="isOpen"
           control={control}
@@ -197,6 +183,7 @@ const NameGenderWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 20px;
+  width: 70%;
 `;
 
 const SubtitleWrapper = styled.div`
@@ -206,7 +193,7 @@ const SubtitleWrapper = styled.div`
 
 const BasicInfoWrapper = styled.div`
   display: flex;
-  gap: 70px;
+  justify-content: space-between;
 `;
 
 const ProfileWrapper = styled.div`
@@ -218,8 +205,8 @@ const ProfileWrapper = styled.div`
 `;
 
 const ProfileImage = styled.img`
-  width: ${({ theme }) => theme.profileImage.small.width};
-  height: ${({ theme }) => theme.profileImage.small.height};
+  width: ${({ theme }) => theme.profileImage.mini.width};
+  height: ${({ theme }) => theme.profileImage.mini.height};
   border-radius: 50%;
   object-fit: cover;
 `;

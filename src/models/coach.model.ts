@@ -50,7 +50,7 @@ export interface IMyPageCoachFormValues {
 
 export interface ICoachDetail {
   coachName: string;
-  coachGender: string;
+  coachGender: "M" | "W";
   localInfo: string;
   profileImageUrl: string;
   createdAt: string;
