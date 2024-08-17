@@ -1,8 +1,7 @@
 import ActionModalInner from "@/components/common/modal/contents/ActionModalInner";
 import RoutineContents from "@/components/common/modal/contents/RoutineContents";
 import Modal from "@/components/common/modal/Modal";
-import Icon from "@/components/Icon/Icon";
-import Routine from "@/components/routine/Routine";
+import RoutineList from "@/components/routine/RoutineList";
 import useModal from "@/hooks/useModal";
 import { useGetRoutines } from "@/hooks/useRoutine";
 import { useState } from "react";
@@ -11,10 +10,8 @@ import { styled } from "styled-components";
 const MyRoutine = () => {
   const { isModal, openModal, closeModal } = useModal();
   const [isSelect, setIsSelect] = useState<boolean>(false);
-  const { data, isLoading, isError } = useGetRoutines();
-
-  if (isLoading) return <div>로딩 중...</div>;
-  if (isError || !data) return <div>무언가 잘못됨</div>;
+  const { data } = useGetRoutines();
+  const routines = data?.pages.flatMap((page) => page.routineList) || [];
 
   const onClickAdd = () => {
     openModal();
@@ -38,23 +35,7 @@ const MyRoutine = () => {
           추가하기
         </p>
       </RoutineTextStyle>
-      {data.routineList.length ? (
-        data.routineList.map((item) => (
-          <Routine
-            key={item.routineId}
-            id={item.routineId}
-            name={item.routineName}
-            sportId={item.sportId}
-          />
-        ))
-      ) : (
-        <div>
-          <EmptyRoutineStyle>
-            <Icon name="routine" size="150px" color="text" />
-            <h2>운동 루틴이 없습니다.</h2>
-          </EmptyRoutineStyle>
-        </div>
-      )}
+      <RoutineList routines={routines} />
     </MyRoutineStyle>
   );
 };
@@ -70,15 +51,6 @@ const RoutineTextStyle = styled.div`
     color: ${({ theme }) => theme.color.primary};
     text-decoration: underline;
   }
-`;
-
-const EmptyRoutineStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  padding-top: 280px;
-  margin: 0 auto;
 `;
 
 export default MyRoutine;
