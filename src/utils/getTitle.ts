@@ -8,6 +8,10 @@ export const getTitle = (pathname: string): string => {
       return "코치 리스트";
     case "/routine":
       return "루틴";
+    case "/check-password":
+      return "본인확인";
+    case "/notification":
+      return "알림";
     default:
       return "";
   }

@@ -1,20 +1,24 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import CustomButton from "../common/Button/CustomButton";
 import { TextField, RadioGroup, FormControlLabel, Radio } from "@mui/material";
-import DaumPostcode, { Address } from "react-daum-postcode";
 import { useForm, Controller } from "react-hook-form";
 import useFetchProfile from "@/hooks/queries/useFetchUserProfile";
 import SelectBox from "../common/InputField/Select/SelectBox";
 import { FaCirclePlus } from "react-icons/fa6";
 import toast from "react-hot-toast";
 import { IMyPageFormValues } from "@/models/auth.model";
+import { getGenderLabel } from "@/utils/genderUtils";
+import Loading from "../loading/Loading";
+import AddressSearchField from "./AddressSearchField";
+import useAuth from "@/hooks/useAuth";
 
 const allowedExtensions = ["jpg", "jpeg", "png", "gif"];
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
 const ProfileSection = () => {
   const { profile, isFetchError, isLoading } = useFetchProfile();
+  const { withdrawUser } = useAuth();
   const { control, handleSubmit, setValue, watch } = useForm<IMyPageFormValues>(
     {
       defaultValues: {
@@ -29,7 +33,6 @@ const ProfileSection = () => {
     }
   );
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const profileImage = watch("profileImageUrl");
@@ -42,24 +45,14 @@ const ProfileSection = () => {
       setValue("addressDetail", profile.addressDetail || "");
       setValue("interestedSports", profile.interestedSports);
       setValue("introduction", profile.introduction);
-      setValue("gender", profile.gender === "M" ? "남성" : "여성");
+      setValue("gender", getGenderLabel(profile.gender));
     }
   }, [profile, setValue]);
 
   const onSubmit = (data: IMyPageFormValues) => {
     const gender = data.gender === "남성" ? "M" : "W";
     const formData = { ...data, gender };
-    //수정 api 호출 부분
     console.log(formData);
-  };
-
-  const completeHandler = (data: Address) => {
-    setValue("address", data.address);
-    setIsOpen(false);
-  };
-
-  const handleOpen = () => {
-    setIsOpen(!isOpen);
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,7 +74,7 @@ const ProfileSection = () => {
     }
   };
 
-  if (isLoading) return <div>로딩 중...</div>;
+  if (isLoading) return <Loading />;
   if (isFetchError || !profile)
     return <div>프로필 정보를 가져오는 중 오류가 발생했습니다.</div>;
 
@@ -151,24 +144,15 @@ const ProfileSection = () => {
           />
         </BasicWrapper>
 
-        <BasicWrapper>
-          <SubtitleWrapper>지역</SubtitleWrapper>
-          <CustomButton variant="outlined" size="small" onClick={handleOpen}>
-            주소 검색
-          </CustomButton>
-        </BasicWrapper>
         <Controller
           name="address"
           control={control}
           render={({ field }) => (
-            <>
-              <TextField {...field} multiline maxRows={1} disabled />
-              {isOpen && (
-                <div>
-                  <DaumPostcode onComplete={completeHandler} />
-                </div>
-              )}
-            </>
+            <AddressSearchField
+              label="지역"
+              value={field.value}
+              onAddressSelect={(address) => field.onChange(address)}
+            />
           )}
         />
         <Controller
@@ -196,7 +180,9 @@ const ProfileSection = () => {
           수정하기
         </CustomButton>
         <DeleteUserWrapper>
-          <span className="login">회원탈퇴</span>
+          <span className="login" onClick={withdrawUser}>
+            회원탈퇴
+          </span>
         </DeleteUserWrapper>
       </InfoWrapper>
     </ProfileWrapper>
@@ -221,7 +207,7 @@ const IconWrapper = styled(FaCirclePlus)`
   border-radius: 50%;
   padding: 2px;
   color: ${({ theme }) => theme.color.background};
-  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: ${({ theme }) => theme.boxShadow};
   cursor: pointer;
 `;
 
@@ -239,6 +225,9 @@ const BasicWrapper = styled.div`
 `;
 
 const DeleteUserWrapper = styled.div`
+  span {
+    cursor: pointer;
+  }
   text-align: center;
   color: ${({ theme }) => theme.color.primary};
 `;

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-const useCoachFilter = () => {
+
+const useCoachFilter = (sportId: number) => {
   const [filterId, setFilterId] = useState<number>(0);
 
-  const [sportsIdList, setSportsIdList] = useState<number[]>([0]);
+  const [sportsIdList, setSportsIdList] = useState<number[]>([sportId]);
 
   const singleFilter = (id: number) => {
     setFilterId(id);
@@ -17,7 +18,13 @@ const useCoachFilter = () => {
         : toast.error("반드시 한개 이상 선택해주세요");
     } else {
       // id 추가
-      setSportsIdList([...sportsIdList, id]);
+      if (id === 0) {
+        setSportsIdList([0]);
+      } else if (sportsIdList.includes(0)) {
+        setSportsIdList([id]);
+      } else {
+        setSportsIdList([...sportsIdList, id]);
+      }
     }
   };
 

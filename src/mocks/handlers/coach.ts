@@ -1,8 +1,8 @@
-import { http, HttpResponse } from "msw";
 import { API_PATH } from "@/constants/apiPath";
 import { coachPagination } from "@/data/coach";
+import { http, HttpResponse } from "msw";
 
-const BASE_URL = "https://api.coach-coach.site";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_V1 = "/api/v1";
 
 const getCoachAll = http.get(

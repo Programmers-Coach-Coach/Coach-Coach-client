@@ -1,5 +1,5 @@
-import { login } from "@/api/auth.api";
-import { ILogin } from "@/models/auth.model";
+import { checkPassword, login, withdraw } from "@/api/auth.api";
+import { ICheckPassword, ILogin } from "@/models/auth.model";
 import { useAuthStore } from "@/store/authStore";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +17,7 @@ const useAuth = () => {
   const [isNicknameError, setIsNicknameError] = useState<boolean>(false);
   const [emailChecked, setEmailChecked] = useState<boolean>(false); //이메일 중복 확인이 완료되었는지 여부
   const [nicknameChecked, setNicknameChecked] = useState<boolean>(false);
-  const { storeLogin } = useAuthStore();
+  const { storeLogin, confirmPassword } = useAuthStore();
 
   const userSignup = (formData: ISignup) => {
     signup(formData)
@@ -70,15 +70,40 @@ const useAuth = () => {
       });
   };
 
+  const passwordCheck = (formData: ICheckPassword) => {
+    checkPassword(formData)
+      .then(() => {
+        confirmPassword();
+        navigate("/mypage");
+        toast.success("비밀번호 확인 성공");
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+      });
+  };
+
+  const withdrawUser = () => {
+    withdraw()
+      .then(() => {
+        toast.success("회원탈퇴 완료");
+        navigate("/login");
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+      });
+  };
+
   return {
     userLogin,
+    withdrawUser,
     userSignup,
     emailDuplication,
     nicknameDuplication,
     isEmailError,
     isNicknameError,
     emailChecked,
-    nicknameChecked
+    nicknameChecked,
+    passwordCheck
   };
 };
 

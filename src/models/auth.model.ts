@@ -2,7 +2,7 @@ export interface IUserProfile {
   email: string;
   nickname: string;
   profileImageUrl: string;
-  gender: string;
+  gender: "M" | "W";
   address: string;
   addressDetail: string;
   introduction: string;
@@ -37,4 +37,8 @@ export interface ICheckEmailDuplication {
 
 export interface ICheckNicknameDuplication {
   nickname: string;
+}
+
+export interface ICheckPassword {
+  password: string;
 }

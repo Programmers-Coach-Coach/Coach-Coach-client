@@ -1,11 +1,10 @@
-import { http, HttpResponse } from "msw";
 import { API_PATH } from "@/constants/apiPath";
 import { responseRoutines } from "@/data/routine";
 import { IRoutine } from "@/models/routine.model";
 import { responseMessage } from "@/data/responseMessage";
+import { http, HttpResponse } from "msw";
 
-// const BASE_URL = import.meta.env.VITE_BASE_URL;
-const BASE_URL = "https://api.coach-coach.site";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_V1 = "/api/v1";
 
 const getRoutineData = http.get(

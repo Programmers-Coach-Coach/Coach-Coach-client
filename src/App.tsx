@@ -1,18 +1,20 @@
-import styled, { ThemeProvider } from "styled-components";
-import { theme } from "./style/theme";
-import { GlobalStyle } from "./style/global";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import styled, { ThemeProvider } from "styled-components";
+import { queryClient } from "./api/queryClient";
 import Layout from "./components/layout/Layout";
+import CheckPassword from "./pages/CheckPassword";
+import CoachList from "./pages/CoachList";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient } from "./api/queryClient";
 import Mypage from "./pages/Mypage";
-import { Toaster } from "react-hot-toast";
-import CoachList from "./pages/CoachList";
 import MyRoutine from "./pages/MyRoutine";
+import Notification from "./pages/Notification";
 import Signup from "./pages/Signup";
+import { GlobalStyle } from "./style/global";
+import { theme } from "./style/theme";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +43,14 @@ const router = createBrowserRouter([
       {
         path: "routine",
         element: <MyRoutine />
+      },
+      {
+        path: "check-password",
+        element: <CheckPassword />
+      },
+      {
+        path: "notification",
+        element: <Notification />
       }
     ]
   }

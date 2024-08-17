@@ -18,14 +18,14 @@ export type FontSize = "large" | "medium" | "small";
 export type FontWeight = "bold" | "normal";
 export type ButtonSize = "large" | "small" | "full" | "mini";
 export type CustomButtonType = "contained" | "outlined";
-export type ProfileImageSize = "small" | "medium" | "large";
+export type ProfileImageSize = "mini" | "small" | "medium" | "large";
 export type ModalSize = "default";
 export type PaddingSize = "default";
 
 export type TitleSize = "t1" | "t2";
 export type BodySize = "b1" | "b2" | "b3";
 
-export type Sports = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+export type Sports = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
 interface Theme {
   color: Record<ColorKey, string>;
@@ -136,6 +136,10 @@ export const theme: Theme = {
   },
   boxShadow: "0 10px 40px 0 rgba(0, 0, 0, 0.1)",
   profileImage: {
+    mini: {
+      width: "60px",
+      height: "60px"
+    },
     small: {
       width: "86px",
       height: "86px"
@@ -201,17 +205,17 @@ export const theme: Theme = {
     }
   },
   sports: {
-    0: "#F0C40E",
-    1: "#B6D9DD",
-    2: "#8369C2",
-    3: "#4D8AA6",
-    4: "#D1AA8D",
-    5: "#F85F51",
-    6: "#AAC77A",
-    7: "#FFC1C2",
-    8: "#2E4B77",
-    9: "#B2CBE7",
-    10: "#0496D1",
-    11: "#5A4097"
+    1: "#F0C40E",
+    2: "#B6D9DD",
+    3: "#8369C2",
+    4: "#4D8AA6",
+    5: "#D1AA8D",
+    6: "#F85F51",
+    7: "#AAC77A",
+    8: "#FFC1C2",
+    9: "#2E4B77",
+    10: "#B2CBE7",
+    11: "#0496D1",
+    12: "#5A4097"
   }
 };

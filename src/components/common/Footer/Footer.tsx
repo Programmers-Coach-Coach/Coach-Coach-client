@@ -1,7 +1,7 @@
-import { styled } from "styled-components";
-import { useNavigate } from "react-router-dom";
 import Icon from "@/components/Icon/Icon";
 import useModal from "@/hooks/useModal";
+import { useNavigate } from "react-router-dom";
+import { styled } from "styled-components";
 import Modal from "../modal/Modal";
 import FooterPicker from "../modal/contents/FooterPicker";
 
@@ -24,7 +24,7 @@ const Footer = () => {
   };
 
   const onClickAlarm = () => {
-    navigate("/");
+    navigate("/notification");
   };
 
   const onClickProfile = () => {

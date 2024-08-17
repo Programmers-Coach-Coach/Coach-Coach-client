@@ -31,14 +31,10 @@ export interface ICoachList {
 
 export interface IAllCoachList {
   filter: {
-    sports?: string; // 종목
     search?: string; // 검색어
-    latest?: boolean; // 최신순
-    review?: boolean; // 리뷰순
-    liked?: boolean; // 좋아요순
-    my?: boolean; // 내 코치
+    filterId: number; // 정렬 필터
+    sportsIdList?: number[]; // 종목 필터
   };
-
   page: number;
 }
 
@@ -54,7 +50,7 @@ export interface IMyPageCoachFormValues {
 
 export interface ICoachDetail {
   coachName: string;
-  coachGender: string;
+  coachGender: "M" | "W";
   localInfo: string;
   profileImageUrl: string;
   createdAt: string;

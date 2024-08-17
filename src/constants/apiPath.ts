@@ -4,5 +4,10 @@ export const API_PATH = {
   getCoachAll: "/coaches-all",
   mypage: "/auth/user/me",
   coachMypage: "/coaches",
-  login: "/login"
+  login: "/auth/login",
+  checkPassword: "/auth/check-password",
+  checkEmail: "/auth/check-email",
+  checkNickname: "/auth/check-nickname",
+  signup: "/auth/signup",
+  withdraw: "/users/me"
 };
