@@ -10,8 +10,12 @@ export const getTitle = (pathname: string): string => {
       return "루틴";
     case "/check-password":
       return "본인확인";
-    case "/record/:id":
+    case "/record":
       return "내 기록";
+    case "/notification":
+      return "알림";
+    case "/routine/my-coach":
+      return "내 코치";
     default:
       return "";
   }

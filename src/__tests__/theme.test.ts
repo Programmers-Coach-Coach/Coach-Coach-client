@@ -80,6 +80,7 @@ describe("Theme Object", () => {
   });
 
   test.each([
+    ["mini", { width: "60px", height: "60px" }],
     ["small", { width: "86px", height: "86px" }],
     ["medium", { width: "114px", height: "114px" }],
     ["large", { width: "316px", height: "140px" }]

@@ -106,6 +106,10 @@ exports[`Theme Object should match the theme snapshot 1`] = `
       "height": "114px",
       "width": "114px",
     },
+    "mini": {
+      "height": "60px",
+      "width": "60px",
+    },
     "small": {
       "height": "86px",
       "width": "86px",

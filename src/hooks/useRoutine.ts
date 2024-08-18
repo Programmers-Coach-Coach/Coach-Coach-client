@@ -5,19 +5,35 @@ import {
   patchRoutineData,
   postRoutineData
 } from "@/api/routine.api";
-import { IResponseMessage, IRoutine, IRoutines } from "@/models/routine.model";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { PER_PAGE } from "@/data/routine";
+import { IResponseMessage } from "@/models/responseMessage.model";
+import { IRoutine, IRoutines } from "@/models/routine.model";
+import {
+  QueryFunctionContext,
+  useInfiniteQuery,
+  useMutation
+} from "@tanstack/react-query";
 
 export const useGetRoutines = () => {
-  const { data, isLoading, isError } = useQuery<IRoutines>({
-    queryKey: ["getRoutineData"],
-    queryFn: getRoutinesData
-  });
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteQuery<IRoutines>({
+      queryKey: ["getRoutineData"],
+      queryFn: ({ pageParam }: QueryFunctionContext) =>
+        getRoutinesData(pageParam as number),
+      getNextPageParam: (lastPage) => {
+        const nextPage = lastPage.currentPage + 1;
+        return lastPage.totalCount > lastPage.currentPage * PER_PAGE
+          ? nextPage
+          : undefined;
+      },
+      initialPageParam: 1
+    });
 
   return {
     data,
-    isLoading,
-    isError
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage
   };
 };
 
@@ -49,9 +65,10 @@ export const usePatchRoutine = () => {
   const { mutateAsync, isPending, isError, data } = useMutation<
     IResponseMessage,
     Error,
-    number
+    { payload: Omit<IRoutine, "routineId">; routineId: number }
   >({
-    mutationFn: patchRoutineData,
+    mutationFn: ({ payload, routineId }) =>
+      patchRoutineData(payload, routineId),
     onSuccess: (data) => {
       console.log("Routine successfully patched: ", data);
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });

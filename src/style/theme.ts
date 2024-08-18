@@ -18,7 +18,7 @@ export type FontSize = "large" | "medium" | "small";
 export type FontWeight = "bold" | "normal";
 export type ButtonSize = "large" | "small" | "full" | "mini" | "super-mini";
 export type CustomButtonType = "contained" | "outlined";
-export type ProfileImageSize = "small" | "medium" | "large";
+export type ProfileImageSize = "mini" | "small" | "medium" | "large";
 export type ModalSize = "default";
 export type PaddingSize = "default";
 
@@ -141,6 +141,10 @@ export const theme: Theme = {
   },
   boxShadow: "0 10px 40px 0 rgba(0, 0, 0, 0.1)",
   profileImage: {
+    mini: {
+      width: "60px",
+      height: "60px"
+    },
     small: {
       width: "86px",
       height: "86px"

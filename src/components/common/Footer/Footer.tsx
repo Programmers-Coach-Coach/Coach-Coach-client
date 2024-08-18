@@ -1,7 +1,7 @@
-import { styled } from "styled-components";
-import { useNavigate } from "react-router-dom";
 import Icon from "@/components/Icon/Icon";
 import useModal from "@/hooks/useModal";
+import { useNavigate } from "react-router-dom";
+import { styled } from "styled-components";
 import Modal from "../modal/Modal";
 import FooterPicker from "../modal/contents/FooterPicker";
 
@@ -24,7 +24,7 @@ const Footer = () => {
   };
 
   const onClickAlarm = () => {
-    navigate("/");
+    navigate("/notification");
   };
 
   const onClickProfile = () => {
@@ -79,5 +79,6 @@ const FooterStyle = styled.footer`
   width: 100%;
   max-width: 600px;
   height: 60px;
+  z-index: 1001; // FooterAbove(Footer 아이콘 클릭 시 모달)보다 앞에 있어 FooterAbove가 가리지 않게 함
 `;
 export default Footer;
