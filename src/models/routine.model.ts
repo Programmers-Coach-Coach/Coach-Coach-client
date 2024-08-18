@@ -9,3 +9,9 @@ export interface IRoutines {
   totalCount: number;
   currentPage: number;
 }
+
+export interface IGetRoutine {
+  coachId?: number;
+  userId?: number;
+  page: number;
+}
