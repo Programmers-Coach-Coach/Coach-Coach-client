@@ -7,19 +7,26 @@ import {
 } from "@/api/routine.api";
 import { PER_PAGE } from "@/data/routine";
 import { IResponseMessage } from "@/models/responseMessage.model";
-import { IRoutine, IRoutines } from "@/models/routine.model";
+import { IGetRoutine, IRoutine, IRoutines } from "@/models/routine.model";
 import {
   QueryFunctionContext,
   useInfiniteQuery,
   useMutation
 } from "@tanstack/react-query";
 
-export const useGetRoutines = () => {
+export const useGetRoutines = ({
+  coachId,
+  userId
+}: Omit<IGetRoutine, "page"> = {}) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery<IRoutines>({
-      queryKey: ["getRoutineData"],
+      queryKey: ["getRoutineData", coachId, userId],
       queryFn: ({ pageParam }: QueryFunctionContext) =>
-        getRoutinesData(pageParam as number),
+        getRoutinesData({
+          coachId,
+          userId,
+          page: pageParam as number
+        }),
       getNextPageParam: (lastPage) => {
         const nextPage = lastPage.currentPage + 1;
         return lastPage.totalCount > lastPage.currentPage * PER_PAGE
