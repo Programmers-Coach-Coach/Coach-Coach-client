@@ -9,7 +9,16 @@ import ErrorBoundary from "../Error/ErrorBoundary";
 
 const Layout = () => {
   const location = useLocation();
-  const title = getTitle(location.pathname);
+  const queryParams = new URLSearchParams(location.search);
+
+  let title: string | null = "";
+
+  if (queryParams.get("coach")) {
+    title = queryParams.get("coach");
+  } else {
+    title = getTitle(location.pathname);
+  }
+
   const isAuth = isAuthPage(location.pathname);
 
   return (
