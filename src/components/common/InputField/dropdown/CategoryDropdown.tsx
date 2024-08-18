@@ -12,7 +12,7 @@ interface Props {
   onEditAction?: () => void; // 액션 수정 기능, 삭제 기능
 }
 
-const RoutineDropdown = ({
+const CategoryDropdown = ({
   category,
   actions,
   modifyEnabled = false,
@@ -144,4 +144,4 @@ const slideUp = keyframes`
   }
 `;
 
-export default RoutineDropdown;
+export default CategoryDropdown;
