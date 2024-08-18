@@ -9,13 +9,14 @@ import CheckPassword from "./pages/CheckPassword";
 import CoachList from "./pages/CoachList";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import MyCoach from "./pages/MyCoach";
 import Mypage from "./pages/Mypage";
 import MyRoutine from "./pages/MyRoutine";
 import Notification from "./pages/Notification";
+import RecordDatail from "./pages/RecordDatail";
 import Signup from "./pages/Signup";
 import { GlobalStyle } from "./style/global";
 import { theme } from "./style/theme";
-import MyCoach from "./pages/MyCoach";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "check-password",
         element: <CheckPassword />
+      },
+      {
+        path: "record",
+        element: <RecordDatail />
       },
       {
         path: "notification",

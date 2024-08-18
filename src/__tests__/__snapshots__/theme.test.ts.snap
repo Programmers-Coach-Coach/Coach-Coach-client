@@ -44,6 +44,11 @@ exports[`Theme Object should match the theme snapshot 1`] = `
       "padding": "16px",
       "width": "105px",
     },
+    "super-mini": {
+      "height": "auto",
+      "padding": "3px",
+      "width": "auto",
+    },
   },
   "buttonVariant": {
     "contained": {
