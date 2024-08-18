@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { modal } from "@/data/modal";
 import { usePatchRoutine, usePostRoutine } from "@/hooks/useRoutine";
 import { useModalInfo } from "@/store/modalInfo.store";
-import { routineDB } from "@/data/routine";
 
 interface Props {
   children: React.ReactNode;
@@ -25,11 +24,12 @@ const ActionModalInner = ({ children, schema, closeModal }: Props) => {
   const onClickHandler = () => {
     if (schema === "routine-enroll") {
       postRoutineResponse.mutateAsync({ routineName, sportId });
-      routineDB.create({ routineName, sportId });
       closeModal();
     } else if (schema === "routine-modify") {
-      patchRoutineResponse.mutateAsync(routineId);
-      routineDB.update(routineId, { routineName, sportId });
+      patchRoutineResponse.mutateAsync({
+        payload: { routineName, sportId },
+        routineId
+      });
       closeModal();
     }
     setRoutineName("");
