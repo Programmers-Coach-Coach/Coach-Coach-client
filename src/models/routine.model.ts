@@ -12,3 +12,10 @@ export interface IResponseMessage {
   statusCode: number;
   message: string;
 }
+
+export interface IAction {
+  actionId: number;
+  actionName: string;
+  sets: number;
+  countOrMinutes: string;
+}
