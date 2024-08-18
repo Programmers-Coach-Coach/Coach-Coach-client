@@ -13,6 +13,7 @@ import MyCoach from "./pages/MyCoach";
 import Mypage from "./pages/Mypage";
 import MyRoutine from "./pages/MyRoutine";
 import Notification from "./pages/Notification";
+import Record from "./pages/Record";
 import RecordDatail from "./pages/RecordDatail";
 import Signup from "./pages/Signup";
 import { GlobalStyle } from "./style/global";
@@ -54,6 +55,7 @@ const router = createBrowserRouter([
         path: "record",
         element: <RecordDatail />
       },
+      { path: "record-list", element: <Record /> },
       {
         path: "notification",
         element: <Notification />
