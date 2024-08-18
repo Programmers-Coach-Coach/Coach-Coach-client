@@ -1,4 +1,3 @@
-import Empty from "@/components/common/Empty/Empty";
 import ActionModalInner from "@/components/common/modal/contents/ActionModalInner";
 import RoutineContents from "@/components/common/modal/contents/RoutineContents";
 import Modal from "@/components/common/modal/Modal";
