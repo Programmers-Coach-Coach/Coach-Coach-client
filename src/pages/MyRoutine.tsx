@@ -1,7 +1,7 @@
+import Empty from "@/components/common/Empty/Empty";
 import ActionModalInner from "@/components/common/modal/contents/ActionModalInner";
 import RoutineContents from "@/components/common/modal/contents/RoutineContents";
 import Modal from "@/components/common/modal/Modal";
-import Icon from "@/components/Icon/Icon";
 import Routine from "@/components/routine/Routine";
 import useModal from "@/hooks/useModal";
 import { useGetRoutines } from "@/hooks/useRoutine";
@@ -48,12 +48,12 @@ const MyRoutine = () => {
           />
         ))
       ) : (
-        <div>
-          <EmptyRoutineStyle>
-            <Icon name="routine" size="150px" color="text" />
-            <h2>운동 루틴이 없습니다.</h2>
-          </EmptyRoutineStyle>
-        </div>
+        <Empty
+          name="routine"
+          size="150px"
+          color="text"
+          descriptions="운동 루틴이 없습니다"
+        />
       )}
     </MyRoutineStyle>
   );
@@ -70,15 +70,6 @@ const RoutineTextStyle = styled.div`
     color: ${({ theme }) => theme.color.primary};
     text-decoration: underline;
   }
-`;
-
-const EmptyRoutineStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  padding-top: 280px;
-  margin: 0 auto;
 `;
 
 export default MyRoutine;
