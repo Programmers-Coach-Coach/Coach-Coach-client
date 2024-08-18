@@ -5,7 +5,7 @@ import { HiChartBar } from "react-icons/hi2";
 import {
   IoIosArrowBack,
   IoIosArrowDown,
-  IoIosMore,
+  IoMdMore,
   IoMdPerson
 } from "react-icons/io";
 import { IoClose, IoLogOutOutline, IoSearch } from "react-icons/io5";
@@ -32,5 +32,5 @@ export const ICONS = {
   x: IoClose,
   search: IoSearch,
   arrowDown: IoIosArrowDown,
-  dots: IoIosMore
+  dots: IoMdMore
 };
