@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         element: <CheckPassword />
       },
       {
-        path: "record/:id",
+        path: "record",
         element: <RecordDatail />
       }
     ]
