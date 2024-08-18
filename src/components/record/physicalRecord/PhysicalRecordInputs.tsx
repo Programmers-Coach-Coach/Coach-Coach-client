@@ -85,6 +85,10 @@ const Input = styled.input<{ $disabled: boolean }>`
       border: 1px solid #ccc;
       border-radius: 4px;
     `};
+
+  &:disabled {
+    background-color: #fff;
+  }
 `;
 
 export default PhysicalRecordInputs;
