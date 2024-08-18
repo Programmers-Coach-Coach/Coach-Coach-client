@@ -9,6 +9,7 @@ import RoutineContents from "@/components/common/modal/contents/RoutineContents"
 import { SPORTS_NAMES } from "@/constants/sportsConstants";
 import { useModalInfo } from "@/store/modalInfo.store";
 import RoutinePicker from "../common/modal/contents/RoutinePicker";
+import { useLocation } from "react-router-dom";
 
 interface RoutineProps {
   id: number;
@@ -17,6 +18,9 @@ interface RoutineProps {
 }
 
 const Routine = ({ id, name, sportId }: RoutineProps) => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+
   const modifyModal = useModal();
   const deleteModal = useModal();
   const [isSelect, setIsSelect] = useState<boolean>(false);
@@ -59,20 +63,22 @@ const Routine = ({ id, name, sportId }: RoutineProps) => {
             <h2>{name}</h2>
             <p className="b2">{SPORTS_NAMES[sportId]}</p>
           </RoutineTextStyle>
-          <RoutineIconStyle>
-            <Icon
-              name="modify"
-              size="20px"
-              color="review"
-              onClick={onClickModify}
-            />
-            <Icon
-              name="delete"
-              size="20px"
-              color="error"
-              onClick={onClickDelete}
-            />
-          </RoutineIconStyle>
+          {!queryParams.get("coach") && (
+            <RoutineIconStyle>
+              <Icon
+                name="modify"
+                size="20px"
+                color="review"
+                onClick={onClickModify}
+              />
+              <Icon
+                name="delete"
+                size="20px"
+                color="error"
+                onClick={onClickDelete}
+              />
+            </RoutineIconStyle>
+          )}
         </RoutineStyle>
       </Card>
     </>
