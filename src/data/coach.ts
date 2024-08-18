@@ -1,4 +1,4 @@
-import { ICoachList, IPopularCoach } from "@/models/coach.model";
+import { ICoachList, IPopularCoach, ISimpleCoach } from "@/models/coach.model";
 import * as faker from "@/utils/faker";
 
 export const popularCoaches: IPopularCoach[] = Array.from({ length: 3 }).map(
@@ -63,3 +63,11 @@ export const coachPagination: ICoachList[] = Array.from({
   totalCount: TOTAL_PAGE * PER_PAGE,
   currentPage: i + 1
 }));
+
+export const myCoaches: ISimpleCoach[] = Array.from({ length: 7 }).map(
+  (_, i) => ({
+    coachId: i,
+    coachName: faker.fullname(),
+    profileImageUrl: faker.imageUrl()
+  })
+);
