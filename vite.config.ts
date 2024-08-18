@@ -10,8 +10,9 @@ export default defineConfig({
     react(),
     tsconfigPaths(),
     sentryVitePlugin({
-      org: "a5b84cea07f9",
-      project: "javascript-react"
+      authToken: process.env.VITE_SENTRY_AUTH_TOKEN,
+      org: process.env.VITE_SENTRY_ORG,
+      project: "coach-coach"
     }),
     VitePluginRadar({
       analytics: {
