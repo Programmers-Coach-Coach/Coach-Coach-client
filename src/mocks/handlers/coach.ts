@@ -1,5 +1,5 @@
 import { API_PATH } from "@/constants/apiPath";
-import { coachPagination } from "@/data/coach";
+import { coachPagination, myCoaches } from "@/data/coach";
 import { http, HttpResponse } from "msw";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -24,4 +24,11 @@ const getCoachAll = http.get(
   }
 );
 
-export const handlers = [getCoachAll];
+const getMyCoaches = http.get(
+  `${BASE_URL}${API_V1}${API_PATH.myCoaches}`,
+  () => {
+    return HttpResponse.json(myCoaches);
+  }
+);
+
+export const handlers = [getCoachAll, getMyCoaches];
