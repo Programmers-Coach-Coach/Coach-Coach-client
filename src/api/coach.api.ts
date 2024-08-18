@@ -1,5 +1,5 @@
 import { API_PATH } from "@/constants/apiPath";
-import { IAllCoachList, ICoachList } from "@/models/coach.model";
+import { IAllCoachList, ICoachList, ISimpleCoach } from "@/models/coach.model";
 import qs from "qs";
 import { requestHandler } from "./http";
 
@@ -44,4 +44,8 @@ export const getCoachAll = ({ filter, page }: IAllCoachList) => {
   console.log(query);
 
   return requestHandler<ICoachList>("get", `${API_PATH.getCoachAll}?${query}`);
+};
+
+export const getMyCoaches = async () => {
+  return await requestHandler<ISimpleCoach[]>("get", API_PATH.myCoaches);
 };

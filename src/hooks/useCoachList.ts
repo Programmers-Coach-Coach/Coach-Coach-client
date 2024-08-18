@@ -1,7 +1,7 @@
-import { getCoachAll } from "@/api/coach.api";
+import { getCoachAll, getMyCoaches } from "@/api/coach.api";
 import { PER_PAGE } from "@/data/coach";
-import { IAllCoachList, ICoachList } from "@/models/coach.model";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { IAllCoachList, ICoachList, ISimpleCoach } from "@/models/coach.model";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
 const useCoachList = (filter: Omit<IAllCoachList, "page">) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
@@ -27,3 +27,12 @@ const useCoachList = (filter: Omit<IAllCoachList, "page">) => {
 };
 
 export default useCoachList;
+
+export const useMyCoachList = () => {
+  const { data, isLoading, isError } = useQuery<ISimpleCoach[]>({
+    queryKey: ["getMyCoaches"],
+    queryFn: getMyCoaches
+  });
+
+  return { data, isLoading, isError };
+};

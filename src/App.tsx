@@ -15,6 +15,7 @@ import Notification from "./pages/Notification";
 import Signup from "./pages/Signup";
 import { GlobalStyle } from "./style/global";
 import { theme } from "./style/theme";
+import MyCoach from "./pages/MyCoach";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "notification",
         element: <Notification />
+      },
+      {
+        path: "routine/my-coach",
+        element: <MyCoach />
       }
     ]
   }
