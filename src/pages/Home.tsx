@@ -1,5 +1,6 @@
 import PopularCoaches from "@/components/coach/PopularCoaches";
 import Search from "@/components/common/InputField/search/Search";
+import SEO from "@/components/common/SEO/SEO";
 import SportsList from "@/components/sports/SportsList";
 import useHome from "@/hooks/useHome";
 import { WhiteSpace } from "@/style/global";
@@ -13,6 +14,12 @@ const Home = () => {
 
   return (
     <HomeStyle>
+      <SEO
+        title="코치코치"
+        description="코치코치 서비스 메인페이지 입니다."
+        keywords="홈트, 운동, 코칭"
+        url="/"
+      />
       <Search placeholder="코치명을 검색하세요" />
       <WhiteSpace $height={40} />
       <SportsList sportsList={data.sports} />

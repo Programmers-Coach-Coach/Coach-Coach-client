@@ -1,6 +1,7 @@
 import ActionModalInner from "@/components/common/modal/contents/ActionModalInner";
 import RoutineContents from "@/components/common/modal/contents/RoutineContents";
 import Modal from "@/components/common/modal/Modal";
+import SEO from "@/components/common/SEO/SEO";
 import Icon from "@/components/Icon/Icon";
 import Routine from "@/components/routine/Routine";
 import useModal from "@/hooks/useModal";
@@ -21,6 +22,12 @@ const MyRoutine = () => {
   };
   return (
     <MyRoutineStyle>
+      <SEO
+        title="코치코치-나의 루틴 페이지"
+        description="나의 루틴 페이지"
+        keywords="My, 루틴"
+        url="/routine"
+      />
       {isModal && (
         <Modal
           closeModal={closeModal}
