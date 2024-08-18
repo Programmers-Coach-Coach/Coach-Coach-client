@@ -1,11 +1,13 @@
 import "jest-styled-components";
-import { theme, BodySize, TitleSize } from "../style/theme";
 import {
+  BodySize,
+  ButtonSize,
   ColorKey,
   FontSize,
   FontWeight,
-  ButtonSize,
-  ProfileImageSize
+  ProfileImageSize,
+  theme,
+  TitleSize
 } from "../style/theme";
 
 describe("Theme Object", () => {
@@ -60,7 +62,8 @@ describe("Theme Object", () => {
     ["large", { padding: "16px", height: "48px", width: "314px" }],
     ["small", { padding: "16px", height: "32px", width: "105px" }],
     ["full", { padding: "16px", height: "48px", width: "100%" }],
-    ["mini", { padding: "16px", height: "32px", width: "86px" }]
+    ["mini", { padding: "16px", height: "32px", width: "86px" }],
+    ["super-mini", { padding: "3px", height: "auto", width: "auto" }]
   ] as [ButtonSize, { padding: string; height: string; width?: string }][])(
     "should have correct button value for %s",
     (buttonSize, expectedValue) => {
