@@ -3,7 +3,6 @@ import {
   routinePicker,
   TRoutinePicker
 } from "@/data/modal";
-import { routineDB } from "@/data/routine";
 import { useDeleteRoutine } from "@/hooks/useRoutine";
 import { useModalInfo } from "@/store/modalInfo.store";
 import styled from "styled-components";
@@ -42,7 +41,6 @@ const Item = ({
   const onClickHandler = () => {
     if (item.name === "루틴 삭제") {
       deleteRoutineResponse.mutateAsync(routineId);
-      routineDB.delete(routineId);
       closeModal();
     } else if (item.name === "취소") {
       closeModal();
