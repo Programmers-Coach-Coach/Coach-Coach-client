@@ -10,11 +10,14 @@ export interface IPopularCoach {
   coachingSports: ICoachingSports[];
 }
 
-export interface ICoach {
+export interface ISimpleCoach {
   coachId: number;
   coachName: string;
-  localInfo: string; // localAddress로 변경
   profileImageUrl: string | null;
+}
+
+export interface ICoach extends ISimpleCoach {
+  localInfo: string; // localAddress로 변경
   coachIntroduction: string;
   coachingSports: ICoachingSports[];
   countOfReviews: number;
