@@ -9,7 +9,6 @@ import CheckPassword from "./pages/CheckPassword";
 import CoachList from "./pages/CoachList";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import MyCoach from "./pages/MyCoach";
 import Mypage from "./pages/Mypage";
 import MyRoutine from "./pages/Routine/MyRoutine";
 import Notification from "./pages/Notification";
