@@ -1,13 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import logo from "@/assets/images/Logo.png";
+import { useProfileInfo } from "@/store/profileInfo.store";
 
 interface ProfileProps {
   profileId: number;
-  profileName: string;
+  profileName?: string;
   profileImageUrl: string | null;
-  state: "mycoaches";
-  size: string;
+  state?: "mycoaches";
+  width: string;
+  height: string;
 }
 
 const Profile = ({
@@ -15,22 +17,33 @@ const Profile = ({
   profileName,
   profileImageUrl,
   state,
-  size
+  width,
+  height
 }: ProfileProps) => {
   const navigate = useNavigate();
   const imageUrl = profileImageUrl ? profileImageUrl : logo;
+  const setCoachId = useProfileInfo((state) => state.setCoachId);
+  const setProfileImageUrl = useProfileInfo(
+    (state) => state.setProfileImageUrl
+  );
 
   const onClickProfile = () => {
     if (state === "mycoaches") {
-      console.log(profileId);
-      navigate(`/routine/my-coach/${profileName}`);
+      setCoachId(profileId);
+      setProfileImageUrl(profileImageUrl);
+      navigate(`/routine/my-coach/${profileId}?coach=${profileName}`);
     }
   };
 
   return (
     <ProfileStyle>
-      <ProfileImageStyle src={imageUrl} onClick={onClickProfile} size={size} />
-      <h1>{profileName}</h1>
+      <ProfileImageStyle
+        src={imageUrl}
+        onClick={onClickProfile}
+        width={width}
+        height={height}
+      />
+      {profileName && <h1>{profileName}</h1>}
     </ProfileStyle>
   );
 };
@@ -41,9 +54,9 @@ const ProfileStyle = styled.div`
   align-items: center;
 `;
 
-const ProfileImageStyle = styled.img<{ size: string }>`
-  width: ${({ size }) => size};
-  height: ${({ size }) => size};
+const ProfileImageStyle = styled.img<{ width: string; height: string }>`
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
   border-radius: ${({ theme }) => theme.borderRadius.default};
   box-shadow: ${({ theme }) => theme.boxShadow};
 `;
