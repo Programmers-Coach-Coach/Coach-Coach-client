@@ -9,3 +9,10 @@ export interface IRoutines {
   totalCount: number;
   currentPage: number;
 }
+
+export interface IAction {
+  actionId: number;
+  actionName: string;
+  sets: number;
+  countOrMinutes: string;
+}
