@@ -14,6 +14,7 @@ export interface IGetRoutine {
   coachId?: number;
   userId?: number;
   page: number;
+}
 
 export interface IAction {
   actionId: number;
