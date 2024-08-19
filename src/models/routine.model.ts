@@ -14,4 +14,10 @@ export interface IGetRoutine {
   coachId?: number;
   userId?: number;
   page: number;
+
+export interface IAction {
+  actionId: number;
+  actionName: string;
+  sets: number;
+  countOrMinutes: string;
 }

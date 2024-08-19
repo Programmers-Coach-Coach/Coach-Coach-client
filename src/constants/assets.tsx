@@ -2,7 +2,12 @@ import { CiBellOn, CiDumbbell } from "react-icons/ci";
 import { FaPeoplePulling } from "react-icons/fa6";
 import { GrHomeRounded } from "react-icons/gr";
 import { HiChartBar } from "react-icons/hi2";
-import { IoIosArrowBack, IoMdPerson } from "react-icons/io";
+import {
+  IoIosArrowBack,
+  IoIosArrowDown,
+  IoMdMore,
+  IoMdPerson
+} from "react-icons/io";
 import { IoClose, IoLogOutOutline, IoSearch } from "react-icons/io5";
 import { LuPencilLine } from "react-icons/lu";
 import { PiSunglassesBold } from "react-icons/pi";
@@ -25,5 +30,7 @@ export const ICONS = {
   delete: RiDeleteBin5Line,
   filter: TbArrowsExchange2,
   x: IoClose,
-  search: IoSearch
+  search: IoSearch,
+  arrowDown: IoIosArrowDown,
+  dots: IoMdMore
 };
