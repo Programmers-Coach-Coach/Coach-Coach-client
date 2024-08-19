@@ -9,14 +9,15 @@ import CheckPassword from "./pages/CheckPassword";
 import CoachList from "./pages/CoachList";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import MyCoach from "./pages/MyCoach";
 import Mypage from "./pages/Mypage";
-import MyRoutine from "./pages/MyRoutine";
+import MyRoutine from "./pages/Routine/MyRoutine";
 import Notification from "./pages/Notification";
 import RecordDatail from "./pages/RecordDatail";
 import Signup from "./pages/Signup";
 import { GlobalStyle } from "./style/global";
 import { theme } from "./style/theme";
+import MyCoach from "./pages/MyCoach";
+import CoachRoutine from "./pages/Routine/CoachRoutine";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "routine/my-coach",
         element: <MyCoach />
+      },
+      {
+        path: "routine/my-coach/:coachId",
+        element: <CoachRoutine />
       }
     ]
   }

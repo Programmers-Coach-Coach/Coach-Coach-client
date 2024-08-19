@@ -11,18 +11,19 @@ const MyCoachesProfileList = ({ data }: MyCoachesProfileListProps) => {
   return (
     <>
       {data.length ? (
-        data.map((d) => (
-          <MyCoachesProfileListStyle>
+        <MyCoachesProfileListStyle>
+          {data.map((d) => (
             <Profile
               key={d.coachId}
               profileId={d.coachId}
               profileName={d.coachName}
               profileImageUrl={d.profileImageUrl}
               state="mycoaches"
-              size="114px"
+              width="114px"
+              height="114px"
             />
-          </MyCoachesProfileListStyle>
-        ))
+          ))}
+        </MyCoachesProfileListStyle>
       ) : (
         <Empty
           name="coach"

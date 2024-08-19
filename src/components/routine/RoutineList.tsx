@@ -1,9 +1,9 @@
 import { styled } from "styled-components";
-import Icon from "@/components/Icon/Icon";
 import Routine from "@/components/routine/Routine";
 import { useGetRoutines } from "@/hooks/useRoutine";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 import { IRoutine } from "@/models/routine.model";
+import Empty from "../common/Empty/Empty";
 
 interface RoutineListProps {
   routines: IRoutine[];
@@ -36,26 +36,17 @@ const RoutineList = ({ routines }: RoutineListProps) => {
               : "마지막 페이지"}
         </>
       ) : (
-        <div>
-          <EmptyRoutineStyle>
-            <Icon name="routine" size="150px" color="text" />
-            <h2>운동 루틴이 없습니다.</h2>
-          </EmptyRoutineStyle>
-        </div>
+        <Empty
+          name="routine"
+          size="150px"
+          color="text"
+          descriptions="운동 루틴이 없습니다"
+        />
       )}
     </RoutineListStyle>
   );
 };
 
 const RoutineListStyle = styled.div``;
-
-const EmptyRoutineStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  padding-top: 280px;
-  margin: 0 auto;
-`;
 
 export default RoutineList;

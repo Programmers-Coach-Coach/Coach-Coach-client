@@ -1,13 +1,26 @@
 import { requestHandler } from "./http";
 import { API_PATH } from "@/constants/apiPath";
 import { IResponseMessage } from "@/models/responseMessage.model";
-import { IRoutine, IRoutines } from "@/models/routine.model";
+import { IGetRoutine, IRoutine, IRoutines } from "@/models/routine.model";
+import qs from "qs";
 
-export const getRoutinesData = async (page: number) => {
-  return await requestHandler<IRoutines>(
-    "get",
-    `${API_PATH.routine}?page=${page}`
+export const getRoutinesData = async ({
+  coachId,
+  userId,
+  page
+}: IGetRoutine) => {
+  const query = qs.stringify(
+    {
+      coachId,
+      userId,
+      page
+    },
+    {
+      skipNulls: true
+    }
   );
+
+  return await requestHandler<IRoutines>("get", `${API_PATH.routine}?${query}`);
 };
 
 export const postRoutineData = async (payload: Omit<IRoutine, "routineId">) => {
