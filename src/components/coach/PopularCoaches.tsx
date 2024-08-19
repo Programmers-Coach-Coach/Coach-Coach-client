@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { LineClamp } from "@/style/global";
-import Heart from "../common/InputField/CheckBox/Heart";
 import { IPopularCoach } from "@/models/coach.model";
+import { LineClamp } from "@/style/global";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import styled from "styled-components";
+import Heart from "../common/InputField/CheckBox/Heart";
 
 interface Props {
   popularCoaches: IPopularCoach[];
@@ -58,9 +58,9 @@ const CoachesSlider = ({ popularCoaches }: CoachesSliderProps) => {
 const Coach = ({ coach }: CoachProps) => {
   return (
     <CoachStyle>
-      <img src={coach.coachImageUrl} alt={coach.coachName} />
+      <img src={coach.profileImageUrl} alt={coach.coachName} />
       <button>
-        <Heart checked={coach.liked} size="small" />
+        <Heart checked={coach.isLiked} size="small" />
         <p className="b3">{coach.countOfLikes}</p>
       </button>
       <BoxText>

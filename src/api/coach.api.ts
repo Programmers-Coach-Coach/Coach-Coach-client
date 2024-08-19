@@ -26,9 +26,16 @@ export const getCoachAll = ({ filter, page }: IAllCoachList) => {
       break;
   }
 
+  let formattedSportsId;
+  if (sportsIdList?.includes(0)) {
+    formattedSportsId = null;
+  } else {
+    formattedSportsId = sportsIdList?.join(",");
+  }
+
   const query = qs.stringify(
     {
-      sportsId: sportsIdList,
+      sports: formattedSportsId,
       search,
       latest,
       review,
@@ -40,8 +47,6 @@ export const getCoachAll = ({ filter, page }: IAllCoachList) => {
       skipNulls: true // undefined 값은 쿼리에 포함x
     }
   );
-
-  console.log(query);
 
   return requestHandler<ICoachList>("get", `${API_PATH.getCoachAll}?${query}`);
 };

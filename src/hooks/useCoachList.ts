@@ -1,8 +1,8 @@
 import { getCoachAll, getMyCoaches } from "@/api/coach.api";
-import { PER_PAGE } from "@/data/coach";
 import { IAllCoachList, ICoachList, ISimpleCoach } from "@/models/coach.model";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
+const PER_PAGE = 20;
 const useCoachList = (filter: Omit<IAllCoachList, "page">) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery<ICoachList>({

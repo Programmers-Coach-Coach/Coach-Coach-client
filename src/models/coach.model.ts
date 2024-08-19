@@ -3,10 +3,10 @@ import { ICoachingSports } from "./sports.model";
 export interface IPopularCoach {
   coachId: number;
   coachName: string;
-  coachImageUrl: string;
+  profileImageUrl: string;
   description: string;
   countOfLikes: number;
-  liked: boolean;
+  isLiked: boolean;
   coachingSports: ICoachingSports[];
 }
 
@@ -17,12 +17,12 @@ export interface ISimpleCoach {
 }
 
 export interface ICoach extends ISimpleCoach {
-  localInfo: string; // localAddress로 변경
+  localAddress: string; // localAddress로 변경
   coachIntroduction: string;
   coachingSports: ICoachingSports[];
   countOfReviews: number;
-  rating: number;
-  liked: boolean;
+  reviewRating: number;
+  isLiked: boolean;
   countOfLikes: number;
 }
 

@@ -23,8 +23,8 @@ const Coach = ({ coach }: Props) => {
           ))}
         </ul>
       </Text>
-      <Heart checked={coach.liked} size="small" />
-      <Local>{coach.localInfo}</Local>
+      <Heart checked={coach.isLiked} size="small" />
+      <Local>{coach.localAddress}</Local>
     </CoachStyle>
   );
 };
@@ -32,7 +32,6 @@ const Coach = ({ coach }: Props) => {
 const CoachStyle = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 10px;
   position: relative;
 `;
@@ -52,6 +51,7 @@ const Image = styled.img`
 
 const Text = styled.div`
   overflow: hidden;
+  flex: 1;
 
   .desc {
     font-size: 12px;
