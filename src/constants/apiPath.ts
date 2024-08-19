@@ -1,5 +1,5 @@
 export const API_PATH = {
-  main: "/main",
+  main: "/main-info",
   routine: "/routines",
   getCoachAll: "/coaches-all",
   mypage: "/auth/user/me",

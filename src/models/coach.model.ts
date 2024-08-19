@@ -17,12 +17,12 @@ export interface ISimpleCoach {
 }
 
 export interface ICoach extends ISimpleCoach {
-  localInfo: string; // localAddress로 변경
+  localAddress: string; // localAddress로 변경
   coachIntroduction: string;
   coachingSports: ICoachingSports[];
   countOfReviews: number;
-  rating: number;
-  liked: boolean;
+  reviewRating: number;
+  isLiked: boolean;
   countOfLikes: number;
 }
 

@@ -26,9 +26,16 @@ export const getCoachAll = ({ filter, page }: IAllCoachList) => {
       break;
   }
 
+  let formattedSportsId;
+  if (sportsIdList?.includes(0)) {
+    formattedSportsId = null;
+  } else {
+    formattedSportsId = sportsIdList?.join(",");
+  }
+
   const query = qs.stringify(
     {
-      sportsId: sportsIdList,
+      sports: formattedSportsId,
       search,
       latest,
       review,

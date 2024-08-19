@@ -23,8 +23,8 @@ const Coach = ({ coach }: Props) => {
           ))}
         </ul>
       </Text>
-      <Heart checked={coach.liked} size="small" />
-      <Local>{coach.localInfo}</Local>
+      <Heart checked={coach.isLiked} size="small" />
+      <Local>{coach.localAddress}</Local>
     </CoachStyle>
   );
 };
