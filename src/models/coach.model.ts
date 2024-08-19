@@ -3,10 +3,10 @@ import { ICoachingSports } from "./sports.model";
 export interface IPopularCoach {
   coachId: number;
   coachName: string;
-  coachImageUrl: string;
+  profileImageUrl: string;
   description: string;
   countOfLikes: number;
-  liked: boolean;
+  isLiked: boolean;
   coachingSports: ICoachingSports[];
 }
 
