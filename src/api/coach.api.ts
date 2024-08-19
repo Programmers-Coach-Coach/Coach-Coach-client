@@ -48,8 +48,6 @@ export const getCoachAll = ({ filter, page }: IAllCoachList) => {
     }
   );
 
-  console.log(query);
-
   return requestHandler<ICoachList>("get", `${API_PATH.getCoachAll}?${query}`);
 };
 
