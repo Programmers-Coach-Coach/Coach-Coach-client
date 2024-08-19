@@ -12,6 +12,8 @@ export const getTitle = (pathname: string): string => {
       return "본인확인";
     case "/record":
       return "내 기록";
+    case "/record-list":
+      return "내 기록";
     case "/notification":
       return "알림";
     case "/routine/my-coach":
