@@ -17,7 +17,7 @@ export interface ISimpleCoach {
 }
 
 export interface ICoach extends ISimpleCoach {
-  localAddress: string; // localAddress로 변경
+  localAddress: string;
   coachIntroduction: string;
   coachingSports: ICoachingSports[];
   countOfReviews: number;
@@ -55,15 +55,15 @@ export interface ICoachDetail {
   coachName: string;
   coachGender: "M" | "W";
   localAddress: string;
-  profileImageUrl: string;
+  profileImageUrl: string | null;
   createdAt: string;
   coachIntroduction: string;
-  coachingSports: string[];
+  coachingSports: ICoachingSports[];
   activeCenter: string | null;
   activeCenterDetail: string | null;
   activeHours: string;
   chattingUrl: string;
-  reviews: Review[];
+  reviews: IReview[];
   isOpen: boolean;
   countOfReviews: number;
   reviewRating: number;
@@ -71,7 +71,7 @@ export interface ICoachDetail {
   countOfLikes: number;
 }
 
-export interface Review {
+export interface IReview {
   userId: number;
   userName: string;
   contents: string;
