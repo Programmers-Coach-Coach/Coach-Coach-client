@@ -1,20 +1,23 @@
+import Icon from "@/components/Icon/Icon";
 import { ICoachDetail } from "@/models/coach.model";
-import { styled } from "styled-components";
-import { BsChatLeftTextFill } from "react-icons/bs";
-import { FaStar } from "react-icons/fa6";
-import { Card } from "@mui/material";
 import { theme } from "@/style/theme";
+import { Card } from "@mui/material";
+import { BsChatLeftTextFill } from "react-icons/bs";
+import { styled } from "styled-components";
 
 interface ReviewCardProps {
   coachProfile: ICoachDetail;
 }
 
-const ReviewCard: React.FC<ReviewCardProps> = ({ coachProfile }) => {
+const ReviewCard = ({ coachProfile }: ReviewCardProps) => {
   const renderStars = (stars: number) => {
-    return Array.from({ length: stars }, () => (
-      <span>
-        <FaStar />
-      </span>
+    return [1, 2, 3, 4, 5].map((cnt) => (
+      <Icon
+        key={cnt}
+        name={cnt <= stars ? "fullStar" : "emptyStar"}
+        size="30"
+        color="review"
+      />
     ));
   };
 
