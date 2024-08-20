@@ -1,11 +1,15 @@
+import useModal from "@/hooks/useModal";
 import { ICoachDetail } from "@/models/coach.model";
 import styled from "styled-components";
 import ReviewCard from "../common/Card/ReviewCard.tsx/ReviewCard";
+import Modal from "../common/modal/Modal";
+import Review from "../modal/Review";
 
 interface Props {
   coach: ICoachDetail;
 }
 const DetailInfo = ({ coach }: Props) => {
+  const { isModal, openModal, closeModal } = useModal();
   return (
     <Wrapper>
       <SubWrapper>
@@ -38,7 +42,7 @@ const DetailInfo = ({ coach }: Props) => {
       <SubWrapper>
         <ReviewWithButton>
           <h2>리뷰</h2>
-          <button>작성하기</button>
+          <button onClick={openModal}>작성하기</button>
         </ReviewWithButton>
         <ReviewCard coachProfile={coach} />
       </SubWrapper>
@@ -49,6 +53,12 @@ const DetailInfo = ({ coach }: Props) => {
           kakaotalk
         </CustomButton>
       </SubWrapper> */}
+
+      {isModal && (
+        <Modal position="center" closeModal={closeModal}>
+          <Review onClose={closeModal} onEnroll={() => {}} />
+        </Modal>
+      )}
     </Wrapper>
   );
 };

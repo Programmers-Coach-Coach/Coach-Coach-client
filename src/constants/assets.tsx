@@ -1,4 +1,5 @@
 import { CiBellOn, CiDumbbell } from "react-icons/ci";
+import { FaRegStar } from "react-icons/fa";
 import { FaPeoplePulling, FaStar } from "react-icons/fa6";
 import { GrHomeRounded } from "react-icons/gr";
 import { HiChartBar } from "react-icons/hi2";
@@ -34,6 +35,7 @@ export const ICONS = {
   search: IoSearch,
   arrowDown: IoIosArrowDown,
   dots: IoMdMore,
-  star: FaStar,
+  emptyStar: FaRegStar,
+  fullStar: FaStar,
   heart: IoIosHeart
 };
