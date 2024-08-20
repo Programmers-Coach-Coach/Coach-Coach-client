@@ -15,7 +15,7 @@ const BasicInfo = ({ coach }: Props) => {
           <h1>{coach.coachName}</h1>
           <Icons>
             <IconWrapper>
-              <Icon name="star" size="16px" color="review" />
+              <Icon name="fullStar" size="16px" color="review" />
               {coach.reviewRating} ({coach.countOfReviews})
             </IconWrapper>
             <IconWrapper>
