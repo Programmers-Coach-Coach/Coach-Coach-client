@@ -6,6 +6,8 @@ export const getTitle = (pathname: string): string => {
       return "회원가입";
     case "/coach-list":
       return "코치 리스트";
+    case "/coach":
+      return "코치";
     case "/routine":
       return "루틴";
     case "/check-password":
