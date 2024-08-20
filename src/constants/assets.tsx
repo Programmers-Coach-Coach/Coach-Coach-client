@@ -1,10 +1,11 @@
 import { CiBellOn, CiDumbbell } from "react-icons/ci";
-import { FaPeoplePulling } from "react-icons/fa6";
+import { FaPeoplePulling, FaStar } from "react-icons/fa6";
 import { GrHomeRounded } from "react-icons/gr";
 import { HiChartBar } from "react-icons/hi2";
 import {
   IoIosArrowBack,
   IoIosArrowDown,
+  IoIosHeart,
   IoMdMore,
   IoMdPerson
 } from "react-icons/io";
@@ -32,5 +33,7 @@ export const ICONS = {
   x: IoClose,
   search: IoSearch,
   arrowDown: IoIosArrowDown,
-  dots: IoMdMore
+  dots: IoMdMore,
+  star: FaStar,
+  heart: IoIosHeart
 };

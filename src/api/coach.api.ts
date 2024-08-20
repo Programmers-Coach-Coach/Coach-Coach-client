@@ -1,5 +1,10 @@
 import { API_PATH } from "@/constants/apiPath";
-import { IAllCoachList, ICoachList, ISimpleCoach } from "@/models/coach.model";
+import {
+  IAllCoachList,
+  ICoachDetail,
+  ICoachList,
+  ISimpleCoach
+} from "@/models/coach.model";
 import qs from "qs";
 import { requestHandler } from "./http";
 
@@ -53,4 +58,12 @@ export const getCoachAll = ({ filter, page }: IAllCoachList) => {
 
 export const getMyCoaches = async () => {
   return await requestHandler<ISimpleCoach[]>("get", API_PATH.myCoaches);
+};
+
+export const getCoachDetail = async (id: number) => {
+  const query = qs.stringify({ coachId: id });
+  return await requestHandler<ICoachDetail>(
+    "get",
+    `${API_PATH.coachMypage}?${query}`
+  );
 };

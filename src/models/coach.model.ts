@@ -54,7 +54,7 @@ export interface IMyPageCoachFormValues {
 export interface ICoachDetail {
   coachName: string;
   coachGender: "M" | "W";
-  localInfo: string;
+  localAddress: string;
   profileImageUrl: string;
   createdAt: string;
   coachIntroduction: string;
@@ -63,16 +63,18 @@ export interface ICoachDetail {
   activeCenterDetail: string | null;
   activeHours: string;
   chattingUrl: string;
-  reviews: {
-    userId: number;
-    userName: string;
-    contents: string;
-    stars: number;
-    createdAt: string;
-  }[];
+  reviews: Review[];
   isOpen: boolean;
   countOfReviews: number;
-  rating: number;
-  liked: boolean;
+  reviewRating: number;
+  isLiked: boolean;
   countOfLikes: number;
+}
+
+export interface Review {
+  userId: number;
+  userName: string;
+  contents: string;
+  stars: number;
+  createdAt: string;
 }
