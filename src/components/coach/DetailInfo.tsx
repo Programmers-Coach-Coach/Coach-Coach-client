@@ -3,7 +3,7 @@ import { ICoachDetail } from "@/models/coach.model";
 import styled from "styled-components";
 import ReviewCard from "../common/Card/ReviewCard.tsx/ReviewCard";
 import Modal from "../common/modal/Modal";
-import Review from "../modal/Review";
+import ReviewInner from "../modal/ReviewInner";
 
 interface Props {
   coach: ICoachDetail;
@@ -56,7 +56,7 @@ const DetailInfo = ({ coach }: Props) => {
 
       {isModal && (
         <Modal position="center" closeModal={closeModal}>
-          <Review onClose={closeModal} onEnroll={() => {}} />
+          <ReviewInner onClose={closeModal} onEnroll={() => {}} />
         </Modal>
       )}
     </Wrapper>

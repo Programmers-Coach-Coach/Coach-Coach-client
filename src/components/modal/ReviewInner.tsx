@@ -7,7 +7,7 @@ interface Props {
   onClose: () => void;
   onEnroll: () => void;
 }
-const Review = ({ onEnroll, onClose }: Props) => {
+const ReviewInner = ({ onEnroll, onClose }: Props) => {
   const [stars, setStars] = useState<number>(0);
 
   const handleStars = (cnt: number) => {
@@ -34,7 +34,6 @@ const Review = ({ onEnroll, onClose }: Props) => {
         rows={3}
         placeholder="코치에 대한 리뷰를 적어주세요"
         fullWidth
-        sx={{ border: "#d9d9d9" }}
       />
       <Footer>
         <button onClick={onClose}>취소</button>
@@ -80,4 +79,4 @@ const StyledTextField = styled(TextField)`
   }
 `;
 
-export default Review;
+export default ReviewInner;
