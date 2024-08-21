@@ -6,79 +6,83 @@ import styled, { ThemeProvider } from "styled-components";
 import { queryClient } from "./api/queryClient";
 import Layout from "./components/layout/Layout";
 import CheckPassword from "./pages/CheckPassword";
-import Coach from "./pages/Coach";
 import CoachList from "./pages/CoachList";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import MyCoach from "./pages/MyCoach";
 import Mypage from "./pages/Mypage";
 import Notification from "./pages/Notification";
-import Record from "./pages/Record";
 import RecordDatail from "./pages/RecordDatail";
 import CoachRoutine from "./pages/Routine/CoachRoutine";
 import MyRoutine from "./pages/Routine/MyRoutine";
 import Signup from "./pages/Signup";
 import { GlobalStyle } from "./style/global";
 import { theme } from "./style/theme";
-
-const router = createBrowserRouter([
-  {
-    element: <Layout />,
-    children: [
-      {
-        path: "/",
-        element: <Home />
-      },
-      {
-        path: "login",
-        element: <Login />
-      },
-      {
-        path: "signup",
-        element: <Signup />
-      },
-      {
-        path: "mypage",
-        element: <Mypage />
-      },
-      {
-        path: "coach-list",
-        element: <CoachList />
-      },
-      {
-        path: "coach/:id",
-        element: <Coach />
-      },
-      {
-        path: "routine",
-        element: <MyRoutine />
-      },
-      {
-        path: "check-password",
-        element: <CheckPassword />
-      },
-      {
-        path: "record",
-        element: <RecordDatail />
-      },
-      { path: "record-list", element: <Record /> },
-      {
-        path: "notification",
-        element: <Notification />
-      },
-      {
-        path: "routine/my-coach",
-        element: <MyCoach />
-      },
-      {
-        path: "routine/my-coach/:coachId",
-        element: <CoachRoutine />
-      }
-    ]
-  }
-]);
+import PrivateLayout from "./components/layout/PrivateLayout";
+import { useState } from "react";
 
 function App() {
+  const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
+  const router = createBrowserRouter([
+    {
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <Home />
+        },
+        {
+          path: "login",
+          element: <Login />
+        },
+        {
+          path: "signup",
+          element: <Signup />
+        },
+        {
+          path: "mypage",
+          element: (
+            <PrivateLayout isAccess={isPasswordConfirmed}>
+              <Mypage />
+            </PrivateLayout>
+          )
+        },
+        {
+          path: "coach-list",
+          element: <CoachList />
+        },
+        {
+          path: "routine",
+          element: <MyRoutine />
+        },
+        {
+          path: "check-password",
+          element: (
+            <CheckPassword
+              onPasswordConfirmed={() => setIsPasswordConfirmed(true)}
+            />
+          )
+        },
+        {
+          path: "record",
+          element: <RecordDatail />
+        },
+
+        {
+          path: "notification",
+          element: <Notification />
+        },
+        {
+          path: "routine/my-coach",
+          element: <MyCoach />
+        },
+        {
+          path: "routine/my-coach/:coachId",
+          element: <CoachRoutine />
+        }
+      ]
+    }
+  ]);
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>

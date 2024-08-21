@@ -1,4 +1,5 @@
 import { TextField } from "@mui/material";
+import { forwardRef } from "react";
 import styled from "styled-components";
 
 interface AuthInputProps {
@@ -9,9 +10,11 @@ interface AuthInputProps {
   helperText?: string;
   width?: string;
 }
-const AuthInput = (props: AuthInputProps) => {
-  return <TextFieldWrapper helperText={props.helperText} {...props} />;
-};
+const AuthInput = forwardRef<HTMLInputElement, AuthInputProps>((props, ref) => {
+  return (
+    <TextFieldWrapper helperText={props.helperText} {...props} inputRef={ref} />
+  );
+});
 
 const TextFieldWrapper = styled(TextField)<{ width?: string }>`
   && {
