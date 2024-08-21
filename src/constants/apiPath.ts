@@ -11,5 +11,5 @@ export const API_PATH = {
   signup: "/auth/signup",
   withdraw: "/users/me",
   myCoaches: "/users/matched/coaches",
-  getNotifications: "/notifications"
+  notification: "/notifications"
 };
