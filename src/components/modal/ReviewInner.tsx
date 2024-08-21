@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
-import Icon from "../Icon/Icon";
+import RatingStars from "../common/Card/ReviewCard.tsx/RatingStars";
 
 interface Props {
   onClose: () => void;
@@ -17,17 +17,7 @@ const ReviewInner = ({ onEnroll, onClose }: Props) => {
   return (
     <ReviewStyle>
       <Stars>
-        {[1, 2, 3, 4, 5].map((cnt) => (
-          <Icon
-            key={cnt}
-            name={cnt <= stars ? "fullStar" : "emptyStar"}
-            size="30"
-            color="review"
-            onClick={() => {
-              handleStars(cnt);
-            }}
-          />
-        ))}
+        <RatingStars stars={stars} size="30" onClick={handleStars} />
       </Stars>
       <StyledTextField
         multiline

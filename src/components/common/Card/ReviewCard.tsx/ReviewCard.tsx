@@ -1,27 +1,15 @@
-import Icon from "@/components/Icon/Icon";
 import { ICoachDetail } from "@/models/coach.model";
 import { theme } from "@/style/theme";
 import { Card } from "@mui/material";
 import { BsChatLeftTextFill } from "react-icons/bs";
 import { styled } from "styled-components";
+import RatingStars from "./RatingStars";
 
 interface ReviewCardProps {
   coachProfile: ICoachDetail;
 }
 
-const STAR_RATING = [1, 2, 3, 4, 5];
 const ReviewCard = ({ coachProfile }: ReviewCardProps) => {
-  const renderStars = (stars: number) => {
-    return STAR_RATING.map((cnt) => (
-      <Icon
-        key={cnt}
-        name={cnt <= stars ? "fullStar" : "emptyStar"}
-        size="30"
-        color="review"
-      />
-    ));
-  };
-
   return coachProfile.reviews.length === 0 ? (
     <NoReviewSection>
       <BsChatLeftTextFill size="100" color={theme.color.primary} />
@@ -33,7 +21,9 @@ const ReviewCard = ({ coachProfile }: ReviewCardProps) => {
         <CardContainer key={index}>
           <CardWrapper>
             <FisrstWrapper>
-              <StarWrapper>{renderStars(review.stars)}</StarWrapper>
+              <StarWrapper>
+                <RatingStars stars={review.stars} size="30" />
+              </StarWrapper>
               <div>{review.userName}</div>
               <div>{review.createdAt}</div>
             </FisrstWrapper>
