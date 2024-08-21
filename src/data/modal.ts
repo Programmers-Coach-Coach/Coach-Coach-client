@@ -11,7 +11,7 @@ export type TModal =
   | "sports-modify";
 
 export type TFooterPicker = "profile" | "routine";
-export type TRoutinePicker = "write" | "delete";
+export type TRoutinePicker = "write" | "delete" | "add";
 
 export interface IModalData {
   primaryButton: string;
@@ -78,7 +78,7 @@ export const footerPicker: Record<TFooterPicker, IFooterPickerData[]> = {
     { name: "내 프로필", link: "/", icon: "person" },
     {
       name: "매칭 회원 리스트",
-      link: "/",
+      link: "/manage",
       icon: "twins"
     },
     { name: "내 기록", link: "/", icon: "record" },
@@ -102,5 +102,9 @@ export const routinePicker: Record<TRoutinePicker, IRoutinePickerData[]> = {
   delete: [
     { name: "루틴 삭제", onClick: () => {} },
     { name: "취소", onClick: () => {} }
+  ],
+  add: [
+    { name: "회원 추가", onClick: () => {} },
+    { name: "거절", onClick: () => {} }
   ]
 };

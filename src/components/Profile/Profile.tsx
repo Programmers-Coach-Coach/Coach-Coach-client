@@ -5,11 +5,12 @@ import { useProfileInfo } from "@/store/profileInfo.store";
 
 interface ProfileProps {
   profileId: number;
-  profileName?: string;
+  profileName: string;
   profileImageUrl: string | null;
-  state?: "mycoaches";
+  state?: "mycoaches" | "MatchingMember" | "InquiryMember";
   width: string;
   height: string;
+  openModal?: () => void;
 }
 
 const Profile = ({
@@ -18,7 +19,8 @@ const Profile = ({
   profileImageUrl,
   state,
   width,
-  height
+  height,
+  openModal = () => {}
 }: ProfileProps) => {
   const navigate = useNavigate();
   const imageUrl = profileImageUrl ? profileImageUrl : logo;
@@ -26,12 +28,19 @@ const Profile = ({
   const setProfileImageUrl = useProfileInfo(
     (state) => state.setProfileImageUrl
   );
+  const setUserId = useProfileInfo((state) => state.setUserId);
+  const setProfileName = useProfileInfo((state) => state.setProfileName);
 
   const onClickProfile = () => {
     if (state === "mycoaches") {
       setCoachId(profileId);
       setProfileImageUrl(profileImageUrl);
       navigate(`/routine/my-coach/${profileId}?coach=${profileName}`);
+    } else {
+      openModal();
+      setUserId(profileId);
+      setProfileName(profileName);
+      setProfileImageUrl(profileImageUrl);
     }
   };
 
@@ -43,7 +52,7 @@ const Profile = ({
         width={width}
         height={height}
       />
-      {profileName && <h1>{profileName}</h1>}
+      {width === "114px" && <h1>{profileName}</h1>}
     </ProfileStyle>
   );
 };
