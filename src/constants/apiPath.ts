@@ -10,5 +10,6 @@ export const API_PATH = {
   checkNickname: "/auth/check-nickname",
   signup: "/auth/signup",
   withdraw: "/users/me",
-  myCoaches: "/users/matched/coaches"
+  myCoaches: "/users/matched/coaches",
+  getNotifications: "/notifications"
 };
