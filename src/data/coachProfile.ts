@@ -3,11 +3,24 @@ import { ICoachDetail } from "@/models/coach.model";
 export const coachProfile: ICoachDetail = {
   coachName: "이현철코치",
   coachGender: "M",
-  localInfo: "경기도 고양시 덕양구 통일로 374",
+  localAddress: "경기도 고양시 덕양구 통일로 374",
   profileImageUrl: "asdasd",
   createdAt: "createdAt",
   coachIntroduction: "안녕하세요 이현철 코치입니다.",
-  coachingSports: ["축구", "배드민턴", "테니스"],
+  coachingSports: [
+    {
+      sportId: 1,
+      sportName: "축구"
+    },
+    {
+      sportId: 3,
+      sportName: "배드민턴"
+    },
+    {
+      sportId: 5,
+      sportName: "테니스"
+    }
+  ],
   activeCenter: "경기도 고양시 덕양구 통일로 374",
   activeCenterDetail: "107-1503",
   activeHours: "오전 10시 ~ 오후 6시",
@@ -44,7 +57,7 @@ export const coachProfile: ICoachDetail = {
   ],
   isOpen: true,
   countOfReviews: 1,
-  rating: 1,
-  liked: true,
+  reviewRating: 1,
+  isLiked: true,
   countOfLikes: 1
 };

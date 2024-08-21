@@ -1,17 +1,18 @@
-import { useEffect } from "react";
-import styled from "styled-components";
-import CustomButton from "../common/Button/CustomButton";
-import { Switch, TextField } from "@mui/material";
-import SelectBox from "../common/InputField/Select/SelectBox";
-import { useForm, Controller } from "react-hook-form";
 import useFetchCoachProfile from "@/hooks/queries/useFetchCoachProfile";
 import { IMyPageCoachFormValues } from "@/models/coach.model";
 import { getGenderLabel } from "@/utils/genderUtils";
+import { Switch, TextField } from "@mui/material";
+import { useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
+import styled from "styled-components";
+import CustomButton from "../common/Button/CustomButton";
+import ReviewCard from "../common/Card/ReviewCard.tsx/ReviewCard";
+import SelectBox from "../common/InputField/Select/SelectBox";
 import Loading from "../loading/Loading";
 import AddressSearchField from "./AddressSearchField";
-import ReviewCard from "../common/Card/ReviewCard.tsx/ReviewCard";
 import useAuth from "@/hooks/useAuth";
 import toast from "react-hot-toast";
+
 interface CoachProfileSectionProps {
   onTabChange: (newValue: number) => void;
 }
@@ -33,10 +34,10 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
 
   useEffect(() => {
     if (coachProfile) {
-      const sportsName = coachProfile.coachingSports.map(
-        (sport) => sport.sportName
+      setValue(
+        "coachingSports",
+        coachProfile.coachingSports.map((sport) => sport.sportName)
       );
-      setValue("coachingSports", sportsName);
       setValue("activeCenter", coachProfile.activeCenter || "");
       setValue("activeCenterDetail", coachProfile.activeCenterDetail || "");
       setValue("coachIntroduction", coachProfile.coachIntroduction);

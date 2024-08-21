@@ -6,20 +6,23 @@ import styled, { ThemeProvider } from "styled-components";
 import { queryClient } from "./api/queryClient";
 import Layout from "./components/layout/Layout";
 import CheckPassword from "./pages/CheckPassword";
+import Coach from "./pages/Coach";
 import CoachList from "./pages/CoachList";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import MyCoach from "./pages/MyCoach";
 import Mypage from "./pages/Mypage";
-import MyRoutine from "./pages/Routine/MyRoutine";
 import Notification from "./pages/Notification";
+import Record from "./pages/Record";
 import RecordDatail from "./pages/RecordDatail";
+import CoachRoutine from "./pages/Routine/CoachRoutine";
+import MyRoutine from "./pages/Routine/MyRoutine";
 import Signup from "./pages/Signup";
 import { GlobalStyle } from "./style/global";
 import { theme } from "./style/theme";
-import MyCoach from "./pages/MyCoach";
-import CoachRoutine from "./pages/Routine/CoachRoutine";
 import PrivateLayout from "./components/layout/PrivateLayout";
 import { useState } from "react";
+
 
 function App() {
   const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
@@ -41,7 +44,6 @@ function App() {
         },
         {
           path: "mypage",
-
           element: (
             <PrivateLayout isAccess={isPasswordConfirmed}>
               <Mypage />

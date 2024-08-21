@@ -1,12 +1,14 @@
-import { ICheckPassword, ILogin, IUserProfile } from "@/models/auth.model";
-import { createClient, requestHandler } from "./http";
 import { API_PATH } from "@/constants/apiPath";
 import {
-  ISignup,
   ICheckEmailDuplication,
-  ICheckNicknameDuplication
+  ICheckNicknameDuplication,
+  ICheckPassword,
+  ILogin,
+  ISignup,
+  IUserProfile
 } from "@/models/auth.model";
 import { ICoachDetail, IMyPageCoachFormValues } from "@/models/coach.model";
+import { createClient, requestHandler } from "./http";
 
 export const getProfile = async () => {
   return await requestHandler<IUserProfile>("get", API_PATH.mypage);
