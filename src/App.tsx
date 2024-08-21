@@ -26,21 +26,21 @@ import { useState } from "react";
 function App() {
   const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
   const router = createBrowserRouter([
-  {
-    element: <Layout />,
-    children: [
-      {
-        path: "/",
-        element: <Home />
-      },
-      {
-        path: "login",
-        element: <Login />
-      },
-      {
-        path: "signup",
-        element: <Signup />
-      },
+    {
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <Home />
+        },
+        {
+          path: "login",
+          element: <Login />
+        },
+        {
+          path: "signup",
+          element: <Signup />
+        },
         {
           path: "mypage",
           element: (
@@ -49,14 +49,14 @@ function App() {
             </PrivateLayout>
           )
         },
-      {
-        path: "coach-list",
-        element: <CoachList />
-      },
-      {
-        path: "routine",
-        element: <MyRoutine />
-      },
+        {
+          path: "coach-list",
+          element: <CoachList />
+        },
+        {
+          path: "routine",
+          element: <MyRoutine />
+        },
         {
           path: "check-password",
           element: (
@@ -65,34 +65,34 @@ function App() {
             />
           )
         },
-      {
-        path: "record",
-        element: <RecordDatail />
-      },
-      {
-        path: "notification",
-        element: <Notification />
-      },
-      {
-        path: "routine/my-coach",
-        element: <MyCoach />
-      },
-      {
-        path: "routine/my-coach/:coachId",
-        element: <CoachRoutine />
-      },
-      {
-        path: "manage",
-        element: <ManageMember />
-      },
-      {
-        path: "routine/member/:userId",
-        element: <MemberRoutine />
-      }
-    ]
-  }
-]);
-  
+        {
+          path: "record",
+          element: <RecordDatail />
+        },
+        {
+          path: "notification",
+          element: <Notification />
+        },
+        {
+          path: "routine/my-coach",
+          element: <MyCoach />
+        },
+        {
+          path: "routine/my-coach/:coachId",
+          element: <CoachRoutine />
+        },
+        {
+          path: "manage",
+          element: <ManageMember />
+        },
+        {
+          path: "routine/member/:userId",
+          element: <MemberRoutine />
+        }
+      ]
+    }
+  ]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
