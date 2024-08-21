@@ -11,6 +11,7 @@ interface InquiryProfileListProps {
 }
 
 const InquriyProfileList = ({ data }: InquiryProfileListProps) => {
+  const filteredData = data.filter((d) => d.isMatching === false);
   const { isModal, openModal, closeModal } = useModal();
   return (
     <>
@@ -19,30 +20,28 @@ const InquriyProfileList = ({ data }: InquiryProfileListProps) => {
           <RoutinePicker schema="add" closeModal={closeModal} />
         </Modal>
       )}
-      {data.length ? (
+      {filteredData.length ? (
         <InquiryProfileListStyle>
-          {data.map(
-            (d) =>
-              !d.isMatching && (
-                <Profile
-                  key={d.userId}
-                  profileId={d.userId}
-                  profileName={d.userName}
-                  profileImageUrl={d.profileImageUrl}
-                  state="InquiryMember"
-                  width="80px"
-                  height="80px"
-                  openModal={openModal}
-                />
-              )
-          )}
+          {filteredData.map((d) => (
+            <Profile
+              key={d.userId}
+              profileId={d.userId}
+              profileName={d.userName}
+              profileImageUrl={d.profileImageUrl}
+              state="InquiryMember"
+              width="80px"
+              height="80px"
+              openModal={openModal}
+            />
+          ))}
         </InquiryProfileListStyle>
       ) : (
         <Empty
-          name="coach"
-          size="150px"
+          name="person"
+          size="80px"
           color="text"
-          descriptions="나의 코치가 없습니다"
+          descriptions="문의 회원이 없습니다"
+          padding="10px"
         />
       )}
     </>
