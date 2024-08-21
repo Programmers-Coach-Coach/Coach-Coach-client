@@ -58,7 +58,7 @@ export interface ICoachDetail {
   profileImageUrl: string;
   createdAt: string;
   coachIntroduction: string;
-  coachingSports: string[];
+  coachingSports: ICoachingSports[];
   activeCenter: string | null;
   activeCenterDetail: string | null;
   activeHours: string;
