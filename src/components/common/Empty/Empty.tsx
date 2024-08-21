@@ -8,23 +8,24 @@ interface EmptyProps {
   size: string;
   color: ColorKey;
   descriptions: string;
+  padding: string;
 }
 
-const Empty = ({ name, size, color, descriptions }: EmptyProps) => {
+const Empty = ({ name, size, color, descriptions, padding }: EmptyProps) => {
   return (
-    <EmptyStyle>
+    <EmptyStyle padding={padding}>
       <Icon name={name} size={size} color={color} />
       <h2>{descriptions}</h2>
     </EmptyStyle>
   );
 };
 
-const EmptyStyle = styled.div`
+const EmptyStyle = styled.div<{ padding: string }>`
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  padding-top: 280px;
+  padding-top: ${({ padding }) => padding};
   margin: 0 auto;
 `;
 
