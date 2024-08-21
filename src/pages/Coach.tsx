@@ -9,7 +9,6 @@ import styled from "styled-components";
 
 const Coach = () => {
   const { id } = useParams();
-  console.log(id);
   const { data, isError, isLoading } = useCoachDetail(Number(id));
 
   if (isLoading) return <Loading />;
