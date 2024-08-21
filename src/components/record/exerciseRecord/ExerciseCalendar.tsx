@@ -57,6 +57,10 @@ const StyledPickersDay = styled(PickersDay)<{
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: ${({ $isSelected, theme }) =>
+    $isSelected ? theme.color.background : "transparent"};
+  color: ${({ $isSelected, theme }) =>
+    $isSelected ? theme.color.background : theme.color.text};
 
   &:after {
     content: "";
@@ -70,7 +74,5 @@ const StyledPickersDay = styled(PickersDay)<{
     background-position: center;
     z-index: 1;
   }
-
-  color: ${({ $isSelected }) => ($isSelected ? "white" : "black")};
 `;
 export default ExerciseCalender;
