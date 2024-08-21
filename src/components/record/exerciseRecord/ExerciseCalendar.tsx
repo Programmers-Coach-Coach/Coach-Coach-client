@@ -73,6 +73,7 @@ const StyledPickersDay = styled(PickersDay)<{
     background-size: cover;
     background-position: center;
     z-index: 1;
+    transform: rotate(-200deg);
   }
 `;
 export default ExerciseCalender;
