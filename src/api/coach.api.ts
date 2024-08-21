@@ -62,3 +62,10 @@ export const deleteMatchMember = async (userId: number) => {
     `${API_PATH.matchMember}/${userId}`
   );
 };
+
+export const patchMatchMember = async (userId: number) => {
+  return await requestHandler<IResponseMessage>(
+    "patch",
+    `${API_PATH.patchMember}/${userId}`
+  );
+};
