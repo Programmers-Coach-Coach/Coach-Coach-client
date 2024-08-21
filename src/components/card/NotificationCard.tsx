@@ -32,17 +32,17 @@ const NotificationCard = ({
     }
   };
 
-  const { mutate } = useDeleteNotification(noticeId);
+  const { mutate } = useDeleteNotification();
 
-  const handleDelete = () => {
-    mutate();
+  const handleDelete = (id: number) => {
+    mutate(id);
   };
 
   return (
     <ReviewCardStyle>
       <img src={getImageSrc()} alt={relationFunction} />
       <div className="message">{message}</div>
-      <button onClick={handleDelete} className="close-button">
+      <button onClick={() => handleDelete(noticeId)} className="close-button">
         <Icon name="x" size="18px" color="gray3" />
       </button>
       <div className="timestamp">{timeAgo(createdAt)}</div>

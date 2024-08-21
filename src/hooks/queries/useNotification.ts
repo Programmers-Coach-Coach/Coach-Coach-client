@@ -12,9 +12,9 @@ export const useFetchNotifications = () => {
   return { data, isError, isLoading };
 };
 
-export const useDeleteNotification = (id: number) => {
-  const { mutate, isError } = useMutation<IResponseMessage, Error>({
-    mutationFn: () => deleteNotification(id),
+export const useDeleteNotification = () => {
+  const { mutate, isError } = useMutation<IResponseMessage, Error, number>({
+    mutationFn: (id: number) => deleteNotification(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getNotifications"] });
     },
