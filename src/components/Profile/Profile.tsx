@@ -5,7 +5,7 @@ import { useProfileInfo } from "@/store/profileInfo.store";
 
 interface ProfileProps {
   profileId: number;
-  profileName?: string;
+  profileName: string;
   profileImageUrl: string | null;
   state?: "mycoaches" | "MatchingMember" | "InquiryMember";
   width: string;
@@ -29,6 +29,7 @@ const Profile = ({
     (state) => state.setProfileImageUrl
   );
   const setUserId = useProfileInfo((state) => state.setUserId);
+  const setProfileName = useProfileInfo((state) => state.setProfileName);
 
   const onClickProfile = () => {
     if (state === "mycoaches") {
@@ -38,6 +39,8 @@ const Profile = ({
     } else {
       openModal();
       setUserId(profileId);
+      setProfileName(profileName);
+      setProfileImageUrl(profileImageUrl);
     }
   };
 
@@ -49,7 +52,7 @@ const Profile = ({
         width={width}
         height={height}
       />
-      {profileName && <h1>{profileName}</h1>}
+      {width === "114px" && <h1>{profileName}</h1>}
     </ProfileStyle>
   );
 };
