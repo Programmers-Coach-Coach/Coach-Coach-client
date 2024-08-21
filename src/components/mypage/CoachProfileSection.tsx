@@ -10,12 +10,15 @@ import { getGenderLabel } from "@/utils/genderUtils";
 import Loading from "../loading/Loading";
 import AddressSearchField from "./AddressSearchField";
 import ReviewCard from "../common/Card/ReviewCard.tsx/ReviewCard";
+import useAuth from "@/hooks/useAuth";
+import toast from "react-hot-toast";
 interface CoachProfileSectionProps {
   onTabChange: (newValue: number) => void;
 }
 
 const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
   const { coachProfile, isFetchError, isLoading } = useFetchCoachProfile();
+  const { editUserCoachProfile } = useAuth();
   const { control, handleSubmit, setValue } = useForm<IMyPageCoachFormValues>({
     defaultValues: {
       coachIntroduction: "",
@@ -30,7 +33,10 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
 
   useEffect(() => {
     if (coachProfile) {
-      setValue("coachingSports", coachProfile.coachingSports);
+      const sportsName = coachProfile.coachingSports.map(
+        (sport) => sport.sportName
+      );
+      setValue("coachingSports", sportsName);
       setValue("activeCenter", coachProfile.activeCenter || "");
       setValue("activeCenterDetail", coachProfile.activeCenterDetail || "");
       setValue("coachIntroduction", coachProfile.coachIntroduction);
@@ -41,8 +47,19 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
   }, [coachProfile, setValue]);
 
   const onSubmit = (data: IMyPageCoachFormValues) => {
-    //수정 API 호출 부분
-    console.log(data);
+    if (
+      !data.coachIntroduction ||
+      !data.activeCenter ||
+      !data.activeCenterDetail ||
+      !data.activeHours ||
+      !data.chattingUrl ||
+      !data.coachingSports.length
+    ) {
+      toast.error("입력 폼을 모두 채워주세요.");
+      return;
+    } else {
+      editUserCoachProfile(data);
+    }
   };
 
   const handleCancel = () => {
@@ -56,12 +73,7 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
   return (
     <ProfileWrapper>
       <BasicInfoWrapper>
-        <ProfileImage
-          src={
-            "https://cdn3.iconfinder.com/data/icons/basic-ui-element-s94-3/64/Basic_UI_Icon_Pack_-_Glyph_user-1024.png"
-          }
-          alt="Profile"
-        />
+        <ProfileImage src={coachProfile.profileImageUrl} alt="Profile" />
         <NameGenderWrapper className="b1">
           <NameWrapper>
             <SubtitleWrapper>성함</SubtitleWrapper>
