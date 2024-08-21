@@ -13,7 +13,7 @@ const ExerciseCalender = () => {
   const [value, setValue] = useState(today);
 
   // utc 시간 문자열을 dayjs 객체로 변환
-  const [selectedDates, setSelectedDates] = useState<dayjs.Dayjs[]>([
+  const [selectedDates] = useState<dayjs.Dayjs[]>([
     utcDatetoLocal("2024-08-11T11:47:11Z"),
     utcDatetoLocal("2024-08-12T11:47:11Z"),
     utcDatetoLocal("2024-08-13T11:47:11Z")
