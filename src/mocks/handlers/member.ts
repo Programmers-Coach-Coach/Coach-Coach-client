@@ -14,7 +14,7 @@ const getMatchMembers = http.get(
 );
 
 const deleteMatchMember = http.delete(
-  `${BASE_URL}${API_V1}${API_PATH.matchMember}`,
+  `${BASE_URL}${API_V1}${API_PATH.matchMember}/:userId`,
   async ({ params }) => {
     const { userId } = params;
 
@@ -32,4 +32,21 @@ const deleteMatchMember = http.delete(
   }
 );
 
-export const handlers = [getMatchMembers, deleteMatchMember];
+const patchMatchMember = http.patch(
+  `${BASE_URL}${API_V1}${API_PATH.patchMember}/:userId`,
+  async ({ params }) => {
+    const { userId } = params;
+
+    matchMembers.forEach((member) => {
+      if (member.userId === Number(userId)) {
+        member.isMatching = true;
+      }
+    });
+
+    return HttpResponse.json({
+      responseMessage
+    });
+  }
+);
+
+export const handlers = [getMatchMembers, deleteMatchMember, patchMatchMember];
