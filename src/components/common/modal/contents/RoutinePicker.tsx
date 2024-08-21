@@ -3,10 +3,11 @@ import {
   routinePicker,
   TRoutinePicker
 } from "@/data/modal";
-import { useDeleteMember } from "@/hooks/useMember";
+import { useDeleteMember, usePatchMember } from "@/hooks/useMember";
 import { useDeleteRoutine } from "@/hooks/useRoutine";
 import { useModalInfo } from "@/store/modalInfo.store";
 import { useProfileInfo } from "@/store/profileInfo.store";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 interface Props {
@@ -37,10 +38,13 @@ const Item = ({
   item: IRoutinePickerData;
   closeModal: () => void;
 }) => {
+  const navigate = useNavigate();
   const deleteRoutineResponse = useDeleteRoutine();
   const deleteMemberResponse = useDeleteMember();
+  const patchMemberResponse = usePatchMember();
   const routineId = useModalInfo((state) => state.routineId);
   const userId = useProfileInfo((state) => state.userId);
+  const profileName = useProfileInfo((state) => state.profileName);
 
   const onClickHandler = () => {
     if (item.name === "루틴 삭제") {
@@ -48,8 +52,15 @@ const Item = ({
       closeModal();
     } else if (item.name === "취소") {
       closeModal();
-    } else if (item.name === "거절") {
+    } else if (item.name === "거절" || item.name === "삭제") {
       deleteMemberResponse.mutate(userId);
+      closeModal();
+    } else if (item.name === "회원 추가") {
+      patchMemberResponse.mutate(userId);
+      closeModal();
+    } else if (item.name === "루틴 작성") {
+      navigate(`/routine/member/${userId}?member=${profileName}`);
+      closeModal();
     }
   };
 
