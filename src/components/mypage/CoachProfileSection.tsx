@@ -12,7 +12,7 @@ import Loading from "../loading/Loading";
 import AddressSearchField from "./AddressSearchField";
 import useAuth from "@/hooks/useAuth";
 import toast from "react-hot-toast";
-
+import image from "@/assets/images/basicProfile.png";
 interface CoachProfileSectionProps {
   onTabChange: (newValue: number) => void;
 }
@@ -74,7 +74,10 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
   return (
     <ProfileWrapper>
       <BasicInfoWrapper>
-        <ProfileImage src={coachProfile.profileImageUrl} alt="Profile" />
+        <ProfileImage
+          src={coachProfile.profileImageUrl || image}
+          alt="Profile"
+        />
         <NameGenderWrapper className="b1">
           <NameWrapper>
             <SubtitleWrapper>성함</SubtitleWrapper>
