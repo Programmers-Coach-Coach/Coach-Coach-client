@@ -1,11 +1,14 @@
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import { queryClient } from "./api/queryClient";
 import Layout from "./components/layout/Layout";
+import PrivateLayout from "./components/layout/PrivateLayout";
 import CheckPassword from "./pages/CheckPassword";
+import Coach from "./pages/Coach";
 import CoachList from "./pages/CoachList";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -18,8 +21,6 @@ import MyRoutine from "./pages/Routine/MyRoutine";
 import Signup from "./pages/Signup";
 import { GlobalStyle } from "./style/global";
 import { theme } from "./style/theme";
-import PrivateLayout from "./components/layout/PrivateLayout";
-import { useState } from "react";
 
 function App() {
   const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
@@ -67,7 +68,10 @@ function App() {
           path: "record",
           element: <RecordDatail />
         },
-
+        {
+          path: "coach/:id",
+          element: <Coach />
+        },
         {
           path: "notification",
           element: <Notification />
