@@ -19,6 +19,7 @@ import { theme } from "./style/theme";
 import MyCoach from "./pages/MyCoach";
 import CoachRoutine from "./pages/Routine/CoachRoutine";
 import ManageMember from "./pages/ManageMember";
+import MemberRoutine from "./pages/Routine/MemberRoutine";
 
 const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
       {
         path: "manage",
         element: <ManageMember />
+      },
+      {
+        path: "routine/member/:userId",
+        element: <MemberRoutine />
       }
     ]
   }
