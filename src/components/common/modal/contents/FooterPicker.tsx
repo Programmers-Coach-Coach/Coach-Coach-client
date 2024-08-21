@@ -5,14 +5,22 @@ import styled from "styled-components";
 
 interface Props {
   schema: TFooterPicker;
+  closeModal: () => void;
 }
 
-const FooterPicker = ({ schema }: Props) => {
+const FooterPicker = ({ schema, closeModal }: Props) => {
   const navigate = useNavigate();
   return (
     <FooterPickerStyle>
       {footerPicker[schema].map((item, i) => (
-        <Item item={item} key={i} onClick={() => navigate(item.link)} />
+        <Item
+          item={item}
+          key={i}
+          onClick={() => {
+            navigate(item.link);
+            closeModal();
+          }}
+        />
       ))}
     </FooterPickerStyle>
   );
