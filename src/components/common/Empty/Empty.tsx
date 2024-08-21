@@ -8,12 +8,13 @@ interface EmptyProps {
   size: string;
   color: ColorKey;
   descriptions: string;
-  padding: string;
+  padding?: string;
 }
 
 const Empty = ({ name, size, color, descriptions, padding }: EmptyProps) => {
+  const paddingTop = padding ? padding : "280px";
   return (
-    <EmptyStyle padding={padding}>
+    <EmptyStyle padding={paddingTop}>
       <Icon name={name} size={size} color={color} />
       <h2>{descriptions}</h2>
     </EmptyStyle>
