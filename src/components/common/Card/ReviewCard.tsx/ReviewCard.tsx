@@ -9,9 +9,10 @@ interface ReviewCardProps {
   coachProfile: ICoachDetail;
 }
 
+const STAR_RATING = [1, 2, 3, 4, 5];
 const ReviewCard = ({ coachProfile }: ReviewCardProps) => {
   const renderStars = (stars: number) => {
-    return [1, 2, 3, 4, 5].map((cnt) => (
+    return STAR_RATING.map((cnt) => (
       <Icon
         key={cnt}
         name={cnt <= stars ? "fullStar" : "emptyStar"}
