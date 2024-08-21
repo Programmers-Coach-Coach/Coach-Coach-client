@@ -75,6 +75,6 @@ const ActiveHours = styled.p`
 
 const HeartWrapper = styled.div`
   display: flex;
-  align-items: center; // 추가된 부분
+  align-items: center;
 `;
 export default BasicInfo;
