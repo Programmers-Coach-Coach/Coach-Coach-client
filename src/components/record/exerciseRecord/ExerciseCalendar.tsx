@@ -1,4 +1,5 @@
 import StampImage from "@/assets/images/stamp.png";
+import { utcDatetoLocal } from "@/utils/format";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -9,11 +10,13 @@ import styled from "styled-components";
 
 const ExerciseCalender = () => {
   const today = dayjs();
-  const [value, setValue] = useState(dayjs("2022-10-12"));
+  const [value, setValue] = useState(today);
+
+  // utc 시간 문자열을 dayjs 객체로 변환
   const [selectedDates, setSelectedDates] = useState<dayjs.Dayjs[]>([
-    dayjs("2022-10-12"),
-    dayjs("2022-10-15"),
-    dayjs("2022-10-20")
+    utcDatetoLocal("2024-08-11T11:47:11Z"),
+    utcDatetoLocal("2024-08-12T11:47:11Z"),
+    utcDatetoLocal("2024-08-13T11:47:11Z")
   ]);
 
   return (
@@ -33,7 +36,7 @@ const ExerciseCalender = () => {
               );
 
               return (
-                <StyledPickersDay {...props} isSelected={isSelected}>
+                <StyledPickersDay {...props} $isSelected={isSelected}>
                   {props.day.date()}
                 </StyledPickersDay>
               );
@@ -48,7 +51,7 @@ const ExerciseCalender = () => {
 const Wrapper = styled.div``;
 
 const StyledPickersDay = styled(PickersDay)<{
-  isSelected: boolean;
+  $isSelected: boolean;
 }>`
   position: relative;
   display: flex;
@@ -61,13 +64,13 @@ const StyledPickersDay = styled(PickersDay)<{
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-image: ${({ isSelected }) =>
-      isSelected ? `url(${StampImage})` : "none"};
+    background-image: ${({ $isSelected }) =>
+      $isSelected ? `url(${StampImage})` : "none"};
     background-size: cover;
     background-position: center;
     z-index: 1;
   }
 
-  color: ${({ isSelected }) => (isSelected ? "white" : "black")};
+  color: ${({ $isSelected }) => ($isSelected ? "white" : "black")};
 `;
 export default ExerciseCalender;
