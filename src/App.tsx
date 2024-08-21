@@ -23,7 +23,9 @@ import MemberRoutine from "./pages/Routine/MemberRoutine";
 import PrivateLayout from "./components/layout/PrivateLayout";
 import { useState } from "react";
 
-const router = createBrowserRouter([
+function App() {
+  const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
+  const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
@@ -90,9 +92,6 @@ const router = createBrowserRouter([
     ]
   }
 ]);
-
-function App() {
-  const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
   
   return (
     <QueryClientProvider client={queryClient}>
