@@ -85,6 +85,5 @@ export const getCoachDetail = async (id: number) => {
   return await requestHandler<ICoachDetail>(
     "get",
     `${API_PATH.coachMypage}?${query}`
-
   );
 };
