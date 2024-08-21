@@ -12,5 +12,6 @@ export const API_PATH = {
   withdraw: "/users/me",
   myCoaches: "/users/matched/coaches",
   matchMembers: "/coaches/members",
-  matchMember: "/coaches/member"
+  matchMember: "/coaches/member",
+  patchMember: "/coaches/matched/members"
 };
