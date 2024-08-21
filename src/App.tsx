@@ -18,6 +18,7 @@ import { GlobalStyle } from "./style/global";
 import { theme } from "./style/theme";
 import MyCoach from "./pages/MyCoach";
 import CoachRoutine from "./pages/Routine/CoachRoutine";
+import ManageMember from "./pages/ManageMember";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
       {
         path: "routine/my-coach/:coachId",
         element: <CoachRoutine />
+      },
+      {
+        path: "manage",
+        element: <ManageMember />
       }
     ]
   }

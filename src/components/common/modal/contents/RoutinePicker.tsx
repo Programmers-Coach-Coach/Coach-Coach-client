@@ -3,8 +3,10 @@ import {
   routinePicker,
   TRoutinePicker
 } from "@/data/modal";
+import { useDeleteMember } from "@/hooks/useMember";
 import { useDeleteRoutine } from "@/hooks/useRoutine";
 import { useModalInfo } from "@/store/modalInfo.store";
+import { useProfileInfo } from "@/store/profileInfo.store";
 import styled from "styled-components";
 
 interface Props {
@@ -36,7 +38,9 @@ const Item = ({
   closeModal: () => void;
 }) => {
   const deleteRoutineResponse = useDeleteRoutine();
+  const deleteMemberResponse = useDeleteMember();
   const routineId = useModalInfo((state) => state.routineId);
+  const userId = useProfileInfo((state) => state.userId);
 
   const onClickHandler = () => {
     if (item.name === "루틴 삭제") {
@@ -44,6 +48,8 @@ const Item = ({
       closeModal();
     } else if (item.name === "취소") {
       closeModal();
+    } else if (item.name === "거절") {
+      deleteMemberResponse.mutate(userId);
     }
   };
 
