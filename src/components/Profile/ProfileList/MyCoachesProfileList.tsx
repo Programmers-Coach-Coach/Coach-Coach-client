@@ -30,6 +30,7 @@ const MyCoachesProfileList = ({ data }: MyCoachesProfileListProps) => {
           size="150px"
           color="text"
           descriptions="나의 코치가 없습니다"
+          padding="280px"
         />
       )}
     </>
