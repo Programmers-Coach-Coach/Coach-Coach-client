@@ -1,21 +1,25 @@
-import { useEffect } from "react";
-import styled from "styled-components";
-import CustomButton from "../common/Button/CustomButton";
-import { Switch, TextField } from "@mui/material";
-import SelectBox from "../common/InputField/Select/SelectBox";
-import { useForm, Controller } from "react-hook-form";
 import useFetchCoachProfile from "@/hooks/queries/useFetchCoachProfile";
 import { IMyPageCoachFormValues } from "@/models/coach.model";
 import { getGenderLabel } from "@/utils/genderUtils";
+import { Switch, TextField } from "@mui/material";
+import { useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
+import styled from "styled-components";
+import CustomButton from "../common/Button/CustomButton";
+import ReviewCard from "../common/Card/ReviewCard.tsx/ReviewCard";
+import SelectBox from "../common/InputField/Select/SelectBox";
 import Loading from "../loading/Loading";
 import AddressSearchField from "./AddressSearchField";
-import ReviewCard from "../common/Card/ReviewCard.tsx/ReviewCard";
+import useAuth from "@/hooks/useAuth";
+import toast from "react-hot-toast";
+import image from "@/assets/images/basicProfile.png";
 interface CoachProfileSectionProps {
   onTabChange: (newValue: number) => void;
 }
 
 const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
   const { coachProfile, isFetchError, isLoading } = useFetchCoachProfile();
+  const { editUserCoachProfile } = useAuth();
   const { control, handleSubmit, setValue } = useForm<IMyPageCoachFormValues>({
     defaultValues: {
       coachIntroduction: "",
@@ -30,7 +34,10 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
 
   useEffect(() => {
     if (coachProfile) {
-      setValue("coachingSports", coachProfile.coachingSports);
+      setValue(
+        "coachingSports",
+        coachProfile.coachingSports.map((sport) => sport.sportName)
+      );
       setValue("activeCenter", coachProfile.activeCenter || "");
       setValue("activeCenterDetail", coachProfile.activeCenterDetail || "");
       setValue("coachIntroduction", coachProfile.coachIntroduction);
@@ -41,8 +48,19 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
   }, [coachProfile, setValue]);
 
   const onSubmit = (data: IMyPageCoachFormValues) => {
-    //수정 API 호출 부분
-    console.log(data);
+    if (
+      !data.coachIntroduction ||
+      !data.activeCenter ||
+      !data.activeCenterDetail ||
+      !data.activeHours ||
+      !data.chattingUrl ||
+      !data.coachingSports.length
+    ) {
+      toast.error("입력 폼을 모두 채워주세요.");
+      return;
+    } else {
+      editUserCoachProfile(data);
+    }
   };
 
   const handleCancel = () => {
@@ -57,9 +75,7 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
     <ProfileWrapper>
       <BasicInfoWrapper>
         <ProfileImage
-          src={
-            "https://cdn3.iconfinder.com/data/icons/basic-ui-element-s94-3/64/Basic_UI_Icon_Pack_-_Glyph_user-1024.png"
-          }
+          src={coachProfile.profileImageUrl || image}
           alt="Profile"
         />
         <NameGenderWrapper className="b1">

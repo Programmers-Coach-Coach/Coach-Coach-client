@@ -18,6 +18,7 @@ const LoginForm = () => {
       <Controller
         name="email"
         control={control}
+        defaultValue=""
         render={({ field }) => (
           <AuthInput
             {...field}
@@ -30,6 +31,7 @@ const LoginForm = () => {
       />
       <Controller
         name="password"
+        defaultValue=""
         control={control}
         render={({ field }) => (
           <AuthInput

@@ -9,17 +9,19 @@ import CheckPassword from "./pages/CheckPassword";
 import CoachList from "./pages/CoachList";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import MyCoach from "./pages/MyCoach";
 import Mypage from "./pages/Mypage";
-import MyRoutine from "./pages/Routine/MyRoutine";
 import Notification from "./pages/Notification";
 import RecordDatail from "./pages/RecordDatail";
+import CoachRoutine from "./pages/Routine/CoachRoutine";
+import MyRoutine from "./pages/Routine/MyRoutine";
 import Signup from "./pages/Signup";
 import { GlobalStyle } from "./style/global";
 import { theme } from "./style/theme";
-import MyCoach from "./pages/MyCoach";
-import CoachRoutine from "./pages/Routine/CoachRoutine";
 import ManageMember from "./pages/ManageMember";
 import MemberRoutine from "./pages/Routine/MemberRoutine";
+import PrivateLayout from "./components/layout/PrivateLayout";
+import { useState } from "react";
 
 const router = createBrowserRouter([
   {
@@ -37,10 +39,14 @@ const router = createBrowserRouter([
         path: "signup",
         element: <Signup />
       },
-      {
-        path: "mypage",
-        element: <Mypage />
-      },
+        {
+          path: "mypage",
+          element: (
+            <PrivateLayout isAccess={isPasswordConfirmed}>
+              <Mypage />
+            </PrivateLayout>
+          )
+        },
       {
         path: "coach-list",
         element: <CoachList />
@@ -49,10 +55,14 @@ const router = createBrowserRouter([
         path: "routine",
         element: <MyRoutine />
       },
-      {
-        path: "check-password",
-        element: <CheckPassword />
-      },
+        {
+          path: "check-password",
+          element: (
+            <CheckPassword
+              onPasswordConfirmed={() => setIsPasswordConfirmed(true)}
+            />
+          )
+        },
       {
         path: "record",
         element: <RecordDatail />
@@ -82,6 +92,8 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
+  
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>

@@ -1,4 +1,11 @@
-import { checkPassword, login, withdraw } from "@/api/auth.api";
+import {
+  checkPassword,
+  editCoachProfile,
+  editProfile,
+  login,
+  logout,
+  withdraw
+} from "@/api/auth.api";
 import { ICheckPassword, ILogin } from "@/models/auth.model";
 import { useAuthStore } from "@/store/authStore";
 import toast from "react-hot-toast";
@@ -10,14 +17,16 @@ import {
   ICheckNicknameDuplication,
   ISignup
 } from "@/models/auth.model";
+import { IMyPageCoachFormValues } from "@/models/coach.model";
 
 const useAuth = () => {
   const navigate = useNavigate();
+  const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
   const [isEmailError, setIsEmailError] = useState<boolean>(false); //과정에서 오류가 있었는지 확인하는 상태
   const [isNicknameError, setIsNicknameError] = useState<boolean>(false);
   const [emailChecked, setEmailChecked] = useState<boolean>(false); //이메일 중복 확인이 완료되었는지 여부
   const [nicknameChecked, setNicknameChecked] = useState<boolean>(false);
-  const { storeLogin, confirmPassword } = useAuthStore();
+  const { storeLogin } = useAuthStore();
 
   const userSignup = (formData: ISignup) => {
     signup(formData)
@@ -39,6 +48,17 @@ const useAuth = () => {
       })
       .catch((error) => {
         toast.error(error.response.data.message);
+      });
+  };
+
+  const userLogout = () => {
+    logout()
+      .then(() => {
+        navigate("/login");
+        toast.success("로그아웃 성공");
+      })
+      .catch(() => {
+        toast.error("로그아웃 실패");
       });
   };
 
@@ -73,8 +93,7 @@ const useAuth = () => {
   const passwordCheck = (formData: ICheckPassword) => {
     checkPassword(formData)
       .then(() => {
-        confirmPassword();
-        navigate("/mypage");
+        setIsPasswordConfirmed(true);
         toast.success("비밀번호 확인 성공");
       })
       .catch((error) => {
@@ -93,17 +112,41 @@ const useAuth = () => {
       });
   };
 
+  const editUserProfile = (formData: FormData) => {
+    editProfile(formData)
+      .then(() => {
+        toast.success("프로필이 성공적으로 업데이트되었습니다.");
+      })
+      .catch(() => {
+        toast.error("프로필 업데이트 중 오류가 발생했습니다.");
+      });
+  };
+
+  const editUserCoachProfile = (formData: IMyPageCoachFormValues) => {
+    editCoachProfile(formData)
+      .then(() => {
+        toast.success("프로필이 성공적으로 업데이트되었습니다.");
+      })
+      .catch(() => {
+        toast.error("프로필 업데이트 중 오류가 발생했습니다.");
+      });
+  };
+
   return {
     userLogin,
     withdrawUser,
     userSignup,
     emailDuplication,
+    editUserProfile,
     nicknameDuplication,
     isEmailError,
     isNicknameError,
     emailChecked,
     nicknameChecked,
-    passwordCheck
+    isPasswordConfirmed,
+    editUserCoachProfile,
+    passwordCheck,
+    userLogout
   };
 };
 

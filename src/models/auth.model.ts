@@ -1,20 +1,24 @@
+interface Sport {
+  sportId: number;
+  sportName: string;
+}
 export interface IUserProfile {
   email: string;
   nickname: string;
-  profileImageUrl: string;
+  profileImageUrl: File;
   gender: "M" | "W";
-  address: string;
-  addressDetail: string;
+  localAddress: string;
+  localAddressDetail: string;
   introduction: string;
-  interestedSports: string[];
-}
+  interestedSports: Sport[];
+} // 타입 정의
 
 export interface IMyPageFormValues {
   nickname: string;
-  profileImageUrl: string;
-  address: string;
-  addressDetail: string;
-  interestedSports: string[];
+  profileImageUrl: File | string;
+  localAddress: string;
+  localAddressDetail: string;
+  interestedSports: string[]; // 수정된 타입
   introduction: string;
   gender: string;
 }

@@ -1,12 +1,14 @@
-import { ICheckPassword, ILogin, IUserProfile } from "@/models/auth.model";
-import { createClient, requestHandler } from "./http";
 import { API_PATH } from "@/constants/apiPath";
 import {
-  ISignup,
   ICheckEmailDuplication,
-  ICheckNicknameDuplication
+  ICheckNicknameDuplication,
+  ICheckPassword,
+  ILogin,
+  ISignup,
+  IUserProfile
 } from "@/models/auth.model";
-import { ICoachDetail } from "@/models/coach.model";
+import { ICoachDetail, IMyPageCoachFormValues } from "@/models/coach.model";
+import { createClient, requestHandler } from "./http";
 
 export const getProfile = async () => {
   return await requestHandler<IUserProfile>("get", API_PATH.mypage);
@@ -18,6 +20,10 @@ export const getCoachProfile = async () => {
 
 export const login = async (formData: ILogin) => {
   return await requestHandler("post", API_PATH.login, formData);
+};
+
+export const logout = async () => {
+  return await requestHandler("delete", API_PATH.logout);
 };
 
 export const signup = async (formData: ISignup) => {
@@ -50,4 +56,17 @@ export const nicknameDuplicate = async (
 
 export const checkPassword = async (formData: ICheckPassword) => {
   return await requestHandler("post", API_PATH.checkPassword, formData);
+};
+
+export const editProfile = async (formData: FormData) => {
+  const client = createClient({
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
+  });
+  return await client.put(API_PATH.editMyProfile, formData);
+};
+
+export const editCoachProfile = async (formData: IMyPageCoachFormValues) => {
+  return await requestHandler("put", API_PATH.editMyCoachProfile, formData);
 };

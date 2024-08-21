@@ -3,10 +3,10 @@ import { ICoachingSports } from "./sports.model";
 export interface IPopularCoach {
   coachId: number;
   coachName: string;
-  coachImageUrl: string;
+  profileImageUrl: string;
   description: string;
   countOfLikes: number;
-  liked: boolean;
+  isLiked: boolean;
   coachingSports: ICoachingSports[];
 }
 
@@ -17,12 +17,12 @@ export interface ISimpleCoach {
 }
 
 export interface ICoach extends ISimpleCoach {
-  localInfo: string; // localAddress로 변경
+  localAddress: string;
   coachIntroduction: string;
   coachingSports: ICoachingSports[];
   countOfReviews: number;
-  rating: number;
-  liked: boolean;
+  reviewRating: number;
+  isLiked: boolean;
   countOfLikes: number;
 }
 
@@ -54,25 +54,27 @@ export interface IMyPageCoachFormValues {
 export interface ICoachDetail {
   coachName: string;
   coachGender: "M" | "W";
-  localInfo: string;
-  profileImageUrl: string;
+  localAddress: string;
+  profileImageUrl: string | null;
   createdAt: string;
   coachIntroduction: string;
-  coachingSports: string[];
+  coachingSports: ICoachingSports[];
   activeCenter: string | null;
   activeCenterDetail: string | null;
   activeHours: string;
   chattingUrl: string;
-  reviews: {
-    userId: number;
-    userName: string;
-    contents: string;
-    stars: number;
-    createdAt: string;
-  }[];
+  reviews: IReview[];
   isOpen: boolean;
   countOfReviews: number;
-  rating: number;
-  liked: boolean;
+  reviewRating: number;
+  isLiked: boolean;
   countOfLikes: number;
+}
+
+export interface IReview {
+  userId: number;
+  userName: string;
+  contents: string;
+  stars: number;
+  createdAt: string;
 }

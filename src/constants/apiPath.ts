@@ -1,11 +1,14 @@
 export const API_PATH = {
-  main: "/main",
+  main: "/main-info",
   routine: "/routines",
   getCoachAll: "/coaches-all",
-  mypage: "/auth/user/me",
+  mypage: "/users/me",
+  editMyProfile: "/users/me",
+  editMyCoachProfile: "/users/coaches",
   coachMypage: "/coaches",
   login: "/auth/login",
-  checkPassword: "/auth/check-password",
+  logout: "/auth/logout",
+  checkPassword: "/auth/confirm-password",
   checkEmail: "/auth/check-email",
   checkNickname: "/auth/check-nickname",
   signup: "/auth/signup",
@@ -13,5 +16,6 @@ export const API_PATH = {
   myCoaches: "/users/matched/coaches",
   matchMembers: "/coaches/members",
   matchMember: "/coaches/member",
-  patchMember: "/coaches/matched/members"
+  patchMember: "/coaches/matched/members",
+  getNotifications: "/notifications"
 };

@@ -1,5 +1,10 @@
 import { API_PATH } from "@/constants/apiPath";
-import { IAllCoachList, ICoachList, ISimpleCoach } from "@/models/coach.model";
+import {
+  IAllCoachList,
+  ICoachDetail,
+  ICoachList,
+  ISimpleCoach
+} from "@/models/coach.model";
 import qs from "qs";
 import { requestHandler } from "./http";
 import { IMatchMembers } from "@/models/member.model";
@@ -28,9 +33,16 @@ export const getCoachAll = ({ filter, page }: IAllCoachList) => {
       break;
   }
 
+  let formattedSportsId;
+  if (sportsIdList?.includes(0)) {
+    formattedSportsId = null;
+  } else {
+    formattedSportsId = sportsIdList?.join(",");
+  }
+
   const query = qs.stringify(
     {
-      sportsId: sportsIdList,
+      sports: formattedSportsId,
       search,
       latest,
       review,
@@ -42,8 +54,6 @@ export const getCoachAll = ({ filter, page }: IAllCoachList) => {
       skipNulls: true // undefined 값은 쿼리에 포함x
     }
   );
-
-  console.log(query);
 
   return requestHandler<ICoachList>("get", `${API_PATH.getCoachAll}?${query}`);
 };
@@ -67,5 +77,14 @@ export const patchMatchMember = async (userId: number) => {
   return await requestHandler<IResponseMessage>(
     "patch",
     `${API_PATH.patchMember}/${userId}`
+  );
+};
+
+export const getCoachDetail = async (id: number) => {
+  const query = qs.stringify({ coachId: id });
+  return await requestHandler<ICoachDetail>(
+    "get",
+    `${API_PATH.coachMypage}?${query}`
+
   );
 };
