@@ -63,6 +63,7 @@ const Footer = styled.div`
 
 const StyledTextField = styled(TextField)`
   & .MuiOutlinedInput-root {
+    font-size: 14px;
     &.Mui-focused fieldset {
       border-color: ${({ theme }) => theme.color.third};
     }
