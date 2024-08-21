@@ -16,7 +16,13 @@ export type ColorKey =
 
 export type FontSize = "large" | "medium" | "small";
 export type FontWeight = "bold" | "normal";
-export type ButtonSize = "large" | "small" | "full" | "mini" | "super-mini";
+export type ButtonSize =
+  | "large"
+  | "small"
+  | "full"
+  | "mini"
+  | "super-mini"
+  | "full-sharp";
 export type CustomButtonType = "contained" | "outlined";
 export type ProfileImageSize = "mini" | "small" | "medium" | "large";
 export type ModalSize = "default";
@@ -131,6 +137,11 @@ export const theme: Theme = {
       width: "86px"
     },
     "super-mini": {
+      padding: "3px",
+      height: "auto",
+      width: "auto"
+    },
+    "full-sharp": {
       padding: "3px",
       height: "auto",
       width: "auto"
