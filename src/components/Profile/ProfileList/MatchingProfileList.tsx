@@ -17,7 +17,7 @@ const MatchingProfileList = ({ data }: MatchingProfileListProps) => {
     <>
       {isModal && (
         <Modal closeModal={closeModal} position="footer-above">
-          <RoutinePicker schema="write" closeModal={closeModal} />
+          <RoutinePicker schema="matching" closeModal={closeModal} />
         </Modal>
       )}
       {filteredData.length ? (
