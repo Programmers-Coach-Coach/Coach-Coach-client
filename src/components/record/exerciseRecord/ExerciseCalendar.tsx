@@ -4,13 +4,16 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const ExerciseCalender = () => {
   const today = dayjs();
   const [value, setValue] = useState(today);
+
+  const navigate = useNavigate();
 
   // utc 시간 문자열을 dayjs 객체로 변환
   const [selectedDates] = useState<dayjs.Dayjs[]>([
@@ -19,6 +22,11 @@ const ExerciseCalender = () => {
     utcDatetoLocal("2024-08-13T11:47:11Z")
   ]);
 
+  const handleDayClick = (date: Dayjs) => {
+    const fommattedDate = date.format("YYYY.MM.DD");
+    navigate(`/record?date=${fommattedDate}`);
+  };
+
   return (
     <Wrapper>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -26,6 +34,7 @@ const ExerciseCalender = () => {
           value={value}
           onChange={(newValue) => {
             setValue(newValue);
+            handleDayClick(newValue);
           }}
           maxDate={today}
           // showDaysOutsideCurrentMonth

@@ -28,7 +28,6 @@ const Record = () => {
             변경
           </CustomButton>
         </Header>
-        <p className="b2">그래프에는 최근 기록 100개가 표시돼요</p>
       </HeaderWithDesc>
       <PhysicalRecordChart />
       {isModal && (
