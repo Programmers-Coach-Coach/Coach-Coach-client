@@ -8,7 +8,8 @@ import {
   IUserProfile
 } from "@/models/auth.model";
 import { ICoachDetail, IMyPageCoachFormValues } from "@/models/coach.model";
-import { createClient, requestHandler } from "./http";
+import { httpClient, createClient, requestHandler } from "./http";
+import { AxiosResponse } from "axios";
 
 export const getProfile = async () => {
   return await requestHandler<IUserProfile>("get", API_PATH.mypage);
@@ -28,6 +29,10 @@ export const logout = async () => {
 
 export const signup = async (formData: ISignup) => {
   return await requestHandler("post", API_PATH.signup, formData);
+};
+
+export const reissue = async () => {
+  return await requestHandler<AxiosResponse>("get", API_PATH.reissue);
 };
 
 export const withdraw = async () => {
@@ -59,12 +64,11 @@ export const checkPassword = async (formData: ICheckPassword) => {
 };
 
 export const editProfile = async (formData: FormData) => {
-  const client = createClient({
+  return await httpClient.put(API_PATH.editMyProfile, formData, {
     headers: {
       "Content-Type": "multipart/form-data"
     }
   });
-  return await client.put(API_PATH.editMyProfile, formData);
 };
 
 export const editCoachProfile = async (formData: IMyPageCoachFormValues) => {
