@@ -3,15 +3,17 @@ import RoutineContents from "@/components/common/modal/contents/RoutineContents"
 import Modal from "@/components/common/modal/Modal";
 import RoutineList from "@/components/routine/RoutineList";
 import useModal from "@/hooks/useModal";
-import { useGetRoutines } from "@/hooks/useRoutine";
+import { useGetRoutines } from "@/hooks/queries/routine/useRoutine";
 import { useState } from "react";
 import { styled } from "styled-components";
 
 const MyRoutine = () => {
   const { isModal, openModal, closeModal } = useModal();
   const [isSelect, setIsSelect] = useState<boolean>(false);
-  const { data } = useGetRoutines();
-  const routines = data?.pages.flatMap((page) => page.routineList) || [];
+  const { data, isLoading, isError } = useGetRoutines();
+
+  if (isLoading) return <div>로딩 중...</div>;
+  if (isError || !data) return <div>무언가 잘못됨</div>;
 
   const onClickAdd = () => {
     openModal();
@@ -35,7 +37,7 @@ const MyRoutine = () => {
           추가하기
         </p>
       </RoutineTextStyle>
-      <RoutineList routines={routines} />
+      <RoutineList routines={data} />
     </MyRoutineStyle>
   );
 };
