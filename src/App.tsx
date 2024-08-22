@@ -8,6 +8,7 @@ import { queryClient } from "./api/queryClient";
 import Layout from "./components/layout/Layout";
 import PrivateLayout from "./components/layout/PrivateLayout";
 import CheckPassword from "./pages/CheckPassword";
+import Coach from "./pages/Coach";
 import CoachList from "./pages/CoachList";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -68,6 +69,10 @@ function App() {
         {
           path: "record",
           element: <RecordDatail />
+        },
+        {
+          path: "coach/:id",
+          element: <Coach />
         },
         {
           path: "notification",

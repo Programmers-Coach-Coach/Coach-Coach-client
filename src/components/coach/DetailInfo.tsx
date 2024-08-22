@@ -82,12 +82,15 @@ const TextField = styled.div`
 
 const CaochingSports = styled.ul`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 9px;
+  overflow: hidden;
+
   li {
     display: inline-flex;
-    font-size: 12px;
-    padding: 4px 6px;
+    font-size: 16px;
+    padding: 4px 10px;
     border-radius: ${({ theme }) => theme.borderRadius.default};
     color: ${({ theme }) => theme.color.text};
     background-color: ${({ theme }) => theme.color.gray1};
