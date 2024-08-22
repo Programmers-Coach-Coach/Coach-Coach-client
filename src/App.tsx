@@ -23,6 +23,7 @@ import MyRoutine from "./pages/Routine/MyRoutine";
 import Signup from "./pages/Signup";
 import { GlobalStyle } from "./style/global";
 import { theme } from "./style/theme";
+import RoutineDetail from "./pages/Routine/RoutineDetail";
 
 function App() {
   const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
