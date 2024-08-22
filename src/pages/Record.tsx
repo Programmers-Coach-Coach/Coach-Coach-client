@@ -17,12 +17,19 @@ const Record = () => {
         </p>
       </HeaderWithDesc>
       <ExerciseCalender />
-      <Header>
-        <h2>오늘의 신체 정보</h2>
-        <CustomButton size="super-mini" variant="contained" onClick={openModal}>
-          변경
-        </CustomButton>
-      </Header>
+      <HeaderWithDesc>
+        <Header>
+          <h2>오늘의 신체 정보</h2>
+          <CustomButton
+            size="super-mini"
+            variant="contained"
+            onClick={openModal}
+          >
+            변경
+          </CustomButton>
+        </Header>
+        <p className="b2">그래프에는 최근 기록 100개가 표시돼요</p>
+      </HeaderWithDesc>
       <PhysicalRecordChart />
       {isModal && (
         <Modal closeModal={closeModal} position="footer-above">
