@@ -22,6 +22,7 @@ import ManageMember from "./pages/ManageMember";
 import MemberRoutine from "./pages/Routine/MemberRoutine";
 import PrivateLayout from "./components/layout/PrivateLayout";
 import { useState } from "react";
+import RoutineDetail from "./pages/Routine/RoutineDetail";
 
 function App() {
   const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
@@ -88,6 +89,10 @@ function App() {
         {
           path: "routine/member/:userId",
           element: <MemberRoutine />
+        },
+        {
+          path: "routine/detail/:routineId",
+          element: <RoutineDetail />
         }
       ]
     }
