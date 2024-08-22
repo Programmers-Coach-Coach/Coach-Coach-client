@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { reissue } from "./auth.api";
-import { performLogout } from "@/utils/login";
+import { performLogout } from "@/utils/logoutUtil";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const DEFAULT_TIMEOUT = 30000;
