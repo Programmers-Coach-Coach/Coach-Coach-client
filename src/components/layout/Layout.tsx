@@ -17,6 +17,8 @@ const Layout = () => {
     title = queryParams.get("coach");
   } else if (queryParams.get("member")) {
     title = queryParams.get("member");
+  } else if (queryParams.get("routineName")) {
+    title = queryParams.get("routineName");
   } else {
     title = getTitle(location.pathname);
   }
