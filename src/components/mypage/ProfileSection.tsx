@@ -12,20 +12,21 @@ import { getGenderLabel } from "@/utils/genderUtils";
 import Loading from "../loading/Loading";
 import AddressSearchField from "./AddressSearchField";
 import useAuth from "@/hooks/useAuth";
+import image from "@/assets/images/basicProfile.png";
 
 const allowedExtensions = ["jpg", "jpeg", "png", "gif"];
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
 const ProfileSection = () => {
   const { profile, isFetchError, isLoading } = useFetchProfile();
-  const { withdrawUser } = useAuth();
+  const { withdrawUser, editUserProfile } = useAuth();
   const { control, handleSubmit, setValue, watch } = useForm<IMyPageFormValues>(
     {
       defaultValues: {
         nickname: "",
         profileImageUrl: "",
-        address: "",
-        addressDetail: "",
+        localAddress: "",
+        localAddressDetail: "",
         interestedSports: [],
         introduction: "",
         gender: ""
@@ -39,20 +40,42 @@ const ProfileSection = () => {
 
   useEffect(() => {
     if (profile) {
-      setValue("nickname", profile.nickname);
-      setValue("profileImageUrl", profile.profileImageUrl);
-      setValue("address", profile.address);
-      setValue("addressDetail", profile.addressDetail || "");
-      setValue("interestedSports", profile.interestedSports);
-      setValue("introduction", profile.introduction);
+      setValue("nickname", profile.nickname || "");
+      setValue("profileImageUrl", profile.profileImageUrl || image);
+      setValue("localAddress", profile.localAddress || "");
+      setValue("localAddressDetail", profile.localAddressDetail || "");
+      const sportsNames = profile.interestedSports.map(
+        (sport) => sport.sportName
+      );
+      setValue("interestedSports", sportsNames);
+      setValue("introduction", profile.introduction || "");
       setValue("gender", getGenderLabel(profile.gender));
     }
   }, [profile, setValue]);
 
-  const onSubmit = (data: IMyPageFormValues) => {
-    const gender = data.gender === "남성" ? "M" : "W";
-    const formData = { ...data, gender };
-    console.log(formData);
+  const onSubmit = async (data: IMyPageFormValues) => {
+    const formData = new FormData();
+
+    if (inputRef.current?.files?.[0]) {
+      formData.append("profileImage", inputRef.current.files[0]);
+    }
+
+    const formattedSports = data.interestedSports.map((sport) => ({
+      sportName: sport
+    }));
+
+    const userProfileRequest = {
+      nickname: data.nickname,
+      localAddress: data.localAddress,
+      localAddressDetail: data.localAddressDetail,
+      interestedSports: formattedSports,
+      introduction: data.introduction,
+      gender: data.gender === "남성" ? "M" : "W"
+    };
+
+    formData.append("userProfileRequest", JSON.stringify(userProfileRequest));
+    console.log(JSON.stringify(userProfileRequest));
+    editUserProfile(formData);
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,19 +92,27 @@ const ProfileSection = () => {
         return;
       }
 
-      const imageUrl = URL.createObjectURL(file);
-      setValue("profileImageUrl", imageUrl);
+      setValue("profileImageUrl", file);
     }
   };
 
+  const getProfileImageUrl = () => {
+    if (profileImage instanceof File) {
+      return URL.createObjectURL(profileImage);
+    }
+    return profileImage || ""; // 기본 이미지 URL이나 빈 문자열로 대체
+  };
+
   if (isLoading) return <Loading />;
-  if (isFetchError || !profile)
+  if (isFetchError || !profile) {
+    console.log(isFetchError);
     return <div>프로필 정보를 가져오는 중 오류가 발생했습니다.</div>;
+  }
 
   return (
     <ProfileWrapper>
       <ProfileImageWrapper>
-        <ProfileImage src={profileImage} alt="Profile" />
+        <ProfileImage src={getProfileImageUrl()} alt="Profile" />
         <IconWrapper onClick={() => inputRef.current?.click()} />
         <input
           type="file"
@@ -98,7 +129,13 @@ const ProfileSection = () => {
             name="nickname"
             control={control}
             render={({ field }) => (
-              <TextField maxRows={1} minRows={1} {...field} label="닉네임" />
+              <TextField
+                maxRows={1}
+                minRows={1}
+                {...field}
+                label="닉네임"
+                value={field.value || ""} // null일 경우 빈 문자열로 처리
+              />
             )}
           />
         </BasicWrapper>
@@ -112,7 +149,7 @@ const ProfileSection = () => {
                 row
                 {...field}
                 onChange={(e) => field.onChange(e.target.value)}
-                value={field.value}
+                value={field.value || ""} // null일 경우 빈 문자열로 처리
               >
                 <FormControlLabel
                   value="남성"
@@ -135,7 +172,7 @@ const ProfileSection = () => {
             control={control}
             render={({ field }) => (
               <SelectBox
-                value={field.value}
+                value={field.value || []} // null일 경우 빈 배열로 처리
                 onChange={(event) =>
                   field.onChange(event.target.value as string[])
                 }
@@ -145,21 +182,26 @@ const ProfileSection = () => {
         </BasicWrapper>
 
         <Controller
-          name="address"
+          name="localAddress"
           control={control}
           render={({ field }) => (
             <AddressSearchField
               label="지역"
-              value={field.value}
+              value={field.value || ""} // null일 경우 빈 문자열로 처리
               onAddressSelect={(address) => field.onChange(address)}
             />
           )}
         />
         <Controller
-          name="addressDetail"
+          name="localAddressDetail"
           control={control}
           render={({ field }) => (
-            <TextField {...field} maxRows={1} minRows={1} />
+            <TextField
+              {...field}
+              maxRows={1}
+              minRows={1}
+              value={field.value || ""}
+            />
           )}
         />
 
@@ -168,7 +210,13 @@ const ProfileSection = () => {
           name="introduction"
           control={control}
           render={({ field }) => (
-            <TextField {...field} multiline minRows={3} maxRows={3} />
+            <TextField
+              {...field}
+              multiline
+              minRows={3}
+              maxRows={3}
+              value={field.value || ""}
+            />
           )}
         />
 

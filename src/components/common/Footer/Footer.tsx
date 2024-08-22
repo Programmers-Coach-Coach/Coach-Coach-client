@@ -40,12 +40,12 @@ const Footer = () => {
     <>
       {routineModal.isModal && (
         <Modal closeModal={routineModal.closeModal} position="footer-above">
-          <FooterPicker schema="routine" />
+          <FooterPicker closeModal={routineModal.closeModal} schema="routine" />
         </Modal>
       )}
       {profileModal.isModal && (
         <Modal closeModal={profileModal.closeModal} position="footer-above">
-          <FooterPicker schema="profile" />
+          <FooterPicker closeModal={profileModal.closeModal} schema="profile" />
         </Modal>
       )}
       <FooterStyle>

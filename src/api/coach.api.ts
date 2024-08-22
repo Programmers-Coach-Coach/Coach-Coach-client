@@ -7,6 +7,8 @@ import {
 } from "@/models/coach.model";
 import qs from "qs";
 import { requestHandler } from "./http";
+import { IMatchMembers } from "@/models/member.model";
+import { IResponseMessage } from "@/models/responseMessage.model";
 
 export const getCoachAll = ({ filter, page }: IAllCoachList) => {
   const { search, sportsIdList, filterId } = filter;
@@ -58,6 +60,24 @@ export const getCoachAll = ({ filter, page }: IAllCoachList) => {
 
 export const getMyCoaches = async () => {
   return await requestHandler<ISimpleCoach[]>("get", API_PATH.myCoaches);
+};
+
+export const getMatchMembers = async () => {
+  return await requestHandler<IMatchMembers[]>("get", API_PATH.matchMembers);
+};
+
+export const deleteMatchMember = async (userId: number) => {
+  return await requestHandler<IResponseMessage>(
+    "delete",
+    `${API_PATH.matchMember}/${userId}`
+  );
+};
+
+export const patchMatchMember = async (userId: number) => {
+  return await requestHandler<IResponseMessage>(
+    "patch",
+    `${API_PATH.patchMember}/${userId}`
+  );
 };
 
 export const getCoachDetail = async (id: number) => {
