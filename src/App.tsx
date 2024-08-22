@@ -21,6 +21,10 @@ import MyRoutine from "./pages/Routine/MyRoutine";
 import Signup from "./pages/Signup";
 import { GlobalStyle } from "./style/global";
 import { theme } from "./style/theme";
+import ManageMember from "./pages/ManageMember";
+import MemberRoutine from "./pages/Routine/MemberRoutine";
+import PrivateLayout from "./components/layout/PrivateLayout";
+import { useState } from "react";
 
 function App() {
   const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
@@ -83,10 +87,19 @@ function App() {
         {
           path: "routine/my-coach/:coachId",
           element: <CoachRoutine />
+        },
+        {
+          path: "manage",
+          element: <ManageMember />
+        },
+        {
+          path: "routine/member/:userId",
+          element: <MemberRoutine />
         }
       ]
     }
   ]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>

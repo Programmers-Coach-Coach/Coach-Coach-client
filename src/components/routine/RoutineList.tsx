@@ -41,6 +41,7 @@ const RoutineList = ({ routines }: RoutineListProps) => {
           size="150px"
           color="text"
           descriptions="운동 루틴이 없습니다"
+          padding="280px"
         />
       )}
     </RoutineListStyle>

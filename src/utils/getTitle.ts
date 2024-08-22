@@ -22,6 +22,8 @@ export const getTitle = (pathname: string): string => {
       return "알림";
     case "/routine/my-coach":
       return "내 코치";
+    case "/manage":
+      return "회원 관리";
     default:
       return "";
   }
