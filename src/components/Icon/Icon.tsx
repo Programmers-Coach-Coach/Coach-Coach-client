@@ -12,9 +12,17 @@ interface IconProps {
 const Icon = ({ name, size, color, onClick }: IconProps) => {
   const SelectedIcon = ICONS[name];
   const ICColor = theme.color[color];
+
+  const handleClick = (event: React.MouseEvent) => {
+    event.stopPropagation(); // 이벤트 전파 중단
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
     <IconStyle>
-      <SelectedIcon size={size} color={ICColor} onClick={onClick} />
+      <SelectedIcon size={size} color={ICColor} onClick={handleClick} />
     </IconStyle>
   );
 };
