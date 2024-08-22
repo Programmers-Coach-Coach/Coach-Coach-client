@@ -22,8 +22,8 @@ const Notification = () => {
         {data.length ? (
           data.map((item) => (
             <NotificationCard
-              key={item.noticeId}
-              noticeId={item.noticeId}
+              key={item.notificationId}
+              noticeId={item.notificationId}
               message={item.message}
               relationFunction={item.relationFunction}
               createdAt={item.createdAt}

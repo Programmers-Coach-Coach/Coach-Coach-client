@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const useCoachDetail = (id: number) => {
   const { data, isError, isLoading } = useQuery({
-    queryKey: ["getCoachDetail"],
+    queryKey: ["getCoachDetail", id],
     queryFn: () => getCoachDetail(id)
   });
 

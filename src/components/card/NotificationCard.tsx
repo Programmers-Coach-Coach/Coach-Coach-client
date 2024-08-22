@@ -2,6 +2,7 @@ import Heart from "@/assets/images/notice-heart.png";
 import Message from "@/assets/images/notice-message.png";
 import Speaker from "@/assets/images/notice-speaker.png";
 
+import { useDeleteNotification } from "@/hooks/queries/useNotification";
 import { TNotificationType } from "@/models/notification.model";
 import { timeAgo } from "@/utils/format";
 import styled from "styled-components";
@@ -31,21 +32,17 @@ const NotificationCard = ({
     }
   };
 
+  const { mutate } = useDeleteNotification();
+
   const handleDelete = (id: number) => {
-    // TODO: 알림 개별 삭제
-    console.log(id);
+    mutate(id);
   };
 
   return (
     <ReviewCardStyle>
       <img src={getImageSrc()} alt={relationFunction} />
       <div className="message">{message}</div>
-      <button
-        onClick={() => {
-          handleDelete(noticeId);
-        }}
-        className="close-button"
-      >
+      <button onClick={() => handleDelete(noticeId)} className="close-button">
         <Icon name="x" size="18px" color="gray3" />
       </button>
       <div className="timestamp">{timeAgo(createdAt)}</div>

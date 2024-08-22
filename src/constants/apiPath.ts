@@ -11,11 +11,12 @@ export const API_PATH = {
   checkPassword: "/auth/confirm-password",
   checkEmail: "/auth/check-email",
   checkNickname: "/auth/check-nickname",
+  reissue: "/auth/reissue",
   signup: "/auth/signup",
   withdraw: "/users/me",
   myCoaches: "/users/matched/coaches",
+  notification: "/notifications",
   matchMembers: "/coaches/members",
   matchMember: "/coaches/member",
-  patchMember: "/coaches/matched/members",
-  getNotifications: "/notifications"
+  patchMember: "/coaches/matched/members"
 };

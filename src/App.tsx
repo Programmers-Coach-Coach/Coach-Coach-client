@@ -1,28 +1,28 @@
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import { queryClient } from "./api/queryClient";
 import Layout from "./components/layout/Layout";
+import PrivateLayout from "./components/layout/PrivateLayout";
 import CheckPassword from "./pages/CheckPassword";
+import Coach from "./pages/Coach";
 import CoachList from "./pages/CoachList";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import ManageMember from "./pages/ManageMember";
 import MyCoach from "./pages/MyCoach";
 import Mypage from "./pages/Mypage";
 import Notification from "./pages/Notification";
 import RecordDatail from "./pages/RecordDatail";
 import CoachRoutine from "./pages/Routine/CoachRoutine";
+import MemberRoutine from "./pages/Routine/MemberRoutine";
 import MyRoutine from "./pages/Routine/MyRoutine";
 import Signup from "./pages/Signup";
 import { GlobalStyle } from "./style/global";
 import { theme } from "./style/theme";
-import ManageMember from "./pages/ManageMember";
-import MemberRoutine from "./pages/Routine/MemberRoutine";
-import PrivateLayout from "./components/layout/PrivateLayout";
-import { useState } from "react";
-import RoutineDetail from "./pages/Routine/RoutineDetail";
 
 function App() {
   const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
@@ -69,6 +69,10 @@ function App() {
         {
           path: "record",
           element: <RecordDatail />
+        },
+        {
+          path: "coach/:id",
+          element: <Coach />
         },
         {
           path: "notification",
