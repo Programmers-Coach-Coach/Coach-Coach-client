@@ -1,5 +1,4 @@
 import PopularCoaches from "@/components/coach/PopularCoaches";
-import Search from "@/components/common/InputField/search/Search";
 import SportsList from "@/components/sports/SportsList";
 import useHome from "@/hooks/useHome";
 import { WhiteSpace } from "@/style/global";
@@ -13,8 +12,6 @@ const Home = () => {
 
   return (
     <HomeStyle>
-      <Search placeholder="코치명을 검색하세요" />
-      <WhiteSpace $height={40} />
       <SportsList sportsList={data.sports} />
       <WhiteSpace $height={80} />
       <PopularCoaches popularCoaches={data.coaches} />
