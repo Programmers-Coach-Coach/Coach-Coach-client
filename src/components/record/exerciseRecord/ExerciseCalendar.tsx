@@ -23,7 +23,7 @@ const ExerciseCalender = () => {
   ]);
 
   const handleDayClick = (date: Dayjs) => {
-    const fommattedDate = date.format("YYYY.MM.DD");
+    const fommattedDate = date.format("YYYY-MM-DD");
     navigate(`/record?date=${fommattedDate}`);
   };
 
@@ -34,10 +34,8 @@ const ExerciseCalender = () => {
           value={value}
           onChange={(newValue) => {
             setValue(newValue);
-            handleDayClick(newValue);
           }}
           maxDate={today}
-          // showDaysOutsideCurrentMonth
           slots={{
             day: (props) => {
               const isSelected = selectedDates.some((date) =>
@@ -45,7 +43,11 @@ const ExerciseCalender = () => {
               );
 
               return (
-                <StyledPickersDay {...props} $isSelected={isSelected}>
+                <StyledPickersDay
+                  {...props}
+                  $isSelected={isSelected}
+                  onClick={() => handleDayClick(props.day)}
+                >
                   {props.day.date()}
                 </StyledPickersDay>
               );
@@ -57,7 +59,12 @@ const ExerciseCalender = () => {
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  width: fit-content;
+  margin: 0 auto;
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  border-radius: ${({ theme }) => theme.borderRadius.default};
+`;
 
 const StyledPickersDay = styled(PickersDay)<{
   $isSelected: boolean;
@@ -83,6 +90,10 @@ const StyledPickersDay = styled(PickersDay)<{
     background-position: center;
     z-index: 1;
     transform: rotate(-200deg);
+  }
+
+  &.Mui-selected {
+    background-color: ${({ theme }) => theme.color.secondary} !important;
   }
 `;
 export default ExerciseCalender;

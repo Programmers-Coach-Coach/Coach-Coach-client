@@ -4,6 +4,7 @@ import PhysicalRecordInner from "@/components/modal/PhysicalRecordInner";
 import ExerciseCalender from "@/components/record/exerciseRecord/ExerciseCalendar";
 import PhysicalRecordChart from "@/components/record/physicalRecord/PhysicalRecordChart";
 import useModal from "@/hooks/useModal";
+import { WhiteSpace } from "@/style/global";
 import styled from "styled-components";
 
 const Record = () => {
@@ -11,15 +12,17 @@ const Record = () => {
   return (
     <Wrapper>
       <HeaderWithDesc>
-        <h2>운동기록</h2>
+        <h2>운동 기록</h2>
         <p className="b2">
           운동 기록과 신체 기록을 보고 싶다면 해당 일자를 클릭해보아요
         </p>
       </HeaderWithDesc>
+      <WhiteSpace $height={10} />
       <ExerciseCalender />
+      <WhiteSpace $height={30} />
       <HeaderWithDesc>
         <Header>
-          <h2>오늘의 신체 정보</h2>
+          <h2>신체 기록</h2>
           <CustomButton
             size="super-mini"
             variant="contained"
@@ -45,13 +48,13 @@ const HeaderWithDesc = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+  padding: 0 10px;
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
 `;
 
 export default Record;
