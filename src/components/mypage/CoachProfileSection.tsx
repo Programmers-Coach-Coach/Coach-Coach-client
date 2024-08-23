@@ -13,6 +13,7 @@ import AddressSearchField from "./AddressSearchField";
 import useAuth from "@/hooks/useAuth";
 import toast from "react-hot-toast";
 import image from "@/assets/images/basicProfile.png";
+
 interface CoachProfileSectionProps {
   onTabChange: (newValue: number) => void;
 }
@@ -20,7 +21,12 @@ interface CoachProfileSectionProps {
 const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
   const { coachProfile, isFetchError, isLoading } = useFetchCoachProfile();
   const { editUserCoachProfile } = useAuth();
-  const { control, handleSubmit, setValue } = useForm<IMyPageCoachFormValues>({
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    formState: { errors }
+  } = useForm<IMyPageCoachFormValues>({
     defaultValues: {
       coachIntroduction: "",
       activeCenter: "",
@@ -48,19 +54,24 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
   }, [coachProfile, setValue]);
 
   const onSubmit = (data: IMyPageCoachFormValues) => {
-    if (
-      !data.coachIntroduction ||
-      !data.activeCenter ||
-      !data.activeCenterDetail ||
-      !data.activeHours ||
-      !data.chattingUrl ||
-      !data.coachingSports.length
-    ) {
+    if (Object.keys(errors).length > 0) {
       toast.error("입력 폼을 모두 채워주세요.");
       return;
-    } else {
-      editUserCoachProfile(data);
     }
+
+    const formattedSports = data.coachingSports.map((sport) => ({
+      sportName: sport
+    }));
+    const userCoachProfileRequest = {
+      coachingSports: formattedSports,
+      coachIntroduction: data.coachIntroduction,
+      activeCenter: data.activeCenter,
+      activeCenterDetail: data.activeCenterDetail,
+      activeHours: data.activeHours,
+      chattingUrl: data.chattingUrl,
+      isOpen: data.isOpen
+    };
+    editUserCoachProfile(userCoachProfileRequest);
   };
 
   const handleCancel = () => {
@@ -96,6 +107,7 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
           <Controller
             name="coachingSports"
             control={control}
+            rules={{ required: true }}
             render={({ field }) => (
               <SelectBox
                 value={field.value}
@@ -110,6 +122,7 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
         <Controller
           name="coachIntroduction"
           control={control}
+          rules={{ required: true }}
           render={({ field }) => (
             <TextField {...field} multiline minRows={3} maxRows={3} />
           )}
@@ -117,6 +130,7 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
         <Controller
           name="activeCenter"
           control={control}
+          rules={{ required: true }}
           render={({ field }) => (
             <AddressSearchField
               label="활동중인 센터"
@@ -128,6 +142,7 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
         <Controller
           name="activeCenterDetail"
           control={control}
+          rules={{ required: true }}
           render={({ field }) => <TextField {...field} maxRows={1} />}
         />
 
@@ -135,6 +150,7 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
         <Controller
           name="activeHours"
           control={control}
+          rules={{ required: true }}
           render={({ field }) => <TextField {...field} maxRows={1} />}
         />
 
@@ -142,6 +158,7 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
         <Controller
           name="chattingUrl"
           control={control}
+          rules={{ required: true }}
           render={({ field }) => <TextField {...field} maxRows={1} />}
         />
         <SubtitleWrapper>리뷰</SubtitleWrapper>
@@ -155,7 +172,7 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
               <SubtitleWrapper>
                 정보 공개 선택 (목록에 노출하기)
               </SubtitleWrapper>
-              <Switch {...field} />
+              <Switch checked={field.value} onChange={field.onChange} />
             </BasicWrapper>
           )}
         />

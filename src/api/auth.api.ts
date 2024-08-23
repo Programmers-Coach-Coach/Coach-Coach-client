@@ -8,7 +8,8 @@ import {
   ISignup,
   IUserProfile
 } from "@/models/auth.model";
-import { ICoachDetail, IMyPageCoachFormValues } from "@/models/coach.model";
+import { ICoachDetail, IMyPageCoachFormWithSports, IMyPageCoachFormValues } from "@/models/coach.model";
+import { httpClient, createClient, requestHandler } from "./http";
 import { AxiosResponse } from "axios";
 import { createClient, httpClient, requestHandler } from "./http";
 
@@ -72,8 +73,10 @@ export const editProfile = async (formData: FormData) => {
   });
 };
 
-export const editCoachProfile = async (formData: IMyPageCoachFormValues) => {
-  return await requestHandler("put", API_PATH.editMyCoachProfile, formData);
+export const editCoachProfile = async (
+  formData: IMyPageCoachFormWithSports
+) => {
+  return await requestHandler("post", API_PATH.editMyCoachProfile, formData);
 };
 
 export const getAuth = async () => {

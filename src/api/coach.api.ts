@@ -5,10 +5,10 @@ import {
   ICoachList,
   ISimpleCoach
 } from "@/models/coach.model";
-import qs from "qs";
-import { requestHandler } from "./http";
 import { IMatchMembers } from "@/models/member.model";
 import { IResponseMessage } from "@/models/responseMessage.model";
+import qs from "qs";
+import { requestHandler } from "./http";
 
 export const getCoachAll = ({ filter, page }: IAllCoachList) => {
   const { search, sportsIdList, filterId } = filter;
@@ -85,5 +85,12 @@ export const getCoachDetail = async (id: number) => {
   return await requestHandler<ICoachDetail>(
     "get",
     `${API_PATH.coachMypage}?${query}`
+  );
+};
+
+export const contact = async (id: number) => {
+  return await requestHandler<IResponseMessage>(
+    "post",
+    `/coaches/${id}/contact`
   );
 };
