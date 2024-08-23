@@ -13,3 +13,10 @@ export const deleteNotification = async (id: number) => {
     `${API_PATH.notification}/${id}`
   );
 };
+
+export const deleteAllNotification = async () => {
+  return await requestHandler<IResponseMessage>(
+    "delete",
+    `${API_PATH.notification}`
+  );
+};
