@@ -50,7 +50,12 @@ export interface IMyPageCoachFormValues {
   chattingUrl: string;
   isOpen: boolean;
 }
-
+export type IMyPageCoachFormWithSports = Omit<
+  IMyPageCoachFormValues,
+  "coachingSports"
+> & {
+  coachingSports: { sportName: string }[];
+};
 export interface ICoachDetail {
   coachName: string;
   coachGender: "M" | "W";

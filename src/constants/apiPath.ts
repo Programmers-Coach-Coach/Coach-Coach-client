@@ -4,7 +4,7 @@ export const API_PATH = {
   getCoachAll: "/coaches-all",
   mypage: "/users/me",
   editMyProfile: "/users/me",
-  editMyCoachProfile: "/users/coaches",
+  editMyCoachProfile: "/coaches",
   coachMypage: "/coaches",
   login: "/auth/login",
   logout: "/auth/logout",

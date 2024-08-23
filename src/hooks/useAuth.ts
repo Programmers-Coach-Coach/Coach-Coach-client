@@ -17,7 +17,7 @@ import {
   ICheckNicknameDuplication,
   ISignup
 } from "@/models/auth.model";
-import { IMyPageCoachFormValues } from "@/models/coach.model";
+import { IMyPageCoachFormWithSports } from "@/models/coach.model";
 
 const useAuth = () => {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const useAuth = () => {
   const [isNicknameError, setIsNicknameError] = useState<boolean>(false);
   const [emailChecked, setEmailChecked] = useState<boolean>(false); //이메일 중복 확인이 완료되었는지 여부
   const [nicknameChecked, setNicknameChecked] = useState<boolean>(false);
-  const { storeLogin } = useAuthStore();
+  const { storeLogin, storeLogout } = useAuthStore();
 
   const userSignup = (formData: ISignup) => {
     signup(formData)
@@ -54,6 +54,7 @@ const useAuth = () => {
   const userLogout = () => {
     logout()
       .then(() => {
+        storeLogout();
         navigate("/login");
         toast.success("로그아웃 성공");
       })
@@ -122,7 +123,7 @@ const useAuth = () => {
       });
   };
 
-  const editUserCoachProfile = (formData: IMyPageCoachFormValues) => {
+  const editUserCoachProfile = (formData: IMyPageCoachFormWithSports) => {
     editCoachProfile(formData)
       .then(() => {
         toast.success("프로필이 성공적으로 업데이트되었습니다.");

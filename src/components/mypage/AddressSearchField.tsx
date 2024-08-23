@@ -34,7 +34,11 @@ const AddressSearchField = ({
           주소 검색
         </CustomButton>
       </BasicWrapper>
-      {isOpen && <DaumPostcode onComplete={completeHandler} />}
+      {isOpen && (
+        <div>
+          <DaumPostcode onComplete={completeHandler} />
+        </div>
+      )}
       <TextField value={value} maxRows={1} disabled fullWidth />
     </>
   );
