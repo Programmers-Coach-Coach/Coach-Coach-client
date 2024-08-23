@@ -54,26 +54,28 @@ const CategoryDropdown = ({
           />
         </Buttons>
       </DropdownBox>
-      <OptionBox $isOpen={isOpen}>
-        {actions.map((action) => (
-          <Action key={action.actionId}>
-            <Text>
-              <p className="b3">{action.actionName}</p>
-              <LineClamp $line={1} className="b2">
-                {action.countOrMinutes} {action.sets}세트
-              </LineClamp>
-            </Text>
-            {modifyEnabled && (
-              <IconButton
-                name="dots"
-                color="text"
-                size="24px"
-                onClick={onEditAction}
-              />
-            )}
-          </Action>
-        ))}
-      </OptionBox>
+      {isOpen && (
+        <OptionBox $isOpen={isOpen}>
+          {actions.map((action) => (
+            <Action key={action.actionId}>
+              <Text>
+                <p className="b3">{action.actionName}</p>
+                <LineClamp $line={1} className="b2">
+                  {action.countOrMinutes} {action.sets}세트
+                </LineClamp>
+              </Text>
+              {modifyEnabled && (
+                <IconButton
+                  name="dots"
+                  color="text"
+                  size="24px"
+                  onClick={onEditAction}
+                />
+              )}
+            </Action>
+          ))}
+        </OptionBox>
+      )}
     </Wrapper>
   );
 };
@@ -87,6 +89,8 @@ const DropdownBox = styled.div`
   display: flex;
   align-items: center;
   height: 60px;
+  padding: 0 10px;
+
   color: ${({ theme }) => theme.color.primary};
   font-weight: 800;
   cursor: pointer;
@@ -119,6 +123,7 @@ const Action = styled.li`
   justify-content: space-between;
   align-items: center;
   height: 70px;
+  padding: 0 10px;
 `;
 
 const Text = styled.div`
