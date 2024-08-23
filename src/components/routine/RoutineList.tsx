@@ -1,10 +1,10 @@
 import { styled } from "styled-components";
 import Routine from "@/components/routine/Routine";
-import { IRoutine } from "@/models/routine.model";
+import { IGetRoutine } from "@/models/routine.model";
 import Empty from "../common/Empty/Empty";
 
 interface RoutineListProps {
-  routines: IRoutine[];
+  routines: IGetRoutine[];
 }
 
 const RoutineList = ({ routines }: RoutineListProps) => {
@@ -17,7 +17,7 @@ const RoutineList = ({ routines }: RoutineListProps) => {
               key={item.routineId}
               id={item.routineId}
               name={item.routineName}
-              sportId={item.sportId}
+              sport={item.sportName}
             />
           ))}
         </>

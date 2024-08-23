@@ -1,13 +1,15 @@
-import { IRoutine, IRoutineDetails } from "@/models/routine.model";
+import { IGetRoutine, IRoutineDetails } from "@/models/routine.model";
 import * as faker from "@/utils/faker";
 
 export const PER_PAGE = 10;
 
-export const routines: IRoutine[] = Array.from({ length: 12 }).map((_, i) => ({
-  routineId: i + 1,
-  routineName: faker.fullname(),
-  sportId: Math.floor(Math.random() * 12)
-}));
+export const routines: IGetRoutine[] = Array.from({ length: 12 }).map(
+  (_, i) => ({
+    routineId: i + 1,
+    routineName: faker.fullname(),
+    sportName: faker.fullname()
+  })
+);
 
 export const routineDetail: Omit<IRoutineDetails, "routineName"> = {
   categoryList: Array.from({ length: 3 }).map((_, i) => ({

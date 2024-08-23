@@ -44,14 +44,14 @@ const ActionModalInner = ({ children, schema, closeModal }: Props) => {
 
   const onClickHandler = () => {
     if (schema === "routine-enroll") {
-      postRoutineResponse.mutateAsync({ routineName, sportId });
+      postRoutineResponse.mutate({ routineName, sportId });
     } else if (schema === "routine-modify") {
-      patchRoutineResponse.mutateAsync({
+      patchRoutineResponse.mutate({
         payload: { routineName, sportId },
         routineId
       });
     } else if (schema === "category-enroll") {
-      postCategoryResponse.mutate({ payload: categoryName, routineId });
+      postCategoryResponse.mutate({ payload: { categoryName }, routineId });
     } else if (schema === "category-modify") {
       patchCategoryResponse.mutate({
         payload: categoryName,

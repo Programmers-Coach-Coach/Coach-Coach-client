@@ -80,7 +80,7 @@ export const modal: Record<TModal, IModalData> = {
 
 export const footerPicker: Record<TFooterPicker, IFooterPickerData[]> = {
   profile: [
-    { name: "내 프로필", link: "/", icon: "person" },
+    { name: "내 프로필", link: "/mypage", icon: "person" },
     {
       name: "매칭 회원 리스트",
       link: "/manage",

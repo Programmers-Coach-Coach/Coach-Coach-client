@@ -7,11 +7,16 @@ import {
   postRoutineData
 } from "@/api/routine/routine.api";
 import { IResponseMessage } from "@/models/responseMessage.model";
-import { IGetRoutine, IRoutine, IRoutineDetails } from "@/models/routine.model";
+import {
+  IGetQuery,
+  IGetRoutine,
+  IPostRoutine,
+  IRoutineDetails
+} from "@/models/routine.model";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-export const useGetRoutines = ({ coachId, userId }: IGetRoutine = {}) => {
-  const { data, isLoading, isError } = useQuery<IRoutine[]>({
+export const useGetRoutines = ({ coachId, userId }: IGetQuery = {}) => {
+  const { data, isLoading, isError } = useQuery<IGetRoutine[]>({
     queryKey: ["getRoutinesData", coachId, userId],
     queryFn: () => getRoutinesData({ coachId, userId })
   });
@@ -37,10 +42,10 @@ export const useGetRoutine = (routineId: number) => {
 };
 
 export const usePostRoutine = () => {
-  const { mutateAsync, isPending, isError, data } = useMutation<
+  const { mutate, isPending, isError, data } = useMutation<
     IResponseMessage,
     Error,
-    Omit<IRoutine, "routineId">
+    Omit<IPostRoutine, "routineId">
   >({
     mutationFn: postRoutineData,
     onSuccess: (data) => {
@@ -53,7 +58,7 @@ export const usePostRoutine = () => {
   });
 
   return {
-    mutateAsync, // POST 요청을 수행하는 함수
+    mutate, // POST 요청을 수행하는 함수
     isLoading: isPending,
     isError,
     data // 성공 시 반환된 데이터
@@ -61,10 +66,10 @@ export const usePostRoutine = () => {
 };
 
 export const usePatchRoutine = () => {
-  const { mutateAsync, isPending, isError, data } = useMutation<
+  const { mutate, isPending, isError, data } = useMutation<
     IResponseMessage,
     Error,
-    { payload: Omit<IRoutine, "routineId">; routineId: number }
+    { payload: Omit<IPostRoutine, "routineId">; routineId: number }
   >({
     mutationFn: ({ payload, routineId }) =>
       patchRoutineData(payload, routineId),
@@ -78,7 +83,7 @@ export const usePatchRoutine = () => {
   });
 
   return {
-    mutateAsync,
+    mutate,
     isLoading: isPending,
     isError,
     data
@@ -86,7 +91,7 @@ export const usePatchRoutine = () => {
 };
 
 export const useDeleteRoutine = () => {
-  const { mutateAsync, isPending, isError, data } = useMutation<
+  const { mutate, isPending, isError, data } = useMutation<
     IResponseMessage,
     Error,
     number
@@ -102,7 +107,7 @@ export const useDeleteRoutine = () => {
   });
 
   return {
-    mutateAsync,
+    mutate,
     isLoading: isPending,
     isError,
     data

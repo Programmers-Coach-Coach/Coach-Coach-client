@@ -6,13 +6,14 @@ import {
   postCompletedCategoryData
 } from "@/api/routine/category.api";
 import { IResponseMessage } from "@/models/responseMessage.model";
+import { ICategoryName } from "@/models/routine.model";
 import { useMutation } from "@tanstack/react-query";
 
 export const usePostCategory = () => {
   const { mutate, isPending, isError, data } = useMutation<
     IResponseMessage,
     Error,
-    { payload: string; routineId: number }
+    { payload: ICategoryName; routineId: number }
   >({
     mutationFn: ({ payload, routineId }) =>
       postCategoryData(payload, routineId),

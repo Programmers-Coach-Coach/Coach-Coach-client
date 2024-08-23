@@ -8,6 +8,7 @@ import useModal from "@/hooks/useModal";
 import { useGetRoutine } from "@/hooks/queries/routine/useRoutine";
 import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
+import { useModalInfo } from "@/store/modalInfo.store";
 
 const RoutineDetail = () => {
   const { routineId } = useParams();
@@ -20,12 +21,15 @@ const RoutineDetail = () => {
   const actionAddModal = useModal();
   const actionModifyModal = useModal();
 
+  const setRoutineId = useModalInfo((state) => state.setRoutineId);
+
   const { data, isLoading, isError } = useGetRoutine(Number(routineId));
 
   if (isLoading) return <div>로딩 중...</div>;
   if (isError || !data) return <div>무언가 잘못됨</div>;
 
   const onClickAdd = () => {
+    setRoutineId(Number(routineId));
     categoryAddModal.openModal();
   };
 
