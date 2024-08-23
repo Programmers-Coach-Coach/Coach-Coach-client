@@ -18,5 +18,6 @@ export const API_PATH = {
   notification: "/notifications",
   matchMembers: "/coaches/members",
   matchMember: "/coaches/member",
-  patchMember: "/coaches/matched/members"
+  patchMember: "/coaches/matched/members",
+  auth: "/auth"
 };

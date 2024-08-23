@@ -1,5 +1,6 @@
 import { API_PATH } from "@/constants/apiPath";
 import {
+  IAuthResponse,
   ICheckEmailDuplication,
   ICheckNicknameDuplication,
   ICheckPassword,
@@ -8,8 +9,8 @@ import {
   IUserProfile
 } from "@/models/auth.model";
 import { ICoachDetail, IMyPageCoachFormWithSports } from "@/models/coach.model";
-import { httpClient, createClient, requestHandler } from "./http";
 import { AxiosResponse } from "axios";
+import { createClient, httpClient, requestHandler } from "./http";
 
 export const getProfile = async () => {
   return await requestHandler<IUserProfile>("get", API_PATH.mypage);
@@ -75,4 +76,8 @@ export const editCoachProfile = async (
   formData: IMyPageCoachFormWithSports
 ) => {
   return await requestHandler("post", API_PATH.editMyCoachProfile, formData);
+};
+
+export const getAuth = async () => {
+  return await requestHandler<IAuthResponse>("get", API_PATH.auth);
 };
