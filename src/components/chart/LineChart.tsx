@@ -121,7 +121,6 @@ const data = {
       data: CHART_DATA.map((item) => item.weight),
       borderColor: "#9CABEF",
       backgroundColor: "#fff",
-      fill: true,
       lineTension: 0
     }
   ]
