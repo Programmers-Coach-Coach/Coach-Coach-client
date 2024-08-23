@@ -7,12 +7,13 @@ interface Props extends HTMLAttributes<HTMLButtonElement> {
   name: keyof typeof ICONS;
   size: string;
   color: ColorKey;
+  onClick?: () => void;
 }
 
-const IconButton = ({ name, size, color, ...props }: Props) => {
+const IconButton = ({ name, size, color, onClick, ...props }: Props) => {
   return (
     <button {...props}>
-      <Icon name={name} color={color} size={size} />
+      <Icon name={name} color={color} size={size} onClick={onClick} />
     </button>
   );
 };

@@ -17,7 +17,7 @@ const InquriyProfileList = ({ data }: InquiryProfileListProps) => {
     <>
       {isModal && (
         <Modal closeModal={closeModal} position="footer-above">
-          <RoutinePicker schema="add" closeModal={closeModal} />
+          <RoutinePicker schema="inquiry" closeModal={closeModal} />
         </Modal>
       )}
       {filteredData.length ? (

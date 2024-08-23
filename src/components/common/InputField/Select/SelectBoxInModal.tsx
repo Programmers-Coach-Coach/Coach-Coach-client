@@ -4,9 +4,9 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { ListItemText, OutlinedInput, Typography } from "@mui/material";
-import { SPORTS_NAMES } from "@/constants/sportsConstants";
 import { theme } from "@/style/theme";
 import { useModalInfo } from "@/store/modalInfo.store";
+import useHome from "@/hooks/useHome";
 
 interface SelectBoxProps {
   setIsSelect: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,14 +22,20 @@ const MenuProps = {
 
 const SelectBoxInModal = ({ setIsSelect }: SelectBoxProps) => {
   const setSport = useModalInfo((state) => state.setSportId);
-
-  // value 상태를 관리
   const [selectedValue, setSelectedValue] = useState<string>("");
+  const { data, isLoading, isError } = useHome();
+
+  if (isLoading) return <div>로딩 중...</div>;
+  if (isError || !data) return <div>무언가 잘못됨</div>;
 
   const handleChange = (event: SelectChangeEvent) => {
     const value = event.target.value;
     setSelectedValue(value);
-    setSport(SPORTS_NAMES.indexOf(value));
+    data.sports.forEach((sport) => {
+      if (sport.sportName === value) {
+        setSport(sport.sportId);
+      }
+    });
   };
 
   const handleOpen = () => {
@@ -75,15 +81,15 @@ const SelectBoxInModal = ({ setIsSelect }: SelectBoxProps) => {
           onClose={handleClose}
           MenuProps={MenuProps}
         >
-          {SPORTS_NAMES.map((name) => (
+          {data.sports.map((sport) => (
             <MenuItem
-              key={name}
-              value={name}
+              key={sport.sportId}
+              value={sport.sportName}
               sx={{
                 height: 30
               }}
             >
-              <ListItemText primary={name} />
+              <ListItemText primary={sport.sportName} />
             </MenuItem>
           ))}
         </Select>

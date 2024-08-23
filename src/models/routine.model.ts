@@ -1,19 +1,19 @@
-export interface IRoutine {
+interface IRoutine {
   routineId: number;
   routineName: string;
+}
+
+export interface IGetRoutine extends IRoutine {
+  sportName: string;
+}
+
+export interface IPostRoutine extends IRoutine {
   sportId: number;
 }
 
-export interface IRoutines {
-  routineList: IRoutine[];
-  totalCount: number;
-  currentPage: number;
-}
-
-export interface IGetRoutine {
+export interface IGetQuery {
   coachId?: number;
   userId?: number;
-  page: number;
 }
 
 export interface IAction {
@@ -21,4 +21,23 @@ export interface IAction {
   actionName: string;
   sets: number;
   countOrMinutes: string;
+  description?: string;
+}
+
+export interface ICategoryName {
+  categoryName: string;
+}
+
+export interface ICategory extends ICategoryName {
+  categoryId: number;
+  isCompleted?: boolean;
+}
+
+export interface ICategoryList extends ICategory {
+  actionList: IAction[];
+}
+
+export interface IRoutineDetails {
+  routineName: string;
+  categoryList: ICategoryList[];
 }

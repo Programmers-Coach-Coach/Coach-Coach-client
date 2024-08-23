@@ -7,11 +7,16 @@ export type TModal =
   | "coach-switch"
   | "category-enroll"
   | "category-modify"
-  | "sports-enroll"
-  | "sports-modify";
+  | "action-enroll"
+  | "action-modify";
 
 export type TFooterPicker = "profile" | "routine";
-export type TRoutinePicker = "write" | "delete" | "add";
+export type TRoutinePicker =
+  | "delete"
+  | "matching"
+  | "inquiry"
+  | "category"
+  | "action";
 
 export interface IModalData {
   primaryButton: string;
@@ -61,12 +66,12 @@ export const modal: Record<TModal, IModalData> = {
     secondaryButton: "취소",
     onClick: () => {}
   },
-  "sports-enroll": {
+  "action-enroll": {
     primaryButton: "등록하기",
     secondaryButton: "취소",
     onClick: () => {}
   },
-  "sports-modify": {
+  "action-modify": {
     primaryButton: "수정하기",
     secondaryButton: "취소",
     onClick: () => {}
@@ -75,7 +80,7 @@ export const modal: Record<TModal, IModalData> = {
 
 export const footerPicker: Record<TFooterPicker, IFooterPickerData[]> = {
   profile: [
-    { name: "내 프로필", link: "/", icon: "person" },
+    { name: "내 프로필", link: "/mypage", icon: "person" },
     {
       name: "매칭 회원 리스트",
       link: "/manage",
@@ -95,16 +100,25 @@ export const footerPicker: Record<TFooterPicker, IFooterPickerData[]> = {
 };
 
 export const routinePicker: Record<TRoutinePicker, IRoutinePickerData[]> = {
-  write: [
-    { name: "루틴 작성", onClick: () => {} },
-    { name: "삭제", onClick: () => {} }
-  ],
   delete: [
     { name: "루틴 삭제", onClick: () => {} },
     { name: "취소", onClick: () => {} }
   ],
-  add: [
+  matching: [
+    { name: "루틴 작성", onClick: () => {} },
+    { name: "삭제", onClick: () => {} }
+  ],
+  inquiry: [
     { name: "회원 추가", onClick: () => {} },
     { name: "거절", onClick: () => {} }
+  ],
+  category: [
+    { name: "카테고리 수정", onClick: () => {} },
+    { name: "카테고리 삭제", onClick: () => {} },
+    { name: "운동 추가", onClick: () => {} }
+  ],
+  action: [
+    { name: "운동 수정", onClick: () => {} },
+    { name: "운동 삭제", onClick: () => {} }
   ]
 };

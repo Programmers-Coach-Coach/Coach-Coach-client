@@ -8,13 +8,12 @@ interface RoutineContentsProps {
 }
 
 const RoutineContents = ({ setIsSelect }: RoutineContentsProps) => {
-  const routineName = useModalInfo((state) => state.routineName);
   const setRoutineName = useModalInfo((state) => state.setRoutineName);
 
   return (
     <RoutineContentsStyle>
       <h2>루틴명</h2>
-      <InputInModal name={routineName} content="종목" setFn={setRoutineName} />
+      <InputInModal content="종목" setFn={setRoutineName} />
       <h2>종목</h2>
       <SelectBoxInModal setIsSelect={setIsSelect} />
     </RoutineContentsStyle>

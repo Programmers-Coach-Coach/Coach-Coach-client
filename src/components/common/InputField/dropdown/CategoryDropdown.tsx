@@ -1,11 +1,14 @@
 import IconButton from "@/components/Icon/IconButton";
-import { IAction } from "@/models/routine.model";
-import { LineClamp } from "@/style/global";
+import Action from "@/components/routine/Action";
+import { IAction, ICategory } from "@/models/routine.model";
+import { useModalInfo } from "@/store/modalInfo.store";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
+import Completed from "../CheckBox/Completed";
 
 interface Props {
-  category: string;
+  category: ICategory;
   actions: IAction[];
   modifyEnabled?: boolean;
   onEditCategory?: () => void; // 카테고리 수정, 삭제 기능
@@ -20,36 +23,45 @@ const CategoryDropdown = ({
   onEditAction
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const params = useParams();
+  const routineId = useModalInfo((state) => state.routineId);
+  const setRoutineId = useModalInfo((state) => state.setRoutineId);
+  const setCategoryId = useModalInfo((state) => state.setCategoryId);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleCategory = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (onEditCategory) {
-      onEditCategory();
-    }
+  const handleEditCategory = () => {
+    setRoutineId(Number(params.routineId));
+    setCategoryId(category.categoryId);
+    onEditCategory && onEditCategory();
   };
 
   return (
     <Wrapper>
       <DropdownBox onClick={handleToggle}>
-        {category}
+        {modifyEnabled && (
+          <Completed
+            isCompleted={category.isCompleted ? category.isCompleted : false}
+            categoryId={category.categoryId}
+          />
+        )}
+        {category.categoryName}
         <Buttons $isOpen={isOpen}>
           {modifyEnabled && (
             <IconButton
               name="dots"
               color="text"
               size="24px"
-              onClick={handleCategory}
+              onClick={handleEditCategory}
             />
           )}
           <IconButton
             name="arrowDown"
             color="text"
             size="24px"
-            onClick={() => {}}
+            onClick={handleToggle}
             className="arrow-button"
           />
         </Buttons>
@@ -57,22 +69,14 @@ const CategoryDropdown = ({
       {isOpen && (
         <OptionBox $isOpen={isOpen}>
           {actions.map((action) => (
-            <Action key={action.actionId}>
-              <Text>
-                <p className="b3">{action.actionName}</p>
-                <LineClamp $line={1} className="b2">
-                  {action.countOrMinutes} {action.sets}세트
-                </LineClamp>
-              </Text>
-              {modifyEnabled && (
-                <IconButton
-                  name="dots"
-                  color="text"
-                  size="24px"
-                  onClick={onEditAction}
-                />
-              )}
-            </Action>
+            <Action
+              key={action.actionId}
+              action={action}
+              routineId={routineId}
+              categoryId={category.categoryId}
+              modifyEnabled={modifyEnabled}
+              onEditAction={onEditAction}
+            />
           ))}
         </OptionBox>
       )}
@@ -116,19 +120,6 @@ const OptionBox = styled.ul<{ $isOpen: boolean }>`
   overflow: hidden;
   animation: ${({ $isOpen }) => ($isOpen ? slideDown : slideUp)} 0.3s
     ease-in-out forwards;
-`;
-
-const Action = styled.li`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 70px;
-  padding: 0 10px;
-`;
-
-const Text = styled.div`
-  display: flex;
-  flex-direction: column;
 `;
 
 const slideDown = keyframes`

@@ -6,19 +6,19 @@ import { useState } from "react";
 import Modal from "@/components/common/modal/Modal";
 import ActionModalInner from "@/components/common/modal/contents/ActionModalInner";
 import RoutineContents from "@/components/common/modal/contents/RoutineContents";
-import { SPORTS_NAMES } from "@/constants/sportsConstants";
 import { useModalInfo } from "@/store/modalInfo.store";
 import RoutinePicker from "../common/modal/contents/RoutinePicker";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface RoutineProps {
   id: number;
   name: string;
-  sportId: number;
+  sport: string;
 }
 
-const Routine = ({ id, name, sportId }: RoutineProps) => {
+const Routine = ({ id, name, sport }: RoutineProps) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
 
   const modifyModal = useModal();
@@ -58,10 +58,15 @@ const Routine = ({ id, name, sportId }: RoutineProps) => {
         </Modal>
       )}
       <Card>
-        <RoutineStyle>
+        <RoutineStyle
+          onClick={() => {
+            setRoutineId(id);
+            navigate(`/routine/detail/${id}?routineName=${name}`);
+          }}
+        >
           <RoutineTextStyle>
             <h2>{name}</h2>
-            <p className="b2">{SPORTS_NAMES[sportId]}</p>
+            <p className="b2">{sport}</p>
           </RoutineTextStyle>
           {!queryParams.get("coach") && (
             <RoutineIconStyle>
