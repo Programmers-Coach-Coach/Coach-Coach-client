@@ -1,6 +1,6 @@
 import IconButton from "@/components/Icon/IconButton";
 import Action from "@/components/routine/Action";
-import { IAction, ICategoryList } from "@/models/routine.model";
+import { IAction, ICategory } from "@/models/routine.model";
 import { useModalInfo } from "@/store/modalInfo.store";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -8,7 +8,7 @@ import styled, { keyframes } from "styled-components";
 import Completed from "../CheckBox/Completed";
 
 interface Props {
-  category: ICategoryList;
+  category: ICategory;
   actions: IAction[];
   modifyEnabled?: boolean;
   onEditCategory?: () => void; // 카테고리 수정, 삭제 기능
@@ -43,7 +43,7 @@ const CategoryDropdown = ({
       <DropdownBox onClick={handleToggle}>
         {modifyEnabled && (
           <Completed
-            isCompleted={category.isCompleted}
+            isCompleted={category.isCompleted ? category.isCompleted : false}
             categoryId={category.categoryId}
           />
         )}

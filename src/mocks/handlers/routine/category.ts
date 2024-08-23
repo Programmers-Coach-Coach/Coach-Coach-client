@@ -1,6 +1,6 @@
 import { API_PATH } from "@/constants/apiPath";
 import { routineDetail } from "@/data/routine";
-import { ICategoryList } from "@/models/routine.model";
+import { ICategoryList, ICategoryName } from "@/models/routine.model";
 import { responseMessage } from "@/data/responseMessage";
 import { http, HttpResponse } from "msw";
 
@@ -15,11 +15,11 @@ let categoryIdCounter = routineDetail.categoryList.reduce(
 const postCategoryData = http.post(
   `${BASE_URL}${API_V1}${API_PATH.routine}/:routineId`,
   async ({ request }) => {
-    const newCategory = (await request.json()) as string;
+    const newCategory = (await request.json()) as ICategoryName;
 
     const createdRoutine: ICategoryList = {
       categoryId: ++categoryIdCounter,
-      categoryName: newCategory,
+      categoryName: newCategory.categoryName,
       isCompleted: false,
       actionList: []
     };
@@ -38,7 +38,7 @@ const patchCategoryData = http.patch(
     const { categoryId } = params;
 
     // 명시적으로 타입을 지정
-    const updateCategory = (await request.json()) as string;
+    const updateCategory = (await request.json()) as ICategoryName;
 
     const categoryIndex = routineDetail.categoryList.findIndex(
       (category) => category.categoryId === Number(categoryId)
@@ -46,7 +46,7 @@ const patchCategoryData = http.patch(
     if (categoryIndex !== -1) {
       routineDetail.categoryList[categoryIndex] = {
         ...routineDetail.categoryList[categoryIndex],
-        categoryName: updateCategory
+        categoryName: updateCategory.categoryName
       };
     }
 

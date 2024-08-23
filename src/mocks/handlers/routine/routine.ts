@@ -1,8 +1,9 @@
 import { API_PATH } from "@/constants/apiPath";
 import { routineDetail, routines } from "@/data/routine";
-import { IRoutine } from "@/models/routine.model";
 import { responseMessage } from "@/data/responseMessage";
 import { http, HttpResponse } from "msw";
+import { IPostRoutine } from "@/models/routine.model";
+import { SPORTS_NAMES } from "@/constants/sportsConstants";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_V1 = "/api/v1";
@@ -42,10 +43,14 @@ let routineIdCounter = routines.reduce(
 const postRoutineData = http.post(
   `${BASE_URL}${API_V1}${API_PATH.routine}`,
   async ({ request }) => {
-    const newRoutine = (await request.json()) as Omit<IRoutine, "routineId">;
+    const newRoutine = (await request.json()) as Omit<
+      IPostRoutine,
+      "routineId"
+    >;
     const createdRoutine = {
-      ...newRoutine,
-      routineId: ++routineIdCounter
+      routineId: ++routineIdCounter,
+      routineName: newRoutine.routineName,
+      sportName: SPORTS_NAMES[newRoutine.sportId - 1]
     };
 
     routines.push(createdRoutine);
@@ -62,7 +67,10 @@ const patchRoutineData = http.patch(
     const { id } = params;
 
     // 명시적으로 타입을 지정
-    const updatedData = (await request.json()) as Omit<IRoutine, "routineId">;
+    const updatedData = (await request.json()) as Omit<
+      IPostRoutine,
+      "routineId"
+    >;
 
     const routineIndex = routines.findIndex(
       (routine) => routine.routineId === Number(id)
@@ -70,7 +78,8 @@ const patchRoutineData = http.patch(
     if (routineIndex !== -1) {
       routines[routineIndex] = {
         ...routines[routineIndex],
-        ...updatedData
+        routineName: updatedData.routineName,
+        sportName: SPORTS_NAMES[updatedData.sportId - 1]
       };
     }
 

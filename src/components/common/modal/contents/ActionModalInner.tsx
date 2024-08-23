@@ -54,7 +54,7 @@ const ActionModalInner = ({ children, schema, closeModal }: Props) => {
       postCategoryResponse.mutate({ payload: { categoryName }, routineId });
     } else if (schema === "category-modify") {
       patchCategoryResponse.mutate({
-        payload: categoryName,
+        payload: { categoryName },
         routineId,
         categoryId
       });

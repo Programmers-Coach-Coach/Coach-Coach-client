@@ -38,7 +38,7 @@ export const usePatchCategory = () => {
   const { mutate, isPending, isError, data } = useMutation<
     IResponseMessage,
     Error,
-    { payload: string; routineId: number; categoryId: number }
+    { payload: ICategoryName; routineId: number; categoryId: number }
   >({
     mutationFn: ({ payload, routineId, categoryId }) =>
       patchCategoryData(payload, routineId, categoryId),

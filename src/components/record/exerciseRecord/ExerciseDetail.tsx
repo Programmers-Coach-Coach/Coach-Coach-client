@@ -26,6 +26,12 @@ const ACITONS = [
     countOrMinutes: "15회"
   }
 ];
+
+const CATEGORY = {
+  categoryId: 1,
+  categoryName: "카테고리명"
+};
+
 const ExerciseDetail = () => {
   const [date, setDate] = useState<string | null>(null);
 
@@ -48,9 +54,9 @@ const ExerciseDetail = () => {
             <p className="b3">루틴1</p>
             <p className="small-text">하주영</p>
           </CoachInfo>
-          <CategoryDropdown category="카테고리 1" actions={ACITONS} />
-          <CategoryDropdown category="카테고리 2" actions={ACITONS} />
-          <CategoryDropdown category="카테고리 3" actions={ACITONS} />
+          <CategoryDropdown category={CATEGORY} actions={ACITONS} />
+          <CategoryDropdown category={CATEGORY} actions={ACITONS} />
+          <CategoryDropdown category={CATEGORY} actions={ACITONS} />
         </Routine>
         <Routine>
           <CoachInfo>
@@ -58,9 +64,9 @@ const ExerciseDetail = () => {
             <p className="b3">루틴2</p>
             <p className="small-text">하주영</p>
           </CoachInfo>
-          <CategoryDropdown category="카테고리 1" actions={ACITONS} />
-          <CategoryDropdown category="카테고리 2" actions={ACITONS} />
-          <CategoryDropdown category="카테고리 3" actions={ACITONS} />
+          <CategoryDropdown category={CATEGORY} actions={ACITONS} />
+          <CategoryDropdown category={CATEGORY} actions={ACITONS} />
+          <CategoryDropdown category={CATEGORY} actions={ACITONS} />
         </Routine>
         <Routine>
           <CoachInfo>
@@ -70,9 +76,9 @@ const ExerciseDetail = () => {
             <p className="b3">루틴2</p>
             <p className="small-text">하주영</p>
           </CoachInfo>
-          <CategoryDropdown category="카테고리 1" actions={ACITONS} />
-          <CategoryDropdown category="카테고리 2" actions={ACITONS} />
-          <CategoryDropdown category="카테고리 3" actions={ACITONS} />
+          <CategoryDropdown category={CATEGORY} actions={ACITONS} />
+          <CategoryDropdown category={CATEGORY} actions={ACITONS} />
+          <CategoryDropdown category={CATEGORY} actions={ACITONS} />
         </Routine>
       </ExerciseWrapper>
     </Wrapper>

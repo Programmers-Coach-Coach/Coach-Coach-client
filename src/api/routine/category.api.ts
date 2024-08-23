@@ -15,7 +15,7 @@ export const postCategoryData = async (
 };
 
 export const patchCategoryData = async (
-  payload: string,
+  payload: ICategoryName,
   routineId: number,
   categoryId: number
 ) => {

@@ -5,7 +5,7 @@ interface ModalInfoProps {
   routineName: string;
   categoryName: string;
   actionName: string;
-  sets: string;
+  sets: number;
   countOrMinutes: string;
   description: string;
   routineId: number;
@@ -15,7 +15,7 @@ interface ModalInfoProps {
   setRoutineName: (routineName: string) => void;
   setCategoryName: (categoryName: string) => void;
   setActionName: (actionName: string) => void;
-  setSets: (sets: string) => void;
+  setSets: (sets: number) => void;
   setCountOrMinutes: (countOrMinutes: string) => void;
   setDescription: (description: string) => void;
   setRoutineId: (routineId: number) => void;
@@ -28,7 +28,7 @@ export const useModalInfo = create<ModalInfoProps>((set) => ({
   routineName: "",
   categoryName: "",
   actionName: "",
-  sets: "",
+  sets: 0,
   countOrMinutes: "",
   description: "",
   routineId: -1,
@@ -43,8 +43,7 @@ export const useModalInfo = create<ModalInfoProps>((set) => ({
   setCountOrMinutes: (countOrMinutes) =>
     set(() => ({ countOrMinutes: countOrMinutes })),
   setDescription: (description) => set(() => ({ description: description })),
-  setRoutineId: (routineId: number) => set(() => ({ routineId: routineId })),
-  setCategoryId: (categoryId: number) =>
-    set(() => ({ categoryId: categoryId })),
-  setActionId: (actionId: number) => set(() => ({ actionId }))
+  setRoutineId: (routineId) => set(() => ({ routineId: routineId })),
+  setCategoryId: (categoryId) => set(() => ({ categoryId: categoryId })),
+  setActionId: (actionId) => set(() => ({ actionId }))
 }));

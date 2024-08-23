@@ -19,9 +19,9 @@ export interface IGetQuery {
 export interface IAction {
   actionId: number;
   actionName: string;
-  sets: string;
+  sets: number;
   countOrMinutes: string;
-  description: string;
+  description?: string;
 }
 
 export interface ICategoryName {
@@ -30,7 +30,7 @@ export interface ICategoryName {
 
 export interface ICategory extends ICategoryName {
   categoryId: number;
-  isCompleted: boolean;
+  isCompleted?: boolean;
 }
 
 export interface ICategoryList extends ICategory {
