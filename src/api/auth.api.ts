@@ -8,8 +8,7 @@ import {
   ISignup,
   IUserProfile
 } from "@/models/auth.model";
-import { ICoachDetail, IMyPageCoachFormWithSports, IMyPageCoachFormValues } from "@/models/coach.model";
-import { httpClient, createClient, requestHandler } from "./http";
+import { ICoachDetail, IMyPageCoachFormWithSports } from "@/models/coach.model";
 import { AxiosResponse } from "axios";
 import { createClient, httpClient, requestHandler } from "./http";
 
