@@ -73,7 +73,7 @@ const Item = ({
   const onClickHandler = () => {
     if (type === "delete") {
       if (item.name === "루틴 삭제") {
-        deleteRoutineResponse.mutateAsync(routineId);
+        deleteRoutineResponse.mutate(routineId);
       }
     } else if (type === "matching") {
       if (item.name === "루틴 작성") {
