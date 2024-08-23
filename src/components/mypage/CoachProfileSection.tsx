@@ -54,7 +54,6 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
   }, [coachProfile, setValue]);
 
   const onSubmit = (data: IMyPageCoachFormValues) => {
-    // 에러가 있는 경우 처리
     if (Object.keys(errors).length > 0) {
       toast.error("입력 폼을 모두 채워주세요.");
       return;
@@ -72,7 +71,6 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
       chattingUrl: data.chattingUrl,
       isOpen: data.isOpen
     };
-    console.log(userCoachProfileRequest);
     editUserCoachProfile(userCoachProfileRequest);
   };
 
@@ -112,7 +110,7 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
             rules={{ required: true }}
             render={({ field }) => (
               <SelectBox
-                value={field.value || []}
+                value={field.value}
                 onChange={(event) =>
                   field.onChange(event.target.value as string[])
                 }
@@ -174,10 +172,7 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
               <SubtitleWrapper>
                 정보 공개 선택 (목록에 노출하기)
               </SubtitleWrapper>
-              <Switch
-                checked={field.value || false}
-                onChange={field.onChange}
-              />
+              <Switch checked={field.value} onChange={field.onChange} />
             </BasicWrapper>
           )}
         />
