@@ -7,6 +7,7 @@ import {
   IoIosArrowBack,
   IoIosArrowDown,
   IoIosHeart,
+  IoIosHeartEmpty,
   IoMdMore,
   IoMdPerson
 } from "react-icons/io";
@@ -37,5 +38,6 @@ export const ICONS = {
   dots: IoMdMore,
   emptyStar: FaRegStar,
   fullStar: FaStar,
-  heart: IoIosHeart
+  heart: IoIosHeart,
+  emptyHeart: IoIosHeartEmpty
 };
