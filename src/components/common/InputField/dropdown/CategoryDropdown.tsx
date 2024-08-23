@@ -66,18 +66,20 @@ const CategoryDropdown = ({
           />
         </Buttons>
       </DropdownBox>
-      <OptionBox $isOpen={isOpen}>
-        {actions.map((action) => (
-          <Action
-            key={action.actionId}
-            action={action}
-            routineId={routineId}
-            categoryId={category.categoryId}
-            modifyEnabled={modifyEnabled}
-            onEditAction={onEditAction}
-          />
-        ))}
-      </OptionBox>
+      {isOpen && (
+        <OptionBox $isOpen={isOpen}>
+          {actions.map((action) => (
+            <Action
+              key={action.actionId}
+              action={action}
+              routineId={routineId}
+              categoryId={category.categoryId}
+              modifyEnabled={modifyEnabled}
+              onEditAction={onEditAction}
+            />
+          ))}
+        </OptionBox>
+      )}
     </Wrapper>
   );
 };
@@ -91,6 +93,8 @@ const DropdownBox = styled.div`
   display: flex;
   align-items: center;
   height: 60px;
+  padding: 0 10px;
+
   color: ${({ theme }) => theme.color.primary};
   font-weight: 800;
   cursor: pointer;

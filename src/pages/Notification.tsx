@@ -1,15 +1,19 @@
 import NotificationCard from "@/components/card/NotificationCard";
 import Empty from "@/components/common/Empty/Empty";
 import Loading from "@/components/loading/Loading";
-import { useFetchNotifications } from "@/hooks/queries/useNotification";
+import {
+  useDeleteAllNotification,
+  useFetchNotifications
+} from "@/hooks/queries/useNotification";
 import styled from "styled-components";
 
 const Notification = () => {
-  const handleDelete = () => {
-    // TODO: 알림 전체 삭제
-  };
-
   const { data, isError, isLoading } = useFetchNotifications();
+  const { mutate } = useDeleteAllNotification();
+
+  const handleDelete = () => {
+    mutate();
+  };
 
   if (isLoading) return <Loading />;
   if (isError || !data)

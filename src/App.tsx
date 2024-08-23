@@ -16,6 +16,7 @@ import ManageMember from "./pages/ManageMember";
 import MyCoach from "./pages/MyCoach";
 import Mypage from "./pages/Mypage";
 import Notification from "./pages/Notification";
+import Record from "./pages/Record";
 import RecordDatail from "./pages/RecordDatail";
 import CoachRoutine from "./pages/Routine/CoachRoutine";
 import MemberRoutine from "./pages/Routine/MemberRoutine";
@@ -70,6 +71,10 @@ function App() {
         {
           path: "record",
           element: <RecordDatail />
+        },
+        {
+          path: "record-list",
+          element: <Record />
         },
         {
           path: "coach/:id",
