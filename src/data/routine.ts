@@ -19,7 +19,7 @@ export const routineDetail: Omit<IRoutineDetails, "routineName"> = {
     actionList: Array.from({ length: 4 }).map((_, j) => ({
       actionId: i * 100 + j * 100 + 1,
       actionName: faker.fullname(),
-      sets: faker.fullname(),
+      sets: 3,
       countOrMinutes: Math.floor(Math.random() * 12) + " minutes",
       description: faker.fullname()
     }))
