@@ -1,5 +1,5 @@
 import StampImage from "@/assets/images/stamp.png";
-import { utcDatetoLocal } from "@/utils/format";
+import { useGetStamps } from "@/hooks/queries/useRecord";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -12,14 +12,18 @@ import styled from "styled-components";
 const ExerciseCalender = () => {
   const today = dayjs();
   const [value, setValue] = useState(today);
+  const [year, setYear] = useState(today.year());
+  const [month, setMonth] = useState(today.month() + 1);
 
   const navigate = useNavigate();
 
+  const { data, isError, isLoading } = useGetStamps(year, month);
+
   // utc 시간 문자열을 dayjs 객체로 변환
   const [selectedDates] = useState<dayjs.Dayjs[]>([
-    utcDatetoLocal("2024-08-11T11:47:11Z"),
-    utcDatetoLocal("2024-08-12T11:47:11Z"),
-    utcDatetoLocal("2024-08-13T11:47:11Z")
+    dayjs("2024-08-10"),
+    dayjs("2024-08-12"),
+    dayjs("2024-08-13")
   ]);
 
   const handleDayClick = (date: Dayjs) => {
@@ -34,6 +38,8 @@ const ExerciseCalender = () => {
           value={value}
           onChange={(newValue) => {
             setValue(newValue);
+            setYear(newValue.year());
+            setMonth(newValue.month() + 1);
           }}
           maxDate={today}
           slots={{

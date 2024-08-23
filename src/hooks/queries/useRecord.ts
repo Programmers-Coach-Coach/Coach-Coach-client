@@ -1,6 +1,6 @@
-import { postPhysicalMetrics } from "@/api/record.api";
+import { getStamps, postPhysicalMetrics } from "@/api/record.api";
 import { IPhysicalMetrics } from "@/models/record.model";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 export const usePostPhysicalMetrics = () => {
@@ -19,4 +19,13 @@ export const usePostPhysicalMetrics = () => {
     isError,
     mutate
   };
+};
+
+export const useGetStamps = (year: number, month: number) => {
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ["getStamp", year, month],
+    queryFn: () => getStamps(year, month)
+  });
+
+  return { data, isError, isLoading };
 };
