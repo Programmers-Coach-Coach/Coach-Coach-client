@@ -1,29 +1,36 @@
+import { Inputs } from "@/components/modal/PhysicalRecordInner";
+import { UseFormProps, UseFormRegister } from "react-hook-form";
 import styled, { css } from "styled-components";
 
-interface Props {
+interface Props extends UseFormProps {
   disabled?: boolean;
+  register?: UseFormRegister<Inputs>;
 }
 
 const PHYSICAL_RECORDS = [
   {
     label: "체중(kg)",
+    name: "weight",
     value: null
   },
   {
     label: "골격근량(kg)",
+    name: "skeletalMuscle",
     value: 20.2
   },
   {
     label: "체지방률(%)",
+    name: "fatPercentage",
     value: 22.0
   },
   {
     label: "BMI",
+    name: "bmi",
     value: 1125.0
   }
 ];
 
-const PhysicalRecordInputs = ({ disabled = false }: Props) => {
+const PhysicalRecordInputs = ({ disabled = false, register }: Props) => {
   return (
     <Wrapper>
       {PHYSICAL_RECORDS.map((record, i) => (
@@ -35,6 +42,11 @@ const PhysicalRecordInputs = ({ disabled = false }: Props) => {
               disabled={disabled}
               $disabled={disabled}
               placeholder="-"
+              {...(register
+                ? register(record.name as keyof Inputs, {
+                    pattern: /^[0-9]+(\.[0-9])?$/
+                  })
+                : {})}
             />
           </InputContainer>
         </InputWithLabel>
