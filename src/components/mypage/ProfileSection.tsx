@@ -74,7 +74,6 @@ const ProfileSection = () => {
     };
 
     formData.append("userProfileRequest", JSON.stringify(userProfileRequest));
-    console.log(JSON.stringify(userProfileRequest));
     editUserProfile(formData);
   };
 
@@ -105,7 +104,6 @@ const ProfileSection = () => {
 
   if (isLoading) return <Loading />;
   if (isFetchError || !profile) {
-    console.log(isFetchError);
     return <div>프로필 정보를 가져오는 중 오류가 발생했습니다.</div>;
   }
 
@@ -134,7 +132,7 @@ const ProfileSection = () => {
                 minRows={1}
                 {...field}
                 label="닉네임"
-                value={field.value || ""} // null일 경우 빈 문자열로 처리
+                value={field.value || ""}
               />
             )}
           />
@@ -149,7 +147,7 @@ const ProfileSection = () => {
                 row
                 {...field}
                 onChange={(e) => field.onChange(e.target.value)}
-                value={field.value || ""} // null일 경우 빈 문자열로 처리
+                value={field.value || ""}
               >
                 <FormControlLabel
                   value="남성"
@@ -187,7 +185,7 @@ const ProfileSection = () => {
           render={({ field }) => (
             <AddressSearchField
               label="지역"
-              value={field.value || ""} // null일 경우 빈 문자열로 처리
+              value={field.value || ""}
               onAddressSelect={(address) => field.onChange(address)}
             />
           )}

@@ -12,7 +12,7 @@ Sentry.init({
     Sentry.replayIntegration()
   ],
   tracesSampleRate: 1.0,
-  tracePropagationTargets: ["localhost", import.meta.env.VITE_SENTRY_URL],
+  tracePropagationTargets: [import.meta.env.VITE_SENTRY_URL],
   profilesSampleRate: 1.0,
   replaysSessionSampleRate: 0.1,
   replaysOnErrorSampleRate: 1.0

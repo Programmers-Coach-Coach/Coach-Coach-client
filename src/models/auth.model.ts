@@ -46,3 +46,9 @@ export interface ICheckNicknameDuplication {
 export interface ICheckPassword {
   password: string;
 }
+
+export interface IAuthResponse {
+  isLogin: boolean;
+  nickname: string | null;
+  countOfNotifications: number;
+}
