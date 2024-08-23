@@ -19,5 +19,6 @@ export const API_PATH = {
   matchMembers: "/coaches/members",
   matchMember: "/coaches/member",
   patchMember: "/coaches/matched/members",
-  auth: "/auth"
+  auth: "/auth",
+  record: "/records"
 };

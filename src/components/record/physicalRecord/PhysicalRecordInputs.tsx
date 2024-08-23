@@ -1,10 +1,11 @@
-import { Inputs } from "@/components/modal/PhysicalRecordInner";
+import { NUMBER_REGEX } from "@/constants/regex";
+import { IPhysicalMetrics } from "@/models/record.model";
 import { UseFormProps, UseFormRegister } from "react-hook-form";
 import styled, { css } from "styled-components";
 
 interface Props extends UseFormProps {
   disabled?: boolean;
-  register?: UseFormRegister<Inputs>;
+  register?: UseFormRegister<IPhysicalMetrics>;
 }
 
 const PHYSICAL_RECORDS = [
@@ -43,8 +44,9 @@ const PhysicalRecordInputs = ({ disabled = false, register }: Props) => {
               $disabled={disabled}
               placeholder="-"
               {...(register
-                ? register(record.name as keyof Inputs, {
-                    pattern: /^[0-9]+(\.[0-9])?$/
+                ? register(record.name as keyof IPhysicalMetrics, {
+                    pattern: NUMBER_REGEX.singleDecimalNumber,
+                    setValueAs: Number
                   })
                 : {})}
             />
