@@ -2,6 +2,7 @@ import { filterList, sportList } from "@/data/sportsList";
 import useModal from "@/hooks/useModal";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
+import Icon from "../Icon/Icon";
 import IconButton from "../Icon/IconButton";
 import Modal from "../common/modal/Modal";
 import FilterPicker from "../common/modal/contents/FilterPicker";
@@ -27,16 +28,14 @@ const CoachListFilter = ({ singleFilter, multiFilter }: Props) => {
 
   return (
     <CoachListFilterStyle>
-      <IconButton
-        name="filter"
-        size="18px"
-        color="text"
-        onClick={handleModal}
-      />
-      {/* 정렬 필터*/}
-      <SortFilter>
-        {filterList.find((filter) => sort === filter.parameter)?.name}
-      </SortFilter>
+      <SortingFilterButton onClick={handleModal}>
+        <Icon name="filter" size="18px" color="text" />
+        {/* 정렬 필터*/}
+        <SortFilter>
+          {filterList.find((filter) => sort === filter.parameter)?.name}
+        </SortFilter>
+      </SortingFilterButton>
+
       {/* 종목 필터 */}
       <SportsFilter>
         {sportsIds.map((id) => (
@@ -95,5 +94,11 @@ const Filter = styled.button`
   background-color: ${({ theme }) => theme.color.background};
   border-radius: ${({ theme }) => theme.borderRadius.default};
   border: 1px solid ${({ theme }) => theme.color.primary};
+`;
+
+const SortingFilterButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 2px;
 `;
 export default CoachListFilter;

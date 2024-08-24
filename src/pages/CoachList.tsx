@@ -11,9 +11,9 @@ const CoachList = () => {
   return (
     <CoachListStyle>
       <Search placeholder="코치명을 검색하세요" />
-      <WhiteSpace $height={30} />
+      <WhiteSpace $height={14} />
       <CoachListFilter singleFilter={singleFilter} multiFilter={multiFilter} />
-      <WhiteSpace $height={30} />
+      <WhiteSpace $height={14} />
       <Coaches />
     </CoachListStyle>
   );
