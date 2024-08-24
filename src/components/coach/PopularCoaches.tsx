@@ -59,10 +59,7 @@ const Coach = ({ coach }: CoachProps) => {
   return (
     <CoachStyle>
       <img src={coach.profileImageUrl} alt={coach.coachName} />
-      <button>
-        <Heart checked={coach.isLiked} size="24px" id={coach.coachId} />
-        <p className="b3">{coach.countOfLikes}</p>
-      </button>
+      <Heart checked={coach.isLiked} size="24px" id={coach.coachId} />
       <BoxText>
         <LineClamp $line={1} className="b3">
           {coach.coachName}
