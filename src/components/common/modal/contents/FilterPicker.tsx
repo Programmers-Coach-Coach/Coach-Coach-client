@@ -4,14 +4,12 @@ import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
 interface Props {
-  sportsIdList: number[];
   sportListWithTotal: ICoachingSports[]; // "전체"를 포함한 종목 필터
   singleFilter: (id: number) => void;
   multiFilter: (id: number) => void;
 }
 
 const FilterPicker = ({
-  sportsIdList,
   sportListWithTotal,
   singleFilter,
   multiFilter
@@ -19,6 +17,8 @@ const FilterPicker = ({
   // TODO: 중복된 sort값 훅으로 분리하기
   const [searchParams] = useSearchParams();
   const sort = searchParams.get("sort") ?? "latest";
+
+  const sportsIds = searchParams.get("sportsIds")?.split(",").map(Number) ?? [];
 
   return (
     <FilterPickerStyle>
@@ -45,7 +45,7 @@ const FilterPicker = ({
         {sportListWithTotal.map((sport) => (
           <Filter
             key={sport.sportId}
-            $active={sportsIdList.includes(sport.sportId)}
+            $active={sportsIds.includes(sport.sportId)}
             onClick={() => multiFilter(sport.sportId)}
           >
             {sport.sportName}

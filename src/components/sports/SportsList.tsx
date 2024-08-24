@@ -53,12 +53,12 @@ const Sport = ({ item }: SportProps) => {
   const { sportId, sportName, sportImageUrl } = item;
   const navigate = useNavigate();
 
-  const handleLocation = (sportId: number) => {
-    navigate("/coach-list", { state: { sportId } });
+  const handleLocation = () => {
+    navigate("/coach-list");
   };
 
   return (
-    <SportStyle $id={sportId} onClick={() => handleLocation(sportId)}>
+    <SportStyle $id={sportId} onClick={handleLocation}>
       <img src={sportImageUrl} alt={sportName} />
       <p>{sportName}</p>
     </SportStyle>

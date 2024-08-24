@@ -4,18 +4,18 @@ import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import Coach from "./Coach";
 
-interface Props {
-  sportsIdList: number[];
-}
-const CoachList = ({ sportsIdList }: Props) => {
+const CoachList = () => {
   const [searchParams] = useSearchParams();
   const sort = searchParams.get("sort") ?? "latest";
 
+  const sportsIds = searchParams.get("sportsIds")?.split(",").map(Number) ?? [];
+
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useCoachList(
     {
-      filter: { sportsIdList }
+      filter: {}
     },
-    sort
+    sort,
+    sportsIds
   );
 
   const { setTarget } = useIntersectionObserver({

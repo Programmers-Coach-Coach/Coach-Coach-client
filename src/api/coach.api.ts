@@ -10,8 +10,12 @@ import { IResponseMessage } from "@/models/responseMessage.model";
 import qs from "qs";
 import { requestHandler } from "./http";
 
-export const getCoachAll = ({ filter, page }: IAllCoachList, sort: string) => {
-  const { search, sportsIdList } = filter;
+export const getCoachAll = (
+  { filter, page }: IAllCoachList,
+  sort: string,
+  sportsIds: number[]
+) => {
+  const { search } = filter;
 
   let latest: boolean | undefined;
   let review: boolean | undefined;
@@ -33,16 +37,9 @@ export const getCoachAll = ({ filter, page }: IAllCoachList, sort: string) => {
       break;
   }
 
-  let formattedSportsId;
-  if (sportsIdList?.includes(0)) {
-    formattedSportsId = null;
-  } else {
-    formattedSportsId = sportsIdList?.join(",");
-  }
-
   const query = qs.stringify(
     {
-      sports: formattedSportsId,
+      sports: sportsIds.length === 0 ? null : sportsIds.join(","),
       search,
       latest,
       review,

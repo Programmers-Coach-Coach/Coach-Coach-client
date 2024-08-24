@@ -4,12 +4,16 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 
 const PER_PAGE = 20;
-const useCoachList = (filter: Omit<IAllCoachList, "page">, sort: string) => {
+const useCoachList = (
+  filter: Omit<IAllCoachList, "page">,
+  sort: string,
+  sportsIds: number[]
+) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } =
     useInfiniteQuery<ICoachList>({
       queryKey: ["coach-infiniteScroll", filter],
       queryFn: ({ pageParam }) =>
-        getCoachAll({ ...filter, page: pageParam as number }, sort),
+        getCoachAll({ ...filter, page: pageParam as number }, sort, sportsIds),
       getNextPageParam: (lastPage) => {
         const nextPage = lastPage.currentPage + 1;
         return lastPage.totalCount > lastPage.currentPage * PER_PAGE
@@ -21,7 +25,7 @@ const useCoachList = (filter: Omit<IAllCoachList, "page">, sort: string) => {
 
   useEffect(() => {
     refetch();
-  }, [refetch, sort]);
+  }, [refetch, sort, sportsIds]);
 
   return {
     data,

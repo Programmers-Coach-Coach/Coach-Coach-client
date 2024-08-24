@@ -7,16 +7,11 @@ import Modal from "../common/modal/Modal";
 import FilterPicker from "../common/modal/contents/FilterPicker";
 
 interface Props {
-  sportsIdList: number[];
   singleFilter: (id: number) => void;
   multiFilter: (id: number) => void;
 }
 
-const CoachListFilter = ({
-  sportsIdList,
-  singleFilter,
-  multiFilter
-}: Props) => {
+const CoachListFilter = ({ singleFilter, multiFilter }: Props) => {
   const { isModal, closeModal, handleModal } = useModal();
 
   // 종목 필터에 "전체" 추가한 배열
@@ -28,6 +23,8 @@ const CoachListFilter = ({
   const [searchParams] = useSearchParams();
   const sort = searchParams.get("sort") ?? "latest";
 
+  const sportsIds = searchParams.get("sportsIds")?.split(",").map(Number) ?? [];
+
   return (
     <CoachListFilterStyle>
       <Icon name="filter" size="18px" color="text" onClick={handleModal} />
@@ -37,7 +34,7 @@ const CoachListFilter = ({
       </SortFilter>
       {/* 종목 필터 */}
       <SportsFilter>
-        {sportsIdList.map((id) => (
+        {sportsIds.map((id) => (
           <Filter key={id}>
             {
               SPORT_LIST_WITH_TOTAL.find((sport) => sport.sportId === id)
@@ -55,7 +52,6 @@ const CoachListFilter = ({
       {isModal && (
         <Modal position="footer-above" closeModal={closeModal}>
           <FilterPicker
-            sportsIdList={sportsIdList}
             sportListWithTotal={SPORT_LIST_WITH_TOTAL}
             singleFilter={singleFilter}
             multiFilter={multiFilter}

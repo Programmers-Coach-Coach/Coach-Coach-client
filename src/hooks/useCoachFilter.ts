@@ -1,12 +1,9 @@
 import { filterList } from "@/data/sportsList";
-import { useState } from "react";
 import toast from "react-hot-toast";
 import { useSearchParams } from "react-router-dom";
 
-const useCoachFilter = (sportId: number) => {
+const useCoachFilter = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const [sportsIdList, setSportsIdList] = useState<number[]>([sportId]);
 
   const singleFilter = (id: number) => {
     const sort =
@@ -16,25 +13,35 @@ const useCoachFilter = (sportId: number) => {
   };
 
   const multiFilter = (id: number) => {
-    if (sportsIdList.includes(id)) {
-      // id 제거
-      sportsIdList.length >= 2
-        ? setSportsIdList(sportsIdList.filter((sportId) => sportId !== id))
-        : toast.error("반드시 한개 이상 선택해주세요");
-    } else {
-      // id 추가
-      if (id === 0) {
-        setSportsIdList([0]);
-      } else if (sportsIdList.includes(0)) {
-        setSportsIdList([id]);
+    const sportsIds =
+      searchParams.get("sportsIds")?.split(",").map(Number) ?? [];
+
+    let newSportsIds: number[];
+
+    if (sportsIds.includes(id)) {
+      if (sportsIds.length >= 2) {
+        newSportsIds = sportsIds.filter((sportId) => sportId !== id);
       } else {
-        setSportsIdList([...sportsIdList, id]);
+        toast.error("반드시 한개 이상 선택해주세요");
+        return;
+      }
+    } else {
+      if (id === 0) {
+        newSportsIds = [];
+      } else {
+        newSportsIds = [...sportsIds, id];
       }
     }
+
+    if (newSportsIds.length === 0) {
+      searchParams.delete("sportsIds");
+    } else {
+      searchParams.set("sportsIds", newSportsIds.join(","));
+    }
+    setSearchParams(searchParams);
   };
 
   return {
-    sportsIdList,
     singleFilter,
     multiFilter
   };
