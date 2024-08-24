@@ -6,8 +6,8 @@ import Coach from "./Coach";
 
 const CoachList = () => {
   const [searchParams] = useSearchParams();
-  const sort = searchParams.get("sort") ?? "latest";
 
+  const sort = searchParams.get("sort") ?? "latest";
   const sportsIds = searchParams.get("sportsIds")?.split(",").map(Number) ?? [];
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useCoachList(

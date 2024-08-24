@@ -17,7 +17,6 @@ const FilterPicker = ({
   // TODO: 중복된 sort값 훅으로 분리하기
   const [searchParams] = useSearchParams();
   const sort = searchParams.get("sort") ?? "latest";
-
   const sportsIds = searchParams.get("sportsIds")?.split(",").map(Number) ?? [];
 
   return (
@@ -45,7 +44,10 @@ const FilterPicker = ({
         {sportListWithTotal.map((sport) => (
           <Filter
             key={sport.sportId}
-            $active={sportsIds.includes(sport.sportId)}
+            $active={
+              sportsIds.includes(sport.sportId) ||
+              (sportsIds.length === 0 && sport.sportId === 0)
+            }
             onClick={() => multiFilter(sport.sportId)}
           >
             {sport.sportName}
