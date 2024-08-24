@@ -57,6 +57,7 @@ export type IMyPageCoachFormWithSports = Omit<
   coachingSports: { sportName: string }[];
 };
 export interface ICoachDetail {
+  coachId: number;
   coachName: string;
   coachGender: "M" | "W";
   localAddress: string;
