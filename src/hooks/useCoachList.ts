@@ -1,7 +1,6 @@
 import { getCoachAll, getMyCoaches } from "@/api/coach.api";
 import { ICoachList, ISimpleCoach } from "@/models/coach.model";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
 
 const PER_PAGE = 20;
 const useCoachList = (
@@ -22,10 +21,6 @@ const useCoachList = (
       },
       initialPageParam: 1
     });
-
-  useEffect(() => {
-    refetch();
-  }, [refetch, sort, sportsIds]);
 
   return {
     data,
