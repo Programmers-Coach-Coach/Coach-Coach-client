@@ -8,6 +8,7 @@ export interface IGetRoutine extends IRoutine {
 }
 
 export interface IPostRoutine extends IRoutine {
+  userId?: number;
   sportId: number;
 }
 
@@ -40,4 +41,8 @@ export interface ICategoryList extends ICategory {
 export interface IRoutineDetails {
   routineName: string;
   categoryList: ICategoryList[];
+}
+
+export interface ICompletedCategory {
+  completedCategoryId: number;
 }

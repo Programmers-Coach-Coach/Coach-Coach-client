@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import logo from "@/assets/images/Logo.png";
 import { useProfileInfo } from "@/store/profileInfo.store";
+import { useIsCoach } from "@/store/isCoach.store";
 
 interface ProfileProps {
   profileId: number;
@@ -30,13 +31,24 @@ const Profile = ({
   );
   const setUserId = useProfileInfo((state) => state.setUserId);
   const setProfileName = useProfileInfo((state) => state.setProfileName);
+  const setIsCoach = useIsCoach((state) => state.setIsCoach);
+  const setIsModify = useIsCoach((state) => state.setIsModify);
+  const setIsUser = useIsCoach((state) => state.setIsUser);
 
   const onClickProfile = () => {
     if (state === "mycoaches") {
+      setIsCoach(false);
+      setIsModify(false);
+      setIsUser(false);
       setCoachId(profileId);
       setProfileImageUrl(profileImageUrl);
       navigate(`/routine/my-coach/${profileId}?coach=${profileName}`);
     } else {
+      if (state === "MatchingMember") {
+        setIsCoach(true);
+        setIsModify(true);
+        setIsUser(true);
+      }
       openModal();
       setUserId(profileId);
       setProfileName(profileName);
@@ -46,13 +58,19 @@ const Profile = ({
 
   return (
     <ProfileStyle>
-      <ProfileImageStyle
-        src={imageUrl}
-        onClick={onClickProfile}
-        width={width}
-        height={height}
-      />
-      {width === "114px" && <h1>{profileName}</h1>}
+      {state ? (
+        <>
+          <ProfileImageStyle
+            src={imageUrl}
+            onClick={onClickProfile}
+            width={width}
+            height={height}
+          />
+        </>
+      ) : (
+        <ProfileImageStyle src={imageUrl} width={width} height={height} />
+      )}
+      {width === "80px" && <h2>{profileName}</h2>}
     </ProfileStyle>
   );
 };

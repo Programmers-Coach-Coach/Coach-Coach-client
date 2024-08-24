@@ -5,6 +5,7 @@ export const myCoaches: ISimpleCoach[] = Array.from({ length: 7 }).map(
   (_, i) => ({
     coachId: i,
     coachName: faker.fullname(),
-    profileImageUrl: faker.imageUrl()
+    profileImageUrl: faker.imageUrl(),
+    isMatching: false
   })
 );

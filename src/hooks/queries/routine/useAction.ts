@@ -14,12 +14,11 @@ export const usePostAction = () => {
     Error,
     {
       payload: Omit<IAction, "actionId">;
-      routineId: number;
       categoryId: number;
     }
   >({
-    mutationFn: ({ payload, routineId, categoryId }) =>
-      postActionData(payload, routineId, categoryId),
+    mutationFn: ({ payload, categoryId }) =>
+      postActionData(payload, categoryId),
     onSuccess: (data) => {
       console.log("Action successfully posted: ", data);
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
@@ -43,13 +42,10 @@ export const usePatchAction = () => {
     Error,
     {
       payload: Omit<IAction, "actionId">;
-      routineId: number;
-      categoryId: number;
       actionId: number;
     }
   >({
-    mutationFn: ({ payload, routineId, categoryId, actionId }) =>
-      patchActionData(payload, routineId, categoryId, actionId),
+    mutationFn: ({ payload, actionId }) => patchActionData(payload, actionId),
     onSuccess: (data) => {
       console.log("Action successfully patched: ", data);
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
@@ -71,10 +67,9 @@ export const useDeleteAction = () => {
   const { mutate, isPending, isError, data } = useMutation<
     IResponseMessage,
     Error,
-    { routineId: number; categoryId: number; actionId: number }
+    number
   >({
-    mutationFn: ({ routineId, categoryId, actionId }) =>
-      deleteActionData(routineId, categoryId, actionId),
+    mutationFn: deleteActionData,
     onSuccess: (data) => {
       console.log("Action successfully deleted: ", data);
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });

@@ -14,6 +14,7 @@ export interface ISimpleCoach {
   coachId: number;
   coachName: string;
   profileImageUrl: string | null;
+  isMatching: boolean;
 }
 
 export interface ICoach extends ISimpleCoach {

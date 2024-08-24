@@ -1,7 +1,7 @@
 import { requestHandler } from "../http";
 import { API_PATH } from "@/constants/apiPath";
 import { IResponseMessage } from "@/models/responseMessage.model";
-import { ICategoryName } from "@/models/routine.model";
+import { ICategoryName, ICompletedCategory } from "@/models/routine.model";
 
 export const postCategoryData = async (
   payload: ICategoryName,
@@ -16,32 +16,32 @@ export const postCategoryData = async (
 
 export const patchCategoryData = async (
   payload: ICategoryName,
-  routineId: number,
   categoryId: number
 ) => {
   return await requestHandler<IResponseMessage>(
     "patch",
-    `${API_PATH.routine}/${routineId}/${categoryId}`,
+    `${API_PATH.category}/${categoryId}`,
     payload
   );
 };
 
-export const deleteCategoryData = async (
-  routineId: number,
-  categoryId: number
-) => {
+export const deleteCategoryData = async (categoryId: number) => {
   return await requestHandler<IResponseMessage>(
     "delete",
-    `${API_PATH.routine}/${routineId}/${categoryId}`
+    `${API_PATH.category}/${categoryId}`
   );
 };
 
-export const postCompletedCategoryData = async (
-  routineId: number,
-  categoryId: number
-) => {
-  return await requestHandler<IResponseMessage>(
+export const postCompletedCategoryData = async (categoryId: number) => {
+  return await requestHandler<IResponseMessage | ICompletedCategory>(
+    "post",
+    `${API_PATH.category}/${categoryId}/completed`
+  );
+};
+
+export const deleteCompletedCategoryData = async (categoryId: number) => {
+  return await requestHandler<IResponseMessage | null>(
     "delete",
-    `${API_PATH.routine}/${routineId}/${categoryId}/completed`
+    `${API_PATH.category}/${categoryId}/completed`
   );
 };

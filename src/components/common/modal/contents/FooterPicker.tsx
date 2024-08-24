@@ -1,5 +1,6 @@
 import Icon from "@/components/Icon/Icon";
 import { footerPicker, IFooterPickerData, TFooterPicker } from "@/data/modal";
+import { useIsCoach } from "@/store/isCoach.store";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -10,6 +11,11 @@ interface Props {
 
 const FooterPicker = ({ schema, closeModal }: Props) => {
   const navigate = useNavigate();
+
+  const setIsCoach = useIsCoach((state) => state.setIsCoach);
+  const setIsModify = useIsCoach((state) => state.setIsModify);
+  const setIsUser = useIsCoach((state) => state.setIsUser);
+
   return (
     <FooterPickerStyle>
       {footerPicker[schema].map((item, i) => (
@@ -17,6 +23,11 @@ const FooterPicker = ({ schema, closeModal }: Props) => {
           item={item}
           key={i}
           onClick={() => {
+            if (item.name === "내 루틴") {
+              setIsCoach(false);
+              setIsModify(true);
+              setIsUser(false);
+            }
             navigate(item.link);
             closeModal();
           }}

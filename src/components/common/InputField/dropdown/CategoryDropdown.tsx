@@ -3,9 +3,9 @@ import Action from "@/components/routine/Action";
 import { IAction, ICategory } from "@/models/routine.model";
 import { useModalInfo } from "@/store/modalInfo.store";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import Completed from "../CheckBox/Completed";
+import { useIsCoach } from "@/store/isCoach.store";
 
 interface Props {
   category: ICategory;
@@ -23,9 +23,7 @@ const CategoryDropdown = ({
   onEditAction
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const params = useParams();
-  const routineId = useModalInfo((state) => state.routineId);
-  const setRoutineId = useModalInfo((state) => state.setRoutineId);
+  const isCoach = useIsCoach((state) => state.isCoach);
   const setCategoryId = useModalInfo((state) => state.setCategoryId);
 
   const handleToggle = () => {
@@ -33,7 +31,6 @@ const CategoryDropdown = ({
   };
 
   const handleEditCategory = () => {
-    setRoutineId(Number(params.routineId));
     setCategoryId(category.categoryId);
     onEditCategory && onEditCategory();
   };
@@ -41,7 +38,7 @@ const CategoryDropdown = ({
   return (
     <Wrapper>
       <DropdownBox onClick={handleToggle}>
-        {modifyEnabled && (
+        {!isCoach && (
           <Completed
             isCompleted={category.isCompleted ? category.isCompleted : false}
             categoryId={category.categoryId}
@@ -72,8 +69,6 @@ const CategoryDropdown = ({
             <Action
               key={action.actionId}
               action={action}
-              routineId={routineId}
-              categoryId={category.categoryId}
               modifyEnabled={modifyEnabled}
               onEditAction={onEditAction}
             />

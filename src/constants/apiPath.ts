@@ -1,6 +1,9 @@
 export const API_PATH = {
   main: "/main-info",
   routine: "/routines",
+  userProfile: "routines/user",
+  category: "/categories",
+  action: "/actions",
   getCoachAll: "/coaches-all",
   mypage: "/users/me",
   editMyProfile: "/users/me",
@@ -14,10 +17,8 @@ export const API_PATH = {
   reissue: "/auth/reissue",
   signup: "/auth/signup",
   withdraw: "/users/me",
-  myCoaches: "/users/matched/coaches",
+  myCoaches: "/users/matches",
   notification: "/notifications",
-  matchMembers: "/coaches/members",
-  matchMember: "/coaches/member",
-  patchMember: "/coaches/matched/members",
+  match: "/coaches/matches",
   auth: "/auth"
 };

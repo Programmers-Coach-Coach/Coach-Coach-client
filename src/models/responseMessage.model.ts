@@ -1,4 +1,4 @@
 export interface IResponseMessage {
-  statusCode: number;
-  message: string;
+  statusCode?: number;
+  message?: string;
 }
