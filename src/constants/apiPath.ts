@@ -20,6 +20,5 @@ export const API_PATH = {
   myCoaches: "/users/matches",
   notification: "/notifications",
   match: "/coaches/matches",
-  patchMember: "/coaches/matched/members",
   auth: "/auth"
 };
