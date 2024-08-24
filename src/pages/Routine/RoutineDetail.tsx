@@ -9,6 +9,8 @@ import { useGetRoutine } from "@/hooks/queries/routine/useRoutine";
 import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import { useModalInfo } from "@/store/modalInfo.store";
+import { useIsCoach } from "@/store/isCoach.store";
+import { useProfileInfo } from "@/store/profileInfo.store";
 
 const RoutineDetail = () => {
   const { routineId } = useParams();
@@ -21,9 +23,16 @@ const RoutineDetail = () => {
   const actionAddModal = useModal();
   const actionModifyModal = useModal();
 
+  const isModify = useIsCoach((state) => state.isModify);
+  const isUser = useIsCoach((state) => state.isUser);
+
+  const userId = useProfileInfo((state) => state.userId);
+
   const setRoutineId = useModalInfo((state) => state.setRoutineId);
 
-  const { data, isLoading, isError } = useGetRoutine(Number(routineId));
+  const query = isUser ? { userId: userId } : {};
+
+  const { data, isLoading, isError } = useGetRoutine(query, Number(routineId));
 
   if (isLoading) return <div>로딩 중...</div>;
   if (isError || !data) return <div>무언가 잘못됨</div>;
@@ -98,18 +107,20 @@ const RoutineDetail = () => {
           />
         </Modal>
       )}
-      <TextStyle>
-        <h2>운동을 완료하면 체크하세요.</h2>
-        <div className="add" onClick={onClickAdd}>
-          추가하기
-        </div>
-      </TextStyle>
+      {isModify && (
+        <TextStyle>
+          <h2>운동을 완료하면 체크하세요.</h2>
+          <div className="add" onClick={onClickAdd}>
+            추가하기
+          </div>
+        </TextStyle>
+      )}
       {data.categoryList.map((category) => (
         <CategoryDropdown
           key={category.categoryId}
           category={category}
           actions={category.actionList}
-          modifyEnabled={true}
+          modifyEnabled={isModify}
           onEditCategory={categoryModal.openModal}
           onEditAction={actionModal.openModal}
         />

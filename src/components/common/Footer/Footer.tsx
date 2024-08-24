@@ -1,4 +1,3 @@
-import Icon from "@/components/Icon/Icon";
 import NotificationBadge from "@/components/badge/NotificationBadge";
 import { useFetchAuth } from "@/hooks/useFetchAuth";
 import useModal from "@/hooks/useModal";
@@ -6,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import Modal from "../modal/Modal";
 import FooterPicker from "../modal/contents/FooterPicker";
+import IconButton from "@/components/Icon/IconButton";
 
 const Footer = () => {
   const { data } = useFetchAuth();
@@ -52,20 +52,30 @@ const Footer = () => {
         </Modal>
       )}
       <FooterStyle>
-        <Icon name="home" size="20px" color="text" onClick={onClickHome} />
-        <Icon
+        <IconButton
+          name="home"
+          size="20px"
+          color="text"
+          onClick={onClickHome}
+        />
+        <IconButton
           name="routine"
           size="30px"
           color="text"
           onClick={onClickRoutine}
         />
         <Notification>
-          <Icon name="alarm" size="30px" color="text" onClick={onClickAlarm} />
+          <IconButton
+            name="alarm"
+            size="30px"
+            color="text"
+            onClick={onClickAlarm}
+          />
           {data && data.countOfNotifications > 0 && (
             <NotificationBadge count={data?.countOfNotifications} />
           )}
         </Notification>
-        <Icon
+        <IconButton
           name="profile"
           size="25px"
           color="text"

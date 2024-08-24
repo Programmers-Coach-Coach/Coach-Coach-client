@@ -91,7 +91,7 @@ const Item = ({
       if (item.name === "카테고리 수정") {
         openModal?.categoryModify?.();
       } else if (item.name === "카테고리 삭제") {
-        deleteCategoryResponse.mutate({ routineId, categoryId });
+        deleteCategoryResponse.mutate(categoryId);
       } else if (item.name === "운동 추가") {
         openModal?.actionAdd?.();
       }
@@ -99,7 +99,7 @@ const Item = ({
       if (item.name === "운동 수정") {
         openModal?.actionModify?.();
       } else if (item.name === "운동 삭제") {
-        deleteActionResponse.mutate({ routineId, categoryId, actionId });
+        deleteActionResponse.mutate(actionId);
       }
     }
     closeModal();

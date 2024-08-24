@@ -7,6 +7,7 @@ export const useLikePost = (id: number) => {
   const { mutate, isError } = useMutation<IResponseMessage, Error, number>({
     mutationFn: (id: number) => likePost(id),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["getHomeData"] });
       queryClient.invalidateQueries({ queryKey: ["getCoachDetail", id] });
     }
   });
@@ -21,6 +22,7 @@ export const useUnLikePost = (id: number) => {
   const { mutate, isError } = useMutation<IResponseMessage, Error, number>({
     mutationFn: (id: number) => unlikePost(id),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["getHomeData"] });
       queryClient.invalidateQueries({ queryKey: ["getCoachDetail", id] });
     }
   });

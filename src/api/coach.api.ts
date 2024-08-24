@@ -63,20 +63,20 @@ export const getMyCoaches = async () => {
 };
 
 export const getMatchMembers = async () => {
-  return await requestHandler<IMatchMembers[]>("get", API_PATH.matchMembers);
+  return await requestHandler<IMatchMembers[]>("get", API_PATH.match);
 };
 
 export const deleteMatchMember = async (userId: number) => {
   return await requestHandler<IResponseMessage>(
     "delete",
-    `${API_PATH.matchMember}/${userId}`
+    `${API_PATH.match}/${userId}`
   );
 };
 
 export const patchMatchMember = async (userId: number) => {
   return await requestHandler<IResponseMessage>(
     "patch",
-    `${API_PATH.patchMember}/${userId}`
+    `${API_PATH.match}/${userId}`
   );
 };
 
