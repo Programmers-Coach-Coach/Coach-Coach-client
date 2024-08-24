@@ -1,7 +1,9 @@
-import { usePostCompleted } from "@/hooks/queries/routine/useCategory";
+import {
+  useDeleteCompleted,
+  usePostCompleted
+} from "@/hooks/queries/routine/useCategory";
 import Checkbox from "@mui/material/Checkbox";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 
 interface CompletedProps {
@@ -10,16 +12,17 @@ interface CompletedProps {
 }
 
 const Completed = ({ isCompleted, categoryId }: CompletedProps) => {
-  const { routineId } = useParams();
   const [isChecked, setIsChecked] = useState(isCompleted);
   const postCompletedResponse = usePostCompleted();
+  const deleteCompletedResponse = useDeleteCompleted();
 
   const handleClick = (event: React.MouseEvent) => {
     event.stopPropagation();
-  };
-
-  const handleChange = () => {
-    postCompletedResponse.mutate({ routineId: Number(routineId), categoryId });
+    if (!isChecked) {
+      postCompletedResponse.mutate(categoryId);
+    } else {
+      deleteCompletedResponse.mutate(categoryId);
+    }
     setIsChecked(!isChecked);
   };
 
@@ -28,7 +31,6 @@ const Completed = ({ isCompleted, categoryId }: CompletedProps) => {
       <Checkbox
         checked={isChecked}
         onClick={handleClick}
-        onChange={handleChange}
         inputProps={{ "aria-label": "controlled" }}
       />
     </CompletedStyle>

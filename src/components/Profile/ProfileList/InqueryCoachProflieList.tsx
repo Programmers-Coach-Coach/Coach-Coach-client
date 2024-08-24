@@ -7,30 +7,29 @@ interface MyCoachesProfileListProps {
   data: ISimpleCoach[];
 }
 
-const MyCoachesProfileList = ({ data }: MyCoachesProfileListProps) => {
-  const filteredData = data.filter((d) => d.isMatching === true);
+const InqueryCoachProfileList = ({ data }: MyCoachesProfileListProps) => {
+  const filteredData = data.filter((d) => d.isMatching === false);
   return (
     <>
       {filteredData.length ? (
-        <MyCoachesProfileListStyle>
+        <InqueryCoachProfileListStyle>
           {filteredData.map((d) => (
             <Profile
               key={d.coachId}
               profileId={d.coachId}
               profileName={d.coachName}
               profileImageUrl={d.profileImageUrl}
-              state="mycoaches"
               width="80px"
               height="80px"
             />
           ))}
-        </MyCoachesProfileListStyle>
+        </InqueryCoachProfileListStyle>
       ) : (
         <Empty
           name="coach"
           size="80px"
           color="text"
-          descriptions="나의 코치가 없습니다"
+          descriptions="문의한 코치가 없습니다"
           padding="10px"
         />
       )}
@@ -38,11 +37,11 @@ const MyCoachesProfileList = ({ data }: MyCoachesProfileListProps) => {
   );
 };
 
-const MyCoachesProfileListStyle = styled.div`
+const InqueryCoachProfileListStyle = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   justify-items: center;
 `;
 
-export default MyCoachesProfileList;
+export default InqueryCoachProfileList;

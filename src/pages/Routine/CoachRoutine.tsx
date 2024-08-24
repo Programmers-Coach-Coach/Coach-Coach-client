@@ -22,7 +22,7 @@ const CoachRoutine = () => {
         width="380px"
         height="180px"
       />
-      <RoutineList routines={data} />
+      <RoutineList routines={data} state="member to coach" />
     </CoachRoutineStyle>
   );
 };

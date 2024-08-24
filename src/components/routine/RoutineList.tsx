@@ -5,9 +5,11 @@ import Empty from "../common/Empty/Empty";
 
 interface RoutineListProps {
   routines: IGetRoutine[];
+  state?: string;
 }
 
-const RoutineList = ({ routines }: RoutineListProps) => {
+const RoutineList = ({ routines, state }: RoutineListProps) => {
+  const padding = state ? "180px" : "200px";
   return (
     <RoutineListStyle>
       {routines.length ? (
@@ -27,7 +29,7 @@ const RoutineList = ({ routines }: RoutineListProps) => {
           size="150px"
           color="text"
           descriptions="운동 루틴이 없습니다"
-          padding="280px"
+          padding={padding}
         />
       )}
     </RoutineListStyle>

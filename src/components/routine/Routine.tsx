@@ -60,7 +60,6 @@ const Routine = ({ id, name, sport }: RoutineProps) => {
       <Card>
         <RoutineStyle
           onClick={() => {
-            setRoutineId(id);
             navigate(`/routine/detail/${id}?routineName=${name}`);
           }}
         >

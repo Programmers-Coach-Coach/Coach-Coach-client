@@ -14,14 +14,21 @@ import {
   usePatchCategory,
   usePostCategory
 } from "@/hooks/queries/routine/useCategory";
+import { useProfileInfo } from "@/store/profileInfo.store";
 
 interface Props {
   children: React.ReactNode;
   schema: TModal;
+  isCoach?: boolean;
   closeModal: () => void;
 }
 
-const ActionModalInner = ({ children, schema, closeModal }: Props) => {
+const ActionModalInner = ({
+  children,
+  schema,
+  closeModal,
+  isCoach = false
+}: Props) => {
   const { primaryButton, secondaryButton } = modal[schema];
 
   const postRoutineResponse = usePostRoutine();
@@ -42,9 +49,15 @@ const ActionModalInner = ({ children, schema, closeModal }: Props) => {
   const categoryId = useModalInfo((state) => state.categoryId);
   const actionId = useModalInfo((state) => state.actionId);
 
+  const userId = useProfileInfo((state) => state.userId);
+
   const onClickHandler = () => {
     if (schema === "routine-enroll") {
-      postRoutineResponse.mutate({ routineName, sportId });
+      if (isCoach) {
+        postRoutineResponse.mutate({ userId, routineName, sportId });
+      } else {
+        postRoutineResponse.mutate({ routineName, sportId });
+      }
     } else if (schema === "routine-modify") {
       patchRoutineResponse.mutate({
         payload: { routineName, sportId },
@@ -55,20 +68,16 @@ const ActionModalInner = ({ children, schema, closeModal }: Props) => {
     } else if (schema === "category-modify") {
       patchCategoryResponse.mutate({
         payload: { categoryName },
-        routineId,
         categoryId
       });
     } else if (schema === "action-enroll") {
       postActionResponse.mutate({
         payload: { actionName, countOrMinutes, sets, description },
-        routineId,
         categoryId
       });
     } else if (schema === "action-modify") {
       patchActionResponse.mutate({
         payload: { actionName, countOrMinutes, sets, description },
-        routineId,
-        categoryId,
         actionId
       });
     }
