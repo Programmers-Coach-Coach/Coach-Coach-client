@@ -57,7 +57,7 @@ const DetailInfo = ({ coach }: Props) => {
 
       {isModal && (
         <Modal position="center" closeModal={closeModal}>
-          <ReviewInner onClose={closeModal} onEnroll={() => {}} />
+          <ReviewInner onClose={closeModal} coachId={coach.coachId} />
         </Modal>
       )}
     </Wrapper>

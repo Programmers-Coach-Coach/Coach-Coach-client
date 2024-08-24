@@ -6,17 +6,17 @@ import styled from "styled-components";
 import RatingStars from "../common/Card/ReviewCard.tsx/RatingStars";
 
 interface Props {
+  coachId: number;
   onClose: () => void;
-  onEnroll: () => void;
 }
 
-const ReviewInner = ({ onEnroll, onClose }: Props) => {
-  const { mutate } = usePostReview();
+const ReviewInner = ({ coachId, onClose }: Props) => {
+  const { mutate } = usePostReview(coachId);
   const { control, handleSubmit } = useForm<IPostReview>();
 
   const onSubmit = (data: IPostReview) => {
-    const coachId = 2; // TODO: 코치 아이디 props로 처리
     mutate({ coachId, data });
+    onClose();
   };
 
   return (
@@ -46,9 +46,7 @@ const ReviewInner = ({ onEnroll, onClose }: Props) => {
         <button onClick={onClose} type="button">
           취소
         </button>
-        <button onClick={onEnroll} type="submit">
-          등록하기
-        </button>
+        <button type="submit">등록하기</button>
       </Footer>
     </ReviewStyle>
   );

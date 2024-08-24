@@ -3,6 +3,7 @@ import { postReview } from "@/api/review.api";
 import { IResponseMessage } from "@/models/responseMessage.model";
 import { IPostReview } from "@/models/review.model";
 import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 interface IPostReviewVariables {
   coachId: number;
@@ -20,7 +21,9 @@ export const usePostReview = (coachId: number) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getCoachDetail", coachId] });
     },
-    onError: () => {}
+    onError: () => {
+      toast.error("리뷰는 한번만 남길 수 있습니다");
+    }
   });
 
   return {
