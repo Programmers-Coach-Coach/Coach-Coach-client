@@ -14,7 +14,7 @@ const FilterPicker = ({
   singleFilter,
   multiFilter
 }: Props) => {
-  // TODO: 중복된 sort값 훅으로 분리하기
+  // TODO: 중복된 쿼리 파라미터 가져오는 부분 훅으로 분리
   const [searchParams] = useSearchParams();
   const sort = searchParams.get("sort") ?? "latest";
   const sportsIds = searchParams.get("sportsIds")?.split(",").map(Number) ?? [];
