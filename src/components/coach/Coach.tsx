@@ -1,6 +1,6 @@
 import { ICoach } from "@/models/coach.model";
 import { LineClamp } from "@/style/global";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Heart from "../common/InputField/CheckBox/Heart";
 
@@ -8,8 +8,9 @@ interface Props {
   coach: ICoach;
 }
 const Coach = ({ coach }: Props) => {
+  const navigate = useNavigate();
   return (
-    <CoachStyle to={`/coach/${coach.coachId}`}>
+    <CoachStyle onClick={() => navigate(`/coach/${coach.coachId}`)}>
       <Image src={coach.profileImageUrl || undefined} alt={coach.coachName} />
       <Text>
         <LineClamp $line={1} className="b3">
@@ -24,13 +25,13 @@ const Coach = ({ coach }: Props) => {
           ))}
         </ul>
       </Text>
-      <Heart checked={coach.isLiked} size="small" />
+      <Heart checked={coach.isLiked} size="24" id={coach.coachId} />
       <Local>{coach.localAddress}</Local>
     </CoachStyle>
   );
 };
 
-const CoachStyle = styled(Link)`
+const CoachStyle = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;

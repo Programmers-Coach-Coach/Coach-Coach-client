@@ -1,54 +1,50 @@
-import { Checkbox } from "@mui/material";
-import { useState } from "react";
+import IconButton from "@/components/Icon/IconButton";
+import { useLikePost, useUnLikePost } from "@/hooks/queries/useLikes";
+import { MouseEvent, useState } from "react";
 import styled from "styled-components";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import Favorite from "@mui/icons-material/Favorite";
-
-type Size = "small" | "medium" | "large";
-const label = { inputProps: { "aria-label": "Checkbox" } };
 
 interface Props {
+  id: number;
   checked: boolean;
-  size: Size;
+  size: string;
 }
 
-const Heart = ({ checked, size }: Props) => {
+const Heart = ({ id, checked, size }: Props) => {
   const [isChecked, setIsChecked] = useState(checked);
+  const { mutate: mutateLike } = useLikePost(id);
+  const { mutate: mutateUnlike } = useUnLikePost(id);
 
-  const handleHeart = () => {
+  const handleHeart = (e: MouseEvent, id: number) => {
+    e.stopPropagation();
+    if (isChecked) {
+      mutateUnlike(id);
+    } else {
+      mutateLike(id);
+    }
     setIsChecked(!isChecked);
   };
 
   return (
-    <HeartStyle $size={size}>
-      <CheckboxStyle
-        {...label}
-        icon={<FavoriteBorder />}
-        checkedIcon={<Favorite />}
-        onChange={handleHeart}
-        className="custom-checkbox"
-      />
+    <HeartStyle>
+      {isChecked ? (
+        <IconButton
+          size={size}
+          name="heart"
+          color="likes"
+          onClick={(e) => handleHeart(e, id)}
+        />
+      ) : (
+        <IconButton
+          size={size}
+          name="emptyHeart"
+          color="likes"
+          onClick={(e) => handleHeart(e, id)}
+        />
+      )}
     </HeartStyle>
   );
 };
 
-const HeartStyle = styled.div<{ $size: Size }>``;
-
-// todo : 호버 색상 제거
-const CheckboxStyle = styled(Checkbox)`
-  & .MuiSvgIcon-root {
-    color: ${({ theme }) => theme.color.likes}; // 기본 색상
-  }
-
-  // Hover 상태 배경 색상 제거
-  & .MuiCheckbox-root:hover {
-    display: none;
-  }
-
-  // 리플 색상 제거
-  & .MuiTouchRipple-root {
-    color: ${({ theme }) => theme.color.likes}; // 기본 색상
-  }
-`;
+const HeartStyle = styled.div``;
 
 export default Heart;
