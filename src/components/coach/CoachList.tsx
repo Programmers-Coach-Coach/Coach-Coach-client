@@ -30,11 +30,7 @@ const CoachList = () => {
         <Coach coach={coach} key={coach.coachId} />
       ))}
       <div ref={setTarget}></div>
-      {isFetchingNextPage
-        ? "로딩중..."
-        : hasNextPage
-          ? "다음 페이지 불러오기"
-          : "마지막 페이지"}
+      {isFetchingNextPage && "로딩중..."}
     </CoachListStyle>
   );
 };
