@@ -1,13 +1,18 @@
+import { filterList } from "@/data/sportsList";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useSearchParams } from "react-router-dom";
 
 const useCoachFilter = (sportId: number) => {
-  const [filterId, setFilterId] = useState<number>(0);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [sportsIdList, setSportsIdList] = useState<number[]>([sportId]);
 
   const singleFilter = (id: number) => {
-    setFilterId(id);
+    const sort =
+      filterList.find((filter) => filter.id === id)?.parameter ?? "latest";
+    searchParams.set("sort", sort);
+    setSearchParams(searchParams);
   };
 
   const multiFilter = (id: number) => {
@@ -29,7 +34,6 @@ const useCoachFilter = (sportId: number) => {
   };
 
   return {
-    filterId,
     sportsIdList,
     singleFilter,
     multiFilter

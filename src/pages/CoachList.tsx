@@ -10,21 +10,19 @@ const CoachList = () => {
   const location = useLocation();
   const sportId = location.state?.sportId ?? 0; // 코치 리스트를 url로 치고 들어왔을 때는 기본 종목 '전체(0)'
 
-  const { filterId, sportsIdList, singleFilter, multiFilter } =
-    useCoachFilter(sportId);
+  const { sportsIdList, singleFilter, multiFilter } = useCoachFilter(sportId);
 
   return (
     <CoachListStyle>
       <Search placeholder="코치명을 검색하세요" />
       <WhiteSpace $height={30} />
       <CoachListFilter
-        filterId={filterId}
         sportsIdList={sportsIdList}
         singleFilter={singleFilter}
         multiFilter={multiFilter}
       />
       <WhiteSpace $height={30} />
-      <Coaches filterId={filterId} sportsIdList={sportsIdList} />
+      <Coaches sportsIdList={sportsIdList} />
     </CoachListStyle>
   );
 };

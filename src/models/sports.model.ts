@@ -12,4 +12,5 @@ export interface ICoachingSports {
 export interface IFilter {
   id: number;
   name: string;
+  parameter: string;
 }

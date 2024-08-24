@@ -1,19 +1,18 @@
 import { filterList, sportList } from "@/data/sportsList";
 import useModal from "@/hooks/useModal";
+import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import Icon from "../Icon/Icon";
 import Modal from "../common/modal/Modal";
 import FilterPicker from "../common/modal/contents/FilterPicker";
 
 interface Props {
-  filterId: number;
   sportsIdList: number[];
   singleFilter: (id: number) => void;
   multiFilter: (id: number) => void;
 }
 
 const CoachListFilter = ({
-  filterId,
   sportsIdList,
   singleFilter,
   multiFilter
@@ -26,12 +25,15 @@ const CoachListFilter = ({
     ...sportList
   ];
 
+  const [searchParams] = useSearchParams();
+  const sort = searchParams.get("sort") ?? "latest";
+
   return (
     <CoachListFilterStyle>
       <Icon name="filter" size="18px" color="text" onClick={handleModal} />
       {/* 정렬 필터*/}
       <SortFilter>
-        {filterList.find((filter) => filterId === filter.id)?.name}
+        {filterList.find((filter) => sort === filter.parameter)?.name}
       </SortFilter>
       {/* 종목 필터 */}
       <SportsFilter>
@@ -53,7 +55,6 @@ const CoachListFilter = ({
       {isModal && (
         <Modal position="footer-above" closeModal={closeModal}>
           <FilterPicker
-            filterId={filterId}
             sportsIdList={sportsIdList}
             sportListWithTotal={SPORT_LIST_WITH_TOTAL}
             singleFilter={singleFilter}

@@ -10,26 +10,26 @@ import { IResponseMessage } from "@/models/responseMessage.model";
 import qs from "qs";
 import { requestHandler } from "./http";
 
-export const getCoachAll = ({ filter, page }: IAllCoachList) => {
-  const { search, sportsIdList, filterId } = filter;
+export const getCoachAll = ({ filter, page }: IAllCoachList, sort: string) => {
+  const { search, sportsIdList } = filter;
 
   let latest: boolean | undefined;
   let review: boolean | undefined;
   let liked: boolean | undefined;
   let my: boolean | undefined;
 
-  switch (filterId) {
-    case 0:
-      latest = true;
-      break;
-    case 1:
+  switch (sort) {
+    case "review":
       review = true;
       break;
-    case 2:
+    case "liked":
       liked = true;
       break;
-    case 3:
+    case "my":
       my = true;
+      break;
+    default:
+      latest = true;
       break;
   }
 
