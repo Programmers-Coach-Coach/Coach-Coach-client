@@ -2,7 +2,7 @@ import { filterList, sportList } from "@/data/sportsList";
 import useModal from "@/hooks/useModal";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
-import Icon from "../Icon/Icon";
+import IconButton from "../Icon/IconButton";
 import Modal from "../common/modal/Modal";
 import FilterPicker from "../common/modal/contents/FilterPicker";
 
@@ -27,7 +27,12 @@ const CoachListFilter = ({ singleFilter, multiFilter }: Props) => {
 
   return (
     <CoachListFilterStyle>
-      <Icon name="filter" size="18px" color="text" onClick={handleModal} />
+      <IconButton
+        name="filter"
+        size="18px"
+        color="text"
+        onClick={handleModal}
+      />
       {/* 정렬 필터*/}
       <SortFilter>
         {filterList.find((filter) => sort === filter.parameter)?.name}
@@ -40,7 +45,7 @@ const CoachListFilter = ({ singleFilter, multiFilter }: Props) => {
               SPORT_LIST_WITH_TOTAL.find((sport) => sport.sportId === id)
                 ?.sportName
             }
-            <Icon
+            <IconButton
               name="x"
               size="14px"
               color="primary"
