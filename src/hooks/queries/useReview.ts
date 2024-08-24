@@ -1,21 +1,25 @@
+import { queryClient } from "@/api/queryClient";
 import { postReview } from "@/api/review.api";
 import { IResponseMessage } from "@/models/responseMessage.model";
 import { IPostReview } from "@/models/review.model";
 import { useMutation } from "@tanstack/react-query";
 
 interface IPostReviewVariables {
-  id: number;
+  coachId: number;
   data: IPostReview;
 }
 
-export const usePostReviews = () => {
+export const usePostReview = (coachId: number) => {
   const { mutate, isError } = useMutation<
     IResponseMessage,
     Error,
     IPostReviewVariables
   >({
-    mutationFn: ({ id, data }: IPostReviewVariables) => postReview(id, data),
-    onSuccess: () => {},
+    mutationFn: ({ coachId, data }: IPostReviewVariables) =>
+      postReview(coachId, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["getCoachDetail", coachId] });
+    },
     onError: () => {}
   });
 

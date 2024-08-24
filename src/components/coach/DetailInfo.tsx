@@ -10,6 +10,7 @@ interface Props {
 }
 const DetailInfo = ({ coach }: Props) => {
   const { isModal, openModal, closeModal } = useModal();
+
   return (
     <Wrapper>
       <SubWrapper>
