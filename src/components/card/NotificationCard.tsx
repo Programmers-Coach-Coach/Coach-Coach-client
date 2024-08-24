@@ -6,7 +6,7 @@ import { useDeleteNotification } from "@/hooks/queries/useNotification";
 import { TNotificationType } from "@/models/notification.model";
 import { timeAgo } from "@/utils/format";
 import styled from "styled-components";
-import Icon from "../Icon/Icon";
+import IconButton from "../Icon/IconButton";
 
 interface Props {
   noticeId: number;
@@ -35,6 +35,7 @@ const NotificationCard = ({
   const { mutate } = useDeleteNotification();
 
   const handleDelete = (id: number) => {
+    console.log(1);
     mutate(id);
   };
 
@@ -42,9 +43,13 @@ const NotificationCard = ({
     <ReviewCardStyle>
       <img src={getImageSrc()} alt={relationFunction} />
       <div className="message">{message}</div>
-      <button onClick={() => handleDelete(noticeId)} className="close-button">
-        <Icon name="x" size="18px" color="gray3" />
-      </button>
+      <IconButton
+        name="x"
+        size="18px"
+        color="gray3"
+        onClick={() => handleDelete(noticeId)}
+        className="close-button"
+      />
       <div className="timestamp">{timeAgo(createdAt)}</div>
     </ReviewCardStyle>
   );
