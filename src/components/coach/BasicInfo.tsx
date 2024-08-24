@@ -27,7 +27,7 @@ const BasicInfo = ({ coach }: Props) => {
         <ActiveHours>문의 가능 시간: {coach.activeHours}</ActiveHours>
       </CoachInfo>
       <HeartWrapper>
-        <Heart checked={coach.isLiked} size="24px" />
+        <Heart checked={coach.isLiked} size="24px" id={coach.coachId} />
       </HeartWrapper>
     </Wrapper>
   );
