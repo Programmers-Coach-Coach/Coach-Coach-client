@@ -1,19 +1,19 @@
 import { getCoachAll, getMyCoaches } from "@/api/coach.api";
-import { IAllCoachList, ICoachList, ISimpleCoach } from "@/models/coach.model";
+import { ICoachList, ISimpleCoach } from "@/models/coach.model";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 
 const PER_PAGE = 20;
 const useCoachList = (
-  filter: Omit<IAllCoachList, "page">,
+  search: string | null,
   sort: string,
   sportsIds: number[]
 ) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } =
     useInfiniteQuery<ICoachList>({
-      queryKey: ["coach-infiniteScroll", filter],
+      queryKey: ["coach-infiniteScroll", search, sort, sportsIds],
       queryFn: ({ pageParam }) =>
-        getCoachAll({ ...filter, page: pageParam as number }, sort, sportsIds),
+        getCoachAll(pageParam as number, search, sort, sportsIds),
       getNextPageParam: (lastPage) => {
         const nextPage = lastPage.currentPage + 1;
         return lastPage.totalCount > lastPage.currentPage * PER_PAGE

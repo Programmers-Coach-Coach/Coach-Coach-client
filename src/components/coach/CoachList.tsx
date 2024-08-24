@@ -11,9 +11,7 @@ const CoachList = () => {
   const sportsIds = searchParams.get("sportsIds")?.split(",").map(Number) ?? [];
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useCoachList(
-    {
-      filter: {}
-    },
+    null,
     sort,
     sportsIds
   );
