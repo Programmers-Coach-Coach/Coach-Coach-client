@@ -1,6 +1,7 @@
 import { ICoachDetail } from "@/models/coach.model";
 
 export const coachProfile: ICoachDetail = {
+  coachId: 0,
   coachName: "이현철코치",
   coachGender: "M",
   localAddress: "경기도 고양시 덕양구 통일로 374",
