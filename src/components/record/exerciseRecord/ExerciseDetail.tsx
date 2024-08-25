@@ -67,7 +67,7 @@ const CoachInfo = styled.div`
   align-items: center;
   gap: 12px;
   height: 50px;
-  padding: 10px;
+  padding: 0 20px;
   border-radius: 20px 20px 0 0;
   background-color: ${({ theme }) => theme.color.primary};
   color: ${({ theme }) => theme.color.background};
