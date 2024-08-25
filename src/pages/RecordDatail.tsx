@@ -2,15 +2,14 @@ import Loading from "@/components/loading/Loading";
 import ExerciseDetail from "@/components/record/exerciseRecord/ExerciseDetail";
 import PhysicalRecord from "@/components/record/physicalRecord/PhysicalRecord";
 import { useGetDetailRecord } from "@/hooks/queries/useRecord";
-import {
-  useGetQueryRecordDate,
-  useGetQueryRecordId
-} from "@/hooks/useQueryString";
+import useQueryString from "@/hooks/useQueryString";
+
 import styled from "styled-components";
 
 const RecordDatail = () => {
-  const date = useGetQueryRecordDate();
-  const recordId = useGetQueryRecordId();
+  const { getRecordId, getRecordDate } = useQueryString();
+  const recordId = getRecordId();
+  const date = getRecordDate();
 
   const { data, isError, isLoading } = useGetDetailRecord(recordId);
 

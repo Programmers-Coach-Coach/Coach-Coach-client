@@ -12,10 +12,10 @@ import {
 import { IResponseMessage } from "@/models/responseMessage.model";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { useQueryRecordId } from "../useQueryString";
+import useQueryString from "../useQueryString";
 
 export const usePostPhysicalMetrics = () => {
-  const { setRecordId } = useQueryRecordId();
+  const { setRecordId } = useQueryString();
   const { mutate, isError, isSuccess } = useMutation<
     { id: number },
     Error,

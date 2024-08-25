@@ -2,10 +2,8 @@ import {
   useEditPhysicalMetrics,
   usePostPhysicalMetrics
 } from "@/hooks/queries/useRecord";
-import {
-  useGetQueryRecordDate,
-  useGetQueryRecordId
-} from "@/hooks/useQueryString";
+
+import useQueryString from "@/hooks/useQueryString";
 import {
   IDetailPhysicalMetrics,
   IPhysicalMetrics
@@ -28,8 +26,10 @@ const PhysicalRecordInner = ({
     formState: { isValid, isSubmitting }
   } = useForm<IPhysicalMetrics>();
 
-  const recordId = useGetQueryRecordId();
-  const recordDate = useGetQueryRecordDate() ?? ""; // TODO: 무조건 'YYYY-DD-MM'로 보내야하기 때문에 "" 대신 다른 값으로 수정해야함
+  const { getRecordId, getRecordDate } = useQueryString();
+
+  const recordId = getRecordId();
+  const recordDate = getRecordDate() ?? ""; // TODO: 무조건 'YYYY-DD-MM'로 보내야하기 때문에 "" 대신 다른 값으로 수정해야함
 
   const { mutate: postMutate } = usePostPhysicalMetrics();
   const { mutate: editMutate } = useEditPhysicalMetrics(recordId); // TODO: 백엔드에서 '나의 신체 정보 수정'의 response id 보내주면 인자로 recordId 안보내줘도 됨
