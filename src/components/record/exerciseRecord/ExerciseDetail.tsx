@@ -37,7 +37,7 @@ const ExerciseDetail = ({ routines }: Props) => {
           <Empty
             name="routine"
             size="64px"
-            color="text"
+            color="gray3"
             descriptions="이 날은 쉬어가는 시간을 가졌네요!"
           />
           <WhiteSpace $height={100} />
