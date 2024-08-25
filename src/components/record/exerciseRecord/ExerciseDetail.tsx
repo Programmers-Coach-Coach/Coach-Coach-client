@@ -1,99 +1,53 @@
-import profileImage from "@/assets/images/basicProfile.png";
+import Empty from "@/components/common/Empty/Empty";
 import CategoryDropdown from "@/components/common/InputField/dropdown/CategoryDropdown";
-import qs from "qs";
-import { useEffect, useState } from "react";
+import { IExerciseRoutine } from "@/models/record.model";
+import { WhiteSpace } from "@/style/global";
 import styled from "styled-components";
 
-// TODO: 내 기록 API 요청
-
-const ACITONS = [
-  {
-    actionId: 0,
-    actionName: "액션1",
-    sets: 3,
-    countOrMinutes: "15회"
-  },
-  {
-    actionId: 1,
-    actionName: "액션2",
-    sets: 3,
-    countOrMinutes: "15회"
-  },
-  {
-    actionId: 2,
-    actionName: "액션2",
-    sets: 3,
-    countOrMinutes: "15회"
-  }
-];
-
-const CATEGORY = {
-  categoryId: 1,
-  categoryName: "카테고리명"
-};
-
-const ExerciseDetail = () => {
-  const [date, setDate] = useState<string | null>(null);
-
-  useEffect(() => {
-    const query = qs.parse(location.search, { ignoreQueryPrefix: true });
-    if (query.date) {
-      setDate(query.date as string);
-    }
-  }, []);
-
+interface Props {
+  routines: IExerciseRoutine[];
+}
+const ExerciseDetail = ({ routines }: Props) => {
   return (
     <Wrapper>
-      <DateWrapper>
-        <h2>{date}</h2>
-      </DateWrapper>
-      <ExerciseWrapper>
-        <Routine>
-          <CoachInfo>
-            <img src={profileImage} alt="코치 이미지" />
-            <p className="b3">루틴1</p>
-            <p className="small-text">하주영</p>
-          </CoachInfo>
-          <CategoryDropdown category={CATEGORY} actions={ACITONS} />
-          <CategoryDropdown category={CATEGORY} actions={ACITONS} />
-          <CategoryDropdown category={CATEGORY} actions={ACITONS} />
-        </Routine>
-        <Routine>
-          <CoachInfo>
-            <img src={profileImage} alt="코치 이미지" />
-            <p className="b3">루틴2</p>
-            <p className="small-text">하주영</p>
-          </CoachInfo>
-          <CategoryDropdown category={CATEGORY} actions={ACITONS} />
-          <CategoryDropdown category={CATEGORY} actions={ACITONS} />
-          <CategoryDropdown category={CATEGORY} actions={ACITONS} />
-        </Routine>
-        <Routine>
-          <CoachInfo>
+      {routines.length > 0 ? (
+        routines.map((routine) => (
+          <Routine>
             <CoachInfo>
-              <img src={profileImage} alt="코치 이미지" />
+              {/* <img
+                src={routine.coachProfileImageUrl || undefined}
+                alt={routine.coachName || "내 프로필"}
+              /> */}
+              <p className="b3">{routine.routineName}</p>
+              <p className="small-text">{routine.coachName || "나"}</p>
             </CoachInfo>
-            <p className="b3">루틴2</p>
-            <p className="small-text">하주영</p>
-          </CoachInfo>
-          <CategoryDropdown category={CATEGORY} actions={ACITONS} />
-          <CategoryDropdown category={CATEGORY} actions={ACITONS} />
-          <CategoryDropdown category={CATEGORY} actions={ACITONS} />
-        </Routine>
-      </ExerciseWrapper>
+            {routine.completedCategories.map((category) => (
+              <CategoryDropdown
+                category={{
+                  categoryId: category.categoryId,
+                  categoryName: category.categoryName
+                }}
+                actions={category.actions}
+              />
+            ))}
+          </Routine>
+        ))
+      ) : (
+        <>
+          <Empty
+            name="routine"
+            size="64px"
+            color="text"
+            descriptions="이 날은 쉬어가는 시간을 가졌네요!"
+          />
+          <WhiteSpace $height={100} />
+        </>
+      )}
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div``;
-
-const DateWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 10px 0;
-`;
-
-const ExerciseWrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;

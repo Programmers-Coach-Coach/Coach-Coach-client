@@ -19,6 +19,10 @@ export const API_PATH = {
   withdraw: "/users/me",
   myCoaches: "/users/matches",
   notification: "/notifications",
+  matchMembers: "/coaches/members",
+  matchMember: "/coaches/member",
+  patchMember: "/coaches/matched/members",
+  auth: "/auth",
+  record: "/records",
   match: "/coaches/matches",
-  auth: "/auth"
 };

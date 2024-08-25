@@ -17,3 +17,8 @@ export const AUTH_REGEX = {
   // 3. 도메인 이름은 "."으로 구분된 최소 2자 이상의 알파벳 문자열이어야 함.
   email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 };
+
+export const NUMBER_REGEX = {
+  // 소수점 한 자리까지 포함한 숫자 형식
+  singleDecimalNumber: /^[0-9]+(\.[0-9])?$/
+};

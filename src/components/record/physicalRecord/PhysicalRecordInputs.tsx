@@ -1,29 +1,47 @@
+import { NUMBER_REGEX } from "@/constants/regex";
+import { IPhysicalMetrics } from "@/models/record.model";
+import { UseFormProps, UseFormRegister } from "react-hook-form";
 import styled, { css } from "styled-components";
 
-interface Props {
+interface Props extends UseFormProps {
   disabled?: boolean;
+  weight: number | null;
+  skeletalMuscle: number | null;
+  fatPercentage: number | null;
+  bmi: number | null;
+  register?: UseFormRegister<IPhysicalMetrics>;
 }
 
-const PHYSICAL_RECORDS = [
-  {
-    label: "체중(kg)",
-    value: null
-  },
-  {
-    label: "골격근량(kg)",
-    value: 20.2
-  },
-  {
-    label: "체지방률(%)",
-    value: 22.0
-  },
-  {
-    label: "BMI",
-    value: 1125.0
-  }
-];
-
-const PhysicalRecordInputs = ({ disabled = false }: Props) => {
+const PhysicalRecordInputs = ({
+  disabled = false,
+  weight,
+  skeletalMuscle,
+  fatPercentage,
+  bmi,
+  register
+}: Props) => {
+  const PHYSICAL_RECORDS = [
+    {
+      label: "체중(kg)",
+      name: "weight",
+      value: weight
+    },
+    {
+      label: "골격근량(kg)",
+      name: "skeletalMuscle",
+      value: skeletalMuscle
+    },
+    {
+      label: "체지방률(%)",
+      name: "fatPercentage",
+      value: fatPercentage
+    },
+    {
+      label: "BMI",
+      name: "bmi",
+      value: bmi
+    }
+  ];
   return (
     <Wrapper>
       {PHYSICAL_RECORDS.map((record, i) => (
@@ -35,6 +53,12 @@ const PhysicalRecordInputs = ({ disabled = false }: Props) => {
               disabled={disabled}
               $disabled={disabled}
               placeholder="-"
+              {...(register
+                ? register(record.name as keyof IPhysicalMetrics, {
+                    pattern: NUMBER_REGEX.singleDecimalNumber,
+                    setValueAs: Number
+                  })
+                : {})}
             />
           </InputContainer>
         </InputWithLabel>

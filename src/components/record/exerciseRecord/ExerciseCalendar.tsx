@@ -1,10 +1,12 @@
 import StampImage from "@/assets/images/stamp.png";
-import { utcDatetoLocal } from "@/utils/format";
+import Loading from "@/components/loading/Loading";
+import { useGetStamps } from "@/hooks/queries/useRecord";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
 import dayjs, { Dayjs } from "dayjs";
+import qs from "qs";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -12,20 +14,39 @@ import styled from "styled-components";
 const ExerciseCalender = () => {
   const today = dayjs();
   const [value, setValue] = useState(today);
+  const [year, setYear] = useState(today.year());
+  const [month, setMonth] = useState(today.month() + 1);
 
   const navigate = useNavigate();
 
-  // utc 시간 문자열을 dayjs 객체로 변환
-  const [selectedDates] = useState<dayjs.Dayjs[]>([
-    utcDatetoLocal("2024-08-11T11:47:11Z"),
-    utcDatetoLocal("2024-08-12T11:47:11Z"),
-    utcDatetoLocal("2024-08-13T11:47:11Z")
-  ]);
+  const { data, isError, isLoading } = useGetStamps(year, month);
 
   const handleDayClick = (date: Dayjs) => {
     const fommattedDate = date.format("YYYY-MM-DD");
-    navigate(`/record?date=${fommattedDate}`);
+    const recordId = data?.records.find(
+      (record) => record.recordDate === fommattedDate
+    )?.recordId;
+
+    const query = qs.stringify({ date: fommattedDate, recordId });
+    navigate(`/record?${query}`);
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (!data || isError) {
+    return (
+      <div>
+        페이지 일부를 불러오는 데 오류가 생겼어요. <br />
+        잠시 후 다시 시도해주세요
+      </div>
+    );
+  }
+
+  const selectedDates = data.records
+    .filter((stamp) => stamp.isCompleted)
+    .map((stamp) => dayjs(stamp.recordDate));
 
   return (
     <Wrapper>
@@ -34,6 +55,8 @@ const ExerciseCalender = () => {
           value={value}
           onChange={(newValue) => {
             setValue(newValue);
+            setYear(newValue.year());
+            setMonth(newValue.month() + 1);
           }}
           maxDate={today}
           slots={{
