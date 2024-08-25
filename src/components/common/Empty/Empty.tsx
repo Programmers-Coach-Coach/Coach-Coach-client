@@ -16,7 +16,7 @@ const Empty = ({ name, size, color, descriptions, padding }: EmptyProps) => {
   return (
     <EmptyStyle padding={paddingTop}>
       <Icon name={name} size={size} color={color} />
-      <h2>{descriptions}</h2>
+      <Message $color={color}>{descriptions}</Message>
     </EmptyStyle>
   );
 };
@@ -28,6 +28,10 @@ const EmptyStyle = styled.div<{ padding: string }>`
 
   padding-top: ${({ padding }) => padding};
   margin: 0 auto;
+`;
+
+const Message = styled.h2<{ $color: string }>`
+  color: ${({ theme, $color }) => theme.color[$color]};
 `;
 
 export default Empty;
