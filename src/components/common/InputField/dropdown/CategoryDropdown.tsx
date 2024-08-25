@@ -1,11 +1,11 @@
 import IconButton from "@/components/Icon/IconButton";
 import Action from "@/components/routine/Action";
 import { IAction, ICategory } from "@/models/routine.model";
+import { useIsCoach } from "@/store/isCoach.store";
 import { useModalInfo } from "@/store/modalInfo.store";
 import { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import Completed from "../CheckBox/Completed";
-import { useIsCoach } from "@/store/isCoach.store";
 
 interface Props {
   category: ICategory;
@@ -13,6 +13,7 @@ interface Props {
   modifyEnabled?: boolean;
   onEditCategory?: () => void; // 카테고리 수정, 삭제 기능
   onEditAction?: () => void; // 액션 수정 기능, 삭제 기능
+  completedAllEnabled?: boolean; // 모두 완료 가능 활성화 여부(기록 페이지에서 사용)
 }
 
 const CategoryDropdown = ({
@@ -20,7 +21,8 @@ const CategoryDropdown = ({
   actions,
   modifyEnabled = false,
   onEditCategory,
-  onEditAction
+  onEditAction,
+  completedAllEnabled = false
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const isCoach = useIsCoach((state) => state.isCoach);
@@ -40,7 +42,13 @@ const CategoryDropdown = ({
       <DropdownBox onClick={handleToggle}>
         {!isCoach && (
           <Completed
-            isCompleted={category.isCompleted ? category.isCompleted : false}
+            isCompleted={
+              completedAllEnabled
+                ? true
+                : category.isCompleted
+                  ? category.isCompleted
+                  : false
+            }
             categoryId={category.categoryId}
           />
         )}
