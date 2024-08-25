@@ -13,7 +13,7 @@ const Coach = ({ coach }: Props) => {
     <CoachStyle onClick={() => navigate(`/coach/${coach.coachId}`)}>
       <Image src={coach.profileImageUrl || undefined} alt={coach.coachName} />
       <Text>
-        <LineClamp $line={1} className="b3">
+        <LineClamp $line={1} className="name">
           {coach.coachName}
         </LineClamp>
         <LineClamp $line={2} className="desc">
@@ -42,7 +42,7 @@ const Image = styled.img`
   flex-shrink: 0;
   width: 114px;
   height: 114px;
-  border-radius: ${({ theme }) => theme.borderRadius.default};
+  border-radius: 8px;
   object-fit: cover;
 
   @media only screen and (max-width: 500px) {
@@ -55,6 +55,11 @@ const Text = styled.div`
   overflow: hidden;
   flex: 1;
 
+  .name {
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
   .desc {
     font-size: 12px;
     margin-bottom: 10px;
@@ -65,9 +70,12 @@ const Text = styled.div`
     align-items: center;
     gap: 9px;
 
+    position: absolute;
+    bottom: 0;
+
     li {
       display: inline-flex;
-      font-size: 9px;
+      font-size: 10px;
       padding: 4px 6px;
       border-radius: ${({ theme }) => theme.borderRadius.default};
       color: ${({ theme }) => theme.color.text};

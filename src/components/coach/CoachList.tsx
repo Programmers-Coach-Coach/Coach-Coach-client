@@ -1,17 +1,19 @@
 import useCoachList from "@/hooks/useCoachList";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
+import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import Coach from "./Coach";
 
-interface Props {
-  filterId: number;
-  sportsIdList: number[];
-}
-const CoachList = ({ filterId, sportsIdList }: Props) => {
+const CoachList = () => {
+  const [searchParams] = useSearchParams();
+
+  const sort = searchParams.get("sort") ?? "latest";
+  const sportsIds = searchParams.get("sportsIds")?.split(",").map(Number) ?? [];
+
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useCoachList(
-    {
-      filter: { filterId, sportsIdList }
-    }
+    null,
+    sort,
+    sportsIds
   );
 
   const { setTarget } = useIntersectionObserver({
@@ -28,11 +30,7 @@ const CoachList = ({ filterId, sportsIdList }: Props) => {
         <Coach coach={coach} key={coach.coachId} />
       ))}
       <div ref={setTarget}></div>
-      {isFetchingNextPage
-        ? "로딩중..."
-        : hasNextPage
-          ? "다음 페이지 불러오기"
-          : "마지막 페이지"}
+      {isFetchingNextPage && "로딩중..."}
     </CoachListStyle>
   );
 };

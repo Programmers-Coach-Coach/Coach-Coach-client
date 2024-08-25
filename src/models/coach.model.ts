@@ -36,8 +36,6 @@ export interface ICoachList {
 export interface IAllCoachList {
   filter: {
     search?: string; // 검색어
-    filterId: number; // 정렬 필터
-    sportsIdList?: number[]; // 종목 필터
   };
   page: number;
 }

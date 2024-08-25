@@ -1,48 +1,39 @@
 import { API_PATH } from "@/constants/apiPath";
-import {
-  IAllCoachList,
-  ICoachDetail,
-  ICoachList,
-  ISimpleCoach
-} from "@/models/coach.model";
+import { ICoachDetail, ICoachList, ISimpleCoach } from "@/models/coach.model";
 import { IMatchMembers } from "@/models/member.model";
 import { IResponseMessage } from "@/models/responseMessage.model";
 import qs from "qs";
 import { requestHandler } from "./http";
 
-export const getCoachAll = ({ filter, page }: IAllCoachList) => {
-  const { search, sportsIdList, filterId } = filter;
-
+export const getCoachAll = (
+  page: number,
+  search: string | null,
+  sort: string,
+  sportsIds: number[]
+) => {
   let latest: boolean | undefined;
   let review: boolean | undefined;
   let liked: boolean | undefined;
   let my: boolean | undefined;
 
-  switch (filterId) {
-    case 0:
-      latest = true;
-      break;
-    case 1:
+  switch (sort) {
+    case "review":
       review = true;
       break;
-    case 2:
+    case "liked":
       liked = true;
       break;
-    case 3:
+    case "my":
       my = true;
       break;
-  }
-
-  let formattedSportsId;
-  if (sportsIdList?.includes(0)) {
-    formattedSportsId = null;
-  } else {
-    formattedSportsId = sportsIdList?.join(",");
+    default:
+      latest = true;
+      break;
   }
 
   const query = qs.stringify(
     {
-      sports: formattedSportsId,
+      sports: sportsIds.length === 0 ? null : sportsIds.join(","),
       search,
       latest,
       review,
