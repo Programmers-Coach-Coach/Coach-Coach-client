@@ -28,10 +28,13 @@ export const useGetRoutines = ({ coachId, userId }: IGetQuery = {}) => {
   };
 };
 
-export const useGetRoutine = (routineId: number) => {
+export const useGetRoutine = (
+  { coachId, userId }: IGetQuery = {},
+  routineId: number
+) => {
   const { data, isLoading, isError } = useQuery<IRoutineDetails>({
-    queryKey: ["getRoutineData", routineId],
-    queryFn: () => getRoutineData(routineId)
+    queryKey: ["getRoutineData", coachId, userId, routineId],
+    queryFn: () => getRoutineData({ coachId, userId }, routineId)
   });
 
   return {

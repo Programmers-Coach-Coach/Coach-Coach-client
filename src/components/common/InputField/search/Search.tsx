@@ -33,7 +33,7 @@ const SearchStyle = styled.div`
   input {
     width: 100%;
     border: 1px solid ${({ theme }) => theme.color.text};
-    border-radius: 4px;
+    border-radius: ${({ theme }) => theme.borderRadius.default};
     padding: 12px 30px 12px 20px;
     outline: none;
     transition:

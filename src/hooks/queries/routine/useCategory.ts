@@ -1,12 +1,13 @@
 import { queryClient } from "@/api/queryClient";
 import {
   deleteCategoryData,
+  deleteCompletedCategoryData,
   patchCategoryData,
   postCategoryData,
   postCompletedCategoryData
 } from "@/api/routine/category.api";
 import { IResponseMessage } from "@/models/responseMessage.model";
-import { ICategoryName } from "@/models/routine.model";
+import { ICategoryName, ICompletedCategory } from "@/models/routine.model";
 import { useMutation } from "@tanstack/react-query";
 
 export const usePostCategory = () => {
@@ -38,10 +39,10 @@ export const usePatchCategory = () => {
   const { mutate, isPending, isError, data } = useMutation<
     IResponseMessage,
     Error,
-    { payload: ICategoryName; routineId: number; categoryId: number }
+    { payload: ICategoryName; categoryId: number }
   >({
-    mutationFn: ({ payload, routineId, categoryId }) =>
-      patchCategoryData(payload, routineId, categoryId),
+    mutationFn: ({ payload, categoryId }) =>
+      patchCategoryData(payload, categoryId),
     onSuccess: (data) => {
       console.log("Category successfully patched: ", data);
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
@@ -63,10 +64,9 @@ export const useDeleteCategory = () => {
   const { mutate, isPending, isError, data } = useMutation<
     IResponseMessage,
     Error,
-    { routineId: number; categoryId: number }
+    number
   >({
-    mutationFn: ({ routineId, categoryId }) =>
-      deleteCategoryData(routineId, categoryId),
+    mutationFn: deleteCategoryData,
     onSuccess: (data) => {
       console.log("Category successfully deleted: ", data);
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
@@ -86,12 +86,11 @@ export const useDeleteCategory = () => {
 
 export const usePostCompleted = () => {
   const { mutate, isPending, isError, data } = useMutation<
-    IResponseMessage,
+    IResponseMessage | ICompletedCategory,
     Error,
-    { routineId: number; categoryId: number }
+    number
   >({
-    mutationFn: ({ routineId, categoryId }) =>
-      postCompletedCategoryData(routineId, categoryId),
+    mutationFn: postCompletedCategoryData,
     onSuccess: (data) => {
       console.log("Completed successfully posted: ", data);
       queryClient.invalidateQueries({
@@ -100,6 +99,32 @@ export const usePostCompleted = () => {
     },
     onError: (error) => {
       console.error("Failed to post Completed: ", error);
+    }
+  });
+
+  return {
+    mutate,
+    isLoading: isPending,
+    isError,
+    data
+  };
+};
+
+export const useDeleteCompleted = () => {
+  const { mutate, isPending, isError, data } = useMutation<
+    IResponseMessage | null,
+    Error,
+    number
+  >({
+    mutationFn: deleteCompletedCategoryData,
+    onSuccess: (data) => {
+      console.log("Completed successfully deleted: ", data);
+      queryClient.invalidateQueries({
+        queryKey: ["getRoutineData"]
+      });
+    },
+    onError: (error) => {
+      console.error("Failed to delete Completed: ", error);
     }
   });
 

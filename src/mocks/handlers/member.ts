@@ -7,14 +7,14 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_V1 = "/api/v1";
 
 const getMatchMembers = http.get(
-  `${BASE_URL}${API_V1}${API_PATH.matchMembers}`,
+  `${BASE_URL}${API_V1}${API_PATH.match}`,
   () => {
     return HttpResponse.json(matchMembers);
   }
 );
 
 const deleteMatchMember = http.delete(
-  `${BASE_URL}${API_V1}${API_PATH.matchMember}/:userId`,
+  `${BASE_URL}${API_V1}${API_PATH.match}/:userId`,
   async ({ params }) => {
     const { userId } = params;
 
@@ -33,7 +33,7 @@ const deleteMatchMember = http.delete(
 );
 
 const patchMatchMember = http.patch(
-  `${BASE_URL}${API_V1}${API_PATH.patchMember}/:userId`,
+  `${BASE_URL}${API_V1}${API_PATH.match}/:userId`,
   async ({ params }) => {
     const { userId } = params;
 

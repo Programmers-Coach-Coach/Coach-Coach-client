@@ -26,10 +26,22 @@ export const getRoutinesData = async ({ coachId, userId }: IGetQuery) => {
   );
 };
 
-export const getRoutineData = async (routineId: number) => {
+export const getRoutineData = async (
+  { coachId, userId }: IGetQuery,
+  routineId: number
+) => {
+  const query = qs.stringify(
+    {
+      coachId,
+      userId
+    },
+    {
+      skipNulls: true
+    }
+  );
   return await requestHandler<IRoutineDetails>(
     "get",
-    `${API_PATH.routine}/${routineId}`
+    `${API_PATH.routine}/${routineId}?${query}`
   );
 };
 

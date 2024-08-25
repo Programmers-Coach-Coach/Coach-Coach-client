@@ -6,27 +6,15 @@ import { useModalInfo } from "@/store/modalInfo.store";
 
 interface ActionProps {
   action: IAction;
-  routineId: number;
-  categoryId: number;
   modifyEnabled?: boolean;
   onEditAction?: () => void;
 }
 
-const Action = ({
-  action,
-  routineId,
-  categoryId,
-  modifyEnabled,
-  onEditAction
-}: ActionProps) => {
-  const setRoutineId = useModalInfo((state) => state.setRoutineId);
-  const setCategoryId = useModalInfo((state) => state.setCategoryId);
+const Action = ({ action, modifyEnabled, onEditAction }: ActionProps) => {
   const setActionId = useModalInfo((state) => state.setActionId);
 
   const handleEditAction = () => {
-    setRoutineId(routineId);
     setActionId(action.actionId);
-    setCategoryId(categoryId);
     onEditAction && onEditAction();
   };
 

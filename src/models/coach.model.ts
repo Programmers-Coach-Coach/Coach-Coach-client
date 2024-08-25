@@ -14,6 +14,7 @@ export interface ISimpleCoach {
   coachId: number;
   coachName: string;
   profileImageUrl: string | null;
+  isMatching: boolean;
 }
 
 export interface ICoach extends ISimpleCoach {
@@ -35,8 +36,6 @@ export interface ICoachList {
 export interface IAllCoachList {
   filter: {
     search?: string; // 검색어
-    filterId: number; // 정렬 필터
-    sportsIdList?: number[]; // 종목 필터
   };
   page: number;
 }
@@ -57,6 +56,7 @@ export type IMyPageCoachFormWithSports = Omit<
   coachingSports: { sportName: string }[];
 };
 export interface ICoachDetail {
+  coachId: number;
   coachName: string;
   coachGender: "M" | "W";
   localAddress: string;

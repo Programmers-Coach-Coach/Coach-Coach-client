@@ -91,8 +91,8 @@ export const sportList: ICoachingSports[] = [
 ];
 
 export const filterList: IFilter[] = [
-  { id: 0, name: "최신순" },
-  { id: 1, name: "리뷰순" },
-  { id: 2, name: "좋아요순" },
-  { id: 3, name: "MY" }
+  { id: 0, name: "최신순", parameter: "latest" },
+  { id: 1, name: "리뷰순", parameter: "review" },
+  { id: 2, name: "좋아요순", parameter: "liked" },
+  { id: 3, name: "MY", parameter: "my" }
 ];

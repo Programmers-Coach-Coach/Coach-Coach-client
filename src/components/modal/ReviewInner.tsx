@@ -1,39 +1,58 @@
+import { usePostReview } from "@/hooks/queries/useReview";
+import { IPostReview } from "@/models/review.model";
 import { TextField } from "@mui/material";
-import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import styled from "styled-components";
 import RatingStars from "../common/Card/ReviewCard.tsx/RatingStars";
 
 interface Props {
+  coachId: number;
   onClose: () => void;
-  onEnroll: () => void;
 }
-const ReviewInner = ({ onEnroll, onClose }: Props) => {
-  const [stars, setStars] = useState<number>(0);
 
-  const handleStars = (cnt: number) => {
-    setStars(cnt);
+const ReviewInner = ({ coachId, onClose }: Props) => {
+  const { mutate } = usePostReview(coachId);
+  const { control, handleSubmit } = useForm<IPostReview>();
+
+  const onSubmit = (data: IPostReview) => {
+    mutate({ coachId, data });
+    onClose();
   };
 
   return (
-    <ReviewStyle>
+    <ReviewStyle onSubmit={handleSubmit(onSubmit)}>
       <Stars>
-        <RatingStars stars={stars} size="30" onClick={handleStars} />
+        <Controller
+          control={control}
+          name="stars"
+          rules={{ required: true }}
+          render={({ field: { onChange, value } }) => (
+            <RatingStars
+              stars={value}
+              size="30"
+              onClick={(stars) => onChange(stars)}
+            />
+          )}
+        />
       </Stars>
       <StyledTextField
         multiline
         rows={3}
         placeholder="코치에 대한 리뷰를 적어주세요"
         fullWidth
+        {...control.register("contents", { required: true })}
       />
       <Footer>
-        <button onClick={onClose}>취소</button>
-        <button onClick={onEnroll}>등록하기</button>
+        <button onClick={onClose} type="button">
+          취소
+        </button>
+        <button type="submit">등록하기</button>
       </Footer>
     </ReviewStyle>
   );
 };
 
-const ReviewStyle = styled.div`
+const ReviewStyle = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
