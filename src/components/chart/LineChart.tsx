@@ -1,5 +1,5 @@
 import { useGetPhysicalChart } from "@/hooks/queries/useRecord";
-import { getChartType } from "@/utils/chart";
+import { getChartType, getUnit } from "@/utils/chart";
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -29,57 +29,58 @@ interface Props {
   chartId: number;
 }
 
-const options = {
-  responsive: false,
-  layout: {
-    padding: {
-      left: 50,
-      right: 50,
-      top: 30,
-      bottom: 30
-    }
-  },
-  plugins: {
-    legend: {
-      display: false
-    },
-    datalabels: {
-      align: "end",
-      anchor: "end",
-      font: {
-        size: 12,
-        weight: "bold"
-      },
-      formatter: function (value: number) {
-        // 데이터레이블 값 변경 함수
-        return value.toFixed(1) + "kg";
-      }
-    }
-  },
-  scales: {
-    x: {
-      grid: {
-        display: false
-      },
-      border: {
-        display: false
-      }
-    },
-    y: {
-      display: false,
-      grid: {
-        display: false
-      }
-    }
-  },
-  events: [],
-  animation: {
-    duration: 2000, // 전체 애니메이션 지속 시간
-    easing: "easeInOutElastic" // 애니메이션의 이징 효과 설정
-  }
-};
-
 const LineChart = ({ chartId }: Props) => {
+  const options = {
+    responsive: false,
+    maintainAspectRatio: false,
+    layout: {
+      padding: {
+        left: 50,
+        right: 50,
+        top: 30,
+        bottom: 10
+      }
+    },
+    plugins: {
+      legend: {
+        display: false
+      },
+      datalabels: {
+        align: "end",
+        anchor: "end",
+        font: {
+          size: 12,
+          weight: "bold",
+          family: "Pretendard"
+        },
+        formatter: function (value: number) {
+          return value.toFixed(1) + getUnit(chartId);
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false
+        },
+        border: {
+          display: false
+        }
+      },
+      y: {
+        display: false,
+        grid: {
+          display: false
+        }
+      }
+    },
+    events: [],
+    animation: {
+      duration: 2000, // 전체 애니메이션 지속 시간
+      easing: "easeInOutElastic" // 애니메이션의 이징 효과 설정
+    }
+  };
+
   const {
     data: chartData,
     isError,
@@ -135,4 +136,5 @@ const Wrapper = styled.div`
   box-shadow: ${({ theme }) => theme.boxShadow};
   overflow: auto;
 `;
+
 export default LineChart;

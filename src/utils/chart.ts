@@ -12,3 +12,16 @@ export const getChartType = (id: number): TChartType => {
       return "bmi";
   }
 };
+
+export const getUnit = (id: number) => {
+  switch (id) {
+    case 0:
+      return "kg";
+    case 1:
+      return "kg";
+    case 2:
+      return "%";
+    default:
+      return "";
+  }
+};
