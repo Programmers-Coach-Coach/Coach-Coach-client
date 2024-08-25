@@ -1,19 +1,46 @@
-import { usePostPhysicalMetrics } from "@/hooks/queries/useRecord";
-import { IPhysicalMetrics } from "@/models/record.model";
+import {
+  useEditPhysicalMetrics,
+  usePostPhysicalMetrics
+} from "@/hooks/queries/useRecord";
+import {
+  useGetQueryRecordDate,
+  useGetQueryRecordId
+} from "@/hooks/useQueryString";
+import {
+  IDetailPhysicalMetrics,
+  IPhysicalMetrics
+} from "@/models/record.model";
 import { SubmitHandler, useForm } from "react-hook-form";
 import styled from "styled-components";
 import CustomButton from "../common/Button/CustomButton";
 import PhysicalRecordInputs from "../record/physicalRecord/PhysicalRecordInputs";
 
-const PhysicalRecordInner = () => {
+interface Props extends IDetailPhysicalMetrics {}
+const PhysicalRecordInner = ({
+  weight,
+  skeletalMuscle,
+  fatPercentage,
+  bmi
+}: Props) => {
   const {
     register,
     handleSubmit,
     formState: { isValid, isSubmitting }
   } = useForm<IPhysicalMetrics>();
 
-  const { mutate } = usePostPhysicalMetrics();
-  const onSubmit: SubmitHandler<IPhysicalMetrics> = (data) => mutate(data);
+  const recordId = useGetQueryRecordId();
+  const recordDate = useGetQueryRecordDate() ?? ""; // TODO: 무조건 'YYYY-DD-MM'로 보내야하기 때문에 "" 대신 다른 값으로 수정해야함
+
+  const { mutate: postMutate } = usePostPhysicalMetrics();
+  const { mutate: editMutate } = useEditPhysicalMetrics(recordId); // TODO: 백엔드에서 '나의 신체 정보 수정'의 response id 보내주면 인자로 recordId 안보내줘도 됨
+
+  const onSubmit: SubmitHandler<IPhysicalMetrics> = (data) => {
+    if (recordId) {
+      editMutate({ data, recordId });
+    } else {
+      postMutate({ ...data, recordDate });
+    }
+  };
 
   return (
     <Wrapper onSubmit={handleSubmit(onSubmit)}>
@@ -32,7 +59,13 @@ const PhysicalRecordInner = () => {
           저장
         </CustomButton>
       </Header>
-      <PhysicalRecordInputs register={register} />
+      <PhysicalRecordInputs
+        register={register}
+        weight={weight}
+        skeletalMuscle={skeletalMuscle}
+        fatPercentage={fatPercentage}
+        bmi={bmi}
+      />
     </Wrapper>
   );
 };

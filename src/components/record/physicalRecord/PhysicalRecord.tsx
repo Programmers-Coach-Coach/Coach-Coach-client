@@ -34,7 +34,12 @@ const PhysicalRecord = ({
 
       {isModal && (
         <Modal closeModal={closeModal} position="footer-above">
-          <PhysicalRecordInner />
+          <PhysicalRecordInner
+            weight={weight}
+            skeletalMuscle={skeletalMuscle}
+            fatPercentage={fatPercentage}
+            bmi={bmi}
+          />
         </Modal>
       )}
     </Wrapper>

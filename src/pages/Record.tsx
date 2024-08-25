@@ -1,14 +1,8 @@
-import CustomButton from "@/components/common/Button/CustomButton";
-import Modal from "@/components/common/modal/Modal";
-import PhysicalRecordInner from "@/components/modal/PhysicalRecordInner";
 import ExerciseCalender from "@/components/record/exerciseRecord/ExerciseCalendar";
-import PhysicalRecordChart from "@/components/record/physicalRecord/PhysicalRecordChart";
-import useModal from "@/hooks/useModal";
 import { WhiteSpace } from "@/style/global";
 import styled from "styled-components";
 
 const Record = () => {
-  const { isModal, openModal, closeModal } = useModal();
   return (
     <Wrapper>
       <HeaderWithDesc>
@@ -20,24 +14,6 @@ const Record = () => {
       <WhiteSpace $height={10} />
       <ExerciseCalender />
       <WhiteSpace $height={30} />
-      <HeaderWithDesc>
-        <Header>
-          <h2>신체 기록</h2>
-          <CustomButton
-            size="super-mini"
-            variant="contained"
-            onClick={openModal}
-          >
-            변경
-          </CustomButton>
-        </Header>
-      </HeaderWithDesc>
-      <PhysicalRecordChart />
-      {isModal && (
-        <Modal closeModal={closeModal} position="footer-above">
-          <PhysicalRecordInner />
-        </Modal>
-      )}
     </Wrapper>
   );
 };
@@ -49,12 +25,6 @@ const HeaderWithDesc = styled.div`
   flex-direction: column;
   gap: 4px;
   padding: 0 10px;
-`;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 `;
 
 export default Record;

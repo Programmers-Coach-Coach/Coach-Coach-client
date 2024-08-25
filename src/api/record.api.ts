@@ -2,18 +2,15 @@ import { API_PATH } from "@/constants/apiPath";
 import {
   ICalendarStamps,
   IDetailRecords,
-  IPhysicalMetrics
+  IPhysicalMetrics,
+  IPhysicalMetricsWithDate
 } from "@/models/record.model";
 import { IResponseMessage } from "@/models/responseMessage.model";
-import { todayFormat } from "@/utils/format";
 import qs from "qs";
 import { requestHandler } from "./http";
 
-export const postPhysicalMetrics = async (data: IPhysicalMetrics) => {
-  return await requestHandler<{ id: number }>("post", API_PATH.record, {
-    recordDate: todayFormat(),
-    ...data
-  });
+export const postPhysicalMetrics = async (data: IPhysicalMetricsWithDate) => {
+  return await requestHandler<{ id: number }>("post", API_PATH.record, data);
 };
 
 export const editPhysicalMetrics = async (

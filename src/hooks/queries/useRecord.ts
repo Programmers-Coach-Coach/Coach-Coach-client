@@ -1,21 +1,66 @@
+import { queryClient } from "@/api/queryClient";
 import {
+  editPhysicalMetrics,
   getDetailRecord,
   getStamps,
   postPhysicalMetrics
 } from "@/api/record.api";
-import { IPhysicalMetrics } from "@/models/record.model";
+import {
+  IPhysicalMetrics,
+  IPhysicalMetricsWithDate
+} from "@/models/record.model";
+import { IResponseMessage } from "@/models/responseMessage.model";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { useQueryRecordId } from "../useQueryString";
 
 export const usePostPhysicalMetrics = () => {
-  const { mutate, isError } = useMutation<
+  const { setRecordId } = useQueryRecordId();
+  const { mutate, isError, isSuccess } = useMutation<
     { id: number },
     Error,
-    IPhysicalMetrics
+    IPhysicalMetricsWithDate
   >({
     mutationFn: postPhysicalMetrics,
+    onSuccess: (data) => {
+      setRecordId(data.id);
+      toast.success("신체 정보를 입력하였습니다");
+    },
     onError: () => {
       toast.error("신체 정보 입력에 실패하였습니다");
+    }
+  });
+
+  return {
+    isSuccess,
+    isError,
+    mutate
+  };
+};
+
+interface IEditRequest {
+  recordId: number;
+  data: IPhysicalMetrics;
+}
+
+export const useEditPhysicalMetrics = (id: number | null) => {
+  const { mutate, isError } = useMutation<
+    IResponseMessage,
+    Error,
+    IEditRequest
+  >({
+    mutationFn: ({ recordId, data }) => editPhysicalMetrics(recordId, data),
+    onSuccess: () => {
+      toast.success("신체 정보를 수정하였습니다");
+      // TODO: 백엔드에 response로 id 보내달라고 요청하기 (usePostPhysicalMetrics 처럼)
+      if (id) {
+        queryClient.invalidateQueries({
+          queryKey: ["getDetailRecord", id]
+        });
+      }
+    },
+    onError: () => {
+      toast.error("신체 정보 수정에 실패하였습니다");
     }
   });
 

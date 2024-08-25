@@ -7,6 +7,10 @@ export interface IPhysicalMetrics {
   bmi?: number;
 }
 
+export interface IPhysicalMetricsWithDate extends IPhysicalMetrics {
+  recordDate: string;
+}
+
 export interface ICalendarStamp {
   recordId: number;
   recordDate: string;

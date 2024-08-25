@@ -2,21 +2,18 @@ import Loading from "@/components/loading/Loading";
 import ExerciseDetail from "@/components/record/exerciseRecord/ExerciseDetail";
 import PhysicalRecord from "@/components/record/physicalRecord/PhysicalRecord";
 import { useGetDetailRecord } from "@/hooks/queries/useRecord";
-import { useSearchParams } from "react-router-dom";
+import {
+  useGetQueryRecordDate,
+  useGetQueryRecordId
+} from "@/hooks/useQueryString";
 import styled from "styled-components";
 
 const RecordDatail = () => {
-  // const [date, setDate] = useState<string | null>(null);
-  const [searchParams] = useSearchParams();
+  const date = useGetQueryRecordDate();
+  const recordId = useGetQueryRecordId();
 
-  const date = searchParams.get("date");
-  const recordId = searchParams.get("recordId");
+  const { data, isError, isLoading } = useGetDetailRecord(recordId);
 
-  const { data, isError, isLoading } = useGetDetailRecord(
-    recordId ? Number(recordId) : null
-  );
-
-  console.log(data);
   if (isError) {
     return (
       <div>
