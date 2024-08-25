@@ -60,10 +60,6 @@ export interface Props {
   type: TChartType;
 }
 
-export interface IChart {
-  recordDate: IDataPoint[];
-}
-
 export interface IDataPoint {
   recordDate: string;
   value: number;

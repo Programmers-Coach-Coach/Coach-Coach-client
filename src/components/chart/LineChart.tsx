@@ -1,3 +1,5 @@
+import { useGetPhysicalChart } from "@/hooks/queries/useRecord";
+import { getChartType } from "@/utils/chart";
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -11,6 +13,7 @@ import {
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { Line } from "react-chartjs-2";
 import styled from "styled-components";
+import Loading from "../loading/Loading";
 
 ChartJS.register(
   CategoryScale,
@@ -25,41 +28,6 @@ ChartJS.register(
 interface Props {
   chartId: number;
 }
-
-const CHART_DATA = [
-  {
-    date: "2024.01.01",
-    weight: 55.0
-  },
-  {
-    date: "2024.01.02",
-    weight: 54.0
-  },
-  {
-    date: "2024.01.03",
-    weight: 56.0
-  },
-  {
-    date: "2024.01.04",
-    weight: 54.0
-  },
-  {
-    date: "2024.01.05",
-    weight: 55.0
-  },
-  {
-    date: "2024.01.10",
-    weight: 55.0
-  },
-  {
-    date: "2024.01.11",
-    weight: 70.0
-  },
-  {
-    date: "2024.01.12",
-    weight: 56.0
-  }
-];
 
 const options = {
   responsive: false,
@@ -111,26 +79,42 @@ const options = {
   }
 };
 
-const labels = CHART_DATA.map((item) => item.date);
-
-const data = {
-  labels,
-  datasets: [
-    {
-      label: "",
-      data: CHART_DATA.map((item) => item.weight),
-      borderColor: "#9CABEF",
-      backgroundColor: "#fff",
-      lineTension: 0
-    }
-  ]
-};
-
 const LineChart = ({ chartId }: Props) => {
-  const chartWidth = CHART_DATA.length * 80;
+  const {
+    data: chartData,
+    isError,
+    isLoading
+  } = useGetPhysicalChart(getChartType(chartId));
 
-  // TODO: type에 맞는 차트 데이터를 가져옴
-  console.log(chartId);
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (!chartData || isError) {
+    return (
+      <div>
+        페이지 일부를 불러오는 데 오류가 생겼어요. <br />
+        잠시 후 다시 시도해주세요
+      </div>
+    );
+  }
+
+  const labels = chartData.map((point) => point.recordDate);
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "",
+        data: chartData.map((point) => point.value),
+        borderColor: "#9CABEF",
+        backgroundColor: "#fff",
+        lineTension: 0
+      }
+    ]
+  };
+
+  const chartWidth = chartData.length * 80;
 
   return (
     <Wrapper>

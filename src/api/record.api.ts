@@ -1,7 +1,7 @@
 import { API_PATH } from "@/constants/apiPath";
 import {
   ICalendarStamps,
-  IChart,
+  IDataPoint,
   IDetailRecords,
   IPhysicalMetrics,
   IPhysicalMetricsWithDate,
@@ -43,7 +43,7 @@ export const getDetailRecord = async (recordId: number) => {
 
 export const getPhysicalChart = async (type: TChartType) => {
   const query = qs.stringify({ type });
-  return await requestHandler<IChart>(
+  return await requestHandler<IDataPoint[]>(
     "get",
     `${API_PATH.recordChart}?${query}`
   );
