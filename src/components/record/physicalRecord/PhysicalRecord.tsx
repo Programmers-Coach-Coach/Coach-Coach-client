@@ -2,10 +2,17 @@ import CustomButton from "@/components/common/Button/CustomButton";
 import Modal from "@/components/common/modal/Modal";
 import PhysicalRecordInner from "@/components/modal/PhysicalRecordInner";
 import useModal from "@/hooks/useModal";
+import { IDetailPhysicalMetrics } from "@/models/record.model";
 import styled from "styled-components";
 import PhysicalRecordInputs from "./PhysicalRecordInputs";
 
-const PhysicalRecord = () => {
+interface Props extends IDetailPhysicalMetrics {}
+const PhysicalRecord = ({
+  weight,
+  skeletalMuscle,
+  fatPercentage,
+  bmi
+}: Props) => {
   const { isModal, openModal, closeModal } = useModal();
   return (
     <Wrapper>
@@ -16,7 +23,13 @@ const PhysicalRecord = () => {
         </CustomButton>
       </Header>
       <Main>
-        <PhysicalRecordInputs disabled={true} />
+        <PhysicalRecordInputs
+          disabled={true}
+          weight={weight}
+          skeletalMuscle={skeletalMuscle}
+          fatPercentage={fatPercentage}
+          bmi={bmi}
+        />
       </Main>
 
       {isModal && (

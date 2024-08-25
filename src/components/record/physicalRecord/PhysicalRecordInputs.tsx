@@ -5,33 +5,44 @@ import styled, { css } from "styled-components";
 
 interface Props extends UseFormProps {
   disabled?: boolean;
+  weight: number | null;
+  skeletalMuscle: number | null;
+  fatPercentage: number | null;
+  bmi: number | null;
   register?: UseFormRegister<IPhysicalMetrics>;
 }
 
-const PHYSICAL_RECORDS = [
-  {
-    label: "체중(kg)",
-    name: "weight",
-    value: null
-  },
-  {
-    label: "골격근량(kg)",
-    name: "skeletalMuscle",
-    value: 20.2
-  },
-  {
-    label: "체지방률(%)",
-    name: "fatPercentage",
-    value: 22.0
-  },
-  {
-    label: "BMI",
-    name: "bmi",
-    value: 1125.0
-  }
-];
-
-const PhysicalRecordInputs = ({ disabled = false, register }: Props) => {
+const PhysicalRecordInputs = ({
+  disabled = false,
+  weight,
+  skeletalMuscle,
+  fatPercentage,
+  bmi,
+  register
+}: Props) => {
+  const PHYSICAL_RECORDS = [
+    {
+      label: "체중(kg)",
+      name: "weight",
+      value: weight
+    },
+    {
+      label: "골격근량(kg)",
+      name: "skeletalMuscle",
+      value: skeletalMuscle
+    },
+    {
+      label: "체지방률(%)",
+      name: "fatPercentage",
+      value: fatPercentage
+    },
+    {
+      label: "BMI",
+      name: "bmi",
+      value: bmi
+    }
+  ];
+  console.log(weight, skeletalMuscle, fatPercentage, bmi);
   return (
     <Wrapper>
       {PHYSICAL_RECORDS.map((record, i) => (
