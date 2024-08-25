@@ -1,4 +1,5 @@
 import ExerciseCalender from "@/components/record/exerciseRecord/ExerciseCalendar";
+import PhysicalRecordChart from "@/components/record/physicalRecord/PhysicalRecordChart";
 import { WhiteSpace } from "@/style/global";
 import styled from "styled-components";
 
@@ -14,6 +15,7 @@ const Record = () => {
       <WhiteSpace $height={10} />
       <ExerciseCalender />
       <WhiteSpace $height={30} />
+      <PhysicalRecordChart />
     </Wrapper>
   );
 };
