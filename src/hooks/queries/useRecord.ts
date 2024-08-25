@@ -2,12 +2,14 @@ import { queryClient } from "@/api/queryClient";
 import {
   editPhysicalMetrics,
   getDetailRecord,
+  getPhysicalChart,
   getStamps,
   postPhysicalMetrics
 } from "@/api/record.api";
 import {
   IPhysicalMetrics,
-  IPhysicalMetricsWithDate
+  IPhysicalMetricsWithDate,
+  TChartType
 } from "@/models/record.model";
 import { IResponseMessage } from "@/models/responseMessage.model";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -84,6 +86,15 @@ export const useGetDetailRecord = (recordId: number | null) => {
     queryKey: ["getDetailRecord", recordId],
     queryFn: () => getDetailRecord(recordId as number),
     enabled: recordId !== null // recordId가 없을 때 API 호출 막기
+  });
+
+  return { data, isError, isLoading };
+};
+
+export const useGetPhysicalChart = (type: TChartType) => {
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ["getPhysicalChart", type],
+    queryFn: () => getPhysicalChart(type)
   });
 
   return { data, isError, isLoading };
