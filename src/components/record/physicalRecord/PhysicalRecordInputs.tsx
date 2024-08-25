@@ -42,7 +42,6 @@ const PhysicalRecordInputs = ({
       value: bmi
     }
   ];
-  console.log(weight, skeletalMuscle, fatPercentage, bmi);
   return (
     <Wrapper>
       {PHYSICAL_RECORDS.map((record, i) => (
