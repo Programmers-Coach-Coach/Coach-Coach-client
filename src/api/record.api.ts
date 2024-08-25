@@ -1,5 +1,5 @@
 import { API_PATH } from "@/constants/apiPath";
-import { ICalendarStamp, IPhysicalMetrics } from "@/models/record.model";
+import { ICalendarStamps, IPhysicalMetrics } from "@/models/record.model";
 import { IResponseMessage } from "@/models/responseMessage.model";
 import { todayFormat } from "@/utils/format";
 import qs from "qs";
@@ -25,7 +25,7 @@ export const editPhysicalMetrics = async (
 
 export const getStamps = async (year: number, month: number) => {
   const query = qs.stringify({ year, month });
-  return await requestHandler<ICalendarStamp[]>(
+  return await requestHandler<ICalendarStamps>(
     "get",
     `${API_PATH.record}?${query}`
   );

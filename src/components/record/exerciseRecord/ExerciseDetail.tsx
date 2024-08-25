@@ -1,7 +1,5 @@
 import profileImage from "@/assets/images/basicProfile.png";
 import CategoryDropdown from "@/components/common/InputField/dropdown/CategoryDropdown";
-import qs from "qs";
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 // TODO: 내 기록 API 요청
@@ -33,20 +31,8 @@ const CATEGORY = {
 };
 
 const ExerciseDetail = () => {
-  const [date, setDate] = useState<string | null>(null);
-
-  useEffect(() => {
-    const query = qs.parse(location.search, { ignoreQueryPrefix: true });
-    if (query.date) {
-      setDate(query.date as string);
-    }
-  }, []);
-
   return (
     <Wrapper>
-      <DateWrapper>
-        <h2>{date}</h2>
-      </DateWrapper>
       <ExerciseWrapper>
         <Routine>
           <CoachInfo>
@@ -86,12 +72,6 @@ const ExerciseDetail = () => {
 };
 
 const Wrapper = styled.div``;
-
-const DateWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 10px 0;
-`;
 
 const ExerciseWrapper = styled.div`
   display: flex;
