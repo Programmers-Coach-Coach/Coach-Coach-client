@@ -1,12 +1,15 @@
+import logoPath from "@/assets/images/Logo.png";
 import { useFetchAuth } from "@/hooks/useFetchAuth";
+import { Link } from "react-router-dom";
 import { styled } from "styled-components";
-import Logo from "../../../assets/images/Logo.png";
 
 const LogoHeader = () => {
   const { data } = useFetchAuth();
   return (
     <LogoHeaderStyle>
-      <img src={Logo} alt="Logo" />
+      <LogoLink to="/">
+        <img src={logoPath} alt="Logo" />
+      </LogoLink>
       {data?.nickname && (
         <h2>
           <span>안녕하세요! </span>
@@ -25,17 +28,24 @@ const LogoHeaderStyle = styled.div`
   padding: 20px;
   margin: 0;
 
-  img {
-    width: 90px;
-    height: 50px;
-  }
-
   h2 {
     display: flex;
     gap: 6px;
   }
   span {
     font-size: 12px;
+  }
+`;
+
+const LogoLink = styled(Link)`
+  display: flex;
+  width: 90px;
+  height: 50px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 `;
 
