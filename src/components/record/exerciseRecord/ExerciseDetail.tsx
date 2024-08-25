@@ -1,6 +1,7 @@
 import Empty from "@/components/common/Empty/Empty";
 import CategoryDropdown from "@/components/common/InputField/dropdown/CategoryDropdown";
 import { IExerciseRoutine } from "@/models/record.model";
+import { WhiteSpace } from "@/style/global";
 import styled from "styled-components";
 
 interface Props {
@@ -32,12 +33,15 @@ const ExerciseDetail = ({ routines }: Props) => {
           </Routine>
         ))
       ) : (
-        <Empty
-          name="routine"
-          size="64px"
-          color="text"
-          descriptions="이 날은 쉬어가는 시간을 가졌네요!"
-        />
+        <>
+          <Empty
+            name="routine"
+            size="64px"
+            color="text"
+            descriptions="이 날은 쉬어가는 시간을 가졌네요!"
+          />
+          <WhiteSpace $height={100} />
+        </>
       )}
     </Wrapper>
   );

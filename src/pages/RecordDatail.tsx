@@ -13,6 +13,10 @@ const RecordDatail = () => {
 
   const { data, isError, isLoading } = useGetDetailRecord(recordId);
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   if (isError) {
     return (
       <div>
@@ -20,10 +24,6 @@ const RecordDatail = () => {
         잠시 후 다시 시도해주세요
       </div>
     );
-  }
-
-  if (isLoading) {
-    return <Loading />;
   }
 
   return (

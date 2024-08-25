@@ -31,6 +31,10 @@ const ExerciseCalender = () => {
     navigate(`/record?${query}`);
   };
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   if (!data || isError) {
     return (
       <div>
@@ -38,10 +42,6 @@ const ExerciseCalender = () => {
         잠시 후 다시 시도해주세요
       </div>
     );
-  }
-
-  if (isLoading) {
-    return <Loading />;
   }
 
   const selectedDates = data.records
