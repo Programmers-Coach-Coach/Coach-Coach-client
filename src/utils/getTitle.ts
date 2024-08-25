@@ -28,3 +28,24 @@ export const getTitle = (pathname: string): string => {
       return "";
   }
 };
+
+export const getClickBackLink = (pathname: string) => {
+  switch (pathname) {
+    case "/login":
+    case "/signup":
+    case "/coach-list":
+    case "/routine":
+    case "/check-password":
+    case "/record-list":
+    case "/notification":
+    case "/routine/my-coach":
+    case "/manage":
+      return "/";
+
+    case "/record":
+      return "/record-list";
+
+    default:
+      return null;
+  }
+};
