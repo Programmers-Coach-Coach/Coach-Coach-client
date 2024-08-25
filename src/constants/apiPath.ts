@@ -25,4 +25,5 @@ export const API_PATH = {
   auth: "/auth",
   record: "/records",
   match: "/coaches/matches",
+  recordChart: "/records/charts"
 };
