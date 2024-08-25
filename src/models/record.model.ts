@@ -53,3 +53,14 @@ export interface IExerciseCategory {
 //   sets: number | null;
 //   description: string | null;
 // }
+
+export type TChartType = "weight" | "skeletalMuscle" | "fatPercentage" | "bmi";
+
+export interface Props {
+  type: TChartType;
+}
+
+export interface IDataPoint {
+  recordDate: string;
+  value: number;
+}

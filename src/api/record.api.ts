@@ -1,9 +1,11 @@
 import { API_PATH } from "@/constants/apiPath";
 import {
   ICalendarStamps,
+  IDataPoint,
   IDetailRecords,
   IPhysicalMetrics,
-  IPhysicalMetricsWithDate
+  IPhysicalMetricsWithDate,
+  TChartType
 } from "@/models/record.model";
 import { IResponseMessage } from "@/models/responseMessage.model";
 import qs from "qs";
@@ -36,5 +38,13 @@ export const getDetailRecord = async (recordId: number) => {
   return await requestHandler<IDetailRecords>(
     "get",
     `${API_PATH.record}/${recordId}`
+  );
+};
+
+export const getPhysicalChart = async (type: TChartType) => {
+  const query = qs.stringify({ type });
+  return await requestHandler<IDataPoint[]>(
+    "get",
+    `${API_PATH.recordChart}?${query}`
   );
 };
