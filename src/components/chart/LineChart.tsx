@@ -1,5 +1,5 @@
 import { useGetPhysicalChart } from "@/hooks/queries/useRecord";
-import { getChartType, getUnit } from "@/utils/chart";
+import { getChartSorted, getChartType, getUnit } from "@/utils/chart";
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -37,7 +37,7 @@ const LineChart = ({ chartId }: Props) => {
       padding: {
         left: 50,
         right: 50,
-        top: 30,
+        top: 40,
         bottom: 10
       }
     },
@@ -100,14 +100,14 @@ const LineChart = ({ chartId }: Props) => {
     );
   }
 
-  const labels = chartData.map((point) => point.recordDate);
+  const labels = getChartSorted(chartData).map((point) => point.recordDate);
 
   const data = {
     labels,
     datasets: [
       {
         label: "",
-        data: chartData.map((point) => point.value),
+        data: getChartSorted(chartData).map((point) => point.value),
         borderColor: "#9CABEF",
         backgroundColor: "#fff",
         lineTension: 0
@@ -115,7 +115,7 @@ const LineChart = ({ chartId }: Props) => {
     ]
   };
 
-  const chartWidth = chartData.length * 80;
+  const chartWidth = chartData.length * 100;
 
   return (
     <Wrapper>
