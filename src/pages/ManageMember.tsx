@@ -1,16 +1,24 @@
 import InquriyProfileList from "@/components/Profile/ProfileList/InquiryProfileList";
 import MatchingProfileList from "@/components/Profile/ProfileList/MatchingProfileList";
+import { useFetchAuth } from "@/hooks/useFetchAuth";
 import { useMatchMember } from "@/hooks/useMember";
 import { WhiteSpace } from "@/style/global";
+import { theme } from "@/style/theme";
+import { BsChatLeftTextFill } from "react-icons/bs";
 import { styled } from "styled-components";
 
 const ManageMember = () => {
-  const { data, isLoading, isError } = useMatchMember();
+  const { data: authData, isLoading: authLoading } = useFetchAuth();
 
-  if (isLoading) return <div>로딩 중...</div>;
-  if (isError || !data) return <div>무언가 잘못됨</div>;
+  // 코치 여부에 따라 useMatchMember 훅을 호출
+  const { data = [], isLoading: memberLoading } = useMatchMember(
+    authData?.isCoach || false
+  );
 
-  return (
+  if (authLoading || memberLoading) return <div>로딩 중...</div>;
+
+  // 코치일 경우 렌더링
+  return authData?.isCoach ? (
     <ManageMemberStyle>
       <SectionStyle>
         <h2>내 회원</h2>
@@ -29,10 +37,30 @@ const ManageMember = () => {
       <WhiteSpace $height={20} />
       <InquriyProfileList data={data} />
     </ManageMemberStyle>
+  ) : (
+    <NoReviewSection>
+      <BsChatLeftTextFill size="100" color={theme.color.gray3} />
+      <ContentWrapper className="t1">매칭 회원이 없습니다</ContentWrapper>
+    </NoReviewSection>
   );
 };
 
-const ManageMemberStyle = styled.div``;
+const ContentWrapper = styled.h2`
+  color: ${({ theme }) => theme.color.gray3};
+`;
+
+const NoReviewSection = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 80vh;
+  gap: 30px;
+`;
+
+const ManageMemberStyle = styled.div`
+  padding: 20px;
+`;
 
 const SectionStyle = styled.div`
   padding-top: 20px;
