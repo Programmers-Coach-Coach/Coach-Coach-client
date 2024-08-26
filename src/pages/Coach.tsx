@@ -37,14 +37,14 @@ const Coach = () => {
           variant="outlined"
           onClick={handleKaKaoLink}
         >
-          카카오톡 링크
+          카카오톡 문의하기
         </CustomButton>
         <CustomButton
           size="full-sharp"
           variant="contained"
           onClick={() => mutate(Number(id))}
         >
-          매칭 신청
+          코치님께 신청하기
         </CustomButton>
       </Buttons>
       <WhiteSpace $height={50} />
