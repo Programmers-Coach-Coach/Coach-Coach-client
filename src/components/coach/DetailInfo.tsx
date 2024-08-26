@@ -47,13 +47,6 @@ const DetailInfo = ({ coach }: Props) => {
         </ReviewWithButton>
         <ReviewCard coachProfile={coach} />
       </SubWrapper>
-      {/* TODO: 문의하기 페이지에서 오픈 카카오톡 링크로 이동할 수 있게함 */}
-      {/* <SubWrapper>
-        <h2>오픈 카카오톡 링크</h2>
-        <CustomButton variant="outlined" size="small" onClick={() => {}}>
-          kakaotalk
-        </CustomButton>
-      </SubWrapper> */}
 
       {isModal && (
         <Modal position="center" closeModal={closeModal}>
