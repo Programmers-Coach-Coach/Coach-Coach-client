@@ -1,5 +1,12 @@
+import {
+  BiDumbbell,
+  BiListUl,
+  BiSolidBell,
+  BiSolidHome,
+  BiSolidUser
+} from "react-icons/bi";
 import { FaRegStar } from "react-icons/fa";
-import { FaPeoplePulling, FaStar } from "react-icons/fa6";
+import { FaPeoplePulling, FaRegUser, FaStar } from "react-icons/fa6";
 import { HiChartBar } from "react-icons/hi2";
 import {
   IoIosArrowBack,
@@ -13,13 +20,6 @@ import { LuPencilLine } from "react-icons/lu";
 import { PiSunglassesBold } from "react-icons/pi";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { TbArrowsExchange2 } from "react-icons/tb";
-import { FaRegUser } from "react-icons/fa6";
-import {
-  BiDumbbell,
-  BiSolidUser,
-  BiSolidBell,
-  BiSolidHome
-} from "react-icons/bi";
 
 export const ICONS = {
   profile: BiSolidUser,
@@ -42,5 +42,6 @@ export const ICONS = {
   emptyStar: FaRegStar,
   fullStar: FaStar,
   heart: IoIosHeart,
-  emptyHeart: IoIosHeartEmpty
+  emptyHeart: IoIosHeartEmpty,
+  list: BiListUl
 };

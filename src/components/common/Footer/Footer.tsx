@@ -1,3 +1,4 @@
+import IconButton from "@/components/Icon/IconButton";
 import NotificationBadge from "@/components/badge/NotificationBadge";
 import { useFetchAuth } from "@/hooks/useFetchAuth";
 import useModal from "@/hooks/useModal";
@@ -5,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import Modal from "../modal/Modal";
 import FooterPicker from "../modal/contents/FooterPicker";
-import IconButton from "@/components/Icon/IconButton";
 
 const Footer = () => {
   const { data } = useFetchAuth();
@@ -39,6 +39,14 @@ const Footer = () => {
     }
   };
 
+  const onClickCoachList = () => {
+    navigate("/coach-list");
+  };
+
+  const activePath = (...pathname: string[]) => {
+    return pathname.some((path) => path === location.pathname);
+  };
+
   return (
     <>
       {routineModal.isModal && (
@@ -55,20 +63,28 @@ const Footer = () => {
         <IconButton
           name="home"
           size="25px"
-          color="gray3"
+          color={activePath("/") ? "primary" : "gray3"}
           onClick={onClickHome}
         />
         <IconButton
           name="routine"
           size="30px"
-          color="gray3"
+          color={
+            activePath("/routine", "/routine/my-coach") ? "primary" : "gray3"
+          }
           onClick={onClickRoutine}
+        />
+        <IconButton
+          name="list"
+          size="25px"
+          color={activePath("/coach-list") ? "primary" : "gray3"}
+          onClick={onClickCoachList}
         />
         <Notification>
           <IconButton
             name="alarm"
             size="25px"
-            color="gray3"
+            color={activePath("/notification") ? "primary" : "gray3"}
             onClick={onClickAlarm}
           />
           {data && data.countOfNotifications > 0 && (
@@ -78,7 +94,11 @@ const Footer = () => {
         <IconButton
           name="profile"
           size="25px"
-          color="gray3"
+          color={
+            activePath("/mypage", "/manage", "/record-list", "/record")
+              ? "primary"
+              : "gray3"
+          }
           onClick={onClickProfile}
         />
       </FooterStyle>
