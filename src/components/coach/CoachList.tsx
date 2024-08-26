@@ -1,17 +1,20 @@
 import useCoachList from "@/hooks/useCoachList";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
+import useQueryString from "@/hooks/useQueryString";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import Coach from "./Coach";
 
 const CoachList = () => {
+  const { getKeyword } = useQueryString();
   const [searchParams] = useSearchParams();
 
   const sort = searchParams.get("sort") ?? "latest";
   const sportsIds = searchParams.get("sportsIds")?.split(",").map(Number) ?? [];
+  const keyword = getKeyword() ?? "";
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useCoachList(
-    null,
+    keyword,
     sort,
     sportsIds
   );
