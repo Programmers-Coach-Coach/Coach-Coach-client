@@ -1,6 +1,5 @@
 import { FaRegStar } from "react-icons/fa";
-import { FaPeoplePulling, FaRegUser, FaStar } from "react-icons/fa6";
-import { HiChartBar } from "react-icons/hi2";
+import { FaStar } from "react-icons/fa6";
 import {
   IoIosArrowBack,
   IoIosArrowDown,
@@ -9,29 +8,31 @@ import {
   IoMdMore
 } from "react-icons/io";
 import {
-  IoBarbell,
+  IoBarbellOutline,
   IoClose,
+  IoGlasses,
   IoHomeOutline,
   IoListOutline,
   IoLogOutOutline,
   IoNotificationsOutline,
+  IoPeopleOutline,
   IoPersonOutline,
-  IoSearch
+  IoSearch,
+  IoTrendingDown
 } from "react-icons/io5";
 import { LuPencilLine } from "react-icons/lu";
-import { PiSunglassesBold } from "react-icons/pi";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { TbArrowsExchange2 } from "react-icons/tb";
 
 export const ICONS = {
   profile: IoPersonOutline,
   alarm: IoNotificationsOutline,
-  routine: IoBarbell,
+  routine: IoBarbellOutline,
   home: IoHomeOutline,
-  person: FaRegUser,
-  twins: FaPeoplePulling,
-  coach: PiSunglassesBold,
-  record: HiChartBar,
+  person: IoPersonOutline,
+  twins: IoPeopleOutline,
+  coach: IoGlasses,
+  record: IoTrendingDown,
   logout: IoLogOutOutline,
   back: IoIosArrowBack,
   modify: LuPencilLine,
