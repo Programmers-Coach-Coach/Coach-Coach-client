@@ -1,6 +1,5 @@
 import { FaRegStar } from "react-icons/fa";
-import { FaPeoplePulling, FaStar } from "react-icons/fa6";
-import { HiChartBar } from "react-icons/hi2";
+import { FaStar } from "react-icons/fa6";
 import {
   IoIosArrowBack,
   IoIosArrowDown,
@@ -8,28 +7,32 @@ import {
   IoIosHeartEmpty,
   IoMdMore
 } from "react-icons/io";
-import { IoClose, IoLogOutOutline, IoSearch } from "react-icons/io5";
+import {
+  IoBarbellOutline,
+  IoClose,
+  IoGlasses,
+  IoHomeOutline,
+  IoListOutline,
+  IoLogOutOutline,
+  IoNotificationsOutline,
+  IoPeopleOutline,
+  IoPersonOutline,
+  IoSearch,
+  IoTrendingDown
+} from "react-icons/io5";
 import { LuPencilLine } from "react-icons/lu";
-import { PiSunglassesBold } from "react-icons/pi";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { TbArrowsExchange2 } from "react-icons/tb";
-import { FaRegUser } from "react-icons/fa6";
-import {
-  BiDumbbell,
-  BiSolidUser,
-  BiSolidBell,
-  BiSolidHome
-} from "react-icons/bi";
 
 export const ICONS = {
-  profile: BiSolidUser,
-  alarm: BiSolidBell,
-  routine: BiDumbbell,
-  home: BiSolidHome,
-  person: FaRegUser,
-  twins: FaPeoplePulling,
-  coach: PiSunglassesBold,
-  record: HiChartBar,
+  profile: IoPersonOutline,
+  alarm: IoNotificationsOutline,
+  routine: IoBarbellOutline,
+  home: IoHomeOutline,
+  person: IoPersonOutline,
+  twins: IoPeopleOutline,
+  coach: IoGlasses,
+  record: IoTrendingDown,
   logout: IoLogOutOutline,
   back: IoIosArrowBack,
   modify: LuPencilLine,
@@ -42,5 +45,6 @@ export const ICONS = {
   emptyStar: FaRegStar,
   fullStar: FaStar,
   heart: IoIosHeart,
-  emptyHeart: IoIosHeartEmpty
+  emptyHeart: IoIosHeartEmpty,
+  list: IoListOutline
 };

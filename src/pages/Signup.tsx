@@ -1,7 +1,7 @@
+import SignupForm from "@/components/signup/SignupForm";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../assets/images/Logo.png";
-import { Link } from "react-router-dom";
-import SignupForm from "@/components/signup/SignupForm";
 
 const Signup = () => {
   return (
@@ -10,7 +10,7 @@ const Signup = () => {
       <SignupForm />
       <LinkWrapper>
         계정이 있으신가요?{" "}
-        <Link to="/auth/login">
+        <Link to="/login">
           <span className="login">로그인 하러가기</span>
         </Link>
       </LinkWrapper>
