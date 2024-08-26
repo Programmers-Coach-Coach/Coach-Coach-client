@@ -5,36 +5,18 @@ export const Wrapper = styled.div`
   overflow: hidden;
 `;
 
-export const Slider = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  height: 250px;
-  overflow-x: scroll;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`;
-
-export const Half = styled.div`
-  display: flex;
-  width: 100%;
-  height: 107px;
-  gap: 15px;
-`;
-
 export const SportsListStyle = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
   overflow: hidden;
+  margin-left: -10px; // 슬라이더의 왼쪽 패딩때문에 상쇄하기 위해 설정
 `;
 
 export const SportStyle = styled(Link)<{ $id: number }>`
   flex-shrink: 0;
-  width: 180px;
-  height: 107px;
+  width: 100%;
+  aspect-ratio: 2/1;
   background-color: ${({ $id, theme }) => theme.sports[$id]};
   border-radius: 10px;
   display: flex;
@@ -61,5 +43,34 @@ export const SportStyle = styled(Link)<{ $id: number }>`
     width: 70px;
     height: 70px;
     object-fit: cover;
+  }
+`;
+
+export const StyledSlider = styled(Slider)`
+  .slick-track {
+    display: flex;
+    gap: 10px;
+  }
+  .slick-slide {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .slick-arrow {
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+  }
+  .slick-prev {
+    left: 10px;
+  }
+  .slick-next {
+    right: 0px;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 50px;
+    opacity: 0.4;
   }
 `;

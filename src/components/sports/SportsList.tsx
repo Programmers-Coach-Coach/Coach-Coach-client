@@ -1,12 +1,8 @@
 import { ISport } from "@/models/sports.model";
 import qs from "qs";
-import {
-  Half,
-  Slider,
-  SportsListStyle,
-  SportStyle,
-  Wrapper
-} from "./SportsList.css";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import { SportsListStyle, SportStyle, StyledSlider } from "./SportsList.css";
 
 interface Props {
   sportsList: ISport[];
@@ -23,29 +19,50 @@ interface SportProps {
 const SportsList = ({ sportsList }: Props) => {
   return (
     <SportsListStyle>
-      <h1>Sports</h1>
       <SportsSlider sportsList={sportsList} />
     </SportsListStyle>
   );
 };
 
 const SportsSlider = ({ sportsList }: SportsSliderProps) => {
-  const len = Math.ceil(sportsList.length / 2);
+  const settings = {
+    slidesToShow: 2.5,
+    rows: 2,
+    initialSlide: 0,
+    infinite: false,
+    centerMode: false,
+    responsive: [
+      {
+        breakpoint: 380,
+        settings: {
+          slidesToShow: 1.2
+        }
+      },
+      {
+        breakpoint: 430,
+        settings: {
+          slidesToShow: 1.5
+        }
+      },
+      {
+        breakpoint: 460,
+        settings: {
+          slidesToShow: 1.8
+        }
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: 2.2
+        }
+      }
+    ]
+  };
+
   return (
-    <Wrapper>
-      <Slider>
-        <Half>
-          {sportsList
-            ?.slice(0, len)
-            .map((item) => <Sport key={item.sportId} item={item} />)}
-        </Half>
-        <Half>
-          {sportsList
-            ?.slice(len)
-            .map((item) => <Sport key={item.sportId} item={item} />)}
-        </Half>
-      </Slider>
-    </Wrapper>
+    <StyledSlider {...settings}>
+      {sportsList?.map((item) => <Sport key={item.sportId} item={item} />)}
+    </StyledSlider>
   );
 };
 
