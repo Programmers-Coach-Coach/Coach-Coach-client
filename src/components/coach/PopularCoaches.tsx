@@ -1,5 +1,6 @@
 import { IPopularCoach } from "@/models/coach.model";
 import { LineClamp } from "@/style/global";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -57,7 +58,7 @@ const CoachesSlider = ({ popularCoaches }: CoachesSliderProps) => {
 
 const Coach = ({ coach }: CoachProps) => {
   return (
-    <CoachStyle>
+    <CoachStyle to={`/coach/${coach.coachId}`}>
       <img src={coach.profileImageUrl} alt={coach.coachName} />
       <Heart checked={coach.isLiked} size="24px" id={coach.coachId} />
       <BoxText>
@@ -87,7 +88,7 @@ const RemovePadding = styled.div`
   margin: 0 -20px;
 `;
 
-const CoachStyle = styled.div`
+const CoachStyle = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: end;
