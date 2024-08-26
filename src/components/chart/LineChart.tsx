@@ -31,7 +31,7 @@ interface Props {
 
 const LineChart = ({ chartId }: Props) => {
   const options = {
-    responsive: false,
+    responsive: true,
     maintainAspectRatio: false,
     layout: {
       padding: {
@@ -118,23 +118,31 @@ const LineChart = ({ chartId }: Props) => {
   const chartWidth = chartData.length * 100;
 
   return (
-    <Wrapper>
-      <Line
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        options={options as any}
-        data={data}
-        width={chartWidth}
-        height={200}
-        plugins={[ChartDataLabels]}
-      />
-    </Wrapper>
+    <W>
+      <Wrapper style={{ width: chartWidth, minWidth: "100%" }}>
+        <Line
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          options={options as any}
+          data={data}
+          // width={chartWidth}
+          height={200}
+          plugins={[ChartDataLabels]}
+        />
+      </Wrapper>
+    </W>
   );
 };
 
 const Wrapper = styled.div`
   border-radius: ${({ theme }) => theme.borderRadius.default};
   box-shadow: ${({ theme }) => theme.boxShadow};
-  overflow: auto;
+  overflow-x: auto; /* 수평 스크롤을 활성화합니다. */
+  overflow-y: hidden; /* 수직 스크롤을 숨깁니다. (필요에 따라 조정) */
+  white-space: nowrap;
+`;
+
+const W = styled.div`
+  overflow-x: auto;
 `;
 
 export default LineChart;
