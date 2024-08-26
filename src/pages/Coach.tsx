@@ -5,6 +5,7 @@ import Loading from "@/components/loading/Loading";
 import useCoachDetail from "@/hooks/queries/useCoachDetail";
 import { useContact } from "@/hooks/queries/useContact";
 import { WhiteSpace } from "@/style/global";
+import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
@@ -21,6 +22,8 @@ const Coach = () => {
   const handleKaKaoLink = () => {
     if (data.chattingUrl) {
       window.open(data.chattingUrl, "_blank");
+    } else {
+      toast.error("코치가 카카오톡 링크를 등록하지 않았습니다");
     }
   };
 
