@@ -1,4 +1,5 @@
 import { ISport } from "@/models/sports.model";
+import qs from "qs";
 import {
   Half,
   Slider,
@@ -51,8 +52,9 @@ const SportsSlider = ({ sportsList }: SportsSliderProps) => {
 const Sport = ({ item }: SportProps) => {
   const { sportId, sportName, sportImageUrl } = item;
 
+  const query = qs.stringify({ sportsIds: sportId });
   return (
-    <SportStyle $id={sportId} to="/coach-list">
+    <SportStyle $id={sportId} to={`/coach-list?${query}`}>
       <img src={sportImageUrl} alt={sportName} />
       <p>{sportName}</p>
     </SportStyle>
