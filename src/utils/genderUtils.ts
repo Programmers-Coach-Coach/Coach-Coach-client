@@ -1,4 +1,4 @@
-export const getGenderLabel = (gender: "M" | "W") => {
+export const getGenderLabel = (gender: "M" | "W" | null | undefined) => {
   switch (gender) {
     case "M":
       return "남성";

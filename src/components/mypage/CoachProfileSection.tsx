@@ -13,14 +13,19 @@ import useAuth from "@/hooks/useAuth";
 import toast from "react-hot-toast";
 import image from "@/assets/images/basicProfile.png";
 import CoachProfileReview from "../common/Card/ReviewCard.tsx/CoachProfileReview";
+import { useFetchAuth } from "@/hooks/useFetchAuth";
 
 interface CoachProfileSectionProps {
   onTabChange: (newValue: number) => void;
 }
 
 const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
-  const { coachProfile, isFetchError, isLoading } = useFetchCoachProfile();
+  const { data, refetch } = useFetchAuth();
   const { editUserCoachProfile } = useAuth();
+
+  const { coachProfile, isLoading, isFetchError } = useFetchCoachProfile(
+    data?.isCoach || false
+  );
   const { control, handleSubmit, setValue } = useForm<IMyPageCoachFormValues>({
     defaultValues: {
       coachIntroduction: "",
@@ -34,19 +39,22 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
   });
 
   useEffect(() => {
-    if (coachProfile) {
-      setValue(
-        "coachingSports",
-        coachProfile.coachingSports.map((sport) => sport.sportName)
-      );
-      setValue("activeCenter", coachProfile.activeCenter || "");
-      setValue("activeCenterDetail", coachProfile.activeCenterDetail || "");
-      setValue("coachIntroduction", coachProfile.coachIntroduction);
-      setValue("activeHours", coachProfile.activeHours);
-      setValue("chattingUrl", coachProfile.chattingUrl);
-      setValue("isOpen", coachProfile.isOpen);
-    }
-  }, [coachProfile, setValue]);
+    refetch().then(() => {
+      if (data?.isCoach && coachProfile) {
+        setValue(
+          "coachingSports",
+          coachProfile.coachingSports.map((sport) => sport.sportName)
+        );
+        setValue("activeCenter", coachProfile.activeCenter || "");
+        setValue("activeCenterDetail", coachProfile.activeCenterDetail || "");
+        setValue("coachIntroduction", coachProfile.coachIntroduction);
+        setValue("activeHours", coachProfile.activeHours);
+        setValue("chattingUrl", coachProfile.chattingUrl);
+        setValue("isOpen", coachProfile.isOpen);
+      }
+      console.log(data);
+    });
+  }, [coachProfile, setValue, refetch, data]);
 
   const onSubmit = (data: IMyPageCoachFormValues) => {
     const formattedSports = data.coachingSports.map((sport) => ({
@@ -71,24 +79,21 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
     toast.error("입력 폼을 모두 채워주세요.");
   };
   if (isLoading) return <Loading />;
-  if (isFetchError || !coachProfile)
+  if (isFetchError)
     return <div>프로필 정보를 가져오는 중 오류가 발생했습니다.</div>;
 
   return (
     <ProfileWrapper>
       <BasicInfoWrapper>
-        <ProfileImage
-          src={coachProfile.profileImageUrl || image}
-          alt="Profile"
-        />
+        <ProfileImage src={data?.profileImageUrl || image} alt="Profile" />
         <NameGenderWrapper className="b1">
           <NameWrapper>
             <SubtitleWrapper>성함</SubtitleWrapper>
-            <div>{coachProfile.coachName}</div>
+            <div>{data?.nickname}</div>
           </NameWrapper>
           <GenderWrapper>
             <SubtitleWrapper>성별</SubtitleWrapper>
-            <div>{getGenderLabel(coachProfile.coachGender)}</div>
+            <div>{getGenderLabel(data?.gender)}</div>
           </GenderWrapper>
         </NameGenderWrapper>
       </BasicInfoWrapper>
@@ -153,8 +158,12 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
           rules={{ required: true }}
           render={({ field }) => <TextField {...field} maxRows={1} />}
         />
-        <SubtitleWrapper>리뷰</SubtitleWrapper>
-        <CoachProfileReview coachProfile={coachProfile} />
+        {data?.isCoach && coachProfile && (
+          <>
+            <SubtitleWrapper>리뷰</SubtitleWrapper>
+            <CoachProfileReview coachProfile={coachProfile} />
+          </>
+        )}
         <Controller
           name="isOpen"
           control={control}

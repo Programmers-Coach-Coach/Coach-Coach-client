@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { reissue } from "./auth.api";
 import { performLogout } from "@/utils/logoutUtil";
+import toast from "react-hot-toast";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const DEFAULT_TIMEOUT = 30000;
@@ -42,8 +43,10 @@ httpClient.interceptors.response.use(
         }
       } catch (err) {
         performLogout();
-        alert("세션이 만료되었습니다. 다시 로그인하세요.");
-        window.location.replace("/login");
+        toast.error("세션이 만료되었습니다. 다시 로그인하세요.");
+        setTimeout(() => {
+          window.location.replace("/login");
+        }, 1000);
       }
     }
     return Promise.reject(error);
