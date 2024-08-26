@@ -37,6 +37,7 @@ const CoachStyle = styled.div`
   align-items: center;
   gap: 10px;
   position: relative;
+  cursor: pointer;
 `;
 
 const Image = styled.img`
