@@ -60,7 +60,7 @@ const NotificationStyle = styled.div`
 `;
 
 const Button = styled.button`
-  color: ${({ theme }) => theme.color.gray3};
+  color: ${({ theme }) => theme.color.primary};
   display: flex;
   margin-left: auto;
 `;

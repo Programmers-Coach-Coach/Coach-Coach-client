@@ -4,13 +4,13 @@ import ActionModalInner from "@/components/common/modal/contents/ActionModalInne
 import CategoryContent from "@/components/common/modal/contents/CategoryContent";
 import RoutinePicker from "@/components/common/modal/contents/RoutinePicker";
 import Modal from "@/components/common/modal/Modal";
-import useModal from "@/hooks/useModal";
 import { useGetRoutine } from "@/hooks/queries/routine/useRoutine";
+import useModal from "@/hooks/useModal";
+import { useIsCoach } from "@/store/isCoach.store";
+import { useModalInfo } from "@/store/modalInfo.store";
+import { useProfileInfo } from "@/store/profileInfo.store";
 import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
-import { useModalInfo } from "@/store/modalInfo.store";
-import { useIsCoach } from "@/store/isCoach.store";
-import { useProfileInfo } from "@/store/profileInfo.store";
 
 const RoutineDetail = () => {
   const { routineId } = useParams();
@@ -110,9 +110,7 @@ const RoutineDetail = () => {
       {isModify && (
         <TextStyle>
           <h2>운동을 완료하면 체크하세요.</h2>
-          <div className="add" onClick={onClickAdd}>
-            추가하기
-          </div>
+          <Button onClick={onClickAdd}>추가하기</Button>
         </TextStyle>
       )}
       {data.categoryList.map((category) => (
@@ -142,6 +140,12 @@ const RoutineDetailStyle = styled.div`
 const TextStyle = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+const Button = styled.button`
+  color: ${({ theme }) => theme.color.primary};
+  display: flex;
+  margin-left: auto;
 `;
 
 export default RoutineDetail;
