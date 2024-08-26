@@ -6,13 +6,13 @@ import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import styled from "styled-components";
 import CustomButton from "../common/Button/CustomButton";
-import ReviewCard from "../common/Card/ReviewCard.tsx/ReviewCard";
 import SelectBox from "../common/InputField/Select/SelectBox";
 import Loading from "../loading/Loading";
 import AddressSearchField from "./AddressSearchField";
 import useAuth from "@/hooks/useAuth";
 import toast from "react-hot-toast";
 import image from "@/assets/images/basicProfile.png";
+import CoachProfileReview from "../common/Card/ReviewCard.tsx/CoachProfileReview";
 
 interface CoachProfileSectionProps {
   onTabChange: (newValue: number) => void;
@@ -21,12 +21,7 @@ interface CoachProfileSectionProps {
 const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
   const { coachProfile, isFetchError, isLoading } = useFetchCoachProfile();
   const { editUserCoachProfile } = useAuth();
-  const {
-    control,
-    handleSubmit,
-    setValue,
-    formState: { errors }
-  } = useForm<IMyPageCoachFormValues>({
+  const { control, handleSubmit, setValue } = useForm<IMyPageCoachFormValues>({
     defaultValues: {
       coachIntroduction: "",
       activeCenter: "",
@@ -54,11 +49,6 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
   }, [coachProfile, setValue]);
 
   const onSubmit = (data: IMyPageCoachFormValues) => {
-    if (Object.keys(errors).length > 0) {
-      toast.error("입력 폼을 모두 채워주세요.");
-      return;
-    }
-
     const formattedSports = data.coachingSports.map((sport) => ({
       sportName: sport
     }));
@@ -77,7 +67,9 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
   const handleCancel = () => {
     onTabChange(0);
   };
-
+  const onInvalid = () => {
+    toast.error("입력 폼을 모두 채워주세요.");
+  };
   if (isLoading) return <Loading />;
   if (isFetchError || !coachProfile)
     return <div>프로필 정보를 가져오는 중 오류가 발생했습니다.</div>;
@@ -162,8 +154,7 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
           render={({ field }) => <TextField {...field} maxRows={1} />}
         />
         <SubtitleWrapper>리뷰</SubtitleWrapper>
-        <ReviewCard coachProfile={coachProfile} />
-
+        <CoachProfileReview coachProfile={coachProfile} />
         <Controller
           name="isOpen"
           control={control}
@@ -188,7 +179,7 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
           <CustomButton
             size="full"
             variant="contained"
-            onClick={handleSubmit(onSubmit)}
+            onClick={handleSubmit(onSubmit, onInvalid)}
           >
             수정하기
           </CustomButton>
