@@ -56,7 +56,7 @@ export const useEditPhysicalMetrics = (id: number | null) => {
       toast.success("신체 정보를 수정하였습니다");
       // TODO: 백엔드에 response로 id 보내달라고 요청하기 (usePostPhysicalMetrics 처럼)
       if (id) {
-        queryClient.invalidateQueries({
+        queryClient.refetchQueries({
           queryKey: ["getDetailRecord", id]
         });
       }
@@ -82,13 +82,13 @@ export const useGetStamps = (year: number, month: number) => {
 };
 
 export const useGetDetailRecord = (recordId: number | null) => {
-  const { data, isError, isLoading } = useQuery({
+  const { data, isError, isLoading, refetch } = useQuery({
     queryKey: ["getDetailRecord", recordId],
     queryFn: () => getDetailRecord(recordId as number),
     enabled: recordId !== null // recordId가 없을 때 API 호출 막기
   });
 
-  return { data, isError, isLoading };
+  return { data, isError, isLoading, refetch };
 };
 
 export const useGetPhysicalChart = (type: TChartType) => {

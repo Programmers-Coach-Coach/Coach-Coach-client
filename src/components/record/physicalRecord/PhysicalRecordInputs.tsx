@@ -3,6 +3,7 @@ import { NUMBER_REGEX } from "@/constants/regex";
 import { IPhysicalMetrics } from "@/models/record.model";
 import { UseFormProps, UseFormRegister } from "react-hook-form";
 import styled, { css } from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 
 interface Props extends UseFormProps {
   disabled?: boolean;
@@ -45,14 +46,18 @@ const PhysicalRecordInputs = ({
   ];
   return (
     <Wrapper>
-      {PHYSICAL_RECORDS.map((record, i) => (
-        <InputWithLabel key={i}>
+      {PHYSICAL_RECORDS.map((record) => (
+        <InputWithLabel key={uuidv4()}>
           <Label>{record.label}</Label>
           <InputContainer>
             <Input
               type="number"
               step={0.1}
-              defaultValue={record.value?.toFixed(1)}
+              defaultValue={
+                record.value === 0 || record.value
+                  ? record.value.toFixed(1)
+                  : ""
+              }
               disabled={disabled}
               $disabled={disabled}
               placeholder="-"

@@ -17,12 +17,15 @@ export interface FormPhysicsInputs {
   bmi?: number;
 }
 
-interface Props extends IDetailPhysicalMetrics {}
+interface Props extends IDetailPhysicalMetrics {
+  closeModal: () => void;
+}
 const PhysicalRecordInner = ({
   weight,
   skeletalMuscle,
   fatPercentage,
-  bmi
+  bmi,
+  closeModal
 }: Props) => {
   const {
     register,
@@ -41,8 +44,10 @@ const PhysicalRecordInner = ({
   const onSubmit: SubmitHandler<FormPhysicsInputs> = (data) => {
     if (recordId) {
       editMutate({ data, recordId });
+      closeModal();
     } else {
       postMutate({ ...data, recordDate });
+      closeModal();
     }
   };
 
