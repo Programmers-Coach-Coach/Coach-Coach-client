@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Slider from "react-slick";
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
