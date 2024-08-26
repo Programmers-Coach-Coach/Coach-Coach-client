@@ -1,3 +1,4 @@
+import { FormPhysicsInputs } from "@/components/modal/PhysicalRecordInner";
 import { NUMBER_REGEX } from "@/constants/regex";
 import { IPhysicalMetrics } from "@/models/record.model";
 import { UseFormProps, UseFormRegister } from "react-hook-form";
@@ -9,7 +10,7 @@ interface Props extends UseFormProps {
   skeletalMuscle: number | null;
   fatPercentage: number | null;
   bmi: number | null;
-  register?: UseFormRegister<IPhysicalMetrics>;
+  register?: UseFormRegister<FormPhysicsInputs>;
 }
 
 const PhysicalRecordInputs = ({
@@ -49,6 +50,8 @@ const PhysicalRecordInputs = ({
           <Label>{record.label}</Label>
           <InputContainer>
             <Input
+              type="number"
+              step={0.1}
               defaultValue={record.value?.toFixed(1)}
               disabled={disabled}
               $disabled={disabled}

@@ -119,8 +119,8 @@ const LineChart = ({ chartId }: Props) => {
   const chartWidth = chartData.length * 100;
 
   return (
-    <W>
-      <Wrapper style={{ width: chartWidth, minWidth: "100%" }}>
+    <Wrapper>
+      <ChartWrapper style={{ width: chartWidth, minWidth: "100%" }}>
         {chartData.length > 0 ? (
           <Line
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -138,11 +138,11 @@ const LineChart = ({ chartId }: Props) => {
             descriptions="데이터가 없습니다"
           />
         )}
-      </Wrapper>
-    </W>
+      </ChartWrapper>
+    </Wrapper>
   );
 };
-const Wrapper = styled.div`
+const ChartWrapper = styled.div`
   overflow-x: auto; /* 수평 스크롤을 활성화합니다. */
   overflow-y: hidden; /* 수직 스크롤을 숨깁니다. (필요에 따라 조정) */
   white-space: nowrap;
@@ -151,7 +151,7 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const W = styled.div`
+const Wrapper = styled.div`
   overflow-x: auto;
   border-radius: ${({ theme }) => theme.borderRadius.default};
   box-shadow: ${({ theme }) => theme.boxShadow};
