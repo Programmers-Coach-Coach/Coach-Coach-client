@@ -39,6 +39,7 @@ const PhysicalRecord = ({
             skeletalMuscle={skeletalMuscle}
             fatPercentage={fatPercentage}
             bmi={bmi}
+            closeModal={closeModal}
           />
         </Modal>
       )}

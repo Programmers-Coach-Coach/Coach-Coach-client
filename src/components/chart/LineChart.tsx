@@ -13,6 +13,7 @@ import {
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { Line } from "react-chartjs-2";
 import styled from "styled-components";
+import Empty from "../common/Empty/Empty";
 import Loading from "../loading/Loading";
 
 ChartJS.register(
@@ -118,31 +119,42 @@ const LineChart = ({ chartId }: Props) => {
   const chartWidth = chartData.length * 100;
 
   return (
-    <W>
-      <Wrapper style={{ width: chartWidth, minWidth: "100%" }}>
-        <Line
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          options={options as any}
-          data={data}
-          // width={chartWidth}
-          height={200}
-          plugins={[ChartDataLabels]}
-        />
-      </Wrapper>
-    </W>
+    <Wrapper>
+      <ChartWrapper style={{ width: chartWidth, minWidth: "100%" }}>
+        {chartData.length > 0 ? (
+          <Line
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            options={options as any}
+            data={data}
+            height={200}
+            plugins={[ChartDataLabels]}
+          />
+        ) : (
+          <Empty
+            name="record"
+            size="30"
+            padding="0"
+            color="gray3"
+            descriptions="데이터가 없습니다"
+          />
+        )}
+      </ChartWrapper>
+    </Wrapper>
   );
 };
-
-const Wrapper = styled.div`
-  border-radius: ${({ theme }) => theme.borderRadius.default};
-  box-shadow: ${({ theme }) => theme.boxShadow};
+const ChartWrapper = styled.div`
   overflow-x: auto; /* 수평 스크롤을 활성화합니다. */
   overflow-y: hidden; /* 수직 스크롤을 숨깁니다. (필요에 따라 조정) */
   white-space: nowrap;
+  height: 200px;
+  display: flex;
+  align-items: center;
 `;
 
-const W = styled.div`
+const Wrapper = styled.div`
   overflow-x: auto;
+  border-radius: ${({ theme }) => theme.borderRadius.default};
+  box-shadow: ${({ theme }) => theme.boxShadow};
 `;
 
 export default LineChart;

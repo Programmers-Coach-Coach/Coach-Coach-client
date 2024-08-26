@@ -4,27 +4,34 @@ import {
 } from "@/hooks/queries/useRecord";
 
 import useQueryString from "@/hooks/useQueryString";
-import {
-  IDetailPhysicalMetrics,
-  IPhysicalMetrics
-} from "@/models/record.model";
+import { IDetailPhysicalMetrics } from "@/models/record.model";
 import { SubmitHandler, useForm } from "react-hook-form";
 import styled from "styled-components";
 import CustomButton from "../common/Button/CustomButton";
 import PhysicalRecordInputs from "../record/physicalRecord/PhysicalRecordInputs";
 
-interface Props extends IDetailPhysicalMetrics {}
+export interface FormPhysicsInputs {
+  weight?: number;
+  skeletalMuscle?: number;
+  fatPercentage?: number;
+  bmi?: number;
+}
+
+interface Props extends IDetailPhysicalMetrics {
+  closeModal: () => void;
+}
 const PhysicalRecordInner = ({
   weight,
   skeletalMuscle,
   fatPercentage,
-  bmi
+  bmi,
+  closeModal
 }: Props) => {
   const {
     register,
     handleSubmit,
     formState: { isValid, isSubmitting }
-  } = useForm<IPhysicalMetrics>();
+  } = useForm<FormPhysicsInputs>();
 
   const { getRecordId, getRecordDate } = useQueryString();
 
@@ -34,11 +41,13 @@ const PhysicalRecordInner = ({
   const { mutate: postMutate } = usePostPhysicalMetrics();
   const { mutate: editMutate } = useEditPhysicalMetrics(recordId); // TODO: 백엔드에서 '나의 신체 정보 수정'의 response id 보내주면 인자로 recordId 안보내줘도 됨
 
-  const onSubmit: SubmitHandler<IPhysicalMetrics> = (data) => {
+  const onSubmit: SubmitHandler<FormPhysicsInputs> = (data) => {
     if (recordId) {
       editMutate({ data, recordId });
+      closeModal();
     } else {
       postMutate({ ...data, recordDate });
+      closeModal();
     }
   };
 
