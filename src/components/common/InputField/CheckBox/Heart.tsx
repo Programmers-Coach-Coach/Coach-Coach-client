@@ -11,8 +11,8 @@ interface Props {
 
 const Heart = ({ id, checked, size }: Props) => {
   const [isChecked, setIsChecked] = useState(checked);
-  const { mutate: mutateLike } = useLikePost(id);
-  const { mutate: mutateUnlike } = useUnLikePost(id);
+  const { mutate: mutateLike } = useLikePost();
+  const { mutate: mutateUnlike } = useUnLikePost();
 
   const handleHeart = (e: MouseEvent, id: number) => {
     e.stopPropagation();

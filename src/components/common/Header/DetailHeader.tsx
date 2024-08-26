@@ -1,16 +1,23 @@
-import { styled } from "styled-components";
-import { useNavigate } from "react-router-dom";
 import Icon from "@/components/Icon/Icon";
+import { getClickBackLink } from "@/utils/getTitle";
+import { useNavigate } from "react-router-dom";
+import { styled } from "styled-components";
 
 interface DetailHeaderProps {
   title: string;
 }
 
 const DetailHeader = ({ title }: DetailHeaderProps) => {
+  const pathname = location.pathname;
   const navigate = useNavigate();
 
   const onClickBack = () => {
-    navigate(-1);
+    const link = getClickBackLink(pathname);
+    if (link) {
+      navigate(link);
+    } else {
+      navigate(-1);
+    }
   };
 
   return (
