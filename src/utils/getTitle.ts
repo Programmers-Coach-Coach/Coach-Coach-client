@@ -12,8 +12,8 @@ export const getTitle = (pathname: string): string => {
       return "코치 리스트";
     case "/routine":
       return "루틴";
-    case "/check-password":
-      return "본인확인";
+    case "/mypage":
+      return "마이페이지";
     case "/record":
       return "내 기록";
     case "/record-list":
