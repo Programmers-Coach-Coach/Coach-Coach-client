@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Logo from "../assets/images/Logo.png";
 import { Link } from "react-router-dom";
-import KakaoLogin from "@/components/common/Button/KakaoLogin";
 import LoginForm from "@/components/login/LoginForm";
 
 function Login() {
@@ -9,7 +8,6 @@ function Login() {
     <Container>
       <ImageWrapper className="logo" src={Logo} alt="Logo" />
       <LoginForm />
-      <KakaoLogin />
       <LinkWrapper className="b1">
         계정이 없으신가요?{" "}
         <Link to="/signup">

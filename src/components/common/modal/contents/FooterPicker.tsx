@@ -1,5 +1,6 @@
 import Icon from "@/components/Icon/Icon";
 import { footerPicker, IFooterPickerData, TFooterPicker } from "@/data/modal";
+import useAuth from "@/hooks/useAuth";
 import { useIsCoach } from "@/store/isCoach.store";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -11,7 +12,7 @@ interface Props {
 
 const FooterPicker = ({ schema, closeModal }: Props) => {
   const navigate = useNavigate();
-
+  const { userLogout } = useAuth();
   const setIsCoach = useIsCoach((state) => state.setIsCoach);
   const setIsModify = useIsCoach((state) => state.setIsModify);
   const setIsUser = useIsCoach((state) => state.setIsUser);
@@ -27,6 +28,8 @@ const FooterPicker = ({ schema, closeModal }: Props) => {
               setIsCoach(false);
               setIsModify(true);
               setIsUser(false);
+            } else if (item.name === "로그아웃") {
+              userLogout();
             }
             navigate(item.link);
             closeModal();

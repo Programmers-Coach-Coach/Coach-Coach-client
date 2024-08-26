@@ -1,25 +1,43 @@
+import { useState } from "react";
+import styled from "styled-components";
 import CoachProfileSection from "@/components/mypage/CoachProfileSection";
 import ProfileSection from "@/components/mypage/ProfileSection";
 import BasicTabs from "@/components/tab/BasicTabs";
-import { useState } from "react";
-import styled from "styled-components";
+import useAuth from "@/hooks/useAuth";
+import { ICheckPassword } from "@/models/auth.model";
+import CheckPassword from "./CheckPassword";
 
 const Mypage = () => {
   const [tabValue, setTabValue] = useState<number>(0);
+  const { passwordCheck } = useAuth();
+  const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
 
   const handleTabChange = (newValue: number) => {
     setTabValue(newValue);
   };
 
+  const handlePasswordCheck = async (data: ICheckPassword) => {
+    const isValid = await passwordCheck(data);
+    if (isValid) {
+      setIsPasswordConfirmed(true); // 비밀번호 확인이 성공하면 true로 설정
+    }
+  };
+
   return (
-    <Container>
-      <BasicTabs value={tabValue} onTabChange={handleTabChange} />
-      {tabValue === 0 ? (
-        <ProfileSection />
+    <>
+      {isPasswordConfirmed ? (
+        <Container>
+          <BasicTabs value={tabValue} onTabChange={handleTabChange} />
+          {tabValue === 0 ? (
+            <ProfileSection />
+          ) : (
+            <CoachProfileSection onTabChange={handleTabChange} />
+          )}
+        </Container>
       ) : (
-        <CoachProfileSection onTabChange={handleTabChange} />
+        <CheckPassword onPasswordCheck={handlePasswordCheck} />
       )}
-    </Container>
+    </>
   );
 };
 
