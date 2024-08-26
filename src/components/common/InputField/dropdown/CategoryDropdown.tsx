@@ -62,13 +62,15 @@ const CategoryDropdown = ({
               onClick={handleEditCategory}
             />
           )}
-          <IconButton
-            name="arrowDown"
-            color="text"
-            size="24px"
-            onClick={handleToggle}
-            className="arrow-button"
-          />
+          {actions.length > 0 && (
+            <IconButton
+              name="arrowDown"
+              color="text"
+              size="24px"
+              onClick={handleToggle}
+              className="arrow-button"
+            />
+          )}
         </Buttons>
       </DropdownBox>
       {isOpen && (
