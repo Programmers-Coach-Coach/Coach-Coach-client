@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
@@ -30,7 +31,7 @@ export const SportsListStyle = styled.div`
   overflow: hidden;
 `;
 
-export const SportStyle = styled.div<{ $id: number }>`
+export const SportStyle = styled(Link)<{ $id: number }>`
   flex-shrink: 0;
   width: 180px;
   height: 107px;

@@ -13,7 +13,7 @@ export const getTitle = (pathname: string): string => {
     case "/routine":
       return "루틴";
     case "/mypage":
-      return "마이페이지";
+      return "내 프로필";
     case "/record":
       return "내 기록";
     case "/record-list":
@@ -23,7 +23,7 @@ export const getTitle = (pathname: string): string => {
     case "/routine/my-coach":
       return "내 코치";
     case "/manage":
-      return "회원 관리";
+      return "매칭 회원 리스트";
     default:
       return "";
   }
