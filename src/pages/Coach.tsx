@@ -19,7 +19,6 @@ const Coach = () => {
   }
 
   const handleKaKaoLink = () => {
-    console.log("click");
     if (data.chattingUrl) {
       window.open(data.chattingUrl, "_blank");
     }
@@ -33,7 +32,7 @@ const Coach = () => {
         <CustomButton
           size="full-sharp"
           variant="outlined"
-          onClick={() => handleKaKaoLink}
+          onClick={handleKaKaoLink}
         >
           카카오톡 링크
         </CustomButton>

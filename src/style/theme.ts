@@ -142,7 +142,7 @@ export const theme: Theme = {
       width: "auto"
     },
     "full-sharp": {
-      padding: "6px",
+      padding: "4px",
       height: "auto",
       width: "auto"
     }
