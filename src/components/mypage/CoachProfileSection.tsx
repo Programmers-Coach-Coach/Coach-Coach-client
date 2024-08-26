@@ -1,19 +1,19 @@
+import image from "@/assets/images/basicProfile.png";
 import useFetchCoachProfile from "@/hooks/queries/useFetchCoachProfile";
+import useAuth from "@/hooks/useAuth";
+import { useFetchAuth } from "@/hooks/useFetchAuth";
 import { IMyPageCoachFormValues } from "@/models/coach.model";
 import { getGenderLabel } from "@/utils/genderUtils";
 import { Switch, TextField } from "@mui/material";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import styled from "styled-components";
 import CustomButton from "../common/Button/CustomButton";
+import CoachProfileReview from "../common/Card/ReviewCard.tsx/CoachProfileReview";
 import SelectBox from "../common/InputField/Select/SelectBox";
 import Loading from "../loading/Loading";
 import AddressSearchField from "./AddressSearchField";
-import useAuth from "@/hooks/useAuth";
-import toast from "react-hot-toast";
-import image from "@/assets/images/basicProfile.png";
-import CoachProfileReview from "../common/Card/ReviewCard.tsx/CoachProfileReview";
-import { useFetchAuth } from "@/hooks/useFetchAuth";
 
 interface CoachProfileSectionProps {
   onTabChange: (newValue: number) => void;
@@ -52,7 +52,6 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
         setValue("chattingUrl", coachProfile.chattingUrl);
         setValue("isOpen", coachProfile.isOpen);
       }
-      console.log(data);
     });
   }, [coachProfile, setValue, refetch, data]);
 

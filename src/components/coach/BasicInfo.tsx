@@ -62,10 +62,12 @@ const Image = styled.img`
 
 const IconWrapper = styled.div`
   display: flex;
+  align-items: center;
   gap: 4px;
 `;
 const Icons = styled.div`
   display: flex;
+  align-items: center;
   gap: 4px;
   font-size: 12px;
 `;
