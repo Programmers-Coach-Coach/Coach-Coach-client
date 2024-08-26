@@ -40,7 +40,7 @@ const ReviewInner = ({ coachId, onClose }: Props) => {
         rows={3}
         placeholder="코치에 대한 리뷰를 적어주세요"
         fullWidth
-        {...control.register("contents", { required: true })}
+        {...control.register("contents", { required: true, maxLength: 500 })}
       />
       <Footer>
         <button onClick={onClose} type="button">
