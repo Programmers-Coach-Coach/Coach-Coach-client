@@ -1,4 +1,5 @@
-import { TChartType } from "@/models/record.model";
+import { IDataPoint, TChartType } from "@/models/record.model";
+import dayjs from "dayjs";
 
 export const getChartType = (id: number): TChartType => {
   switch (id) {
@@ -24,4 +25,10 @@ export const getUnit = (id: number) => {
     default:
       return "";
   }
+};
+
+export const getChartSorted = (data: IDataPoint[]): IDataPoint[] => {
+  return data.slice().sort((a, b) => {
+    return dayjs(a.recordDate).isBefore(dayjs(b.recordDate)) ? -1 : 1;
+  });
 };
