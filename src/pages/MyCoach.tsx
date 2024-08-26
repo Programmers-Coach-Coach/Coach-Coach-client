@@ -21,9 +21,11 @@ const MyCoach = () => {
       <MyCoachesProfileList data={data} />
       <WhiteSpace $height={30} />
       <SectionStyle>
-        <h2>문의중...</h2>
+        <h2>매칭 진행 중...</h2>
         <WhiteSpace $height={3} />
-        <p className="b2">현재 회원님이 문의한 코치입니다.</p>
+        <p className="b2">
+          곧 코치와 연결됩니다. 빠른 매칭을 위해 카카오톡으로 문의하세요!
+        </p>
       </SectionStyle>
       <WhiteSpace $height={20} />
       <InqueryCoachProfileList data={data} />

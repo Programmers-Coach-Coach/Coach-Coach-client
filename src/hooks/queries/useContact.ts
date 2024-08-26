@@ -7,10 +7,12 @@ import toast from "react-hot-toast";
 export const useContact = () => {
   const { mutate, isError } = useMutation<IResponseMessage, Error, number>({
     mutationFn: (id: number) => contact(id),
-    onSuccess: () => {},
+    onSuccess: () => {
+      toast.success("신청이 완료됐어요");
+    },
     onError: (error) => {
       if (conflictError(error)) {
-        toast.error("이미 문의가 완료된 코치입니다");
+        toast.error("이미 신청이 완료된 코치입니다");
       }
     }
   });
