@@ -18,17 +18,33 @@ const Coach = () => {
     return <div>무언가 잘못됨</div>;
   }
 
+  const handleKaKaoLink = () => {
+    console.log("click");
+    if (data.chattingUrl) {
+      window.open(data.chattingUrl, "_blank");
+    }
+  };
+
   return (
     <Wrapper>
       <BasicInfo coach={data} />
       <WhiteSpace $height={30} />
-      <CustomButton
-        size="full-sharp"
-        variant="contained"
-        onClick={() => mutate(Number(id))}
-      >
-        문의하기
-      </CustomButton>
+      <Buttons>
+        <CustomButton
+          size="full-sharp"
+          variant="outlined"
+          onClick={() => handleKaKaoLink}
+        >
+          카카오톡 링크
+        </CustomButton>
+        <CustomButton
+          size="full-sharp"
+          variant="contained"
+          onClick={() => mutate(Number(id))}
+        >
+          매칭 신청
+        </CustomButton>
+      </Buttons>
       <WhiteSpace $height={50} />
       <DetailInfo coach={data} />
     </Wrapper>
@@ -40,4 +56,12 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
+const Buttons = styled.div`
+  display: flex;
+  gap: 10px;
+
+  button {
+    flex: 1;
+  }
+`;
 export default Coach;

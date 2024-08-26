@@ -51,7 +51,7 @@ const ExerciseCalender = () => {
   return (
     <Wrapper>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DateCalendar
+        <ResponsiveDateCalendar
           value={value}
           onChange={(newValue) => {
             setValue(newValue);
@@ -83,10 +83,16 @@ const ExerciseCalender = () => {
 };
 
 const Wrapper = styled.div`
-  width: fit-content;
+  width: 100%;
   margin: 0 auto;
   box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: ${({ theme }) => theme.borderRadius.default};
+  padding: 0;
+`;
+
+const ResponsiveDateCalendar = styled(DateCalendar)`
+  width: 100%;
+  max-width: 100%;
 `;
 
 const StyledPickersDay = styled(PickersDay)<{
@@ -119,4 +125,5 @@ const StyledPickersDay = styled(PickersDay)<{
     background-color: ${({ theme }) => theme.color.secondary} !important;
   }
 `;
+
 export default ExerciseCalender;
