@@ -70,7 +70,7 @@ const Footer = () => {
         <button onClick={onClickRoutine}>
           <Icon
             name="routine"
-            size="30px"
+            size="25px"
             color={
               activePath("/routine", "/routine/my-coach") ? "primary" : "gray3"
             }

@@ -21,6 +21,7 @@ export const useDeleteNotification = () => {
     mutationFn: (id: number) => deleteNotification(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getNotifications"] });
+      queryClient.invalidateQueries({ queryKey: ["getAuth"] });
     },
     onError: (error) => {
       console.error(error);
@@ -38,6 +39,7 @@ export const useDeleteAllNotification = () => {
     mutationFn: deleteAllNotification,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getNotifications"] });
+      queryClient.invalidateQueries({ queryKey: ["getAuth"] });
     },
     onError: (error) => {
       console.error(error);
