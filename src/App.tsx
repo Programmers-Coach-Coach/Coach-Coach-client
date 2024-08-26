@@ -1,13 +1,10 @@
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import { queryClient } from "./api/queryClient";
 import Layout from "./components/layout/Layout";
-import PrivateLayout from "./components/layout/PrivateLayout";
-import CheckPassword from "./pages/CheckPassword";
 import Coach from "./pages/Coach";
 import CoachList from "./pages/CoachList";
 import Home from "./pages/Home";
@@ -27,7 +24,6 @@ import { theme } from "./style/theme";
 import RoutineDetail from "./pages/Routine/RoutineDetail";
 
 function App() {
-  const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
   const router = createBrowserRouter([
     {
       element: <Layout />,
@@ -46,11 +42,7 @@ function App() {
         },
         {
           path: "mypage",
-          element: (
-            <PrivateLayout isAccess={isPasswordConfirmed}>
-              <Mypage />
-            </PrivateLayout>
-          )
+          element: <Mypage />
         },
         {
           path: "coach-list",
@@ -59,14 +51,6 @@ function App() {
         {
           path: "routine",
           element: <MyRoutine />
-        },
-        {
-          path: "check-password",
-          element: (
-            <CheckPassword
-              onPasswordConfirmed={() => setIsPasswordConfirmed(true)}
-            />
-          )
         },
         {
           path: "record",

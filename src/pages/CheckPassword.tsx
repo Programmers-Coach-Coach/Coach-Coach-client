@@ -3,22 +3,17 @@ import styled from "styled-components";
 import CustomButton from "@/components/common/Button/CustomButton";
 import AuthInput from "@/components/common/InputField/Text/AuthInput";
 import { ICheckPassword } from "@/models/auth.model";
-import useAuth from "@/hooks/useAuth";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-interface Props {
-  onPasswordConfirmed: () => void;
+interface CheckPasswordProps {
+  onPasswordCheck: (data: ICheckPassword) => void;
 }
 
-const CheckPassword = ({ onPasswordConfirmed }: Props) => {
+const CheckPassword = ({ onPasswordCheck }: CheckPasswordProps) => {
   const { control, handleSubmit } = useForm<ICheckPassword>();
-  const { passwordCheck, isPasswordConfirmed } = useAuth();
-  const navigate = useNavigate();
 
   const onSubmit = (data: ICheckPassword) => {
-    passwordCheck(data);
+    onPasswordCheck(data);
   };
 
   const onInvalid = (errors: FieldErrors<ICheckPassword>) => {
@@ -26,12 +21,6 @@ const CheckPassword = ({ onPasswordConfirmed }: Props) => {
       toast.error("비밀번호를 입력해주세요");
     }
   };
-  useEffect(() => {
-    if (isPasswordConfirmed) {
-      onPasswordConfirmed();
-      navigate("/mypage");
-    }
-  }, [isPasswordConfirmed, navigate, onPasswordConfirmed]);
 
   return (
     <Container>
@@ -44,7 +33,7 @@ const CheckPassword = ({ onPasswordConfirmed }: Props) => {
           name="password"
           control={control}
           defaultValue=""
-          rules={{ required: true }} // 필수 필드로 설정
+          rules={{ required: true }}
           render={({ field }) => (
             <AuthInput
               {...field}
@@ -55,7 +44,6 @@ const CheckPassword = ({ onPasswordConfirmed }: Props) => {
             />
           )}
         />
-
         <CustomButton size="large" variant="contained" type="submit">
           확인
         </CustomButton>

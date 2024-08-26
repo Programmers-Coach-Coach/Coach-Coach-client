@@ -18,13 +18,13 @@ import {
   ISignup
 } from "@/models/auth.model";
 import { IMyPageCoachFormWithSports } from "@/models/coach.model";
+import axios from "axios";
 
 const useAuth = () => {
   const navigate = useNavigate();
-  const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
-  const [isEmailError, setIsEmailError] = useState<boolean>(false); //과정에서 오류가 있었는지 확인하는 상태
+  const [isEmailError, setIsEmailError] = useState<boolean>(false);
   const [isNicknameError, setIsNicknameError] = useState<boolean>(false);
-  const [emailChecked, setEmailChecked] = useState<boolean>(false); //이메일 중복 확인이 완료되었는지 여부
+  const [emailChecked, setEmailChecked] = useState<boolean>(false);
   const [nicknameChecked, setNicknameChecked] = useState<boolean>(false);
   const { storeLogin, storeLogout } = useAuthStore();
 
@@ -55,7 +55,6 @@ const useAuth = () => {
     logout()
       .then(() => {
         storeLogout();
-        navigate("/login");
         toast.success("로그아웃 성공");
       })
       .catch(() => {
@@ -91,15 +90,19 @@ const useAuth = () => {
       });
   };
 
-  const passwordCheck = (formData: ICheckPassword) => {
-    checkPassword(formData)
-      .then(() => {
-        setIsPasswordConfirmed(true);
-        toast.success("비밀번호 확인 성공");
-      })
-      .catch((error) => {
-        toast.error(error.response.data.message);
-      });
+  const passwordCheck = async (formData: ICheckPassword): Promise<boolean> => {
+    try {
+      await checkPassword(formData);
+      toast.success("비밀번호 확인 성공");
+      return true;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data?.message || "요청 중 오류가 발생했습니다."
+        );
+      }
+      return false;
+    }
   };
 
   const withdrawUser = () => {
@@ -144,7 +147,6 @@ const useAuth = () => {
     isNicknameError,
     emailChecked,
     nicknameChecked,
-    isPasswordConfirmed,
     editUserCoachProfile,
     passwordCheck,
     userLogout
