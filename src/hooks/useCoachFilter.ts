@@ -1,5 +1,4 @@
 import { filterList } from "@/data/sportsList";
-import toast from "react-hot-toast";
 import { useSearchParams } from "react-router-dom";
 
 const useCoachFilter = () => {
@@ -22,8 +21,7 @@ const useCoachFilter = () => {
       if (sportsIds.length >= 2) {
         newSportsIds = sportsIds.filter((sportId) => sportId !== id);
       } else {
-        toast.error("반드시 한개 이상 선택해주세요");
-        return;
+        newSportsIds = [];
       }
     } else {
       if (id === 0) {
