@@ -1,3 +1,4 @@
+import profilePath from "@/assets/images/profile.png";
 import { ICoachDetail } from "@/models/coach.model";
 import styled from "styled-components";
 import Icon from "../Icon/Icon";
@@ -9,7 +10,7 @@ interface Props {
 const BasicInfo = ({ coach }: Props) => {
   return (
     <Wrapper>
-      <Image src={coach.profileImageUrl || undefined} alt={coach.coachName} />
+      <Image src={coach.profileImageUrl || profilePath} alt={coach.coachName} />
       <CoachInfo>
         <div>
           <h1>{coach.coachName}</h1>
@@ -51,6 +52,7 @@ const Image = styled.img`
   height: 140px;
   border-radius: ${({ theme }) => theme.borderRadius.default};
   object-fit: cover;
+  background: ${({ theme }) => theme.color.gray1};
 
   @media only screen and (max-width: 500px) {
     width: 90px;

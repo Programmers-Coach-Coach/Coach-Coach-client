@@ -1,3 +1,4 @@
+import profilePath from "@/assets/images/profile.png";
 import { ICoach } from "@/models/coach.model";
 import { LineClamp } from "@/style/global";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +12,7 @@ const Coach = ({ coach }: Props) => {
   const navigate = useNavigate();
   return (
     <CoachStyle onClick={() => navigate(`/coach/${coach.coachId}`)}>
-      <Image src={coach.profileImageUrl || undefined} alt={coach.coachName} />
+      <Image src={coach.profileImageUrl || profilePath} alt={coach.coachName} />
       <Text>
         <LineClamp $line={1} className="name">
           {coach.coachName}
@@ -44,6 +45,7 @@ const Image = styled.img`
   height: 114px;
   border-radius: 8px;
   object-fit: cover;
+  background: ${({ theme }) => theme.color.gray1};
 
   @media only screen and (max-width: 500px) {
     width: 90px;

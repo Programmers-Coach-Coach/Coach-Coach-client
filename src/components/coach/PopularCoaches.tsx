@@ -1,3 +1,4 @@
+import profilePath from "@/assets/images/profile.png";
 import { IPopularCoach } from "@/models/coach.model";
 import { LineClamp } from "@/style/global";
 import { Link } from "react-router-dom";
@@ -59,7 +60,7 @@ const CoachesSlider = ({ popularCoaches }: CoachesSliderProps) => {
 const Coach = ({ coach }: CoachProps) => {
   return (
     <CoachStyle to={`/coach/${coach.coachId}`}>
-      <img src={coach.profileImageUrl} alt={coach.coachName} />
+      <img src={coach.profileImageUrl || profilePath} alt={coach.coachName} />
       <Heart checked={coach.isLiked} size="24px" id={coach.coachId} />
       <BoxText>
         <LineClamp $line={1} className="b3">
