@@ -1,10 +1,3 @@
-import {
-  BiDumbbell,
-  BiListUl,
-  BiSolidBell,
-  BiSolidHome,
-  BiSolidUser
-} from "react-icons/bi";
 import { FaRegStar } from "react-icons/fa";
 import { FaPeoplePulling, FaRegUser, FaStar } from "react-icons/fa6";
 import { HiChartBar } from "react-icons/hi2";
@@ -15,17 +8,26 @@ import {
   IoIosHeartEmpty,
   IoMdMore
 } from "react-icons/io";
-import { IoClose, IoLogOutOutline, IoSearch } from "react-icons/io5";
+import {
+  IoBarbell,
+  IoClose,
+  IoHomeOutline,
+  IoListOutline,
+  IoLogOutOutline,
+  IoNotificationsOutline,
+  IoPersonOutline,
+  IoSearch
+} from "react-icons/io5";
 import { LuPencilLine } from "react-icons/lu";
 import { PiSunglassesBold } from "react-icons/pi";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { TbArrowsExchange2 } from "react-icons/tb";
 
 export const ICONS = {
-  profile: BiSolidUser,
-  alarm: BiSolidBell,
-  routine: BiDumbbell,
-  home: BiSolidHome,
+  profile: IoPersonOutline,
+  alarm: IoNotificationsOutline,
+  routine: IoBarbell,
+  home: IoHomeOutline,
   person: FaRegUser,
   twins: FaPeoplePulling,
   coach: PiSunglassesBold,
@@ -43,5 +45,5 @@ export const ICONS = {
   fullStar: FaStar,
   heart: IoIosHeart,
   emptyHeart: IoIosHeartEmpty,
-  list: BiListUl
+  list: IoListOutline
 };
