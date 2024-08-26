@@ -28,7 +28,7 @@ const InqueryCoachProfileList = ({ data }: MyCoachesProfileListProps) => {
         <Empty
           name="coach"
           size="80px"
-          color="text"
+          color="gray3"
           descriptions="문의한 코치가 없습니다"
           padding="10px"
         />

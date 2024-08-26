@@ -54,21 +54,21 @@ const Footer = () => {
       <FooterStyle>
         <IconButton
           name="home"
-          size="20px"
-          color="text"
+          size="25px"
+          color="gray3"
           onClick={onClickHome}
         />
         <IconButton
           name="routine"
           size="30px"
-          color="text"
+          color="gray3"
           onClick={onClickRoutine}
         />
         <Notification>
           <IconButton
             name="alarm"
-            size="30px"
-            color="text"
+            size="25px"
+            color="gray3"
             onClick={onClickAlarm}
           />
           {data && data.countOfNotifications > 0 && (
@@ -78,7 +78,7 @@ const Footer = () => {
         <IconButton
           name="profile"
           size="25px"
-          color="text"
+          color="gray3"
           onClick={onClickProfile}
         />
       </FooterStyle>

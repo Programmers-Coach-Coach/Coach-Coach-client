@@ -37,7 +37,7 @@ const Notification = () => {
           <Empty
             name="alarm"
             size="150px"
-            color="text"
+            color="gray3"
             descriptions="모든 알림을 확인하였습니다."
           />
         )}

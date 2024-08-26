@@ -29,7 +29,7 @@ const MyCoachesProfileList = ({ data }: MyCoachesProfileListProps) => {
         <Empty
           name="coach"
           size="80px"
-          color="text"
+          color="gray3"
           descriptions="나의 코치가 없습니다"
           padding="10px"
         />
