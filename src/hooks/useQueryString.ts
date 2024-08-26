@@ -4,7 +4,6 @@ const RECORD_ID = "recordId";
 const DATE = "date";
 const KEYWORD = "keyword";
 const SORT = "sort";
-const SPORTS_IDS = "sportsIds";
 
 const useQueryString = () => {
   const [searchParams, setSearchParams] = useSearchParams();
