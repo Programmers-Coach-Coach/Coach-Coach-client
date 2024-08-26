@@ -104,8 +104,8 @@ const StyledPickersDay = styled(PickersDay)<{
   &:after {
     content: "";
     position: absolute;
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background-image: ${({ $isSelected }) =>
       $isSelected ? `url(${StampImage})` : "none"};

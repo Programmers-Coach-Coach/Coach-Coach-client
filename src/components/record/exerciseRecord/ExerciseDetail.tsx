@@ -28,6 +28,7 @@ const ExerciseDetail = ({ routines }: Props) => {
                   categoryName: category.categoryName
                 }}
                 actions={category.actions}
+                completedAllEnabled
               />
             ))}
           </Routine>
@@ -37,7 +38,7 @@ const ExerciseDetail = ({ routines }: Props) => {
           <Empty
             name="routine"
             size="64px"
-            color="text"
+            color="gray3"
             descriptions="이 날은 쉬어가는 시간을 가졌네요!"
           />
           <WhiteSpace $height={100} />
@@ -66,7 +67,7 @@ const CoachInfo = styled.div`
   align-items: center;
   gap: 12px;
   height: 50px;
-  padding: 10px;
+  padding: 0 20px;
   border-radius: 20px 20px 0 0;
   background-color: ${({ theme }) => theme.color.primary};
   color: ${({ theme }) => theme.color.background};

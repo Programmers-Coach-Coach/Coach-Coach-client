@@ -3,6 +3,7 @@ import ExerciseDetail from "@/components/record/exerciseRecord/ExerciseDetail";
 import PhysicalRecord from "@/components/record/physicalRecord/PhysicalRecord";
 import { useGetDetailRecord } from "@/hooks/queries/useRecord";
 import useQueryString from "@/hooks/useQueryString";
+import { WhiteSpace } from "@/style/global";
 
 import styled from "styled-components";
 
@@ -32,6 +33,7 @@ const RecordDatail = () => {
         <h2>{date}</h2>
       </DateWrapper>
       <ExerciseDetail routines={data?.records || []} />
+      <WhiteSpace $height={30} />
       <PhysicalRecord
         weight={data?.weight || null}
         skeletalMuscle={data?.skeletalMuscle || null}

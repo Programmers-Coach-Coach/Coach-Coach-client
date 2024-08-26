@@ -1,8 +1,8 @@
 import { IAction } from "@/models/routine.model";
+import { useModalInfo } from "@/store/modalInfo.store";
+import { LineClamp } from "@/style/global";
 import { styled } from "styled-components";
 import IconButton from "../Icon/IconButton";
-import { LineClamp } from "@/style/global";
-import { useModalInfo } from "@/store/modalInfo.store";
 
 interface ActionProps {
   action: IAction;
@@ -43,6 +43,7 @@ const ActionStyle = styled.li`
   justify-content: space-between;
   align-items: center;
   height: 70px;
+  padding: 0 20px;
 `;
 
 const Text = styled.div`
