@@ -51,9 +51,7 @@ const MemberRoutine = () => {
         height="180px"
       />
       <AddTextStyle>
-        <p className="b2" onClick={onClickAdd}>
-          추가하기
-        </p>
+        <Button onClick={onClickAdd}>추가하기</Button>
       </AddTextStyle>
       <RoutineList routines={data} />
     </MemberRoutineStyle>
@@ -71,6 +69,12 @@ const AddTextStyle = styled.div`
     color: ${({ theme }) => theme.color.primary};
     text-decoration: underline;
   }
+`;
+
+const Button = styled.button`
+  color: ${({ theme }) => theme.color.primary};
+  display: flex;
+  margin-left: auto;
 `;
 
 export default MemberRoutine;
