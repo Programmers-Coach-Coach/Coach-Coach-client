@@ -87,7 +87,7 @@ const Coach = ({ coach }: CoachProps) => {
         {coach.description}
       </LineClamp>
       <CoachingSports className="coaching-sports">
-        {coach.coachingSports.map((item) => (
+        {coach.coachingSports.slice(0, 3).map((item) => (
           <li key={item.sportId}>#{item.sportName}</li>
         ))}
       </CoachingSports>
@@ -157,7 +157,7 @@ const CoachesSliderStyle = styled(Slider)`
   }
 `;
 
-const CoachingSports = styled.ul`
+export const CoachingSports = styled.ul`
   display: flex;
   align-items: center;
   gap: 9px;
@@ -166,7 +166,7 @@ const CoachingSports = styled.ul`
 
   li {
     display: inline-flex;
-    font-size: 9px;
+    font-size: 12px;
     padding: 4px 9px;
     color: ${({ theme }) => theme.color.primary};
     border: 1px solid ${({ theme }) => theme.color.primary};
