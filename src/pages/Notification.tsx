@@ -17,7 +17,7 @@ const Notification = () => {
 
   if (isLoading) return <Loading />;
   if (isError || !data)
-    return <div>알림 정보를 가져오는 중 오류가 발생했습니다.</div>;
+    return <div>알림 정보를 가져오는 중 오류가 발생했어요.</div>;
 
   return (
     <NotificationStyle>
