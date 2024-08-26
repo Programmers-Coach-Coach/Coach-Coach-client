@@ -16,7 +16,7 @@ const Home = () => {
         name="home"
         size="64px"
         color="gray3"
-        descriptions="홈 화면을 가져오는 중 오류가 발생했어요. "
+        descriptions="홈 화면을 가져오는 중 오류가 발생했어요."
       />
     );
 
