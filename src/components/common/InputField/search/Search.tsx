@@ -1,32 +1,43 @@
 import Icon from "@/components/Icon/Icon";
-import { ForwardedRef, forwardRef, useState } from "react";
+import useQueryString from "@/hooks/useQueryString";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {}
 
-const Search = forwardRef(
-  ({ ...props }: Props, ref: ForwardedRef<HTMLInputElement>) => {
-    const [isIconFocus, setIsIconFocus] = useState(false);
+interface FormInput {
+  keyword: string;
+}
 
-    return (
-      <SearchStyle
-        onFocus={() => setIsIconFocus(true)}
-        onBlur={() => setIsIconFocus(false)}
-      >
-        <input {...props} ref={ref} />
-        <button className="search-button">
-          <Icon
-            name="search"
-            color={isIconFocus ? "primary" : "text"}
-            size="16px"
-          />
-        </button>
-      </SearchStyle>
-    );
-  }
-);
+const Search = ({ ...props }: Props) => {
+  const [isIconFocus, setIsIconFocus] = useState(false);
+  const { register, handleSubmit } = useForm<FormInput>();
+  const { setKeyword } = useQueryString();
 
-const SearchStyle = styled.div`
+  const onSubmit = (data: FormInput) => {
+    setKeyword(data.keyword);
+  };
+
+  return (
+    <SearchStyle
+      onSubmit={handleSubmit(onSubmit)}
+      onFocus={() => setIsIconFocus(true)}
+      onBlur={() => setIsIconFocus(false)}
+    >
+      <input {...register("keyword", { required: true })} {...props} />
+      <button type="submit" className="search-button">
+        <Icon
+          name="search"
+          color={isIconFocus ? "primary" : "text"}
+          size="16px"
+        />
+      </button>
+    </SearchStyle>
+  );
+};
+
+const SearchStyle = styled.form`
   display: flex;
   position: relative;
 

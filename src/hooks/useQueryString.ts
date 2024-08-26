@@ -2,6 +2,8 @@ import { useSearchParams } from "react-router-dom";
 
 const RECORD_ID = "recordId";
 const DATE = "date";
+const KEYWORD = "keyword";
+const SORT = "sort";
 
 const useQueryString = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -25,11 +27,27 @@ const useQueryString = () => {
     setSearchParams(searchParams);
   };
 
+  const setKeyword = (keyword: string) => {
+    searchParams.set(KEYWORD, keyword);
+    setSearchParams(searchParams);
+  };
+
+  const getKeyword = (): string | null => {
+    return searchParams.get(KEYWORD);
+  };
+
+  const getSort = (): string | null => {
+    return searchParams.get(SORT);
+  };
+
   return {
     getRecordId,
     setRecordId,
     getRecordDate,
-    setRecordDate
+    setRecordDate,
+    setKeyword,
+    getKeyword,
+    getSort
   };
 };
 

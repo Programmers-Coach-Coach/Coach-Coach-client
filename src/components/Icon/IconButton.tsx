@@ -1,8 +1,8 @@
 import { ICONS } from "@/constants/assets";
 import { ColorKey, theme } from "@/style/theme";
-import { HTMLAttributes } from "react";
+import { ButtonHTMLAttributes } from "react";
 
-interface Props extends HTMLAttributes<HTMLButtonElement> {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   name: keyof typeof ICONS;
   size: string;
   color: ColorKey;
