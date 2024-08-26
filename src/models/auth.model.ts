@@ -50,5 +50,8 @@ export interface ICheckPassword {
 export interface IAuthResponse {
   isLogin: boolean;
   nickname: string | null;
+  gender: "W" | "M" | null;
+  profileImageUrl: string | null;
+  isCoach: boolean;
   countOfNotifications: number;
 }
