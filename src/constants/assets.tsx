@@ -1,34 +1,37 @@
-import { CiBellOn, CiDumbbell } from "react-icons/ci";
 import { FaRegStar } from "react-icons/fa";
 import { FaPeoplePulling, FaStar } from "react-icons/fa6";
-import { GrHomeRounded } from "react-icons/gr";
 import { HiChartBar } from "react-icons/hi2";
 import {
   IoIosArrowBack,
   IoIosArrowDown,
   IoIosHeart,
   IoIosHeartEmpty,
-  IoMdMore,
-  IoMdPerson
+  IoMdMore
 } from "react-icons/io";
 import { IoClose, IoLogOutOutline, IoSearch } from "react-icons/io5";
 import { LuPencilLine } from "react-icons/lu";
 import { PiSunglassesBold } from "react-icons/pi";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import { RxPerson } from "react-icons/rx";
 import { TbArrowsExchange2 } from "react-icons/tb";
+import { FaRegUser } from "react-icons/fa6";
+import {
+  BiDumbbell,
+  BiSolidUser,
+  BiSolidBell,
+  BiSolidHome
+} from "react-icons/bi";
 
 export const ICONS = {
-  person: IoMdPerson,
+  profile: BiSolidUser,
+  alarm: BiSolidBell,
+  routine: BiDumbbell,
+  home: BiSolidHome,
+  person: FaRegUser,
   twins: FaPeoplePulling,
   coach: PiSunglassesBold,
-  profile: RxPerson,
   record: HiChartBar,
   logout: IoLogOutOutline,
   back: IoIosArrowBack,
-  home: GrHomeRounded,
-  routine: CiDumbbell,
-  alarm: CiBellOn,
   modify: LuPencilLine,
   delete: RiDeleteBin5Line,
   filter: TbArrowsExchange2,
