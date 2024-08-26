@@ -1,24 +1,29 @@
 import InquriyProfileList from "@/components/Profile/ProfileList/InquiryProfileList";
 import MatchingProfileList from "@/components/Profile/ProfileList/MatchingProfileList";
+import Loading from "@/components/loading/Loading";
 import { useFetchAuth } from "@/hooks/useFetchAuth";
 import { useMatchMember } from "@/hooks/useMember";
 import { WhiteSpace } from "@/style/global";
 import { theme } from "@/style/theme";
+import { useEffect, useState } from "react";
 import { BsChatLeftTextFill } from "react-icons/bs";
 import { styled } from "styled-components";
 
 const ManageMember = () => {
-  const { data: authData, isLoading: authLoading } = useFetchAuth();
+  const { data: authData, isLoading: authLoading, refetch } = useFetchAuth();
+  const [isCoach, setIsCoach] = useState(false);
 
-  // 코치 여부에 따라 useMatchMember 훅을 호출
-  const { data = [], isLoading: memberLoading } = useMatchMember(
-    authData?.isCoach || false
-  );
+  const { data = [], isLoading: memberLoading } = useMatchMember(isCoach);
 
-  if (authLoading || memberLoading) return <div>로딩 중...</div>;
+  useEffect(() => {
+    refetch().then(() => {
+      setIsCoach(authData?.isCoach || false);
+    });
+  }, [authData, refetch]);
 
-  // 코치일 경우 렌더링
-  return authData?.isCoach ? (
+  if (authLoading || memberLoading) return <Loading />;
+
+  return isCoach ? (
     <ManageMemberStyle>
       <SectionStyle>
         <h2>내 회원</h2>
@@ -40,7 +45,7 @@ const ManageMember = () => {
   ) : (
     <NoReviewSection>
       <BsChatLeftTextFill size="100" color={theme.color.gray3} />
-      <ContentWrapper className="t1">매칭 회원이 없습니다</ContentWrapper>
+      <ContentWrapper className="t1">코치가 아닙니다.</ContentWrapper>
     </NoReviewSection>
   );
 };
