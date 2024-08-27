@@ -1,4 +1,5 @@
 import { useDeleteReview } from "@/hooks/queries/useReview";
+import useDropdownClick from "@/hooks/useDropdownClick";
 import useModal from "@/hooks/useModal";
 import styled from "styled-components";
 import Modal from "../common/modal/Modal";
@@ -29,6 +30,8 @@ const ReviewControl = ({ reviewId, coachId }: Props) => {
     closeControlModal();
   };
 
+  const { menuRef } = useDropdownClick(closeControlModal, false); // 변경된 부분
+
   return (
     <ReviewControlStyle>
       <IconButton
@@ -38,7 +41,7 @@ const ReviewControl = ({ reviewId, coachId }: Props) => {
         onClick={handleControlModal}
       />
       {isControlModal && (
-        <ControlModal>
+        <ControlModal ref={menuRef}>
           <Item onClick={openEditModal} className="first-child">
             <Icon size="12px" color="text" name="modify" />
             수정
