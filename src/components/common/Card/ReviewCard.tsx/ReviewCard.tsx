@@ -17,8 +17,8 @@ const ReviewCard = ({ coachProfile }: ReviewCardProps) => {
     </NoReviewSection>
   ) : (
     <>
-      {coachProfile.reviews.map((review, index) => (
-        <CardContainer key={index}>
+      {coachProfile.reviews.map((review) => (
+        <CardContainer key={review.reviewId}>
           <CardWrapper>
             <FisrstWrapper>
               <StarWrapper>

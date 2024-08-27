@@ -77,6 +77,7 @@ export interface ICoachDetail {
 }
 
 export interface IReview {
+  reviewId: number;
   userId: number;
   userName: string;
   contents: string;
