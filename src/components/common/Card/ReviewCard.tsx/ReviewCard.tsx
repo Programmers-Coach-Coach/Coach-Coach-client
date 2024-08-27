@@ -1,3 +1,4 @@
+import ReviewControl from "@/components/modal/ReviewControl";
 import { ICoachDetail } from "@/models/coach.model";
 import { theme } from "@/style/theme";
 import { timeAgo } from "@/utils/format";
@@ -29,6 +30,7 @@ const ReviewCard = ({ coachProfile }: ReviewCardProps) => {
             </FisrstWrapper>
             <div className="contents">{review.contents}</div>
           </CardWrapper>
+          <ReviewControl reviewId={review.reviewId} />
         </CardContainer>
       ))}
     </>
@@ -38,6 +40,9 @@ const ReviewCard = ({ coachProfile }: ReviewCardProps) => {
 export default ReviewCard;
 
 const CardContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: ${({ theme }) => theme.borderRadius.default};
 `;

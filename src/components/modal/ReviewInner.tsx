@@ -6,12 +6,12 @@ import styled from "styled-components";
 import RatingStars from "../common/Card/ReviewCard.tsx/RatingStars";
 
 interface Props {
-  coachId: number;
+  id: number;
   onClose: () => void;
 }
 
-const ReviewInner = ({ coachId, onClose }: Props) => {
-  const { mutate } = usePostReview(coachId);
+const ReviewInner = ({ id, onClose }: Props) => {
+  const { mutate } = usePostReview(id);
   const {
     control,
     handleSubmit,
@@ -19,7 +19,7 @@ const ReviewInner = ({ coachId, onClose }: Props) => {
   } = useForm<IPostReview>();
 
   const onSubmit = (data: IPostReview) => {
-    mutate({ coachId, data });
+    mutate({ coachId: id, data });
     onClose();
   };
 
