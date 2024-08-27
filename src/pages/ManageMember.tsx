@@ -7,7 +7,7 @@ import { WhiteSpace } from "@/style/global";
 import { theme } from "@/style/theme";
 import { useEffect, useState } from "react";
 import { styled } from "styled-components";
-import { BiSolidUser } from "react-icons/bi";
+import { IoPersonOutline } from "react-icons/io5";
 const ManageMember = () => {
   const { data: authData, isLoading: authLoading, refetch } = useFetchAuth();
   const [isCoach, setIsCoach] = useState(false);
@@ -43,7 +43,7 @@ const ManageMember = () => {
     </ManageMemberStyle>
   ) : (
     <NoReviewSection>
-      <BiSolidUser size="100" color={theme.color.gray3} />
+      <IoPersonOutline size="100" color={theme.color.gray3} />
       <ContentWrapper className="t1">코치가 아닙니다.</ContentWrapper>
     </NoReviewSection>
   );

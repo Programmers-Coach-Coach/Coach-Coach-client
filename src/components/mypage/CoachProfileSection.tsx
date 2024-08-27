@@ -34,7 +34,7 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
       coachingSports: [],
       activeHours: "",
       chattingUrl: "",
-      isOpen: false
+      isOpen: true
     }
   });
 
