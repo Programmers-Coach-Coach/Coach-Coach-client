@@ -14,14 +14,21 @@ const Heart = ({ id, checked, size }: Props) => {
   const { mutate: mutateLike } = useLikePost(id);
   const { mutate: mutateUnlike } = useUnLikePost(id);
 
-  const handleHeart = (e: MouseEvent, id: number) => {
+  const handleHeart = async (e: MouseEvent, id: number) => {
     e.stopPropagation();
     if (isChecked) {
       mutateUnlike(id);
+      setIsChecked(false);
     } else {
-      mutateLike(id);
+      mutateLike(id, {
+        onSuccess: () => {
+          setIsChecked(true);
+        },
+        onError: () => {
+          setIsChecked(false);
+        }
+      });
     }
-    setIsChecked(!isChecked);
   };
 
   return (

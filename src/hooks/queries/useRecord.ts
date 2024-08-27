@@ -12,6 +12,7 @@ import {
   TChartType
 } from "@/models/record.model";
 import { IResponseMessage } from "@/models/responseMessage.model";
+import { getChartSorted } from "@/utils/sort";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import useQueryString from "../useQueryString";
@@ -97,5 +98,7 @@ export const useGetPhysicalChart = (type: TChartType) => {
     queryFn: () => getPhysicalChart(type)
   });
 
-  return { data, isError, isLoading };
+  const sortedData = data ? getChartSorted(data) : undefined;
+
+  return { data: sortedData, isError, isLoading };
 };

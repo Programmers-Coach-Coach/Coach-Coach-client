@@ -5,6 +5,7 @@ import {
 } from "@/api/notification.api";
 import { queryClient } from "@/api/queryClient";
 import { IResponseMessage } from "@/models/responseMessage.model";
+import { getNotificationSorted } from "@/utils/sort";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useFetchNotifications = () => {
@@ -13,7 +14,9 @@ export const useFetchNotifications = () => {
     queryFn: getNotifications
   });
 
-  return { data, isError, isLoading };
+  const sortedData = data ? getNotificationSorted(data) : undefined;
+
+  return { data: sortedData, isError, isLoading };
 };
 
 export const useDeleteNotification = () => {
