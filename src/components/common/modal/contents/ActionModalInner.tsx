@@ -115,12 +115,12 @@ const ActionModalInner = ({
       } else if (schema.startsWith("action")) {
         if (schema === "action-enroll") {
           postActionResponse.mutate({
-            payload: { actionName, minutes, count, sets, description },
+            payload: { actionName, minutes, counts: count, sets, description },
             categoryId
           });
         } else if (schema === "action-modify") {
           patchActionResponse.mutate({
-            payload: { actionName, minutes, count, sets, description },
+            payload: { actionName, minutes, counts: count, sets, description },
             actionId
           });
         }

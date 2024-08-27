@@ -21,7 +21,7 @@ export interface IAction {
   actionId: number;
   actionName: string;
   sets?: number;
-  count?: number;
+  counts?: number;
   minutes?: number;
   description?: string;
 }

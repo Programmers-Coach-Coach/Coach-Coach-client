@@ -14,6 +14,12 @@ interface Props {
   onEditCategory?: () => void; // 카테고리 수정, 삭제 기능
   onEditAction?: () => void; // 액션 수정 기능, 삭제 기능
   completedAllEnabled?: boolean; // 모두 완료 가능 활성화 여부(기록 페이지에서 사용)
+  setCategoryName?: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setAction?: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setActionTime?: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setActionCount?: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setActionSets?: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setActionDes?: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 const CategoryDropdown = ({
@@ -22,19 +28,31 @@ const CategoryDropdown = ({
   modifyEnabled = false,
   onEditCategory,
   onEditAction,
-  completedAllEnabled = false
+  completedAllEnabled = false,
+  setCategoryName,
+  setAction,
+  setActionTime,
+  setActionCount,
+  setActionSets,
+  setActionDes
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const isCoach = useIsCoach((state) => state.isCoach);
   const setCategoryId = useModalInfo((state) => state.setCategoryId);
+  const settingCategoryName = useModalInfo((state) => state.setCategoryName);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleEditCategory = () => {
+  const handleEditCategory = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setCategoryId(category.categoryId);
-    onEditCategory && onEditCategory();
+    settingCategoryName(category.categoryName);
+    if (onEditCategory) {
+      onEditCategory();
+      setCategoryName && setCategoryName(category.categoryName);
+    }
   };
 
   return (
@@ -81,6 +99,11 @@ const CategoryDropdown = ({
               action={action}
               modifyEnabled={modifyEnabled}
               onEditAction={onEditAction}
+              setAction={setAction}
+              setActionTime={setActionTime}
+              setActionCount={setActionCount}
+              setActionSets={setActionSets}
+              setActionDes={setActionDes}
             />
           ))}
         </OptionBox>
