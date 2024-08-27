@@ -12,7 +12,6 @@ const useDropdownClick = (handler: () => void, disabled: boolean) => {
       }
     }
 
-    // 바깥 클릭 이벤트 리스너 추가
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);

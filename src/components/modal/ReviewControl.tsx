@@ -27,10 +27,9 @@ const ReviewControl = ({ reviewId, coachId }: Props) => {
 
   const handleDelete = () => {
     deleteMutate(reviewId);
-    closeControlModal();
   };
 
-  const { menuRef } = useDropdownClick(closeControlModal, false); // 변경된 부분
+  const { menuRef } = useDropdownClick(closeControlModal, false);
 
   return (
     <ReviewControlStyle>
