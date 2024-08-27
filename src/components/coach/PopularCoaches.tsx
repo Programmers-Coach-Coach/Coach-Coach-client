@@ -155,6 +155,25 @@ const CoachesSliderStyle = styled(Slider)`
     gap: 10px;
     margin: 0 -10px;
   }
+
+  .slick-arrow {
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+    top: 100px;
+  }
+  .slick-prev {
+    left: 0px;
+  }
+  .slick-next {
+    right: 0px;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 50px;
+    opacity: 0.4;
+  }
 `;
 
 export const CoachingSports = styled.ul`
