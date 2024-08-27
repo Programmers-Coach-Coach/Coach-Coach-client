@@ -20,8 +20,9 @@ export interface IGetQuery {
 export interface IAction {
   actionId: number;
   actionName: string;
-  sets: number;
-  countOrMinutes: string;
+  sets?: number;
+  count?: number;
+  minutes?: number;
   description?: string;
 }
 

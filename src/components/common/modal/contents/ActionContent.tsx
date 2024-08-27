@@ -6,7 +6,9 @@ import InputNumberInModal from "../../InputField/Text/InputNumberInModal";
 const ActionContent = () => {
   const setActionName = useModalInfo((state) => state.setActionName);
 
-  const setCountOrMinutes = useModalInfo((state) => state.setCountOrMinutes);
+  const setMinutes = useModalInfo((state) => state.setMinutes);
+
+  const setCount = useModalInfo((state) => state.setCount);
 
   const setSets = useModalInfo((state) => state.setSets);
 
@@ -16,8 +18,10 @@ const ActionContent = () => {
     <ActionContentStyle>
       <h2>운동명</h2>
       <InputInModal content="종목" setFn={setActionName} />
-      <h2>횟수/시간</h2>
-      <InputInModal content="횟수/시간" setFn={setCountOrMinutes} />
+      <h2>시간</h2>
+      <InputNumberInModal content="시간" setFn={setMinutes} />
+      <h2>횟수</h2>
+      <InputNumberInModal content="횟수" setFn={setCount} />
       <h2>세트</h2>
       <InputNumberInModal content="세트" setFn={setSets} />
       <h2>주의사항</h2>

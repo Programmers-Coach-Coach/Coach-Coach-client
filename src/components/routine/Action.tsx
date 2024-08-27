@@ -13,7 +13,8 @@ interface ActionProps {
 const Action = ({ action, modifyEnabled, onEditAction }: ActionProps) => {
   const setActionId = useModalInfo((state) => state.setActionId);
 
-  const handleEditAction = () => {
+  const handleEditAction = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setActionId(action.actionId);
     onEditAction && onEditAction();
   };
@@ -23,7 +24,10 @@ const Action = ({ action, modifyEnabled, onEditAction }: ActionProps) => {
       <Text>
         <p className="b3">{action.actionName}</p>
         <LineClamp $line={1} className="b2">
-          {action.countOrMinutes}회/분 {action.sets}세트
+          {action.minutes && `${action.minutes}분`}{" "}
+          {action.count && `${action.count}회`}{" "}
+          {action.sets && ` ${action.sets}세트`}
+          {modifyEnabled && action.description && ` ${action.description}`}
         </LineClamp>
       </Text>
       {modifyEnabled && (
