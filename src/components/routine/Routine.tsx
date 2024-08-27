@@ -1,6 +1,5 @@
 import { styled } from "styled-components";
 import Card from "@/components/common/Card/Card";
-import Icon from "@/components/Icon/Icon";
 import useModal from "@/hooks/useModal";
 import { useState } from "react";
 import Modal from "@/components/common/modal/Modal";
@@ -9,6 +8,7 @@ import RoutineContents from "@/components/common/modal/contents/RoutineContents"
 import { useModalInfo } from "@/store/modalInfo.store";
 import RoutinePicker from "../common/modal/contents/RoutinePicker";
 import { useLocation, useNavigate } from "react-router-dom";
+import IconButton from "../Icon/IconButton";
 
 interface RoutineProps {
   id: number;
@@ -25,13 +25,17 @@ const Routine = ({ id, name, sport }: RoutineProps) => {
   const deleteModal = useModal();
   const [isSelect, setIsSelect] = useState<boolean>(false);
   const setRoutineId = useModalInfo((state) => state.setRoutineId);
+  const setRoutineName = useModalInfo((state) => state.setRoutineName);
 
-  const onClickModify = () => {
+  const onClickModify = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setRoutineId(id);
+    setRoutineName(name);
     modifyModal.openModal();
   };
 
-  const onClickDelete = () => {
+  const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setRoutineId(id);
     deleteModal.openModal();
   };
@@ -48,7 +52,11 @@ const Routine = ({ id, name, sport }: RoutineProps) => {
             schema="routine-modify"
             closeModal={modifyModal.closeModal}
           >
-            <RoutineContents setIsSelect={setIsSelect} />
+            <RoutineContents
+              routineName={name}
+              sportName={sport}
+              setIsSelect={setIsSelect}
+            />
           </ActionModalInner>
         </Modal>
       )}
@@ -69,13 +77,13 @@ const Routine = ({ id, name, sport }: RoutineProps) => {
           </RoutineTextStyle>
           {!queryParams.get("coach") && (
             <RoutineIconStyle>
-              <Icon
+              <IconButton
                 name="modify"
                 size="20px"
                 color="review"
                 onClick={onClickModify}
               />
-              <Icon
+              <IconButton
                 name="delete"
                 size="20px"
                 color="error"

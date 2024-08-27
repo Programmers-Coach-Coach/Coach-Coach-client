@@ -3,10 +3,26 @@ import InputInModal from "../../InputField/Text/InputInModal";
 import { useModalInfo } from "@/store/modalInfo.store";
 import InputNumberInModal from "../../InputField/Text/InputNumberInModal";
 
-const ActionContent = () => {
+interface ActionContentProps {
+  action?: string;
+  actionTime?: number;
+  actionCount?: number;
+  actionSets?: number;
+  actionDes?: string;
+}
+
+const ActionContent = ({
+  action,
+  actionTime,
+  actionCount,
+  actionSets,
+  actionDes
+}: ActionContentProps) => {
   const setActionName = useModalInfo((state) => state.setActionName);
 
-  const setCountOrMinutes = useModalInfo((state) => state.setCountOrMinutes);
+  const setMinutes = useModalInfo((state) => state.setMinutes);
+
+  const setCount = useModalInfo((state) => state.setCount);
 
   const setSets = useModalInfo((state) => state.setSets);
 
@@ -15,13 +31,23 @@ const ActionContent = () => {
   return (
     <ActionContentStyle>
       <h2>운동명</h2>
-      <InputInModal content="종목" setFn={setActionName} />
-      <h2>횟수/시간</h2>
-      <InputInModal content="횟수/시간" setFn={setCountOrMinutes} />
+      <InputInModal name={action} content="운동" setFn={setActionName} />
+      <h2>시간</h2>
+      <InputNumberInModal
+        value={actionTime}
+        content="시간"
+        setFn={setMinutes}
+      />
+      <h2>횟수</h2>
+      <InputNumberInModal value={actionCount} content="횟수" setFn={setCount} />
       <h2>세트</h2>
-      <InputNumberInModal content="세트" setFn={setSets} />
-      <h2>주의사항</h2>
-      <InputInModal content="주의사항" setFn={setDescription} />
+      <InputNumberInModal value={actionSets} content="세트" setFn={setSets} />
+      <h2>운동 가이드</h2>
+      <InputInModal
+        name={actionDes}
+        content="운동 가이드"
+        setFn={setDescription}
+      />
     </ActionContentStyle>
   );
 };

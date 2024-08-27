@@ -9,11 +9,19 @@ import useModal from "@/hooks/useModal";
 import { useIsCoach } from "@/store/isCoach.store";
 import { useModalInfo } from "@/store/modalInfo.store";
 import { useProfileInfo } from "@/store/profileInfo.store";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 
 const RoutineDetail = () => {
   const { routineId } = useParams();
+
+  const [categoryName, setCategoryName] = useState<string>();
+  const [action, setAction] = useState<string>();
+  const [actionTime, setActionTime] = useState<number>();
+  const [actionCount, setActionCount] = useState<number>();
+  const [actionSets, setActionSets] = useState<number>();
+  const [actionDes, setActionDes] = useState<string>();
 
   const categoryModal = useModal();
   const categoryAddModal = useModal();
@@ -60,7 +68,7 @@ const RoutineDetail = () => {
             schema="category-modify"
             closeModal={categoryModifyModal.closeModal}
           >
-            <CategoryContent />
+            <CategoryContent categoryName={categoryName} />
           </ActionModalInner>
         </Modal>
       )}
@@ -80,7 +88,13 @@ const RoutineDetail = () => {
             schema="action-modify"
             closeModal={actionModifyModal.closeModal}
           >
-            <ActionContent />
+            <ActionContent
+              action={action}
+              actionTime={actionTime}
+              actionCount={actionCount}
+              actionSets={actionSets}
+              actionDes={actionDes}
+            />
           </ActionModalInner>
         </Modal>
       )}
@@ -121,6 +135,12 @@ const RoutineDetail = () => {
           modifyEnabled={isModify}
           onEditCategory={categoryModal.openModal}
           onEditAction={actionModal.openModal}
+          setCategoryName={setCategoryName}
+          setAction={setAction}
+          setActionTime={setActionTime}
+          setActionCount={setActionCount}
+          setActionSets={setActionSets}
+          setActionDes={setActionDes}
         />
       ))}
     </RoutineDetailStyle>
