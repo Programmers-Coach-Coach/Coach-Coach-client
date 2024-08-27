@@ -23,11 +23,14 @@ const Layout = () => {
     title = getTitle(location.pathname);
   }
 
+  const isLoginPage = location.pathname === "/login";
+
   const isAuth = isAuthPage(location.pathname);
 
   return (
     <ErrorBoundary>
-      {title ? <DetailHeader title={title} /> : <LogoHeader />}
+      {!isLoginPage &&
+        (title ? <DetailHeader title={title} /> : !isAuth && <LogoHeader />)}
       <LayoutStyle>
         <Outlet />
       </LayoutStyle>

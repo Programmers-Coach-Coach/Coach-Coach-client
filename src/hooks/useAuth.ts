@@ -55,6 +55,7 @@ const useAuth = () => {
     logout()
       .then(() => {
         storeLogout();
+        navigate("/login");
         toast.success("로그아웃 성공");
       })
       .catch(() => {
