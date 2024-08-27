@@ -37,7 +37,7 @@ export const usePostReview = (coachId: number) => {
   };
 };
 
-export const useEditReview = () => {
+export const useEditReview = (refetchCoachId: number | undefined) => {
   const { mutate, isError } = useMutation<
     IResponseMessage,
     Error,
@@ -45,7 +45,13 @@ export const useEditReview = () => {
   >({
     mutationFn: ({ reviewId, data }: IEditReviewVariables) =>
       editReview(reviewId, data),
-    onSuccess: () => {},
+    onSuccess: () => {
+      if (refetchCoachId) {
+        queryClient.invalidateQueries({
+          queryKey: ["getCoachDetail", refetchCoachId]
+        });
+      }
+    },
     onError: () => {}
   });
 
@@ -55,10 +61,16 @@ export const useEditReview = () => {
   };
 };
 
-export const useDeleteReview = () => {
+export const useDeleteReview = (refetchCoachId: number | undefined) => {
   const { mutate, isError } = useMutation<IResponseMessage, Error, number>({
     mutationFn: deleteReview,
-    onSuccess: () => {},
+    onSuccess: () => {
+      if (refetchCoachId) {
+        queryClient.invalidateQueries({
+          queryKey: ["getCoachDetail", refetchCoachId]
+        });
+      }
+    },
     onError: () => {}
   });
 

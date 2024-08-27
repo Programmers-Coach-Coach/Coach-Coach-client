@@ -50,7 +50,7 @@ const DetailInfo = ({ coach }: Props) => {
 
       {isModal && (
         <Modal position="center" closeModal={closeModal}>
-          <ReviewInner onClose={closeModal} id={coach.coachId} />
+          <ReviewInner onClose={closeModal} id={coach.coachId} type="enroll" />
         </Modal>
       )}
     </Wrapper>

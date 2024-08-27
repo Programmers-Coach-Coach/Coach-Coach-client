@@ -1,3 +1,4 @@
+import { useDeleteReview } from "@/hooks/queries/useReview";
 import useModal from "@/hooks/useModal";
 import styled from "styled-components";
 import Modal from "../common/modal/Modal";
@@ -7,17 +8,26 @@ import ReviewInner from "./ReviewInner";
 
 interface Props {
   reviewId: number;
+  coachId: number;
 }
-const ReviewControl = ({ reviewId }: Props) => {
-  const { isModal: isControlModal, handleModal: handleControlModal } =
-    useModal();
+const ReviewControl = ({ reviewId, coachId }: Props) => {
+  const { mutate: deleteMutate } = useDeleteReview(coachId);
+
+  const {
+    isModal: isControlModal,
+    handleModal: handleControlModal,
+    closeModal: closeControlModal
+  } = useModal();
   const {
     isModal: isEditModal,
     closeModal: closeEditModal,
     openModal: openEditModal
   } = useModal();
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    deleteMutate(reviewId);
+    closeControlModal();
+  };
 
   return (
     <ReviewControlStyle>
@@ -41,7 +51,12 @@ const ReviewControl = ({ reviewId }: Props) => {
       )}
       {isEditModal && (
         <Modal closeModal={closeEditModal} position="center">
-          <ReviewInner onClose={closeEditModal} id={reviewId} />
+          <ReviewInner
+            onClose={closeEditModal}
+            id={reviewId}
+            type="edit"
+            refetchCoachId={coachId}
+          />
         </Modal>
       )}
     </ReviewControlStyle>
