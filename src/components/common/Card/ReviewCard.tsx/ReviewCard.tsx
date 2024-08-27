@@ -30,10 +30,12 @@ const ReviewCard = ({ coachProfile }: ReviewCardProps) => {
             </FisrstWrapper>
             <div className="contents">{review.contents}</div>
           </CardWrapper>
-          <ReviewControl
-            reviewId={review.reviewId}
-            coachId={coachProfile.coachId}
-          />
+          {review.isMyReview && (
+            <ReviewControl
+              reviewId={review.reviewId}
+              coachId={coachProfile.coachId}
+            />
+          )}
         </CardContainer>
       ))}
     </>
