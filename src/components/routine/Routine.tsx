@@ -1,6 +1,5 @@
 import { styled } from "styled-components";
 import Card from "@/components/common/Card/Card";
-import Icon from "@/components/Icon/Icon";
 import useModal from "@/hooks/useModal";
 import { useState } from "react";
 import Modal from "@/components/common/modal/Modal";
@@ -9,6 +8,7 @@ import RoutineContents from "@/components/common/modal/contents/RoutineContents"
 import { useModalInfo } from "@/store/modalInfo.store";
 import RoutinePicker from "../common/modal/contents/RoutinePicker";
 import { useLocation, useNavigate } from "react-router-dom";
+import IconButton from "../Icon/IconButton";
 
 interface RoutineProps {
   id: number;
@@ -26,12 +26,14 @@ const Routine = ({ id, name, sport }: RoutineProps) => {
   const [isSelect, setIsSelect] = useState<boolean>(false);
   const setRoutineId = useModalInfo((state) => state.setRoutineId);
 
-  const onClickModify = () => {
+  const onClickModify = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setRoutineId(id);
     modifyModal.openModal();
   };
 
-  const onClickDelete = () => {
+  const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setRoutineId(id);
     deleteModal.openModal();
   };
@@ -69,13 +71,13 @@ const Routine = ({ id, name, sport }: RoutineProps) => {
           </RoutineTextStyle>
           {!queryParams.get("coach") && (
             <RoutineIconStyle>
-              <Icon
+              <IconButton
                 name="modify"
                 size="20px"
                 color="review"
                 onClick={onClickModify}
               />
-              <Icon
+              <IconButton
                 name="delete"
                 size="20px"
                 color="error"

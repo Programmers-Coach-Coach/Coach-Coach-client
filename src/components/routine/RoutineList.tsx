@@ -10,11 +10,14 @@ interface RoutineListProps {
 
 const RoutineList = ({ routines, state }: RoutineListProps) => {
   const padding = state ? "180px" : "200px";
+
+  const routinesArray = Array.isArray(routines) ? routines : [];
+
   return (
     <RoutineListStyle>
-      {routines.length ? (
+      {routinesArray.length ? (
         <>
-          {routines.map((item) => (
+          {routinesArray.map((item) => (
             <Routine
               key={item.routineId}
               id={item.routineId}

@@ -3,7 +3,7 @@ import * as faker from "@/utils/faker";
 
 export const PER_PAGE = 10;
 
-export const routines: IGetRoutine[] = Array.from({ length: 12 }).map(
+export const routines: IGetRoutine[] = Array.from({ length: 1 }).map(
   (_, i) => ({
     routineId: i + 1,
     routineName: faker.fullname(),

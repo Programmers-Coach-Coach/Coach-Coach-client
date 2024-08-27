@@ -81,17 +81,18 @@ const SelectBoxInModal = ({ setIsSelect }: SelectBoxProps) => {
           onClose={handleClose}
           MenuProps={MenuProps}
         >
-          {data.sports.map((sport) => (
-            <MenuItem
-              key={sport.sportId}
-              value={sport.sportName}
-              sx={{
-                height: 30
-              }}
-            >
-              <ListItemText primary={sport.sportName} />
-            </MenuItem>
-          ))}
+          {data.sports &&
+            data.sports.map((sport) => (
+              <MenuItem
+                key={sport.sportId}
+                value={sport.sportName}
+                sx={{
+                  height: 30
+                }}
+              >
+                <ListItemText primary={sport.sportName} />
+              </MenuItem>
+            ))}
         </Select>
       </FormControl>
     </Box>
