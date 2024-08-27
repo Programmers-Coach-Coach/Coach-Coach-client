@@ -87,7 +87,7 @@ const Coach = ({ coach }: CoachProps) => {
         {coach.description}
       </LineClamp>
       <CoachingSports className="coaching-sports">
-        {coach.coachingSports.slice(0, 3).map((item) => (
+        {coach.coachingSports.slice(0, 2).map((item) => (
           <li key={item.sportId}>#{item.sportName}</li>
         ))}
       </CoachingSports>

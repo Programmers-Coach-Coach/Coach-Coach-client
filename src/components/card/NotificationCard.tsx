@@ -1,4 +1,5 @@
 import Heart from "@/assets/images/notice-heart.png";
+import Match from "@/assets/images/notice-match.png";
 import Message from "@/assets/images/notice-message.png";
 import Speaker from "@/assets/images/notice-speaker.png";
 
@@ -27,6 +28,8 @@ const NotificationCard = ({
         return Message;
       case "ask":
         return Speaker;
+      case "match":
+        return Match;
       default:
         return Heart;
     }

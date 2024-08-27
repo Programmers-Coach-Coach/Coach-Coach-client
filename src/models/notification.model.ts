@@ -1,4 +1,4 @@
-export type TNotificationType = "review" | "ask" | "like";
+export type TNotificationType = "review" | "ask" | "like" | "match";
 
 export interface INotification {
   notificationId: number;
