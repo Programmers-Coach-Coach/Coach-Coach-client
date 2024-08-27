@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import CustomButton from "../common/Button/CustomButton";
 import { TextField, RadioGroup, FormControlLabel, Radio } from "@mui/material";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, FieldErrors } from "react-hook-form";
 import useFetchProfile from "@/hooks/queries/useFetchUserProfile";
 import SelectBox from "../common/InputField/Select/SelectBox";
 import { FaCirclePlus } from "react-icons/fa6";
@@ -101,6 +101,13 @@ const ProfileSection = () => {
     }
     return profileImage || ""; // 기본 이미지 URL이나 빈 문자열로 대체
   };
+  const onInvalid = (errors: FieldErrors<IMyPageFormValues>) => {
+    if (errors.nickname?.type === "required") {
+      toast.error("닉네임을 입력해주세요.");
+    } else {
+      toast.error("형식에 맞는 정보를 입력하세요.");
+    }
+  };
 
   if (isLoading) return <Loading />;
   if (isFetchError || !profile) {
@@ -122,10 +129,19 @@ const ProfileSection = () => {
       </ProfileImageWrapper>
       <InfoWrapper>
         <BasicWrapper>
-          <SubtitleWrapper>이름</SubtitleWrapper>
+          <SubtitleWrapper>닉네임</SubtitleWrapper>
           <Controller
             name="nickname"
             control={control}
+            rules={{
+              maxLength: 10,
+              pattern: {
+                value:
+                  /^(?!.*\s{2,})([0-9a-zA-Z가-힣][0-9a-zA-Z가-힣\s]{0,8}[0-9a-zA-Z가-힣])$/,
+                message: "닉네임은 공백을 포함하여 최대 10자 이내여야 합니다."
+              },
+              required: true
+            }}
             render={({ field }) => (
               <TextField
                 maxRows={1}
@@ -221,7 +237,7 @@ const ProfileSection = () => {
         <CustomButton
           size="full"
           variant="contained"
-          onClick={handleSubmit(onSubmit)}
+          onClick={handleSubmit(onSubmit, onInvalid)}
         >
           수정하기
         </CustomButton>

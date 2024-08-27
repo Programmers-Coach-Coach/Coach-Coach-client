@@ -1,6 +1,5 @@
 import { ICoachDetail } from "@/models/coach.model";
 import { theme } from "@/style/theme";
-import { Card } from "@mui/material";
 import { BsChatLeftTextFill } from "react-icons/bs";
 import { styled } from "styled-components";
 import RatingStars from "./RatingStars";
@@ -23,12 +22,12 @@ const CoachProfileReview = ({ coachProfile }: ReviewCardProps) => {
           <CardWrapper>
             <FisrstWrapper>
               <StarWrapper>
-                <RatingStars stars={review.stars} size="15" />
+                <RatingStars stars={review.stars} size="12" />
               </StarWrapper>
-              <div>{review.userName}</div>
-              <div>{formatDate(review.createdAt)}</div>
+              <div className="small-text">{review.userName}</div>
+              <div className="small-text">{formatDate(review.createdAt)}</div>
             </FisrstWrapper>
-            <div>{review.contents}</div>
+            <div className="contents">{review.contents}</div>
           </CardWrapper>
         </CardContainer>
       ))}
@@ -38,7 +37,8 @@ const CoachProfileReview = ({ coachProfile }: ReviewCardProps) => {
 
 export default CoachProfileReview;
 
-const CardContainer = styled(Card)`
+const CardContainer = styled.div`
+  box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: ${({ theme }) => theme.borderRadius.default};
 `;
 
@@ -57,6 +57,14 @@ const CardWrapper = styled.div`
   padding: 10px;
   gap: 10px;
   overflow-wrap: break-word;
+  .small-text {
+    font-size: 12px;
+    color: ${({ theme }) => theme.color.gray3};
+  }
+
+  .contents {
+    font-size: 14px;
+  }
 `;
 
 const FisrstWrapper = styled.div`
