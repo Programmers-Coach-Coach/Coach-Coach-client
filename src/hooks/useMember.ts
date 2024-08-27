@@ -8,10 +8,11 @@ import { IMatchMembers } from "@/models/member.model";
 import { IResponseMessage } from "@/models/responseMessage.model";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-export const useMatchMember = () => {
+export const useMatchMember = (isCoach: boolean) => {
   const { data, isLoading, isError } = useQuery<IMatchMembers[]>({
     queryKey: ["getMatchMembers"],
-    queryFn: getMatchMembers
+    queryFn: getMatchMembers,
+    enabled: isCoach // isCoach가 true일 때만 쿼리를 실행
   });
 
   return {

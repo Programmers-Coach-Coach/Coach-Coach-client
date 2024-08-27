@@ -1,16 +1,28 @@
 import InquriyProfileList from "@/components/Profile/ProfileList/InquiryProfileList";
 import MatchingProfileList from "@/components/Profile/ProfileList/MatchingProfileList";
+import Loading from "@/components/loading/Loading";
+import { useFetchAuth } from "@/hooks/useFetchAuth";
 import { useMatchMember } from "@/hooks/useMember";
 import { WhiteSpace } from "@/style/global";
+import { theme } from "@/style/theme";
+import { useEffect, useState } from "react";
 import { styled } from "styled-components";
-
+import { BiSolidUser } from "react-icons/bi";
 const ManageMember = () => {
-  const { data, isLoading, isError } = useMatchMember();
+  const { data: authData, isLoading: authLoading, refetch } = useFetchAuth();
+  const [isCoach, setIsCoach] = useState(false);
 
-  if (isLoading) return <div>로딩 중...</div>;
-  if (isError || !data) return <div>무언가 잘못됨</div>;
+  const { data = [], isLoading: memberLoading } = useMatchMember(isCoach);
 
-  return (
+  useEffect(() => {
+    refetch().then(() => {
+      setIsCoach(authData?.isCoach || false);
+    });
+  }, [authData, refetch]);
+
+  if (authLoading || memberLoading) return <Loading />;
+
+  return isCoach ? (
     <ManageMemberStyle>
       <SectionStyle>
         <h2>내 회원</h2>
@@ -29,10 +41,30 @@ const ManageMember = () => {
       <WhiteSpace $height={20} />
       <InquriyProfileList data={data} />
     </ManageMemberStyle>
+  ) : (
+    <NoReviewSection>
+      <BiSolidUser size="100" color={theme.color.gray3} />
+      <ContentWrapper className="t1">코치가 아닙니다.</ContentWrapper>
+    </NoReviewSection>
   );
 };
 
-const ManageMemberStyle = styled.div``;
+const ContentWrapper = styled.h2`
+  color: ${({ theme }) => theme.color.gray3};
+`;
+
+const NoReviewSection = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 80vh;
+  gap: 10px;
+`;
+
+const ManageMemberStyle = styled.div`
+  padding: 20px;
+`;
 
 const SectionStyle = styled.div`
   padding-top: 20px;
