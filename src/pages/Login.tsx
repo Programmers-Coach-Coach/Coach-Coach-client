@@ -1,9 +1,19 @@
 import styled from "styled-components";
 import Logo from "../assets/images/Logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoginForm from "@/components/login/LoginForm";
+import { useAuthStore } from "@/store/authStore";
+import { useEffect } from "react";
 
 function Login() {
+  const { isLoggedIn } = useAuthStore();
+  const nav = useNavigate();
+  useEffect(() => {
+    console.log(isLoggedIn);
+    if (isLoggedIn) {
+      nav("/");
+    }
+  });
   return (
     <Container>
       <ImageWrapper className="logo" src={Logo} alt="Logo" />
@@ -28,6 +38,7 @@ const Container = styled.div`
   justify-content: center;
   padding: 0 20px;
   margin: 0 auto;
+  margin-top: 80px;
   box-sizing: border-box;
   gap: 15px;
 `;

@@ -129,7 +129,6 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
         <Controller
           name="activeCenter"
           control={control}
-          rules={{ required: true }}
           render={({ field }) => (
             <AddressSearchField
               label="활동중인 센터"
@@ -141,7 +140,6 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
         <Controller
           name="activeCenterDetail"
           control={control}
-          rules={{ required: true }}
           render={({ field }) => <TextField {...field} maxRows={1} />}
         />
 
