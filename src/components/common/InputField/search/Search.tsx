@@ -25,7 +25,7 @@ const Search = ({ ...props }: Props) => {
       onFocus={() => setIsIconFocus(true)}
       onBlur={() => setIsIconFocus(false)}
     >
-      <input {...register("keyword", { required: true })} {...props} />
+      <input {...register("keyword")} {...props} />
       <button type="submit" className="search-button">
         <Icon
           name="search"

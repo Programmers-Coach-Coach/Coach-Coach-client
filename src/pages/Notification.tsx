@@ -17,7 +17,7 @@ const Notification = () => {
 
   if (isLoading) return <Loading />;
   if (isError || !data)
-    return <div>알림 정보를 가져오는 중 오류가 발생했습니다.</div>;
+    return <div>알림 정보를 가져오는 중 오류가 발생했어요.</div>;
 
   return (
     <NotificationStyle>
@@ -37,7 +37,7 @@ const Notification = () => {
           <Empty
             name="alarm"
             size="150px"
-            color="text"
+            color="gray3"
             descriptions="모든 알림을 확인하였습니다."
           />
         )}
@@ -60,7 +60,7 @@ const NotificationStyle = styled.div`
 `;
 
 const Button = styled.button`
-  color: ${({ theme }) => theme.color.gray3};
+  color: ${({ theme }) => theme.color.primary};
   display: flex;
   margin-left: auto;
 `;

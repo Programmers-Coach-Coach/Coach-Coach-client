@@ -64,7 +64,6 @@ const CardWrapper = styled.div`
 
   .contents {
     font-size: 14px;
-    word-break: keep-all;
   }
 `;
 

@@ -12,7 +12,11 @@ interface Props {
 
 const ReviewInner = ({ coachId, onClose }: Props) => {
   const { mutate } = usePostReview(coachId);
-  const { control, handleSubmit } = useForm<IPostReview>();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<IPostReview>();
 
   const onSubmit = (data: IPostReview) => {
     mutate({ coachId, data });
@@ -40,8 +44,16 @@ const ReviewInner = ({ coachId, onClose }: Props) => {
         rows={3}
         placeholder="코치에 대한 리뷰를 적어주세요"
         fullWidth
-        {...control.register("contents", { required: true })}
+        {...control.register("contents", { required: true, maxLength: 500 })}
       />
+      {errors.stars ? (
+        <Error>별점을 등록해주세요</Error>
+      ) : errors.contents ? (
+        <Error>리뷰는 500자까지 가능해요</Error>
+      ) : (
+        ""
+      )}
+
       <Footer>
         <button onClick={onClose} type="button">
           취소
@@ -87,6 +99,11 @@ const StyledTextField = styled(TextField)`
       border-color: ${({ theme }) => theme.color.third};
     }
   }
+`;
+
+const Error = styled.p`
+  font-size: 12px;
+  color: red;
 `;
 
 export default ReviewInner;

@@ -1,30 +1,30 @@
+import image from "@/assets/images/basicProfile.png";
 import useFetchCoachProfile from "@/hooks/queries/useFetchCoachProfile";
+import useAuth from "@/hooks/useAuth";
+import { useFetchAuth } from "@/hooks/useFetchAuth";
 import { IMyPageCoachFormValues } from "@/models/coach.model";
 import { getGenderLabel } from "@/utils/genderUtils";
 import { Switch, TextField } from "@mui/material";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import styled from "styled-components";
 import CustomButton from "../common/Button/CustomButton";
+import CoachProfileReview from "../common/Card/ReviewCard.tsx/CoachProfileReview";
 import SelectBox from "../common/InputField/Select/SelectBox";
 import Loading from "../loading/Loading";
 import AddressSearchField from "./AddressSearchField";
-import useAuth from "@/hooks/useAuth";
-import toast from "react-hot-toast";
-import image from "@/assets/images/basicProfile.png";
-import CoachProfileReview from "../common/Card/ReviewCard.tsx/CoachProfileReview";
-import { useFetchAuth } from "@/hooks/useFetchAuth";
 
 interface CoachProfileSectionProps {
   onTabChange: (newValue: number) => void;
 }
 
 const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
-  const { data, refetch } = useFetchAuth();
+  const { data: userMeData, refetch: authRefetch } = useFetchAuth();
   const { editUserCoachProfile } = useAuth();
 
   const { coachProfile, isLoading, isFetchError } = useFetchCoachProfile(
-    data?.isCoach || false
+    userMeData?.isCoach || false
   );
   const { control, handleSubmit, setValue } = useForm<IMyPageCoachFormValues>({
     defaultValues: {
@@ -39,8 +39,8 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
   });
 
   useEffect(() => {
-    refetch().then(() => {
-      if (data?.isCoach && coachProfile) {
+    authRefetch().then(() => {
+      if (userMeData?.isCoach && coachProfile) {
         setValue(
           "coachingSports",
           coachProfile.coachingSports.map((sport) => sport.sportName)
@@ -52,9 +52,8 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
         setValue("chattingUrl", coachProfile.chattingUrl);
         setValue("isOpen", coachProfile.isOpen);
       }
-      console.log(data);
     });
-  }, [coachProfile, setValue, refetch, data]);
+  }, [coachProfile, setValue, authRefetch, userMeData]);
 
   const onSubmit = (data: IMyPageCoachFormValues) => {
     const formattedSports = data.coachingSports.map((sport) => ({
@@ -85,15 +84,18 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
   return (
     <ProfileWrapper>
       <BasicInfoWrapper>
-        <ProfileImage src={data?.profileImageUrl || image} alt="Profile" />
+        <ProfileImage
+          src={userMeData?.profileImageUrl || image}
+          alt="Profile"
+        />
         <NameGenderWrapper className="b1">
           <NameWrapper>
             <SubtitleWrapper>성함</SubtitleWrapper>
-            <div>{data?.nickname}</div>
+            <div>{userMeData?.nickname}</div>
           </NameWrapper>
           <GenderWrapper>
             <SubtitleWrapper>성별</SubtitleWrapper>
-            <div>{getGenderLabel(data?.gender)}</div>
+            <div>{getGenderLabel(userMeData?.gender)}</div>
           </GenderWrapper>
         </NameGenderWrapper>
       </BasicInfoWrapper>
@@ -127,7 +129,6 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
         <Controller
           name="activeCenter"
           control={control}
-          rules={{ required: true }}
           render={({ field }) => (
             <AddressSearchField
               label="활동중인 센터"
@@ -139,7 +140,6 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
         <Controller
           name="activeCenterDetail"
           control={control}
-          rules={{ required: true }}
           render={({ field }) => <TextField {...field} maxRows={1} />}
         />
 
@@ -158,7 +158,7 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
           rules={{ required: true }}
           render={({ field }) => <TextField {...field} maxRows={1} />}
         />
-        {data?.isCoach && coachProfile && (
+        {userMeData?.isCoach && coachProfile && (
           <>
             <SubtitleWrapper>리뷰</SubtitleWrapper>
             <CoachProfileReview coachProfile={coachProfile} />

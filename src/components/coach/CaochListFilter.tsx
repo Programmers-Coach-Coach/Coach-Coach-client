@@ -82,7 +82,7 @@ const SportsFilter = styled.div`
   gap: 10px;
 `;
 
-const Filter = styled.button`
+const Filter = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;

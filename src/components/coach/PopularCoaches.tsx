@@ -23,7 +23,9 @@ interface CoachProps {
 const PopularCoaches = ({ popularCoaches }: Props) => {
   return (
     <PopularCoachStyle>
-      <h1>Popular Coach</h1>
+      <Title>
+        TOP 3<span className="sub-title">이번 주 인기 코치</span>
+      </Title>
       <CoachesSlider popularCoaches={popularCoaches} />
     </PopularCoachStyle>
   );
@@ -31,29 +33,37 @@ const PopularCoaches = ({ popularCoaches }: Props) => {
 
 const CoachesSlider = ({ popularCoaches }: CoachesSliderProps) => {
   const settings = {
-    className: "center",
-    centerMode: true,
-    centerPadding: "60px",
-    slidesToShow: 1,
     speed: 500,
-    dots: true,
-    arrows: false,
-    autoplay: true,
-    autoplaySpeed: 8000,
-    focusOnSelect: true,
+    arrows: true,
+    // autoplay: true,
+    // autoplaySpeed: 8000,
+    // focusOnSelect: true,
     infinite: false,
     pauseOnFocus: true,
-    pauseOnHover: true
+    pauseOnHover: true,
+    slidesToShow: 2.6,
+    responsive: [
+      {
+        breakpoint: 400,
+        settings: {
+          slidesToShow: 1.5
+        }
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: 2.2
+        }
+      }
+    ]
   };
 
   return (
-    <RemovePadding>
-      <CoachesSliderStyle {...settings}>
-        {popularCoaches?.map((coach) => (
-          <Coach key={coach.coachId} coach={coach} />
-        ))}
-      </CoachesSliderStyle>
-    </RemovePadding>
+    <CoachesSliderStyle {...settings}>
+      {popularCoaches?.map((coach) => (
+        <Coach key={coach.coachId} coach={coach} />
+      ))}
+    </CoachesSliderStyle>
   );
 };
 
@@ -68,21 +78,19 @@ const Coach = ({ coach }: CoachProps) => {
         handleLocation(coach.coachId);
       }}
     >
-      <img src={coach.profileImageUrl || profilePath} alt={coach.coachName} />
-      <Heart checked={coach.isLiked} size="24px" id={coach.coachId} />
-      <BoxText>
-        <LineClamp $line={1} className="b3">
-          {coach.coachName}
-        </LineClamp>
-        <ul className="coaching-sports">
-          {coach.coachingSports.map((item) => (
-            <li key={item.sportId}>#{item.sportName}</li>
-          ))}
-        </ul>
-        <LineClamp $line={2} className="b2 desc">
-          {coach.description}
-        </LineClamp>
-      </BoxText>
+      <Image src={coach.profileImageUrl || profilePath} alt={coach.coachName} />
+      <Heart checked={coach.isLiked} size="30px" id={coach.coachId} />
+      <LineClamp $line={1} className="b3">
+        {coach.coachName}
+      </LineClamp>
+      <LineClamp $line={2} className="b2 desc">
+        {coach.description}
+      </LineClamp>
+      <CoachingSports className="coaching-sports">
+        {coach.coachingSports.slice(0, 3).map((item) => (
+          <li key={item.sportId}>#{item.sportName}</li>
+        ))}
+      </CoachingSports>
     </CoachStyle>
   );
 };
@@ -91,30 +99,27 @@ const PopularCoachStyle = styled.div`
   display: flex;
   flex-direction: column;
   gap: 18px;
+  overflow: hidden;
 `;
 
-const RemovePadding = styled.div`
-  margin: 0 -20px;
+const Title = styled.h1`
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  color: ${({ theme }) => theme.color.primary};
+  .sub-title {
+    font-size: 16px;
+    font-weight: 600;
+  }
 `;
 
 const CoachStyle = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: end;
 
-  height: 246px;
   position: relative;
   cursor: pointer;
-  border-radius: ${({ theme }) => theme.borderRadius.default};
   overflow: hidden;
-
-  img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
 
   button {
     display: flex;
@@ -130,53 +135,62 @@ const CoachStyle = styled.div`
   }
 `;
 
+const Image = styled.img`
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.color.gray1};
+`;
+
 const CoachesSliderStyle = styled(Slider)`
   .slick-slide {
+    padding: 0;
     transition:
       transform 0.5s ease,
       opacity 0.5s ease;
   }
-
-  .slick-center .slick-slide {
-    transform: scale(1.3);
-    /* z-index: 1; */
-  }
-
-  .slick-slide:not(.slick-center) {
-    transform: scale(0.8);
-    opacity: 0.7; /* 나머지 슬라이드를 투명하게 만듦 */
-  }
-
-  .slick-dots {
-    bottom: -40px;
-  }
-`;
-
-const BoxText = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 0 10px 10px 20px;
-  z-index: 10;
-  color: ${({ theme }) => theme.color.text};
-
-  .desc {
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .coaching-sports {
+  .slick-track {
     display: flex;
-    align-items: center;
-    gap: 9px;
+    gap: 10px;
+    margin: 0 -10px;
+  }
 
-    li {
-      display: inline-flex;
-      font-size: 9px;
-      padding: 4px 9px;
-      border-radius: ${({ theme }) => theme.borderRadius.default};
-      background-color: ${({ theme }) => theme.color.box};
-    }
+  .slick-arrow {
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+    top: 100px;
+  }
+  .slick-prev {
+    left: 0px;
+  }
+  .slick-next {
+    right: 0px;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 50px;
+    opacity: 0.4;
   }
 `;
 
+export const CoachingSports = styled.ul`
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-top: 10px;
+
+  li {
+    display: inline-flex;
+    font-size: 12px;
+    padding: 4px 9px;
+    color: ${({ theme }) => theme.color.primary};
+    border: 1px solid ${({ theme }) => theme.color.primary};
+    background-color: ${({ theme }) => theme.color.background};
+    border-radius: ${({ theme }) => theme.borderRadius.default};
+  }
+`;
 export default PopularCoaches;

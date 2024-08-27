@@ -27,7 +27,7 @@ const RoutineList = ({ routines, state }: RoutineListProps) => {
         <Empty
           name="routine"
           size="150px"
-          color="text"
+          color="gray3"
           descriptions="운동 루틴이 없습니다"
           padding={padding}
         />

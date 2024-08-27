@@ -39,7 +39,7 @@ const MatchingProfileList = ({ data }: MatchingProfileListProps) => {
         <Empty
           name="twins"
           size="80px"
-          color="text"
+          color="gray3"
           descriptions="나의 회원이 없습니다"
           padding="10px"
         />

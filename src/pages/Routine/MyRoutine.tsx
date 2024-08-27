@@ -2,8 +2,8 @@ import ActionModalInner from "@/components/common/modal/contents/ActionModalInne
 import RoutineContents from "@/components/common/modal/contents/RoutineContents";
 import Modal from "@/components/common/modal/Modal";
 import RoutineList from "@/components/routine/RoutineList";
-import useModal from "@/hooks/useModal";
 import { useGetRoutines } from "@/hooks/queries/routine/useRoutine";
+import useModal from "@/hooks/useModal";
 import { useState } from "react";
 import { styled } from "styled-components";
 
@@ -33,9 +33,7 @@ const MyRoutine = () => {
       )}
       <RoutineTextStyle>
         <h1>나만의 운동 루틴</h1>
-        <p className="b2" onClick={onClickAdd}>
-          추가하기
-        </p>
+        <Button onClick={onClickAdd}>추가하기</Button>
       </RoutineTextStyle>
       <RoutineList routines={data} />
     </MyRoutineStyle>
@@ -47,12 +45,19 @@ const MyRoutineStyle = styled.div``;
 const RoutineTextStyle = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   p {
     margin-top: 15px;
     color: ${({ theme }) => theme.color.primary};
     text-decoration: underline;
   }
+`;
+
+const Button = styled.button`
+  color: ${({ theme }) => theme.color.primary};
+  display: flex;
+  margin-left: auto;
 `;
 
 export default MyRoutine;

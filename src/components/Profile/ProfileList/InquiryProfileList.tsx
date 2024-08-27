@@ -39,7 +39,7 @@ const InquriyProfileList = ({ data }: InquiryProfileListProps) => {
         <Empty
           name="person"
           size="80px"
-          color="text"
+          color="gray3"
           descriptions="문의 회원이 없습니다"
           padding="10px"
         />

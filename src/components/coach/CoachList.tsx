@@ -3,6 +3,7 @@ import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 import useQueryString from "@/hooks/useQueryString";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
+import Empty from "../common/Empty/Empty";
 import Coach from "./Coach";
 
 const CoachList = () => {
@@ -28,13 +29,24 @@ const CoachList = () => {
   const coaches = data?.pages.flatMap((page) => page.data) || []; // 각 페이지의 코치 데이터를 하나의 배열로 평탄화
 
   return (
-    <CoachListStyle>
-      {coaches.map((coach) => (
-        <Coach coach={coach} key={coach.coachId} />
-      ))}
-      <div ref={setTarget}></div>
-      {isFetchingNextPage && "로딩중..."}
-    </CoachListStyle>
+    <>
+      {coaches.length > 0 ? (
+        <CoachListStyle>
+          {coaches.map((coach) => (
+            <Coach coach={coach} key={coach.coachId} />
+          ))}
+          <div ref={setTarget}></div>
+          {isFetchingNextPage && "로딩중..."}
+        </CoachListStyle>
+      ) : (
+        <Empty
+          name="list"
+          size="64px"
+          color="gray3"
+          descriptions="다른 키워드로 검색해보세요!"
+        />
+      )}
+    </>
   );
 };
 

@@ -77,8 +77,8 @@ const LineChart = ({ chartId }: Props) => {
     },
     events: [],
     animation: {
-      duration: 2000, // 전체 애니메이션 지속 시간
-      easing: "easeInOutElastic" // 애니메이션의 이징 효과 설정
+      duration: 1600, // 전체 애니메이션 지속 시간
+      easing: "easeInOutQuint" // 애니메이션의 이징 효과 설정
     }
   };
 
