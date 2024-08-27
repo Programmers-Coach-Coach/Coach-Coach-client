@@ -9,3 +9,18 @@ export const postReview = async (coachId: number, data: IPostReview) => {
     data
   );
 };
+
+export const editReview = async (reviewId: number, data: IPostReview) => {
+  return await requestHandler<IResponseMessage>(
+    "patch",
+    `coaches/reviews/${reviewId}`,
+    data
+  );
+};
+
+export const deleteReview = async (reviewId: number) => {
+  return await requestHandler<IResponseMessage>(
+    "delete",
+    `coaches/reviews/${reviewId}`
+  );
+};
