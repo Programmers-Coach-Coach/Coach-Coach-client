@@ -6,9 +6,8 @@ import { useMatchMember } from "@/hooks/useMember";
 import { WhiteSpace } from "@/style/global";
 import { theme } from "@/style/theme";
 import { useEffect, useState } from "react";
-import { BsChatLeftTextFill } from "react-icons/bs";
 import { styled } from "styled-components";
-
+import { BiSolidUser } from "react-icons/bi";
 const ManageMember = () => {
   const { data: authData, isLoading: authLoading, refetch } = useFetchAuth();
   const [isCoach, setIsCoach] = useState(false);
@@ -44,7 +43,7 @@ const ManageMember = () => {
     </ManageMemberStyle>
   ) : (
     <NoReviewSection>
-      <BsChatLeftTextFill size="100" color={theme.color.gray3} />
+      <BiSolidUser size="100" color={theme.color.gray3} />
       <ContentWrapper className="t1">코치가 아닙니다.</ContentWrapper>
     </NoReviewSection>
   );
@@ -60,7 +59,7 @@ const NoReviewSection = styled.div`
   flex-direction: column;
   align-items: center;
   height: 80vh;
-  gap: 30px;
+  gap: 10px;
 `;
 
 const ManageMemberStyle = styled.div`
