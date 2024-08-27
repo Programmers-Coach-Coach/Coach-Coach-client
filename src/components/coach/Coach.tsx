@@ -4,6 +4,7 @@ import { LineClamp } from "@/style/global";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Heart from "../common/InputField/CheckBox/Heart";
+import { CoachingSports } from "./PopularCoaches";
 
 interface Props {
   coach: ICoach;
@@ -20,11 +21,11 @@ const Coach = ({ coach }: Props) => {
         <LineClamp $line={2} className="desc">
           {coach.coachIntroduction}
         </LineClamp>
-        <ul className="coaching-sports">
+        <CoachingSportStyle className="coaching-sports">
           {coach.coachingSports.map((item) => (
             <li key={item.sportId}>#{item.sportName}</li>
           ))}
-        </ul>
+        </CoachingSportStyle>
       </Text>
       <Heart checked={coach.isLiked} size="24" id={coach.coachId} />
       <Local>{coach.localAddress}</Local>
@@ -67,24 +68,11 @@ const Text = styled.div`
     font-size: 12px;
     margin-bottom: 10px;
   }
+`;
 
-  .coaching-sports {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-
-    position: absolute;
-    bottom: 0;
-
-    li {
-      display: inline-flex;
-      font-size: 10px;
-      padding: 4px 6px;
-      border-radius: ${({ theme }) => theme.borderRadius.default};
-      color: ${({ theme }) => theme.color.text};
-      background-color: ${({ theme }) => theme.color.gray1};
-    }
-  }
+const CoachingSportStyle = styled(CoachingSports)`
+  position: absolute;
+  bottom: 0;
 `;
 
 const Local = styled.div`
