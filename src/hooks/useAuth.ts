@@ -18,7 +18,7 @@ import {
   ISignup
 } from "@/models/auth.model";
 import { IMyPageCoachFormWithSports } from "@/models/coach.model";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 const useAuth = () => {
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ const useAuth = () => {
       });
   };
 
-  const userLogout = () => {
+  const userLogout = async () => {
     logout()
       .then(() => {
         storeLogout();
@@ -122,11 +122,18 @@ const useAuth = () => {
       .then(() => {
         toast.success("프로필이 성공적으로 업데이트되었습니다.");
       })
-      .catch(() => {
-        toast.error("프로필 업데이트 중 오류가 발생했습니다.");
+      .catch((error) => {
+        if (error instanceof AxiosError) {
+          if (error.response?.status === 409) {
+            toast.error("이미 사용 중인 닉네임입니다.");
+          } else {
+            toast.error("프로필 업데이트 중 오류가 발생했습니다.");
+          }
+        } else {
+          toast.error("알 수 없는 오류가 발생했습니다.");
+        }
       });
   };
-
   const editUserCoachProfile = (formData: IMyPageCoachFormWithSports) => {
     editCoachProfile(formData)
       .then(() => {

@@ -6,14 +6,17 @@ import { useAuthStore } from "@/store/authStore";
 import { useEffect } from "react";
 
 function Login() {
-  const { isLoggedIn } = useAuthStore();
   const nav = useNavigate();
+
   useEffect(() => {
-    console.log(isLoggedIn);
-    if (isLoggedIn) {
-      nav("/");
-    }
-  });
+    const unsubscribe = useAuthStore.subscribe((state) => {
+      if (state.isLoggedIn) {
+        nav("/");
+      }
+    });
+    return () => unsubscribe();
+  }, [nav]);
+
   return (
     <Container>
       <ImageWrapper className="logo" src={Logo} alt="Logo" />
