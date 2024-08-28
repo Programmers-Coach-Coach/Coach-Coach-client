@@ -17,7 +17,7 @@ const DetailInfo = ({ coach }: Props) => {
     return (
       !coach.reviews.some((review) => review.isMyReview) && // 내가 리뷰 작성한 적이 없으면서
       coach.isMatched && //  매칭 상태일 때
-      myAuth?.nickname === coach.coachName // 그리고 나의 상세페이지가 아닐 때
+      myAuth?.nickname !== coach.coachName // 그리고 나의 상세페이지가 아닐 때
     );
   };
 
