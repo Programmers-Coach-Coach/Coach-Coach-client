@@ -1,4 +1,4 @@
-import Icon from "@/components/Icon/Icon";
+import IconButton from "@/components/Icon/IconButton";
 import { getClickBackLink } from "@/utils/getTitle";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
@@ -22,7 +22,7 @@ const DetailHeader = ({ title }: DetailHeaderProps) => {
 
   return (
     <DetailHeaderStyle>
-      <Icon name="back" size="24px" color="text" onClick={onClickBack} />
+      <IconButton name="back" size="24px" color="text" onClick={onClickBack} />
       <h1>{title}</h1>
     </DetailHeaderStyle>
   );
