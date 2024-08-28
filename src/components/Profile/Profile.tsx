@@ -80,6 +80,11 @@ const ProfileStyle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  h2 {
+    font-weight: 600;
+    font-size: 14px;
+  }
 `;
 
 const ProfileImageStyle = styled.img<{ width: string; height: string }>`

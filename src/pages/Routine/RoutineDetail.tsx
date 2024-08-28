@@ -123,8 +123,8 @@ const RoutineDetail = () => {
       )}
       {isModify && (
         <TextStyle>
-          <h2>운동을 완료하면 체크하세요.</h2>
-          <Button onClick={onClickAdd}>추가하기</Button>
+          {!isUser && <h2>운동을 완료하면 체크하세요.</h2>}
+          {isModify && <Button onClick={onClickAdd}>추가하기</Button>}
         </TextStyle>
       )}
       {data.categoryList.map((category) => (
