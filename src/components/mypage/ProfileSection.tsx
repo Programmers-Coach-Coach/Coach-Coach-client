@@ -13,12 +13,18 @@ import Loading from "../loading/Loading";
 import AddressSearchField from "./AddressSearchField";
 import useAuth from "@/hooks/useAuth";
 import image from "@/assets/images/basicProfile.png";
+import useModal from "@/hooks/useModal";
+import Modal from "@/components/common/modal/Modal";
 
 const allowedExtensions = ["jpg", "jpeg", "png", "gif"];
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
 const ProfileSection = () => {
   const { profile, isFetchError, isLoading } = useFetchProfile();
+  const { isModal, openModal, closeModal } = useModal();
+  const onClickAdd = () => {
+    openModal();
+  };
   const { withdrawUser, editUserProfile } = useAuth();
   const { control, handleSubmit, setValue, watch } = useForm<IMyPageFormValues>(
     {
@@ -116,6 +122,23 @@ const ProfileSection = () => {
 
   return (
     <ProfileWrapper>
+      {isModal && (
+        <Modal closeModal={closeModal} position="center">
+          <ModalTitleWrapper>회원탈퇴를 하시겠습니까?</ModalTitleWrapper>
+          <ButtonWrapper>
+            <CustomButton
+              size="mini"
+              variant="contained"
+              onClick={withdrawUser}
+            >
+              확인
+            </CustomButton>
+            <CustomButton size="mini" variant="outlined" onClick={closeModal}>
+              취소
+            </CustomButton>
+          </ButtonWrapper>
+        </Modal>
+      )}
       <ProfileImageWrapper>
         <ProfileImage src={getProfileImageUrl()} alt="Profile" />
         <IconWrapper onClick={() => inputRef.current?.click()} />
@@ -241,16 +264,34 @@ const ProfileSection = () => {
         >
           수정하기
         </CustomButton>
-        <DeleteUserWrapper>
-          <span className="login" onClick={withdrawUser}>
-            회원탈퇴
-          </span>
-        </DeleteUserWrapper>
+        <AddTextStyle>
+          <span onClick={onClickAdd}>회원탈퇴</span>
+        </AddTextStyle>
       </InfoWrapper>
     </ProfileWrapper>
   );
 };
 
+const ModalTitleWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+`;
+const AddTextStyle = styled.div`
+  display: flex;
+  justify-content: center;
+  span {
+    color: ${({ theme }) => theme.color.primary};
+    text-decoration: none;
+    cursor: pointer;
+  }
+`;
 const ProfileImageWrapper = styled.div`
   position: relative;
   display: flex;
@@ -284,14 +325,6 @@ const BasicWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-
-const DeleteUserWrapper = styled.div`
-  span {
-    cursor: pointer;
-  }
-  text-align: center;
-  color: ${({ theme }) => theme.color.primary};
 `;
 
 const SubtitleWrapper = styled.div`

@@ -13,7 +13,6 @@ Sentry.init({
   ],
   tracesSampleRate: 1.0,
   tracePropagationTargets: [import.meta.env.VITE_SENTRY_URL],
-  profilesSampleRate: 1.0,
   replaysSessionSampleRate: 0.1,
   replaysOnErrorSampleRate: 1.0
 });

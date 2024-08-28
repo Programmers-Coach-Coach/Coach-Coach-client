@@ -25,10 +25,12 @@ const Routine = ({ id, name, sport }: RoutineProps) => {
   const deleteModal = useModal();
   const [isSelect, setIsSelect] = useState<boolean>(false);
   const setRoutineId = useModalInfo((state) => state.setRoutineId);
+  const setRoutineName = useModalInfo((state) => state.setRoutineName);
 
   const onClickModify = (e: React.MouseEvent) => {
     e.stopPropagation();
     setRoutineId(id);
+    setRoutineName(name);
     modifyModal.openModal();
   };
 
@@ -50,7 +52,11 @@ const Routine = ({ id, name, sport }: RoutineProps) => {
             schema="routine-modify"
             closeModal={modifyModal.closeModal}
           >
-            <RoutineContents setIsSelect={setIsSelect} />
+            <RoutineContents
+              routineName={name}
+              sportName={sport}
+              setIsSelect={setIsSelect}
+            />
           </ActionModalInner>
         </Modal>
       )}

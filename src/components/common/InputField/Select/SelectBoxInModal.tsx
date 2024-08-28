@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -9,6 +9,7 @@ import { useModalInfo } from "@/store/modalInfo.store";
 import useHome from "@/hooks/useHome";
 
 interface SelectBoxProps {
+  sportName?: string;
   setIsSelect: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -20,10 +21,21 @@ const MenuProps = {
   }
 };
 
-const SelectBoxInModal = ({ setIsSelect }: SelectBoxProps) => {
+const SelectBoxInModal = ({ sportName, setIsSelect }: SelectBoxProps) => {
   const setSport = useModalInfo((state) => state.setSportId);
-  const [selectedValue, setSelectedValue] = useState<string>("");
+  const [selectedValue, setSelectedValue] = useState<string>(
+    sportName ? sportName : ""
+  );
   const { data, isLoading, isError } = useHome();
+
+  useEffect(() => {
+    if (data && sportName) {
+      const sport = data.sports.find((sport) => sport.sportName === sportName);
+      if (sport) {
+        setSport(sport.sportId);
+      }
+    }
+  }, [data, sportName, setSport]);
 
   if (isLoading) return <div>로딩 중...</div>;
   if (isError || !data) return <div>무언가 잘못됨</div>;
@@ -81,17 +93,18 @@ const SelectBoxInModal = ({ setIsSelect }: SelectBoxProps) => {
           onClose={handleClose}
           MenuProps={MenuProps}
         >
-          {data.sports.map((sport) => (
-            <MenuItem
-              key={sport.sportId}
-              value={sport.sportName}
-              sx={{
-                height: 30
-              }}
-            >
-              <ListItemText primary={sport.sportName} />
-            </MenuItem>
-          ))}
+          {data.sports &&
+            data.sports.map((sport) => (
+              <MenuItem
+                key={sport.sportId}
+                value={sport.sportName}
+                sx={{
+                  height: 30
+                }}
+              >
+                <ListItemText primary={sport.sportName} />
+              </MenuItem>
+            ))}
         </Select>
       </FormControl>
     </Box>
