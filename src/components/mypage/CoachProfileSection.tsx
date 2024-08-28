@@ -6,7 +6,7 @@ import { useFetchAuth } from "@/hooks/useFetchAuth";
 import { IMyPageCoachFormValues } from "@/models/coach.model";
 import { getGenderLabel } from "@/utils/genderUtils";
 import { Switch, TextField } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Controller, FieldErrors, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import styled from "styled-components";
@@ -24,10 +24,18 @@ interface CoachProfileSectionProps {
 const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
   const { data: userMeData, refetch: authRefetch } = useFetchAuth();
   const { editUserCoachProfile } = useAuth();
+  const [shouldFetchCoachProfile, setShouldFetchCoachProfile] = useState(false);
+
+  useEffect(() => {
+    if (userMeData?.isCoach) {
+      setShouldFetchCoachProfile(true);
+    }
+  }, [userMeData?.isCoach]);
 
   const { coachProfile, isLoading, isFetchError } = useFetchCoachProfile(
-    userMeData?.isCoach || false
+    shouldFetchCoachProfile
   );
+
   const { control, handleSubmit, setValue } = useForm<IMyPageCoachFormValues>({
     defaultValues: {
       coachIntroduction: "",
