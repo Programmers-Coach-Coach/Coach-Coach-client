@@ -46,7 +46,7 @@ const ModalStyle = styled.div`
 const CenterContents = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 0px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -56,7 +56,7 @@ const CenterContents = styled.div`
   padding: 30px;
   background-color: ${({ theme }) => theme.color.box};
   border-radius: ${({ theme }) => theme.borderRadius.default};
-  border: 1px solid ${({ theme }) => theme.color.border};
+  border: 1px solid ${({ theme }) => theme.color.gray1};
   box-shadow: ${({ theme }) => theme.boxShadow};
   z-index: 1000;
 `;
@@ -73,9 +73,9 @@ const FooterAboveContents = styled.div`
   background-color: ${({ theme }) => theme.color.box};
   border-radius: ${({ theme }) => theme.borderRadius.default}
     ${({ theme }) => theme.borderRadius.default} 0 0;
-  border-top: 1px solid ${({ theme }) => theme.color.border};
-  border-left: 1px solid ${({ theme }) => theme.color.border};
-  border-right: 1px solid ${({ theme }) => theme.color.border};
+  border-top: 1px solid ${({ theme }) => theme.color.gray1};
+  border-left: 1px solid ${({ theme }) => theme.color.gray1};
+  border-right: 1px solid ${({ theme }) => theme.color.gray1};
   background-color: ${({ theme }) => theme.color.background};
   z-index: 1000;
 `;

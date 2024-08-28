@@ -75,6 +75,7 @@ const Coach = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 60px;
 `;
 
 const Buttons = styled.div`

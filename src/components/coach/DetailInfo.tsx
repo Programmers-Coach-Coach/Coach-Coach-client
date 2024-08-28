@@ -1,3 +1,4 @@
+import { useFetchAuth } from "@/hooks/useFetchAuth";
 import useModal from "@/hooks/useModal";
 import { ICoachDetail } from "@/models/coach.model";
 import styled from "styled-components";
@@ -10,6 +11,15 @@ interface Props {
 }
 const DetailInfo = ({ coach }: Props) => {
   const { isModal, openModal, closeModal } = useModal();
+  const { data: myAuth } = useFetchAuth();
+
+  const showPost = () => {
+    return (
+      !coach.reviews.some((review) => review.isMyReview) && // 내가 리뷰 작성한 적이 없으면서
+      coach.isMatched && //  매칭 상태일 때
+      myAuth?.nickname !== coach.coachName // 그리고 나의 상세페이지가 아닐 때
+    );
+  };
 
   return (
     <Wrapper>
@@ -23,7 +33,7 @@ const DetailInfo = ({ coach }: Props) => {
       </SubWrapper>
       <SubWrapper>
         <h2>자기소개</h2>
-        <TextField>{coach.coachIntroduction}</TextField>
+        <DescriptionTextField>{coach.coachIntroduction}</DescriptionTextField>
       </SubWrapper>
 
       {coach.activeCenter && (
@@ -46,7 +56,7 @@ const DetailInfo = ({ coach }: Props) => {
       <SubWrapper>
         <ReviewWithButton>
           <h2>리뷰</h2>
-          <button onClick={openModal}>작성하기</button>
+          {showPost() && <button onClick={openModal}>작성하기</button>}
         </ReviewWithButton>
         <ReviewCard coachProfile={coach} />
       </SubWrapper>
@@ -69,12 +79,23 @@ const Wrapper = styled.div`
 const SubWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 4px;
 `;
 
 const TextField = styled.div`
   line-height: 1.5;
+<<<<<<< HEAD
+`;
+
+const DescriptionTextField = styled(TextField)`
+  min-height: 200px;
+  background: ${({ theme }) => theme.color.box};
+  border-radius: 8px;
+  padding: 10px;
+=======
   word-break: keep-all;
+  white-space: pre-line; /* 줄바꿈을 처리하기 위해 추가 */
+>>>>>>> refactor/auth
 `;
 
 const CaochingSports = styled.ul`

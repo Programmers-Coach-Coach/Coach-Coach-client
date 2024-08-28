@@ -63,6 +63,7 @@ const Text = styled.div`
   overflow: hidden;
   flex: 1;
   height: 100%;
+  padding: 4px;
 
   .name {
     font-weight: 600;
@@ -72,6 +73,7 @@ const Text = styled.div`
   .desc {
     font-size: 12px;
     margin-bottom: 10px;
+    white-space: pre-line; /* 줄바꿈 처리 */
   }
 `;
 

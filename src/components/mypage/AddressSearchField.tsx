@@ -6,6 +6,7 @@ import CustomButton from "../common/Button/CustomButton";
 
 interface AddressSearchFieldProps {
   label: string;
+  type: string;
   value: string;
   onAddressSelect: (address: string) => void;
 }
@@ -13,6 +14,7 @@ interface AddressSearchFieldProps {
 const AddressSearchField = ({
   label,
   value,
+  type,
   onAddressSelect
 }: AddressSearchFieldProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -22,7 +24,12 @@ const AddressSearchField = ({
   };
 
   const completeHandler = (data: Address) => {
-    onAddressSelect(data.address);
+    if (type == "home") {
+      onAddressSelect(data.sigungu + " " + data.bname);
+    } else {
+      onAddressSelect(data.address);
+    }
+
     setIsOpen(false);
   };
 

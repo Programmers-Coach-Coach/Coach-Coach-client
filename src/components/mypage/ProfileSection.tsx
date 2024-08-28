@@ -49,7 +49,6 @@ const ProfileSection = () => {
       setValue("nickname", profile.nickname || "");
       setValue("profileImageUrl", profile.profileImageUrl || profilePath);
       setValue("localAddress", profile.localAddress || "");
-      setValue("localAddressDetail", profile.localAddressDetail || "");
       const sportsNames = profile.interestedSports.map(
         (sport) => sport.sportName
       );
@@ -135,7 +134,11 @@ const ProfileSection = () => {
             >
               확인
             </CustomButton>
-            <CustomButton size="mini" variant="outlined" onClick={closeModal}>
+            <CustomButton
+              size="mini"
+              variant="containedCancel"
+              onClick={closeModal}
+            >
               취소
             </CustomButton>
           </ButtonWrapper>
@@ -225,21 +228,10 @@ const ProfileSection = () => {
           control={control}
           render={({ field }) => (
             <AddressSearchField
+              type="home"
               label="지역"
               value={field.value || ""}
               onAddressSelect={(address) => field.onChange(address)}
-            />
-          )}
-        />
-        <Controller
-          name="localAddressDetail"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              maxRows={1}
-              minRows={1}
-              value={field.value || ""}
             />
           )}
         />
@@ -277,6 +269,7 @@ const ProfileSection = () => {
 const ModalTitleWrapper = styled.div`
   display: flex;
   justify-content: center;
+  margin-bottom: 20px;
 `;
 
 const ButtonWrapper = styled.div`
