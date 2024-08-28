@@ -33,7 +33,7 @@ const DetailInfo = ({ coach }: Props) => {
       </SubWrapper>
       <SubWrapper>
         <h2>자기소개</h2>
-        <TextField>{coach.coachIntroduction}</TextField>
+        <DescriptionTextField>{coach.coachIntroduction}</DescriptionTextField>
       </SubWrapper>
 
       {coach.activeCenter && (
@@ -79,11 +79,18 @@ const Wrapper = styled.div`
 const SubWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 4px;
 `;
 
 const TextField = styled.div`
   line-height: 1.5;
+`;
+
+const DescriptionTextField = styled(TextField)`
+  min-height: 200px;
+  background: ${({ theme }) => theme.color.box};
+  border-radius: 8px;
+  padding: 10px;
 `;
 
 const CaochingSports = styled.ul`
