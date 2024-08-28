@@ -84,6 +84,7 @@ const SubWrapper = styled.div`
 
 const TextField = styled.div`
   line-height: 1.5;
+<<<<<<< HEAD
 `;
 
 const DescriptionTextField = styled(TextField)`
@@ -91,6 +92,10 @@ const DescriptionTextField = styled(TextField)`
   background: ${({ theme }) => theme.color.box};
   border-radius: 8px;
   padding: 10px;
+=======
+  word-break: keep-all;
+  white-space: pre-line; /* 줄바꿈을 처리하기 위해 추가 */
+>>>>>>> refactor/auth
 `;
 
 const CaochingSports = styled.ul`
