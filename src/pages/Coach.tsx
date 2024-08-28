@@ -4,6 +4,7 @@ import CustomButton from "@/components/common/Button/CustomButton";
 import Loading from "@/components/loading/Loading";
 import useCoachDetail from "@/hooks/queries/useCoachDetail";
 import { useContact } from "@/hooks/queries/useContact";
+import { useFetchAuth } from "@/hooks/useFetchAuth";
 import { WhiteSpace } from "@/style/global";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
@@ -13,6 +14,7 @@ const Coach = () => {
   const { id } = useParams();
   const { data, isError, isLoading, refetch } = useCoachDetail(Number(id));
   const { mutate } = useContact();
+  const { data: myAuth } = useFetchAuth();
 
   if (isLoading) return <Loading />;
   if (isError || !data) {
@@ -38,26 +40,32 @@ const Coach = () => {
   return (
     <Wrapper>
       <BasicInfo coach={data} />
-      <WhiteSpace $height={30} />
-      <Buttons>
-        <CustomButton
-          size="full-sharp"
-          variant="outlined"
-          onClick={handleKaKaoLink}
-        >
-          카카오톡 문의하기
-        </CustomButton>
-        <CustomButton
-          size="full-sharp"
-          variant="contained"
-          onClick={handleRequestMatching}
-          disabled={data.isContacted || data.isMatched}
-        >
-          {data.isContacted || data.isMatched
-            ? "신청완료"
-            : "코치님께 매칭 신청하기"}
-        </CustomButton>
-      </Buttons>
+
+      {myAuth?.nickname !== data.coachName && (
+        <>
+          <WhiteSpace $height={30} />
+          <Buttons>
+            <CustomButton
+              size="full-sharp"
+              variant="outlined"
+              onClick={handleKaKaoLink}
+            >
+              카카오톡 문의하기
+            </CustomButton>
+            <CustomButton
+              size="full-sharp"
+              variant="contained"
+              onClick={handleRequestMatching}
+              disabled={data.isContacted || data.isMatched}
+            >
+              {data.isContacted || data.isMatched
+                ? "신청완료"
+                : "코치님께 매칭 신청하기"}
+            </CustomButton>
+          </Buttons>
+        </>
+      )}
+
       <WhiteSpace $height={50} />
       <DetailInfo coach={data} />
     </Wrapper>
