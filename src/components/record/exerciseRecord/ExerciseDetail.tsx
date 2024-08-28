@@ -18,7 +18,9 @@ const ExerciseDetail = ({ routines }: Props) => {
                 src={routine.coachProfileImageUrl || undefined}
                 alt={routine.coachName || "내 프로필"}
               /> */}
-              <p className="b3">{routine.routineName}</p>
+              <LineClamp $line={1} className="b3">
+                {routine.routineName}
+              </LineClamp>
               <p className="small-text">{routine.coachName || "나"}</p>
             </CoachInfo>
             {routine.completedCategories.map((category) => (
