@@ -52,7 +52,7 @@ const CenterContents = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  width: 352px;
+  width: 300px;
   padding: 30px;
   background-color: ${({ theme }) => theme.color.box};
   border-radius: ${({ theme }) => theme.borderRadius.default};
