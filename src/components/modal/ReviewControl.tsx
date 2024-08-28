@@ -71,7 +71,7 @@ const ReviewControlStyle = styled.div`
 
 const ControlModal = styled.div`
   position: absolute;
-  top: 0;
+  top: -50px;
   right: 30px;
   background-color: #fff;
   border-radius: 10px;
