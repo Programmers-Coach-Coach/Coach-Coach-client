@@ -63,6 +63,7 @@ const Text = styled.div`
   overflow: hidden;
   flex: 1;
   height: 100%;
+  padding: 4px;
 
   .name {
     font-weight: 600;
