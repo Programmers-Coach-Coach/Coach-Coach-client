@@ -11,7 +11,7 @@ const InputInModal = ({ name = "", content, setFn }: InputModalProp) => {
   const [inputValue, setInputValue] = useState<string>(name);
   const [error, setError] = useState<boolean>(false);
 
-  const textLimit = content === "운동 가이드" ? 45 : 12;
+  const textLimit = content === "운동 가이드" ? 29 : 12;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
