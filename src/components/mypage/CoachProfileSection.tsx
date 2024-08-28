@@ -6,7 +6,7 @@ import { IMyPageCoachFormValues } from "@/models/coach.model";
 import { getGenderLabel } from "@/utils/genderUtils";
 import { Switch, TextField } from "@mui/material";
 import { useEffect } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, FieldErrors, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import styled from "styled-components";
 import CustomButton from "../common/Button/CustomButton";
@@ -14,6 +14,7 @@ import CoachProfileReview from "../common/Card/ReviewCard.tsx/CoachProfileReview
 import SelectBox from "../common/InputField/Select/SelectBox";
 import Loading from "../loading/Loading";
 import AddressSearchField from "./AddressSearchField";
+import { AUTH_REGEX } from "@/constants/regex";
 
 interface CoachProfileSectionProps {
   onTabChange: (newValue: number) => void;
@@ -74,8 +75,12 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
   const handleCancel = () => {
     onTabChange(0);
   };
-  const onInvalid = () => {
-    toast.error("입력 폼을 모두 채워주세요.");
+  const onInvalid = (errors: FieldErrors<IMyPageCoachFormValues>) => {
+    if (errors.chattingUrl?.message) {
+      toast.error(errors.chattingUrl.message);
+    } else {
+      toast.error("입력 폼을 모두 채워주세요.");
+    }
   };
   if (isLoading) return <Loading />;
   if (isFetchError)
@@ -155,7 +160,13 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
         <Controller
           name="chattingUrl"
           control={control}
-          rules={{ required: true }}
+          rules={{
+            required: true,
+            pattern: {
+              value: AUTH_REGEX.kakaoOpenChat,
+              message: "올바른 카카오톡 링크를 적어주세요."
+            }
+          }}
           render={({ field }) => <TextField {...field} maxRows={1} />}
         />
         {userMeData?.isCoach && coachProfile && (
