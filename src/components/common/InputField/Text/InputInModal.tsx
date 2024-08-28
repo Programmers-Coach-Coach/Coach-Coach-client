@@ -11,10 +11,12 @@ const InputInModal = ({ name = "", content, setFn }: InputModalProp) => {
   const [inputValue, setInputValue] = useState<string>(name);
   const [error, setError] = useState<boolean>(false);
 
+  const textLimit = content === "운동 가이드" ? 45 : 12;
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
 
-    if (value.length > 45) {
+    if (value.length > textLimit) {
       setError(true);
     } else {
       setError(false);
@@ -33,8 +35,8 @@ const InputInModal = ({ name = "", content, setFn }: InputModalProp) => {
       value={inputValue}
       onChange={handleChange}
       error={error}
-      helperText={error ? "최대 45자까지 입력 가능합니다." : ""}
-      inputProps={{ maxLength: 45 }}
+      helperText={error ? `최대 ${textLimit}자까지 입력 가능합니다` : ""}
+      inputProps={{ maxLength: textLimit }}
     />
   );
 };
