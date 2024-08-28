@@ -111,7 +111,9 @@ const ProfileSection = () => {
     if (errors.nickname?.type === "required") {
       toast.error("닉네임을 입력해주세요.");
     } else {
-      toast.error("형식에 맞는 정보를 입력하세요.");
+      toast.error(
+        "닉네임은 2~10자까지만 가능합니다.\n(특수문자, 연속적인 공백 제외)"
+      );
     }
   };
 
