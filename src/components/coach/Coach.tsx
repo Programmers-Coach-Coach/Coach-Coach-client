@@ -22,20 +22,24 @@ const Coach = ({ coach }: Props) => {
           {coach.coachIntroduction}
         </LineClamp>
         <CoachingSportStyle className="coaching-sports">
-          {coach.coachingSports.map((item) => (
+          {coach.coachingSports.slice(0, 2).map((item) => (
             <li key={item.sportId}>#{item.sportName}</li>
           ))}
+          {coach.coachingSports.length > 2 && (
+            <span className="etc">외 {coach.coachingSports.length - 2}개</span>
+          )}
         </CoachingSportStyle>
       </Text>
       <Heart checked={coach.isLiked} size="24" id={coach.coachId} />
-      <Local>{coach.localAddress}</Local>
+      {/* TODO: 개인정보 주소는 기획 확정될때까지 임시 삭제 */}
+      {/* <Local>{coach.localAddress}</Local> */}
     </CoachStyle>
   );
 };
 
 const CoachStyle = styled.div`
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   gap: 10px;
   position: relative;
   cursor: pointer;
@@ -58,6 +62,7 @@ const Image = styled.img`
 const Text = styled.div`
   overflow: hidden;
   flex: 1;
+  height: 100%;
 
   .name {
     font-weight: 600;
@@ -73,6 +78,11 @@ const Text = styled.div`
 const CoachingSportStyle = styled(CoachingSports)`
   position: absolute;
   bottom: 0;
+
+  .etc {
+    color: ${({ theme }) => theme.color.gray3};
+    font-size: 12px;
+  }
 `;
 
 const Local = styled.div`
