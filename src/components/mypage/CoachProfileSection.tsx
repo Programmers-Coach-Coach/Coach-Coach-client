@@ -1,4 +1,5 @@
-import image from "@/assets/images/basicProfile.png";
+import profilePath from "@/assets/images/profile.png";
+
 import useFetchCoachProfile from "@/hooks/queries/useFetchCoachProfile";
 import useAuth from "@/hooks/useAuth";
 import { useFetchAuth } from "@/hooks/useFetchAuth";
@@ -90,7 +91,7 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
     <ProfileWrapper>
       <BasicInfoWrapper>
         <ProfileImage
-          src={userMeData?.profileImageUrl || image}
+          src={userMeData?.profileImageUrl || profilePath}
           alt="Profile"
         />
         <NameGenderWrapper className="b1">
@@ -251,8 +252,9 @@ const ProfileWrapper = styled.div`
 const ProfileImage = styled.img`
   width: ${({ theme }) => theme.profileImage.mini.width};
   height: ${({ theme }) => theme.profileImage.mini.height};
-  border-radius: 50%;
+  border-radius: 8px;
   object-fit: cover;
+  background: ${({ theme }) => theme.color.gray1};
 `;
 
 const NameWrapper = styled.div`

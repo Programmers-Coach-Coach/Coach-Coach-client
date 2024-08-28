@@ -5,7 +5,11 @@ import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 export const useContact = () => {
-  const { mutate, isError } = useMutation<IResponseMessage, Error, number>({
+  const { mutate, isError, isSuccess } = useMutation<
+    IResponseMessage,
+    Error,
+    number
+  >({
     mutationFn: (id: number) => contact(id),
     onSuccess: () => {
       toast.success("신청이 완료됐어요");
@@ -17,8 +21,5 @@ export const useContact = () => {
     }
   });
 
-  return {
-    isError,
-    mutate
-  };
+  return { isSuccess, isError, mutate };
 };

@@ -70,6 +70,8 @@ export interface ICoachDetail {
   chattingUrl: string;
   reviews: IReview[];
   isOpen: boolean;
+  isContacted: boolean;
+  isMatched: boolean;
   countOfReviews: number;
   reviewRating: number;
   isLiked: boolean;
@@ -77,9 +79,11 @@ export interface ICoachDetail {
 }
 
 export interface IReview {
+  reviewId: number;
   userId: number;
   userName: string;
   contents: string;
   stars: number;
   createdAt: string;
+  isMyReview: boolean; // 내가 쓴 리뷰인지
 }

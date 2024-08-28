@@ -1,6 +1,7 @@
 import { ICONS } from "@/constants/assets";
 import { ColorKey, theme } from "@/style/theme";
 import { ButtonHTMLAttributes } from "react";
+import styled from "styled-components";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   name: keyof typeof ICONS;
@@ -13,10 +14,16 @@ const IconButton = ({ name, size, color, ...props }: Props) => {
   const ICColor = theme.color[color];
 
   return (
-    <button {...props}>
+    <StyledButton {...props}>
       <SelectedIcon size={size} color={ICColor} />
-    </button>
+    </StyledButton>
   );
 };
+
+const StyledButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export default IconButton;

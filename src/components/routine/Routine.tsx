@@ -1,13 +1,13 @@
-import { styled } from "styled-components";
 import Card from "@/components/common/Card/Card";
-import useModal from "@/hooks/useModal";
-import { useState } from "react";
-import Modal from "@/components/common/modal/Modal";
 import ActionModalInner from "@/components/common/modal/contents/ActionModalInner";
 import RoutineContents from "@/components/common/modal/contents/RoutineContents";
+import Modal from "@/components/common/modal/Modal";
+import useModal from "@/hooks/useModal";
 import { useModalInfo } from "@/store/modalInfo.store";
-import RoutinePicker from "../common/modal/contents/RoutinePicker";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { styled } from "styled-components";
+import RoutinePicker from "../common/modal/contents/RoutinePicker";
 import IconButton from "../Icon/IconButton";
 
 interface RoutineProps {
@@ -27,15 +27,15 @@ const Routine = ({ id, name, sport }: RoutineProps) => {
   const setRoutineId = useModalInfo((state) => state.setRoutineId);
   const setRoutineName = useModalInfo((state) => state.setRoutineName);
 
-  const onClickModify = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
+  const onClickModify = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setRoutineId(id);
     setRoutineName(name);
     modifyModal.openModal();
   };
 
-  const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
+  const onClickDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setRoutineId(id);
     deleteModal.openModal();
   };

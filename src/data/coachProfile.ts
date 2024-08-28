@@ -28,6 +28,8 @@ export const coachProfile: ICoachDetail = {
   chattingUrl: "오픈톡 링크",
   reviews: [
     {
+      isMyReview: true,
+      reviewId: 0,
       userId: 1,
       userName: "이현철",
       contents: "참 좋은 코치",
@@ -35,6 +37,8 @@ export const coachProfile: ICoachDetail = {
       createdAt: "2024-08-15"
     },
     {
+      isMyReview: true,
+      reviewId: 1,
       userId: 1,
       userName: "이현철",
       contents: "참 좋은 코치",
@@ -42,6 +46,8 @@ export const coachProfile: ICoachDetail = {
       createdAt: "2024-08-15"
     },
     {
+      isMyReview: true,
+      reviewId: 2,
       userId: 1,
       userName: "이현철",
       contents: "참 좋은 코치",
@@ -49,6 +55,8 @@ export const coachProfile: ICoachDetail = {
       createdAt: "2024-08-15"
     },
     {
+      isMyReview: true,
+      reviewId: 3,
       userId: 1,
       userName: "이현철",
       contents: "참 좋은 코치",
@@ -60,5 +68,7 @@ export const coachProfile: ICoachDetail = {
   countOfReviews: 1,
   reviewRating: 1,
   isLiked: true,
-  countOfLikes: 1
+  countOfLikes: 1,
+  isContacted: false, // 추가
+  isMatched: false // 추가
 };

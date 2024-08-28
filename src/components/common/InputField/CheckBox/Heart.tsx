@@ -52,6 +52,9 @@ const Heart = ({ id, checked, size }: Props) => {
   );
 };
 
-const HeartStyle = styled.div``;
+const HeartStyle = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 export default Heart;

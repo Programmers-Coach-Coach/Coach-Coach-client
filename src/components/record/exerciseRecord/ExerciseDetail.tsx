@@ -1,7 +1,7 @@
 import Empty from "@/components/common/Empty/Empty";
 import CategoryDropdown from "@/components/common/InputField/dropdown/CategoryDropdown";
 import { IExerciseRoutine } from "@/models/record.model";
-import { WhiteSpace } from "@/style/global";
+import { LineClamp, WhiteSpace } from "@/style/global";
 import styled from "styled-components";
 
 interface Props {
@@ -18,7 +18,9 @@ const ExerciseDetail = ({ routines }: Props) => {
                 src={routine.coachProfileImageUrl || undefined}
                 alt={routine.coachName || "내 프로필"}
               /> */}
-              <p className="b3">{routine.routineName}</p>
+              <LineClamp $line={1} className="b3">
+                {routine.routineName}
+              </LineClamp>
               <p className="small-text">{routine.coachName || "나"}</p>
             </CoachInfo>
             {routine.completedCategories.map((category) => (

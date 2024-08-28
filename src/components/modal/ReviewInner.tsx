@@ -1,17 +1,23 @@
-import { usePostReview } from "@/hooks/queries/useReview";
+import { useEditReview, usePostReview } from "@/hooks/queries/useReview";
 import { IPostReview } from "@/models/review.model";
 import { TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import styled from "styled-components";
 import RatingStars from "../common/Card/ReviewCard.tsx/RatingStars";
 
+export type TReviewMethod = "enroll" | "edit";
+
 interface Props {
-  coachId: number;
+  id: number; //  리뷰 작성 시 코치 아이디, 리뷰 수정 시 리뷰 아이디
   onClose: () => void;
+  type: TReviewMethod;
+  refetchCoachId?: number;
 }
 
-const ReviewInner = ({ coachId, onClose }: Props) => {
-  const { mutate } = usePostReview(coachId);
+const ReviewInner = ({ id, onClose, type, refetchCoachId }: Props) => {
+  const { mutate: postMutate } = usePostReview(id);
+  const { mutate: editMutate } = useEditReview(refetchCoachId);
+
   const {
     control,
     handleSubmit,
@@ -19,7 +25,11 @@ const ReviewInner = ({ coachId, onClose }: Props) => {
   } = useForm<IPostReview>();
 
   const onSubmit = (data: IPostReview) => {
-    mutate({ coachId, data });
+    if (type === "enroll") {
+      postMutate({ coachId: id, data });
+    } else {
+      editMutate({ reviewId: id, data });
+    }
     onClose();
   };
 

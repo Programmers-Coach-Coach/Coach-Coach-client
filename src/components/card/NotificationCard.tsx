@@ -44,7 +44,11 @@ const NotificationCard = ({
 
   return (
     <ReviewCardStyle>
-      <img src={getImageSrc()} alt={relationFunction} />
+      <img
+        className="notification-img"
+        src={getImageSrc()}
+        alt={relationFunction}
+      />
       <div className="message">{message}</div>
       <IconButton
         name="x"
@@ -68,6 +72,11 @@ const ReviewCardStyle = styled.div`
   position: relative;
   border-radius: ${({ theme }) => theme.borderRadius.default};
   box-shadow: ${({ theme }) => theme.boxShadow};
+
+  .notification-img {
+    width: 27px;
+    height: 27px;
+  }
 
   .message {
     flex: 1;

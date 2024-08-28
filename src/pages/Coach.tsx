@@ -11,7 +11,7 @@ import styled from "styled-components";
 
 const Coach = () => {
   const { id } = useParams();
-  const { data, isError, isLoading } = useCoachDetail(Number(id));
+  const { data, isError, isLoading, refetch } = useCoachDetail(Number(id));
   const { mutate } = useContact();
 
   if (isLoading) return <Loading />;
@@ -25,6 +25,14 @@ const Coach = () => {
     } else {
       toast.error("코치가 카카오톡 링크를 등록하지 않았습니다");
     }
+  };
+
+  const handleRequestMatching = () => {
+    mutate(Number(id), {
+      onSuccess: () => {
+        refetch();
+      }
+    });
   };
 
   return (
@@ -42,9 +50,12 @@ const Coach = () => {
         <CustomButton
           size="full-sharp"
           variant="contained"
-          onClick={() => mutate(Number(id))}
+          onClick={handleRequestMatching}
+          disabled={data.isContacted || data.isMatched}
         >
-          코치님께 신청하기
+          {data.isContacted || data.isMatched
+            ? "신청완료"
+            : "코치님께 매칭 신청하기"}
         </CustomButton>
       </Buttons>
       <WhiteSpace $height={50} />

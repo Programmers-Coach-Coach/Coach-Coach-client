@@ -79,11 +79,10 @@ const Coach = ({ coach }: CoachProps) => {
       }}
     >
       <Image src={coach.profileImageUrl || profilePath} alt={coach.coachName} />
-      <Heart checked={coach.isLiked} size="30px" id={coach.coachId} />
       <LineClamp $line={1} className="b3">
         {coach.coachName}
       </LineClamp>
-      <LineClamp $line={2} className="b2 desc">
+      <LineClamp $line={1} className="b2 desc">
         {coach.description}
       </LineClamp>
       <CoachingSports className="coaching-sports">
@@ -91,6 +90,7 @@ const Coach = ({ coach }: CoachProps) => {
           <li key={item.sportId}>#{item.sportName}</li>
         ))}
       </CoachingSports>
+      <Heart checked={coach.isLiked} size="30px" id={coach.coachId} />
     </CoachStyle>
   );
 };
@@ -132,6 +132,9 @@ const CoachStyle = styled.div`
     border: none;
     padding: 5px;
     border-radius: 5px;
+  }
+  .desc {
+    flex: 1;
   }
 `;
 
