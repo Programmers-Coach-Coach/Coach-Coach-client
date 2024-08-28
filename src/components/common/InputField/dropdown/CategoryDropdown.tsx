@@ -13,7 +13,7 @@ interface Props {
   modifyEnabled?: boolean;
   onEditCategory?: () => void; // 카테고리 수정, 삭제 기능
   onEditAction?: () => void; // 액션 수정 기능, 삭제 기능
-  completedAllEnabled?: boolean; // 모두 완료 가능 활성화 여부(기록 페이지에서 사용)
+  checkDisabled?: boolean; // 체크 박스 disabled(기록 페이지에서 사용)
   setCategoryName?: React.Dispatch<React.SetStateAction<string | undefined>>;
   setAction?: React.Dispatch<React.SetStateAction<string | undefined>>;
   setActionTime?: React.Dispatch<React.SetStateAction<number | undefined>>;
@@ -28,7 +28,7 @@ const CategoryDropdown = ({
   modifyEnabled = false,
   onEditCategory,
   onEditAction,
-  completedAllEnabled = false,
+  checkDisabled = false,
   setCategoryName,
   setAction,
   setActionTime,
@@ -58,18 +58,13 @@ const CategoryDropdown = ({
   return (
     <Wrapper>
       <DropdownBox onClick={handleToggle}>
-        {!isCoach && (
-          <Completed
-            isCompleted={
-              completedAllEnabled
-                ? true
-                : category.isCompleted
-                  ? category.isCompleted
-                  : false
-            }
-            categoryId={category.categoryId}
-          />
-        )}
+        {!isCoach ||
+          (!checkDisabled && (
+            <Completed
+              isCompleted={category.isCompleted ? category.isCompleted : false}
+              categoryId={category.categoryId}
+            />
+          ))}
         {category.categoryName}
         <Buttons $isOpen={isOpen}>
           {modifyEnabled && (

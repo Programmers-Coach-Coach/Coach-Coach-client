@@ -30,7 +30,7 @@ const ExerciseDetail = ({ routines }: Props) => {
                   categoryName: category.categoryName
                 }}
                 actions={category.actions}
-                completedAllEnabled
+                checkDisabled
               />
             ))}
           </Routine>
