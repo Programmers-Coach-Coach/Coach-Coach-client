@@ -54,7 +54,7 @@ const CoachListStyle = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
-  /* margin-bottom: 90px; */
+  margin-bottom: 60px;
 `;
 
 export default CoachList;
