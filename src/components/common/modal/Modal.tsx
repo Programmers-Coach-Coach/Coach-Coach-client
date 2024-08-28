@@ -46,7 +46,7 @@ const ModalStyle = styled.div`
 const CenterContents = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 0px;
   position: absolute;
   top: 50%;
   left: 50%;
