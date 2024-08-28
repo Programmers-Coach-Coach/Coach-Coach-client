@@ -122,7 +122,10 @@ const FooterStyle = styled.footer`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   align-items: center;
-  background-color: ${({ theme }) => theme.color.box};
+  background-color: ${({ theme }) => theme.color.background};
+  border-top: 0.5px solid ${({ theme }) => theme.color.gray1};
+  border-left: 0.5px solid ${({ theme }) => theme.color.gray1};
+  border-right: 0.5px solid ${({ theme }) => theme.color.gray1};
   position: fixed;
   bottom: 0;
   width: 100%;

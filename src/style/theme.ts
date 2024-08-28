@@ -92,7 +92,7 @@ interface Theme {
 export const theme: Theme = {
   color: {
     background: "#FFFFFF",
-    box: "#F8F9FA",
+    box: "#F5F6F8",
     border: "#BDBDBD",
     primary: "#5271FF",
     secondary: "#9CABEF",
