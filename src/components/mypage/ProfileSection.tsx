@@ -1,20 +1,20 @@
-import { useEffect, useRef } from "react";
-import styled from "styled-components";
-import CustomButton from "../common/Button/CustomButton";
-import { TextField, RadioGroup, FormControlLabel, Radio } from "@mui/material";
-import { useForm, Controller, FieldErrors } from "react-hook-form";
+import profilePath from "@/assets/images/profile.png";
+import Modal from "@/components/common/modal/Modal";
 import useFetchProfile from "@/hooks/queries/useFetchUserProfile";
-import SelectBox from "../common/InputField/Select/SelectBox";
-import { FaCirclePlus } from "react-icons/fa6";
-import toast from "react-hot-toast";
+import useAuth from "@/hooks/useAuth";
+import useModal from "@/hooks/useModal";
 import { IMyPageFormValues } from "@/models/auth.model";
 import { getGenderLabel } from "@/utils/genderUtils";
+import { FormControlLabel, Radio, RadioGroup, TextField } from "@mui/material";
+import { useEffect, useRef } from "react";
+import { Controller, FieldErrors, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { FaCirclePlus } from "react-icons/fa6";
+import styled from "styled-components";
+import CustomButton from "../common/Button/CustomButton";
+import SelectBox from "../common/InputField/Select/SelectBox";
 import Loading from "../loading/Loading";
 import AddressSearchField from "./AddressSearchField";
-import useAuth from "@/hooks/useAuth";
-import image from "@/assets/images/basicProfile.png";
-import useModal from "@/hooks/useModal";
-import Modal from "@/components/common/modal/Modal";
 
 const allowedExtensions = ["jpg", "jpeg", "png", "gif"];
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -47,7 +47,7 @@ const ProfileSection = () => {
   useEffect(() => {
     if (profile) {
       setValue("nickname", profile.nickname || "");
-      setValue("profileImageUrl", profile.profileImageUrl || image);
+      setValue("profileImageUrl", profile.profileImageUrl || profilePath);
       setValue("localAddress", profile.localAddress || "");
       setValue("localAddressDetail", profile.localAddressDetail || "");
       const sportsNames = profile.interestedSports.map(
@@ -317,7 +317,8 @@ const IconWrapper = styled(FaCirclePlus)`
 const ProfileImage = styled.img`
   width: 100%;
   height: 100%;
-  border-radius: ${({ theme }) => theme.borderRadius.default};
+  border-radius: 8px;
+  background: ${({ theme }) => theme.color.gray1};
   object-fit: cover;
 `;
 
