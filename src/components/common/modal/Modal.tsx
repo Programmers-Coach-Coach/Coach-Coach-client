@@ -71,6 +71,12 @@ const FooterAboveContents = styled.div`
   width: 100%;
   border-radius: 20px 20px 0 0;
   background-color: ${({ theme }) => theme.color.box};
+  border-radius: ${({ theme }) => theme.borderRadius.default}
+    ${({ theme }) => theme.borderRadius.default} 0 0;
+  border-top: 1px solid ${({ theme }) => theme.color.border};
+  border-left: 1px solid ${({ theme }) => theme.color.border};
+  border-right: 1px solid ${({ theme }) => theme.color.border};
+  background-color: ${({ theme }) => theme.color.background};
   z-index: 1000;
 `;
 
