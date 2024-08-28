@@ -28,17 +28,17 @@ const DetailInfo = ({ coach }: Props) => {
       <SubWrapper>
         <h2>활동중인 센터</h2>
         <TextField>
-          {coach.activeCenterDetail
+          {coach.activeCenter
             ? `${coach.activeCenter} ${coach.activeCenterDetail}`
             : "등록된 센터 정보가 없습니다"}
         </TextField>
       </SubWrapper>
-      <SubWrapper>
+      {/* <SubWrapper>
         <h2>주소</h2>
         <TextField>
           {coach.localAddress ? coach.localAddress : "등록된 주소가 없습니다"}
         </TextField>
-      </SubWrapper>
+      </SubWrapper> */}
 
       <SubWrapper>
         <ReviewWithButton>
