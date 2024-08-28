@@ -25,14 +25,17 @@ const DetailInfo = ({ coach }: Props) => {
         <h2>자기소개</h2>
         <TextField>{coach.coachIntroduction}</TextField>
       </SubWrapper>
-      <SubWrapper>
-        <h2>활동중인 센터</h2>
-        <TextField>
-          {coach.activeCenter
-            ? `${coach.activeCenter} ${coach.activeCenterDetail}`
-            : "등록된 센터 정보가 없습니다"}
-        </TextField>
-      </SubWrapper>
+
+      {coach.activeCenter && (
+        <SubWrapper>
+          <h2>활동중인 센터</h2>
+          <TextField>
+            {coach.activeCenter
+              ? `${coach.activeCenter} ${coach.activeCenterDetail}`
+              : "등록된 센터 정보가 없습니다"}
+          </TextField>
+        </SubWrapper>
+      )}
       {/* <SubWrapper>
         <h2>주소</h2>
         <TextField>
