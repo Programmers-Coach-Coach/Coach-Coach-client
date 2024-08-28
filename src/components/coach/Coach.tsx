@@ -85,12 +85,12 @@ const CoachingSportStyle = styled(CoachingSports)`
   }
 `;
 
-const Local = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 10px;
+// const Local = styled.div`
+//   position: absolute;
+//   top: 10px;
+//   right: 10px;
 
-  font-size: 10px;
-  color: ${({ theme }) => theme.color.gray3};
-`;
+//   font-size: 10px;
+//   color: ${({ theme }) => theme.color.gray3};
+// `;
 export default Coach;
