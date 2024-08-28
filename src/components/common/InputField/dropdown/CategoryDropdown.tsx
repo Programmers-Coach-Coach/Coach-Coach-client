@@ -58,13 +58,12 @@ const CategoryDropdown = ({
   return (
     <Wrapper>
       <DropdownBox onClick={handleToggle}>
-        {!isCoach ||
-          (!checkDisabled && (
-            <Completed
-              isCompleted={category.isCompleted ? category.isCompleted : false}
-              categoryId={category.categoryId}
-            />
-          ))}
+        {!isCoach && !checkDisabled && (
+          <Completed
+            isCompleted={category.isCompleted ? category.isCompleted : false}
+            categoryId={category.categoryId}
+          />
+        )}
         {category.categoryName}
         <Buttons $isOpen={isOpen}>
           {modifyEnabled && (
