@@ -34,14 +34,13 @@ function Login() {
 const Container = styled.div`
   width: 100%;
   max-width: 600px;
-  height: calc(100vh - 136px);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 0 20px;
   margin: 0 auto;
-  margin-top: 80px;
   box-sizing: border-box;
   gap: 15px;
 `;

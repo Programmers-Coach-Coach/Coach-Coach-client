@@ -60,7 +60,7 @@ const SignupForm = () => {
             required: "닉네임을 입력하세요",
             pattern: {
               value: AUTH_REGEX.nickname,
-              message: "닉네임은 공백제외 1~10자입니다."
+              message: "닉네임은 공백제외 2~10자입니다."
             }
           }}
           render={({ field }) => (

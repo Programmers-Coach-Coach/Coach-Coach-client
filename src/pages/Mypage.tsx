@@ -44,7 +44,6 @@ const Mypage = () => {
 const Container = styled.div`
   width: 100%;
   max-width: 600px;
-  height: calc(100vh - 136px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
