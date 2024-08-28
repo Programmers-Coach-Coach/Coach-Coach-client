@@ -13,7 +13,7 @@ const BasicInfo = ({ coach }: Props) => {
       <Image src={coach.profileImageUrl || profilePath} alt={coach.coachName} />
       <CoachInfo>
         <div>
-          <h1>{coach.coachName}</h1>
+          <p className="coach-name">{coach.coachName}</p>
           <Icons>
             <IconWrapper>
               <Icon name="fullStar" size="16px" color="review" />
@@ -44,6 +44,12 @@ const CoachInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  .coach-name {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 36px;
+  }
 `;
 
 const Image = styled.img`
