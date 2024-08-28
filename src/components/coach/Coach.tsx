@@ -72,6 +72,7 @@ const Text = styled.div`
   .desc {
     font-size: 12px;
     margin-bottom: 10px;
+    white-space: pre-line; /* 줄바꿈 처리 */
   }
 `;
 

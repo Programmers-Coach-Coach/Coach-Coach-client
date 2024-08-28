@@ -23,7 +23,11 @@ export type ButtonSize =
   | "mini"
   | "super-mini"
   | "full-sharp";
-export type CustomButtonType = "contained" | "outlined" | "containedError";
+export type CustomButtonType =
+  | "contained"
+  | "outlined"
+  | "containedError"
+  | "containedCancel";
 export type ProfileImageSize = "mini" | "small" | "medium" | "large";
 export type ModalSize = "default";
 export type PaddingSize = "default";
@@ -92,7 +96,7 @@ interface Theme {
 export const theme: Theme = {
   color: {
     background: "#FFFFFF",
-    box: "#F8F9FA",
+    box: "#F5F6F8",
     border: "#BDBDBD",
     primary: "#5271FF",
     secondary: "#9CABEF",
@@ -220,10 +224,16 @@ export const theme: Theme = {
       borderHoverColor: "#5271FF"
     },
     containedError: {
-      backgroundColor: "#ff3333",
-      color: "#FFFFFF",
+      backgroundColor: "#e23636",
+      color: "#ffffff",
+      border: "1px solid #e23636",
+      borderHoverColor: "#e23636"
+    },
+    containedCancel: {
+      backgroundColor: "transparent",
+      color: "#808080",
       border: "1px solid #808080",
-      borderHoverColor: "#ff3333"
+      borderHoverColor: "#808080"
     }
   },
   sports: {

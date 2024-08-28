@@ -75,6 +75,7 @@ const SubWrapper = styled.div`
 const TextField = styled.div`
   line-height: 1.5;
   word-break: keep-all;
+  white-space: pre-line; /* 줄바꿈을 처리하기 위해 추가 */
 `;
 
 const CaochingSports = styled.ul`

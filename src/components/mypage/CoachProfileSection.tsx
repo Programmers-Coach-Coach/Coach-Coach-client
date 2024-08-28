@@ -16,7 +16,8 @@ import SelectBox from "../common/InputField/Select/SelectBox";
 import Loading from "../loading/Loading";
 import AddressSearchField from "./AddressSearchField";
 import { AUTH_REGEX } from "@/constants/regex";
-
+import useModal from "@/hooks/useModal";
+import Modal from "@/components/common/modal/Modal";
 interface CoachProfileSectionProps {
   onTabChange: (newValue: number) => void;
 }
@@ -25,12 +26,18 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
   const { data: userMeData, refetch: authRefetch } = useFetchAuth();
   const { editUserCoachProfile } = useAuth();
   const [shouldFetchCoachProfile, setShouldFetchCoachProfile] = useState(false);
+  const { isModal, openModal, closeModal } = useModal();
 
   useEffect(() => {
-    if (userMeData?.isCoach) {
-      setShouldFetchCoachProfile(true);
+    if (userMeData?.isCoach !== undefined) {
+      if (userMeData?.isCoach) {
+        setShouldFetchCoachProfile(true);
+      } else {
+        openModal();
+      }
     }
-  }, [userMeData?.isCoach]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const { coachProfile, isLoading, isFetchError } = useFetchCoachProfile(
     shouldFetchCoachProfile
@@ -97,6 +104,25 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
 
   return (
     <ProfileWrapper>
+      {isModal && (
+        <Modal closeModal={closeModal} position="center">
+          <DescWrapper>
+            <SubtitleWrapper>코치로 전환하고 싶으신가요? </SubtitleWrapper>
+            <div>코치로 등록하기 위해서는 아래 단계를 따라주세요</div>
+            <div>1. 모든 필드를 채워주세요.</div>
+            <div>2. 아래 수정하기 버튼을 클릭하세요.</div>
+            <ConfirmBtnWrapper>
+              <CustomButton
+                size="mini"
+                variant="contained"
+                onClick={closeModal}
+              >
+                확인
+              </CustomButton>
+            </ConfirmBtnWrapper>
+          </DescWrapper>
+        </Modal>
+      )}
       <BasicInfoWrapper>
         <ProfileImage
           src={userMeData?.profileImageUrl || profilePath}
@@ -145,7 +171,8 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
           control={control}
           render={({ field }) => (
             <AddressSearchField
-              label="활동중인 센터"
+              type="center"
+              label="활동중인 센터 (선택)"
               value={field.value}
               onAddressSelect={(address) => field.onChange(address)}
             />
@@ -196,6 +223,7 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
             </BasicWrapper>
           )}
         />
+
         <ButtonsWrapper>
           <CustomButton
             size="full"
@@ -217,6 +245,17 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
     </ProfileWrapper>
   );
 };
+
+const ConfirmBtnWrapper = styled.div`
+  display: flex;
+  justify-content: end;
+`;
+
+const DescWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
 
 const ButtonsWrapper = styled.div`
   display: flex;
