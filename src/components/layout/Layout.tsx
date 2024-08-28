@@ -43,7 +43,7 @@ const LayoutStyle = styled.main`
   width: 100%;
   margin: 0 auto;
   max-width: 600px;
-  padding: 0 20px 80px 20px; // 80px은 내용이 Footer 위까지만 위치하기 위해 설정
+  padding: 0 20px 0 20px; // 80px은 내용이 Footer 위까지만 위치하기 위해 설정
 `;
 
 export default Layout;

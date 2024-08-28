@@ -130,7 +130,7 @@ const ProfileSection = () => {
           <ButtonWrapper>
             <CustomButton
               size="mini"
-              variant="contained"
+              variant="containedError"
               onClick={withdrawUser}
             >
               확인
