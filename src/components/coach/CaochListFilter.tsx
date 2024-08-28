@@ -71,6 +71,13 @@ const CoachListFilterStyle = styled.div`
   padding: 0.5rem 0;
 `;
 
+const SortingFilter = styled.div`
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 2px;
+`;
+
 const SortFilter = styled.button`
   flex-shrink: 0;
   font-size: 12px;
@@ -95,9 +102,4 @@ const Filter = styled.div`
   border: 1px solid ${({ theme }) => theme.color.primary};
 `;
 
-const SortingFilter = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 2px;
-`;
 export default CoachListFilter;

@@ -23,6 +23,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     body {
         color: ${({ theme }) => theme.color.text};
+        background-color: ${({ theme }) => theme.color.box};
         font-family: 'Pretendard', sans-serif;
     }
     button {

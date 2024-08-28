@@ -18,10 +18,10 @@ import RecordDatail from "./pages/RecordDatail";
 import CoachRoutine from "./pages/Routine/CoachRoutine";
 import MemberRoutine from "./pages/Routine/MemberRoutine";
 import MyRoutine from "./pages/Routine/MyRoutine";
+import RoutineDetail from "./pages/Routine/RoutineDetail";
 import Signup from "./pages/Signup";
 import { GlobalStyle } from "./style/global";
 import { theme } from "./style/theme";
-import RoutineDetail from "./pages/Routine/RoutineDetail";
 
 function App() {
   const router = createBrowserRouter([

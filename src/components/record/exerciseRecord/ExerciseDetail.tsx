@@ -11,15 +11,15 @@ const ExerciseDetail = ({ routines }: Props) => {
   return (
     <Wrapper>
       {routines.length > 0 ? (
-        routines.map((routine) => (
-          <Routine>
+        routines.map((routine, i) => (
+          <Routine key={i}>
             <CoachInfo>
               {/* <img
                 src={routine.coachProfileImageUrl || undefined}
                 alt={routine.coachName || "내 프로필"}
               /> */}
               <LineClamp $line={1} className="b3">
-                {routine.routineName}
+                {routine.routineName ?? "삭제된 루틴입니다"}
               </LineClamp>
               <p className="small-text">{routine.coachName || "나"}</p>
             </CoachInfo>
@@ -30,7 +30,7 @@ const ExerciseDetail = ({ routines }: Props) => {
                   categoryName: category.categoryName
                 }}
                 actions={category.actions}
-                completedAllEnabled
+                checkDisabled
               />
             ))}
           </Routine>

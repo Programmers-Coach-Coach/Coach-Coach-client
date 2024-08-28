@@ -44,7 +44,6 @@ const CoachInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 10px 0;
 `;
 
 const Image = styled.img`
