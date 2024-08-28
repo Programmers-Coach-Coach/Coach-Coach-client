@@ -84,7 +84,6 @@ const SubWrapper = styled.div`
 
 const TextField = styled.div`
   line-height: 1.5;
-  word-break: keep-all;
 `;
 
 const CaochingSports = styled.ul`
