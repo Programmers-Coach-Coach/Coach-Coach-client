@@ -1,7 +1,7 @@
 import Empty from "@/components/common/Empty/Empty";
 import CategoryDropdown from "@/components/common/InputField/dropdown/CategoryDropdown";
 import { IExerciseRoutine } from "@/models/record.model";
-import { WhiteSpace } from "@/style/global";
+import { LineClamp, WhiteSpace } from "@/style/global";
 import styled from "styled-components";
 
 interface Props {
