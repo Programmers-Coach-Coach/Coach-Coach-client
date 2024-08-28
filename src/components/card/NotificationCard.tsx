@@ -2,6 +2,7 @@ import Heart from "@/assets/images/notice-heart.png";
 import Match from "@/assets/images/notice-match.png";
 import Message from "@/assets/images/notice-message.png";
 import Speaker from "@/assets/images/notice-speaker.png";
+import Warning from "@/assets/images/notice-warning.png";
 
 import { useDeleteNotification } from "@/hooks/queries/useNotification";
 import { TNotificationType } from "@/models/notification.model";
@@ -24,14 +25,16 @@ const NotificationCard = ({
 }: Props) => {
   const getImageSrc = () => {
     switch (relationFunction) {
+      case "like":
+        return Heart;
       case "review":
         return Message;
-      case "ask":
-        return Speaker;
       case "match":
         return Match;
+      case "refusal" || "cancel":
+        return Warning;
       default:
-        return Heart;
+        return Speaker;
     }
   };
 
