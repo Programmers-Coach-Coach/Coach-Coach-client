@@ -32,7 +32,7 @@ export interface IExerciseRoutine {
   coachId: number | null; //null이면 본인이 생성한 루틴
   coachName: string | null;
   coachProfileImageUrl: string | null;
-  routineName: string;
+  routineName: string | null; // 추가됨 (삭제한 루틴의 경우 null로 표시)
   completedCategories: IExerciseCategory[];
 }
 
