@@ -41,6 +41,7 @@ const ModalStyle = styled.div`
   margin: 0 auto;
   height: 100vh;
   z-index: 1000;
+  background: rgba(101, 104, 104, 0.5);
 `;
 
 const CenterContents = styled.div`
