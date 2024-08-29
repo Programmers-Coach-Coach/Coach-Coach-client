@@ -107,7 +107,7 @@ const PopularCoachStyle = styled.div`
   overflow: hidden;
 `;
 
-const Title = styled.h1`
+export const Title = styled.h1`
   display: flex;
   align-items: flex-end;
   gap: 10px;

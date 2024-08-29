@@ -11,7 +11,6 @@ export const SportsListStyle = styled.div`
   flex-direction: column;
   gap: 15px;
   overflow: hidden;
-  margin-left: -10px; // 슬라이더의 왼쪽 패딩때문에 상쇄하기 위해 설정
 `;
 
 export const SportStyle = styled(Link)<{ $id: number }>`
@@ -51,6 +50,7 @@ export const StyledSlider = styled(Slider)<{ $isMobile: boolean }>`
   .slick-track {
     display: flex;
     gap: 10px;
+    margin-left: -10px; // 슬라이더의 왼쪽 패딩때문에 상쇄하기 위해 설정
   }
   .slick-slide {
     display: flex;
