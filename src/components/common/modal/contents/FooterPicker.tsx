@@ -54,7 +54,7 @@ interface itemProp {
 const Item = ({ item, onClick }: itemProp) => {
   return (
     <ItemStyle onClick={onClick}>
-      <Icon name={item.icon} size="30px" color="text" />
+      <Icon name={item.icon} size="25px" color="text" />
       {item.name}
     </ItemStyle>
   );
