@@ -1,10 +1,13 @@
 import { FadeLoader } from "react-spinners";
 import styled from "styled-components";
 
-const Loading = () => {
+interface Props {
+  textDisabled?: boolean;
+}
+const Loading = ({ textDisabled }: Props) => {
   return (
     <Container>
-      <h3>잠시만 기다려주세요.</h3>
+      {!textDisabled && <h3>잠시만 기다려주세요.</h3>}
       <FadeLoader color="#5271FF" />
     </Container>
   );
