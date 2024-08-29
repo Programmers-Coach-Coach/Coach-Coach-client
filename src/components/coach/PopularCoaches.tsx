@@ -142,7 +142,7 @@ const CoachStyle = styled.div`
     font-weight: 600;
   }
   .desc {
-    height: 32px;
+    height: 34px;
   }
 `;
 
