@@ -283,8 +283,8 @@ const ProfileWrapper = styled.div`
 `;
 
 const ProfileImage = styled.img`
-  width: ${({ theme }) => theme.profileImage.mini.width};
-  height: ${({ theme }) => theme.profileImage.mini.height};
+  width: 25%;
+  height: 25%;
   border-radius: 8px;
   object-fit: cover;
   background: ${({ theme }) => theme.color.gray1};
