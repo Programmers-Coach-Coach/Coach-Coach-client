@@ -48,6 +48,7 @@ const NotificationCard = ({
   return (
     <ReviewCardStyle>
       <img
+        loading="lazy"
         className="notification-img"
         src={getImageSrc()}
         alt={relationFunction}

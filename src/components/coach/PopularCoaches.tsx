@@ -79,7 +79,11 @@ const Coach = ({ coach }: CoachProps) => {
         handleLocation(coach.coachId);
       }}
     >
-      <Image src={coach.profileImageUrl || profilePath} alt={coach.coachName} />
+      <Image
+        src={coach.profileImageUrl || profilePath}
+        alt={coach.coachName}
+        loading="lazy"
+      />
       <LineClamp $line={1} className="b3">
         {coach.coachName}
       </LineClamp>
