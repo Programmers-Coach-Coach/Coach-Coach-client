@@ -27,11 +27,13 @@ const SportsList = ({ sportsList }: Props) => {
 
 const SportsSlider = ({ sportsList }: SportsSliderProps) => {
   const settings = {
-    slidesToShow: 2.5,
+    slidesToShow: 3.0,
     rows: 2,
     initialSlide: 0,
     infinite: false,
     centerMode: false,
+    swipeToSlide: true,
+    touchThreshold: 10,
     responsive: [
       {
         breakpoint: 380,
@@ -54,7 +56,7 @@ const SportsSlider = ({ sportsList }: SportsSliderProps) => {
       {
         breakpoint: 500,
         settings: {
-          slidesToShow: 2.2
+          slidesToShow: 2.5
         }
       }
     ]
