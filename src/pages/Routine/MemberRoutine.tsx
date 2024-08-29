@@ -48,7 +48,7 @@ const MemberRoutine = () => {
         profileId={userId}
         profileName={profileName}
         profileImageUrl={profileImageUrl}
-        width="380px"
+        width="180px"
         height="180px"
       />
       <AddTextStyle>
