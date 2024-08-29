@@ -68,7 +68,7 @@ const Coach = () => {
 
       <WhiteSpace $height={50} />
       <DetailInfo coach={data} />
-      <WhiteSpace $height={60} />
+      <WhiteSpace $height={80} />
     </Wrapper>
   );
 };
