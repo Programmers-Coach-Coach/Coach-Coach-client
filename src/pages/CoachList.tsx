@@ -15,6 +15,7 @@ const CoachList = () => {
       <CoachListFilter singleFilter={singleFilter} multiFilter={multiFilter} />
       <WhiteSpace $height={14} />
       <Coaches />
+      <WhiteSpace $height={60} />
     </CoachListStyle>
   );
 };

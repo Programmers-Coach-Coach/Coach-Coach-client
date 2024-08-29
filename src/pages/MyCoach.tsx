@@ -29,6 +29,7 @@ const MyCoach = () => {
       </SectionStyle>
       <WhiteSpace $height={20} />
       <InqueryCoachProfileList data={data} />
+      <WhiteSpace $height={80} />
     </MyCoachStyle>
   );
 };

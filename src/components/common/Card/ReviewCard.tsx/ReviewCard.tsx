@@ -17,7 +17,7 @@ const ReviewCard = ({ coachProfile }: ReviewCardProps) => {
       <h2>리뷰가 없습니다</h2>
     </NoReviewSection>
   ) : (
-    <>
+    <ReviewList>
       {coachProfile.reviews.map((review) => (
         <CardContainer key={review.reviewId}>
           <CardWrapper>
@@ -38,12 +38,17 @@ const ReviewCard = ({ coachProfile }: ReviewCardProps) => {
           )}
         </CardContainer>
       ))}
-    </>
+    </ReviewList>
   );
 };
 
 export default ReviewCard;
 
+const ReviewList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
 const CardContainer = styled.div`
   display: flex;
   justify-content: space-between;
