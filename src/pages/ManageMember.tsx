@@ -63,9 +63,7 @@ const NoReviewSection = styled.div`
   gap: 10px;
 `;
 
-const ManageMemberStyle = styled.div`
-  padding: 0 20px;
-`;
+const ManageMemberStyle = styled.div``;
 
 const SectionStyle = styled.div`
   padding-top: 20px;
