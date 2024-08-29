@@ -1,5 +1,6 @@
 import { ISport } from "@/models/sports.model";
 import qs from "qs";
+import { isMobile } from "react-device-detect";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import { SportsListStyle, SportStyle, StyledSlider } from "./SportsList.css";
@@ -25,6 +26,7 @@ const SportsList = ({ sportsList }: Props) => {
 };
 
 const SportsSlider = ({ sportsList }: SportsSliderProps) => {
+  console.log(isMobile);
   const settings = {
     slidesToShow: 2.5,
     rows: 2,
@@ -60,7 +62,7 @@ const SportsSlider = ({ sportsList }: SportsSliderProps) => {
   };
 
   return (
-    <StyledSlider {...settings}>
+    <StyledSlider {...settings} $isMobile={isMobile}>
       {sportsList?.map((item) => <Sport key={item.sportId} item={item} />)}
     </StyledSlider>
   );

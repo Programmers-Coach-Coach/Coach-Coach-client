@@ -1,6 +1,7 @@
 import profilePath from "@/assets/images/profile.png";
 import { IPopularCoach } from "@/models/coach.model";
 import { LineClamp } from "@/style/global";
+import { isMobile } from "react-device-detect";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
@@ -59,7 +60,7 @@ const CoachesSlider = ({ popularCoaches }: CoachesSliderProps) => {
   };
 
   return (
-    <CoachesSliderStyle {...settings}>
+    <CoachesSliderStyle {...settings} $isMobile={isMobile}>
       {popularCoaches?.map((coach) => (
         <Coach key={coach.coachId} coach={coach} />
       ))}
@@ -146,7 +147,7 @@ const Image = styled.img`
   background-color: ${({ theme }) => theme.color.gray1};
 `;
 
-const CoachesSliderStyle = styled(Slider)`
+const CoachesSliderStyle = styled(Slider)<{ $isMobile: boolean }>`
   .slick-slide {
     padding: 0;
     transition:
@@ -175,7 +176,7 @@ const CoachesSliderStyle = styled(Slider)`
   .slick-prev:before,
   .slick-next:before {
     font-size: 50px;
-    opacity: 0.4;
+    opacity: ${({ $isMobile }) => ($isMobile ? "0" : "0.4")};
   }
 `;
 
