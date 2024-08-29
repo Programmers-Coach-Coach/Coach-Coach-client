@@ -33,7 +33,7 @@ export const useDeleteMember = () => {
       queryClient.invalidateQueries({ queryKey: ["getMatchMembers"] });
     },
     onError: (error) => {
-      console.error("Failed to delete Member: ", error);
+      throw error;
     }
   });
 
@@ -56,7 +56,7 @@ export const usePatchMember = () => {
       queryClient.invalidateQueries({ queryKey: ["getMatchMembers"] });
     },
     onError: (error) => {
-      console.error("Failed to delete Member: ", error);
+      throw error;
     }
   });
 

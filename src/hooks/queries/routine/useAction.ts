@@ -23,7 +23,7 @@ export const usePostAction = () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
-      console.error("Failed to post Action: ", error);
+      throw error;
     }
   });
 
@@ -49,7 +49,7 @@ export const usePatchAction = () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
-      console.error("Failed to patch Action: ", error);
+      throw error;
     }
   });
 
@@ -72,7 +72,7 @@ export const useDeleteAction = () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
-      console.error("Failed to delete Action: ", error);
+      throw error;
     }
   });
 

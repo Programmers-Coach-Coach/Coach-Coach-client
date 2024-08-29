@@ -55,7 +55,7 @@ export const usePostRoutine = () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutinesData"] });
     },
     onError: (error) => {
-      console.error("Failed to post routine: ", error);
+      throw error;
     }
   });
 
@@ -79,7 +79,7 @@ export const usePatchRoutine = () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutinesData"] });
     },
     onError: (error) => {
-      console.error("Failed to patch routine: ", error);
+      throw error;
     }
   });
 
@@ -102,7 +102,7 @@ export const useDeleteRoutine = () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutinesData"] });
     },
     onError: (error) => {
-      console.error("Failed to delete routine: ", error);
+      throw error;
     }
   });
 

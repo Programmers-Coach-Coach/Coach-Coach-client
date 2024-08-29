@@ -22,7 +22,7 @@ export const usePostCategory = () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
-      console.error("Failed to post Category: ", error);
+      throw error;
     }
   });
 
@@ -46,7 +46,7 @@ export const usePatchCategory = () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
-      console.error("Failed to patch Category: ", error);
+      throw error;
     }
   });
 
@@ -69,7 +69,7 @@ export const useDeleteCategory = () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
-      console.error("Failed to delete Category: ", error);
+      throw error;
     }
   });
 
@@ -94,7 +94,7 @@ export const usePostCompleted = () => {
       });
     },
     onError: (error) => {
-      console.error("Failed to post Completed: ", error);
+      throw error;
     }
   });
 
@@ -119,7 +119,7 @@ export const useDeleteCompleted = () => {
       });
     },
     onError: (error) => {
-      console.error("Failed to delete Completed: ", error);
+      throw error;
     }
   });
 

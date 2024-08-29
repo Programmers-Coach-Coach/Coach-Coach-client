@@ -27,7 +27,7 @@ export const useDeleteNotification = () => {
       queryClient.invalidateQueries({ queryKey: ["getAuth"] });
     },
     onError: (error) => {
-      console.error(error);
+      throw error;
     }
   });
 
@@ -45,7 +45,7 @@ export const useDeleteAllNotification = () => {
       queryClient.invalidateQueries({ queryKey: ["getAuth"] });
     },
     onError: (error) => {
-      console.error(error);
+      throw error;
     }
   });
 
