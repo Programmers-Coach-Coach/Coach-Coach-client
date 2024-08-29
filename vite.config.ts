@@ -15,6 +15,12 @@ export default defineConfig({
     })
   ],
   build: {
-    sourcemap: false
+    sourcemap: false,
+    rollupOptions: {
+      input: {
+        main: "./index.html",
+        sw: "./sw.js"
+      }
+    }
   }
 });
