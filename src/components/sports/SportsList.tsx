@@ -36,19 +36,19 @@ const SportsSlider = ({ sportsList }: SportsSliderProps) => {
       {
         breakpoint: 380,
         settings: {
-          slidesToShow: 1.2
+          slidesToShow: 1.6
         }
       },
       {
         breakpoint: 430,
         settings: {
-          slidesToShow: 1.5
+          slidesToShow: 2.0
         }
       },
       {
         breakpoint: 460,
         settings: {
-          slidesToShow: 1.8
+          slidesToShow: 2.2
         }
       },
       {
