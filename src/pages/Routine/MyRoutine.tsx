@@ -4,6 +4,7 @@ import Modal from "@/components/common/modal/Modal";
 import RoutineList from "@/components/routine/RoutineList";
 import { useGetRoutines } from "@/hooks/queries/routine/useRoutine";
 import useModal from "@/hooks/useModal";
+import { WhiteSpace } from "@/style/global";
 import { useState } from "react";
 import { styled } from "styled-components";
 
@@ -36,6 +37,7 @@ const MyRoutine = () => {
         <Button onClick={onClickAdd}>추가하기</Button>
       </RoutineTextStyle>
       <RoutineList routines={data} />
+      <WhiteSpace $height={80} />
     </MyRoutineStyle>
   );
 };

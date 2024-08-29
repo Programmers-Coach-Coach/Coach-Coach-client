@@ -16,6 +16,7 @@ const Record = () => {
       <ExerciseCalender />
       <WhiteSpace $height={30} />
       <PhysicalRecordChart />
+      <WhiteSpace $height={80} />
     </Wrapper>
   );
 };

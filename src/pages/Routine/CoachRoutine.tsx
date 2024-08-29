@@ -2,6 +2,7 @@ import Profile from "@/components/Profile/Profile";
 import RoutineList from "@/components/routine/RoutineList";
 import { useGetRoutines } from "@/hooks/queries/routine/useRoutine";
 import { useProfileInfo } from "@/store/profileInfo.store";
+import { WhiteSpace } from "@/style/global";
 import { styled } from "styled-components";
 
 const CoachRoutine = () => {
@@ -23,6 +24,7 @@ const CoachRoutine = () => {
         height="180px"
       />
       <RoutineList routines={data} state="member to coach" />
+      <WhiteSpace $height={80} />
     </CoachRoutineStyle>
   );
 };

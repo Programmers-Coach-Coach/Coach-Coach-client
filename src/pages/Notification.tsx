@@ -5,6 +5,7 @@ import {
   useDeleteAllNotification,
   useFetchNotifications
 } from "@/hooks/queries/useNotification";
+import { WhiteSpace } from "@/style/global";
 import styled from "styled-components";
 
 const Notification = () => {
@@ -42,6 +43,7 @@ const Notification = () => {
           />
         )}
       </div>
+      <WhiteSpace $height={60} />
     </NotificationStyle>
   );
 };
@@ -50,7 +52,6 @@ const NotificationStyle = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
-  padding-bottom: 80px;
 
   .contents {
     display: flex;

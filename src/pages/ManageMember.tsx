@@ -6,8 +6,8 @@ import { useMatchMember } from "@/hooks/useMember";
 import { WhiteSpace } from "@/style/global";
 import { theme } from "@/style/theme";
 import { useEffect, useState } from "react";
-import { styled } from "styled-components";
 import { IoPersonOutline } from "react-icons/io5";
+import { styled } from "styled-components";
 const ManageMember = () => {
   const { data: authData, isLoading: authLoading, refetch } = useFetchAuth();
   const [isCoach, setIsCoach] = useState(false);
@@ -40,6 +40,7 @@ const ManageMember = () => {
       </SectionStyle>
       <WhiteSpace $height={20} />
       <InquriyProfileList data={data} />
+      <WhiteSpace $height={80} />
     </ManageMemberStyle>
   ) : (
     <NoReviewSection>
@@ -63,7 +64,7 @@ const NoReviewSection = styled.div`
 `;
 
 const ManageMemberStyle = styled.div`
-  padding: 20px;
+  padding: 0 20px;
 `;
 
 const SectionStyle = styled.div`

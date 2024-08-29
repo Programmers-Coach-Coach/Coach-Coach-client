@@ -6,6 +6,7 @@ import RoutineList from "@/components/routine/RoutineList";
 import { useGetRoutines } from "@/hooks/queries/routine/useRoutine";
 import useModal from "@/hooks/useModal";
 import { useProfileInfo } from "@/store/profileInfo.store";
+import { WhiteSpace } from "@/style/global";
 import { useState } from "react";
 import { styled } from "styled-components";
 
@@ -54,6 +55,7 @@ const MemberRoutine = () => {
         <Button onClick={onClickAdd}>추가하기</Button>
       </AddTextStyle>
       <RoutineList routines={data} />
+      <WhiteSpace $height={80} />
     </MemberRoutineStyle>
   );
 };

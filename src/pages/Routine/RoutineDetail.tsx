@@ -9,6 +9,7 @@ import useModal from "@/hooks/useModal";
 import { useIsCoach } from "@/store/isCoach.store";
 import { useModalInfo } from "@/store/modalInfo.store";
 import { useProfileInfo } from "@/store/profileInfo.store";
+import { WhiteSpace } from "@/style/global";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
@@ -143,6 +144,7 @@ const RoutineDetail = () => {
           setActionDes={setActionDes}
         />
       ))}
+      <WhiteSpace $height={80} />
     </RoutineDetailStyle>
   );
 };

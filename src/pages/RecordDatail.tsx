@@ -40,6 +40,7 @@ const RecordDatail = () => {
         fatPercentage={data?.fatPercentage || null}
         bmi={data?.bmi || null}
       />
+      <WhiteSpace $height={80} />
     </Wrapper>
   );
 };
