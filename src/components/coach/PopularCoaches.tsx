@@ -87,7 +87,7 @@ const Coach = ({ coach }: CoachProps) => {
       <LineClamp $line={1} className="b3">
         {coach.coachName}
       </LineClamp>
-      <LineClamp $line={2} className="b2 desc">
+      <LineClamp $line={2} className="desc">
         {coach.description}
       </LineClamp>
       <CoachingSports className="coaching-sports">
@@ -142,7 +142,9 @@ const CoachStyle = styled.div`
     font-weight: 600;
   }
   .desc {
-    height: 34px;
+    flex-grow: 1;
+    font-size: 12px;
+    line-height: 16px;
   }
 `;
 
