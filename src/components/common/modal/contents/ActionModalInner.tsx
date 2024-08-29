@@ -1,11 +1,4 @@
-import { TModal } from "@/data/modal";
-import styled from "styled-components";
-import { modal } from "@/data/modal";
-import {
-  usePatchRoutine,
-  usePostRoutine
-} from "@/hooks/queries/routine/useRoutine";
-import { useModalInfo } from "@/store/modalInfo.store";
+import { modal, TModal } from "@/data/modal";
 import {
   usePatchAction,
   usePostAction
@@ -14,8 +7,14 @@ import {
   usePatchCategory,
   usePostCategory
 } from "@/hooks/queries/routine/useCategory";
+import {
+  usePatchRoutine,
+  usePostRoutine
+} from "@/hooks/queries/routine/useRoutine";
+import { useModalInfo } from "@/store/modalInfo.store";
 import { useProfileInfo } from "@/store/profileInfo.store";
 import toast from "react-hot-toast";
+import styled from "styled-components";
 
 interface Props {
   children: React.ReactNode;
@@ -158,5 +157,7 @@ const Footer = styled.div`
   button:nth-of-type(2) {
     color: ${({ theme }) => theme.color.primary};
   }
+
+  margin-top: 10px;
 `;
 export default ActionModalInner;
