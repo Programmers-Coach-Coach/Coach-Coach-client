@@ -91,7 +91,6 @@ const DescriptionTextField = styled(TextField)`
   background: ${({ theme }) => theme.color.box};
   border-radius: 8px;
   padding: 10px;
-  word-break: keep-all;
   white-space: pre-line; /* 줄바꿈을 처리하기 위해 추가 */
 `;
 
