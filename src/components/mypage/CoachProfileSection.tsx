@@ -18,11 +18,8 @@ import AddressSearchField from "./AddressSearchField";
 import { AUTH_REGEX } from "@/constants/regex";
 import useModal from "@/hooks/useModal";
 import Modal from "@/components/common/modal/Modal";
-interface CoachProfileSectionProps {
-  onTabChange: (newValue: number) => void;
-}
 
-const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
+const CoachProfileSection = () => {
   const { data: userMeData, refetch: authRefetch } = useFetchAuth();
   const { editUserCoachProfile } = useAuth();
   const [shouldFetchCoachProfile, setShouldFetchCoachProfile] = useState(false);
@@ -88,9 +85,6 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
     editUserCoachProfile(userCoachProfileRequest);
   };
 
-  const handleCancel = () => {
-    onTabChange(0);
-  };
   const onInvalid = (errors: FieldErrors<IMyPageCoachFormValues>) => {
     if (errors.chattingUrl?.message) {
       toast.error(errors.chattingUrl.message);
@@ -225,14 +219,6 @@ const CoachProfileSection = ({ onTabChange }: CoachProfileSectionProps) => {
         />
 
         <ButtonsWrapper>
-          <CustomButton
-            size="full"
-            variant="outlined"
-            type="button"
-            onClick={handleCancel}
-          >
-            취소
-          </CustomButton>
           <CustomButton
             size="full"
             variant="contained"
