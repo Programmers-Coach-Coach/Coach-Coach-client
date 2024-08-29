@@ -5,7 +5,7 @@ const Loading = () => {
   return (
     <Container>
       <h3>잠시만 기다려주세요.</h3>
-      <FadeLoader />
+      <FadeLoader color="#5271FF" />
     </Container>
   );
 };
