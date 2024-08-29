@@ -1,9 +1,8 @@
 import React from "react";
 import App from "./App.tsx";
 import { HelmetProvider } from "react-helmet-async";
-import { createRoot, hydrateRoot } from "react-dom/client";
-
 import * as Sentry from "@sentry/react";
+import ReactDOM from "react-dom/client";
 
 Sentry.init({
   dsn: import.meta.env.VITE_SENTRY_DSN,
@@ -25,26 +24,12 @@ async function enableMocking() {
   return worker.start();
 }
 
-const rootElement = document.getElementById("root");
-const root = createRoot(rootElement!);
-
 enableMocking().then(() => {
-  if (rootElement?.hasChildNodes()) {
-    hydrateRoot(
-      rootElement,
-      <React.StrictMode>
-        <HelmetProvider>
-          <App />
-        </HelmetProvider>
-      </React.StrictMode>
-    );
-  } else {
-    root.render(
-      <React.StrictMode>
-        <HelmetProvider>
-          <App />
-        </HelmetProvider>
-      </React.StrictMode>
-    );
-  }
+  ReactDOM.createRoot(document.getElementById("root")!).render(
+    <React.StrictMode>
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>
+    </React.StrictMode>
+  );
 });
