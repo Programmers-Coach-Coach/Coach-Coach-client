@@ -47,7 +47,7 @@ export const SportStyle = styled(Link)<{ $id: number }>`
   }
 `;
 
-export const StyledSlider = styled(Slider)`
+export const StyledSlider = styled(Slider)<{ $isMobile: boolean }>`
   .slick-track {
     display: flex;
     gap: 10px;
@@ -72,6 +72,6 @@ export const StyledSlider = styled(Slider)`
   .slick-prev:before,
   .slick-next:before {
     font-size: 50px;
-    opacity: 0.4;
+    opacity: ${({ $isMobile }) => ($isMobile ? "0" : "0.4")};
   }
 `;

@@ -207,7 +207,7 @@ export const theme: Theme = {
     b3: {
       fontSize: "16px",
       lineHeight: "32px",
-      bold: "800"
+      bold: "600"
     }
   },
   buttonVariant: {

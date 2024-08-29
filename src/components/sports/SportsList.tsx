@@ -1,5 +1,6 @@
 import { ISport } from "@/models/sports.model";
 import qs from "qs";
+import { isMobile } from "react-device-detect";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import { SportsListStyle, SportStyle, StyledSlider } from "./SportsList.css";
@@ -35,19 +36,19 @@ const SportsSlider = ({ sportsList }: SportsSliderProps) => {
       {
         breakpoint: 380,
         settings: {
-          slidesToShow: 1.2
+          slidesToShow: 1.6
         }
       },
       {
         breakpoint: 430,
         settings: {
-          slidesToShow: 1.5
+          slidesToShow: 2.0
         }
       },
       {
         breakpoint: 460,
         settings: {
-          slidesToShow: 1.8
+          slidesToShow: 2.2
         }
       },
       {
@@ -60,7 +61,7 @@ const SportsSlider = ({ sportsList }: SportsSliderProps) => {
   };
 
   return (
-    <StyledSlider {...settings}>
+    <StyledSlider {...settings} $isMobile={isMobile}>
       {sportsList?.map((item) => <Sport key={item.sportId} item={item} />)}
     </StyledSlider>
   );
@@ -72,7 +73,7 @@ const Sport = ({ item }: SportProps) => {
 
   return (
     <SportStyle $id={sportId} to={`/coach-list?${query}`}>
-      <img src={sportImageUrl} alt={sportName} />
+      <img src={sportImageUrl} alt={sportName} loading="lazy" />
       <p>{sportName}</p>
     </SportStyle>
   );
