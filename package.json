@@ -109,6 +109,7 @@
     ]
   },
   "reactSnap": {
+    "source": "dist",
     "inlineCss": true
   }
 }
