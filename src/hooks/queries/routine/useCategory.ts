@@ -9,6 +9,8 @@ import {
 import { IResponseMessage } from "@/models/responseMessage.model";
 import { ICategoryName, ICompletedCategory } from "@/models/routine.model";
 import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export const usePostCategory = () => {
   const { mutate, isPending, isError, data } = useMutation<
@@ -22,7 +24,11 @@ export const usePostCategory = () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
-      throw error;
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data?.message || "요청 중 오류가 발생했습니다."
+        );
+      }
     }
   });
 
@@ -46,7 +52,11 @@ export const usePatchCategory = () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
-      throw error;
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data?.message || "요청 중 오류가 발생했습니다."
+        );
+      }
     }
   });
 
@@ -69,7 +79,11 @@ export const useDeleteCategory = () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
-      throw error;
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data?.message || "요청 중 오류가 발생했습니다."
+        );
+      }
     }
   });
 
@@ -94,7 +108,11 @@ export const usePostCompleted = () => {
       });
     },
     onError: (error) => {
-      throw error;
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data?.message || "요청 중 오류가 발생했습니다."
+        );
+      }
     }
   });
 
@@ -119,7 +137,11 @@ export const useDeleteCompleted = () => {
       });
     },
     onError: (error) => {
-      throw error;
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data?.message || "요청 중 오류가 발생했습니다."
+        );
+      }
     }
   });
 

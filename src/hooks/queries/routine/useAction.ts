@@ -7,6 +7,8 @@ import {
 import { IResponseMessage } from "@/models/responseMessage.model";
 import { IAction } from "@/models/routine.model";
 import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export const usePostAction = () => {
   const { mutate, isPending, isError, data } = useMutation<
@@ -23,7 +25,11 @@ export const usePostAction = () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
-      throw error;
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data?.message || "요청 중 오류가 발생했습니다."
+        );
+      }
     }
   });
 
@@ -49,7 +55,11 @@ export const usePatchAction = () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
-      throw error;
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data?.message || "요청 중 오류가 발생했습니다."
+        );
+      }
     }
   });
 
@@ -72,7 +82,11 @@ export const useDeleteAction = () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
-      throw error;
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data?.message || "요청 중 오류가 발생했습니다."
+        );
+      }
     }
   });
 

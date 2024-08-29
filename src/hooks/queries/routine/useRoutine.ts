@@ -14,6 +14,8 @@ import {
   IRoutineDetails
 } from "@/models/routine.model";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export const useGetRoutines = ({ coachId, userId }: IGetQuery = {}) => {
   const { data, isLoading, isError } = useQuery<IGetRoutine[]>({
@@ -55,7 +57,11 @@ export const usePostRoutine = () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutinesData"] });
     },
     onError: (error) => {
-      throw error;
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data?.message || "요청 중 오류가 발생했습니다."
+        );
+      }
     }
   });
 
@@ -79,7 +85,11 @@ export const usePatchRoutine = () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutinesData"] });
     },
     onError: (error) => {
-      throw error;
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data?.message || "요청 중 오류가 발생했습니다."
+        );
+      }
     }
   });
 
@@ -102,7 +112,11 @@ export const useDeleteRoutine = () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutinesData"] });
     },
     onError: (error) => {
-      throw error;
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data?.message || "요청 중 오류가 발생했습니다."
+        );
+      }
     }
   });
 

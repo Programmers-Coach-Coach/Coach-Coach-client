@@ -59,7 +59,7 @@ const Action = ({
           {action.counts !== 0 && `${action.counts}회`}{" "}
           {action.sets !== 0 && `${action.sets}세트`}{" "}
         </LineClamp>
-        <LineClamp $line={1} className="b2">
+        <LineClamp $line={2} className="b2">
           {action.description && `${action.description}`}
         </LineClamp>
       </Text>
@@ -79,7 +79,7 @@ const ActionStyle = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 70px;
+  height: 90px;
   padding: 0 20px;
 `;
 
