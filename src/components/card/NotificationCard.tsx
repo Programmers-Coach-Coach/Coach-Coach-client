@@ -31,7 +31,8 @@ const NotificationCard = ({
         return Message;
       case "match":
         return Match;
-      case "refusal" || "cancel":
+      case "refusal":
+      case "cancel":
         return Warning;
       default:
         return Speaker;
