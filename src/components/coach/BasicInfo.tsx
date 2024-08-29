@@ -58,7 +58,7 @@ const CoachInfo = styled.div`
 const Image = styled.img`
   width: 140px;
   height: 140px;
-  border-radius: ${({ theme }) => theme.borderRadius.default};
+  border-radius: 8px;
   object-fit: cover;
   background: ${({ theme }) => theme.color.gray1};
 
