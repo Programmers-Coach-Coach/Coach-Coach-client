@@ -18,12 +18,11 @@ export const usePostCategory = () => {
   >({
     mutationFn: ({ payload, routineId }) =>
       postCategoryData(payload, routineId),
-    onSuccess: (data) => {
-      console.log("Category successfully posted: ", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
-      console.error("Failed to post Category: ", error);
+      throw error;
     }
   });
 
@@ -43,12 +42,11 @@ export const usePatchCategory = () => {
   >({
     mutationFn: ({ payload, categoryId }) =>
       patchCategoryData(payload, categoryId),
-    onSuccess: (data) => {
-      console.log("Category successfully patched: ", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
-      console.error("Failed to patch Category: ", error);
+      throw error;
     }
   });
 
@@ -67,12 +65,11 @@ export const useDeleteCategory = () => {
     number
   >({
     mutationFn: deleteCategoryData,
-    onSuccess: (data) => {
-      console.log("Category successfully deleted: ", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
-      console.error("Failed to delete Category: ", error);
+      throw error;
     }
   });
 
@@ -91,14 +88,13 @@ export const usePostCompleted = () => {
     number
   >({
     mutationFn: postCompletedCategoryData,
-    onSuccess: (data) => {
-      console.log("Completed successfully posted: ", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["getRoutineData"]
       });
     },
     onError: (error) => {
-      console.error("Failed to post Completed: ", error);
+      throw error;
     }
   });
 
@@ -117,14 +113,13 @@ export const useDeleteCompleted = () => {
     number
   >({
     mutationFn: deleteCompletedCategoryData,
-    onSuccess: (data) => {
-      console.log("Completed successfully deleted: ", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["getRoutineData"]
       });
     },
     onError: (error) => {
-      console.error("Failed to delete Completed: ", error);
+      throw error;
     }
   });
 
