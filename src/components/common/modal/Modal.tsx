@@ -67,6 +67,7 @@ const FooterAboveContents = styled.div`
   position: absolute;
   bottom: 60px;
   animation: ${slideAnimation("50%", 0)} 0.3s forwards;
+  position: fixed;
 
   width: 100%;
   border-radius: 20px 20px 0 0;
