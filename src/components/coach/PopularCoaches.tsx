@@ -84,10 +84,10 @@ const Coach = ({ coach }: CoachProps) => {
         alt={coach.coachName}
         loading="lazy"
       />
-      <LineClamp $line={1} className="name">
+      <LineClamp $line={1} className="b3">
         {coach.coachName}
       </LineClamp>
-      <LineClamp $line={1} className="b2 desc">
+      <LineClamp $line={2} className="b2 desc">
         {coach.description}
       </LineClamp>
       <CoachingSports className="coaching-sports">
@@ -142,7 +142,7 @@ const CoachStyle = styled.div`
     font-weight: 600;
   }
   .desc {
-    flex: 1;
+    height: 32px;
   }
 `;
 
@@ -152,7 +152,6 @@ const Image = styled.img`
   object-fit: cover;
   border-radius: 8px;
   background-color: ${({ theme }) => theme.color.gray1};
-  margin-bottom: 10px;
 `;
 
 const CoachesSliderStyle = styled(Slider)<{ $isMobile: boolean }>`
