@@ -65,11 +65,12 @@ const CenterContents = styled.div`
 const FooterAboveContents = styled.div`
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   bottom: 60px;
   animation: ${slideAnimation("50%", 0)} 0.3s forwards;
 
   width: 100%;
+  max-width: 600px;
   border-radius: 20px 20px 0 0;
   background-color: ${({ theme }) => theme.color.box};
   border-radius: ${({ theme }) => theme.borderRadius.default}

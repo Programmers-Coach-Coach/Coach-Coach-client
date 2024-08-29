@@ -2,6 +2,7 @@ import ActionModalInner from "@/components/common/modal/contents/ActionModalInne
 import RoutineContents from "@/components/common/modal/contents/RoutineContents";
 import Modal from "@/components/common/modal/Modal";
 import RoutineList from "@/components/routine/RoutineList";
+import ReactHelmet from "@/components/SEO/ReactHelmet";
 import { useGetRoutines } from "@/hooks/queries/routine/useRoutine";
 import useModal from "@/hooks/useModal";
 import { WhiteSpace } from "@/style/global";
@@ -21,6 +22,12 @@ const MyRoutine = () => {
   };
   return (
     <MyRoutineStyle>
+      <ReactHelmet
+        title="코치코치-나의 루틴 페이지"
+        description="나의 루틴 페이지"
+        keywords="My, 루틴"
+        url="/routine"
+      />
       {isModal && (
         <Modal
           closeModal={closeModal}
