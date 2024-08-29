@@ -1,6 +1,7 @@
 import PopularCoaches from "@/components/coach/PopularCoaches";
 import Empty from "@/components/common/Empty/Empty";
 import Loading from "@/components/loading/Loading";
+import ReactHelmet from "@/components/SEO/ReactHelmet";
 import SportsList from "@/components/sports/SportsList";
 import useHome from "@/hooks/useHome";
 import { WhiteSpace } from "@/style/global";
@@ -22,6 +23,12 @@ const Home = () => {
 
   return (
     <HomeStyle>
+      <ReactHelmet
+        title="코치코치"
+        description="코치코치 서비스 메인페이지 입니다."
+        keywords="홈트, 운동, 코칭"
+        url="/"
+      />
       <SportsList sportsList={data.sports} />
       <WhiteSpace $height={80} />
       <PopularCoaches popularCoaches={data.coaches} />
