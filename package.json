@@ -12,8 +12,7 @@
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "postbuild": "react-snap"
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@emotion/react": "^11.13.0",
@@ -107,9 +106,5 @@
     "workerDirectory": [
       "public"
     ]
-  },
-  "reactSnap": {
-    "source": "dist",
-    "inlineCss": true
   }
 }
