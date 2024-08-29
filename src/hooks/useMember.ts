@@ -7,6 +7,8 @@ import { queryClient } from "@/api/queryClient";
 import { IMatchMembers } from "@/models/member.model";
 import { IResponseMessage } from "@/models/responseMessage.model";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export const useMatchMember = (isCoach: boolean) => {
   const { data, isLoading, isError } = useQuery<IMatchMembers[]>({
@@ -33,7 +35,11 @@ export const useDeleteMember = () => {
       queryClient.invalidateQueries({ queryKey: ["getMatchMembers"] });
     },
     onError: (error) => {
-      throw error;
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data?.message || "요청 중 오류가 발생했습니다."
+        );
+      }
     }
   });
 
@@ -56,7 +62,11 @@ export const usePatchMember = () => {
       queryClient.invalidateQueries({ queryKey: ["getMatchMembers"] });
     },
     onError: (error) => {
-      throw error;
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data?.message || "요청 중 오류가 발생했습니다."
+        );
+      }
     }
   });
 

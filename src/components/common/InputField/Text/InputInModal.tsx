@@ -1,5 +1,6 @@
 import TextField from "@mui/material/TextField";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 interface InputModalProp {
   name?: string;
@@ -12,7 +13,7 @@ const InputInModal = ({ name = "", content, setFn }: InputModalProp) => {
   const [placeholder, setPlaceholder] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
 
-  const textLimit = content === "운동 가이드" ? 29 : 12;
+  const textLimit = content === "운동 가이드" ? 45 : 12;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -23,6 +24,13 @@ const InputInModal = ({ name = "", content, setFn }: InputModalProp) => {
       setError(false);
       setInputValue(value);
       setFn(value);
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      toast.error("줄바꿈 할 수 없습니다.");
     }
   };
 
@@ -47,7 +55,10 @@ const InputInModal = ({ name = "", content, setFn }: InputModalProp) => {
       onChange={handleChange}
       error={error}
       helperText={error ? `최대 ${textLimit}자까지 입력 가능합니다` : ""}
-      inputProps={{ maxLength: textLimit }}
+      minRows={textLimit === 45 ? 3 : 1}
+      maxRows={textLimit === 45 ? 3 : 1}
+      multiline
+      onKeyDown={handleKeyDown}
     />
   );
 };
