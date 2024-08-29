@@ -4,6 +4,7 @@ import useQueryString from "@/hooks/useQueryString";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import Empty from "../common/Empty/Empty";
+import Loading from "../loading/Loading";
 import Coach from "./Coach";
 
 const CoachList = () => {
@@ -36,7 +37,7 @@ const CoachList = () => {
             <Coach coach={coach} key={coach.coachId} />
           ))}
           <div ref={setTarget}></div>
-          {isFetchingNextPage && "로딩중..."}
+          {isFetchingNextPage && <Loading textDisabled />}
         </CoachListStyle>
       ) : (
         <Empty

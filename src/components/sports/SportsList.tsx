@@ -3,6 +3,7 @@ import qs from "qs";
 import { isMobile } from "react-device-detect";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
+import { Title } from "../coach/PopularCoaches";
 import { SportsListStyle, SportStyle, StyledSlider } from "./SportsList.css";
 
 interface Props {
@@ -20,6 +21,7 @@ interface SportProps {
 const SportsList = ({ sportsList }: Props) => {
   return (
     <SportsListStyle>
+      <Title>종목 별 코치 리스트</Title>
       <SportsSlider sportsList={sportsList} />
     </SportsListStyle>
   );

@@ -20,7 +20,7 @@ const CoachRoutine = () => {
         profileId={coachId}
         profileName={profileName}
         profileImageUrl={profileImageUrl}
-        width="380px"
+        width="180px"
         height="180px"
       />
       <RoutineList routines={data} state="member to coach" />
