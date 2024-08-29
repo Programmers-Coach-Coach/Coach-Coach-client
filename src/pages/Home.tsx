@@ -31,7 +31,7 @@ const Home = () => {
 };
 
 const HomeStyle = styled.div`
-  padding: 0 0 60px 0;
+  padding: 60px 0 60px 0;
 `;
 
 export default Home;
