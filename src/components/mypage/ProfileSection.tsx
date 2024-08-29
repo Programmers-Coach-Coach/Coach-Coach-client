@@ -16,7 +16,17 @@ import SelectBox from "../common/InputField/Select/SelectBox";
 import Loading from "../loading/Loading";
 import AddressSearchField from "./AddressSearchField";
 
-const allowedExtensions = ["jpg", "jpeg", "png", "gif"];
+const allowedExtensions = [
+  "jpg",
+  "jpeg",
+  "jfif",
+  "png",
+  "gif",
+  "bmp",
+  "webp",
+  "tif",
+  "tiff"
+];
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
 const ProfileSection = () => {
