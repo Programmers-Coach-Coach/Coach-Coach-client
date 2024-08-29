@@ -3,6 +3,7 @@ import { ICoachDetail } from "@/models/coach.model";
 import styled from "styled-components";
 import Icon from "../Icon/Icon";
 import Heart from "../common/InputField/CheckBox/Heart";
+import { Local } from "./Coach";
 
 interface Props {
   coach: ICoachDetail;
@@ -30,6 +31,7 @@ const BasicInfo = ({ coach }: Props) => {
       <HeartWrapper>
         <Heart checked={coach.isLiked} size="24px" id={coach.coachId} />
       </HeartWrapper>
+      <Local>{coach.localAddress}</Local>
     </Wrapper>
   );
 };
@@ -37,6 +39,7 @@ const BasicInfo = ({ coach }: Props) => {
 const Wrapper = styled.div`
   display: flex;
   gap: 20px;
+  position: relative;
 `;
 
 const CoachInfo = styled.div`
@@ -86,4 +89,5 @@ const HeartWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
+
 export default BasicInfo;

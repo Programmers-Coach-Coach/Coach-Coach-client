@@ -31,8 +31,8 @@ const Coach = ({ coach }: Props) => {
         </CoachingSportStyle>
       </Text>
       <Heart checked={coach.isLiked} size="24" id={coach.coachId} />
-      {/* TODO: 개인정보 주소는 기획 확정될때까지 임시 삭제 */}
-      {/* <Local>{coach.localAddress}</Local> */}
+
+      <Local>{coach.localAddress}</Local>
     </CoachStyle>
   );
 };
@@ -87,12 +87,12 @@ const CoachingSportStyle = styled(CoachingSports)`
   }
 `;
 
-// const Local = styled.div`
-//   position: absolute;
-//   top: 10px;
-//   right: 10px;
+export const Local = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 0;
 
-//   font-size: 10px;
-//   color: ${({ theme }) => theme.color.gray3};
-// `;
+  font-size: 10px;
+  color: ${({ theme }) => theme.color.gray3};
+`;
 export default Coach;
