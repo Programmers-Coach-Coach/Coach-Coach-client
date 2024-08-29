@@ -19,7 +19,7 @@ const RoutineContents = ({
   return (
     <RoutineContentsStyle>
       <h2>루틴명</h2>
-      <InputInModal name={routineName} content="종목" setFn={setRoutineName} />
+      <InputInModal name={routineName} content="루틴" setFn={setRoutineName} />
       <h2>종목</h2>
       <SelectBoxInModal sportName={sportName} setIsSelect={setIsSelect} />
     </RoutineContentsStyle>

@@ -1,5 +1,5 @@
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface InputModalProp {
   value?: number;
@@ -9,6 +9,7 @@ interface InputModalProp {
 
 const InputNumberInModal = ({ value = 0, content, setFn }: InputModalProp) => {
   const [inputValue, setInputValue] = useState<number | string>(value);
+  const [placeholder, setPlaceholder] = useState<string>("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const input = event.target.value;
@@ -20,7 +21,15 @@ const InputNumberInModal = ({ value = 0, content, setFn }: InputModalProp) => {
     }
   };
 
-  const placeholder = `${content}을 입력하세요.`;
+  useEffect(() => {
+    if (content === "시간") {
+      setPlaceholder("운동 시간을 입력하세요.");
+    } else if (content === "횟수") {
+      setPlaceholder("운동 횟수를 입력하세요.");
+    } else if (content === "세트") {
+      setPlaceholder("운동 세트를 입력하세요.");
+    }
+  }, [content, placeholder]);
 
   return (
     <TextField
