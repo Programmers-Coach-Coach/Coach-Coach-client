@@ -19,12 +19,11 @@ export const usePostAction = () => {
   >({
     mutationFn: ({ payload, categoryId }) =>
       postActionData(payload, categoryId),
-    onSuccess: (data) => {
-      console.log("Action successfully posted: ", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
-      console.error("Failed to post Action: ", error);
+      throw error;
     }
   });
 
@@ -46,12 +45,11 @@ export const usePatchAction = () => {
     }
   >({
     mutationFn: ({ payload, actionId }) => patchActionData(payload, actionId),
-    onSuccess: (data) => {
-      console.log("Action successfully patched: ", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
-      console.error("Failed to patch Action: ", error);
+      throw error;
     }
   });
 
@@ -70,12 +68,11 @@ export const useDeleteAction = () => {
     number
   >({
     mutationFn: deleteActionData,
-    onSuccess: (data) => {
-      console.log("Action successfully deleted: ", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
-      console.error("Failed to delete Action: ", error);
+      throw error;
     }
   });
 

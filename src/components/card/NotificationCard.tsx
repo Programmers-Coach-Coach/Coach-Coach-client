@@ -41,7 +41,6 @@ const NotificationCard = ({
   const { mutate } = useDeleteNotification();
 
   const handleDelete = (id: number) => {
-    console.log(1);
     mutate(id);
   };
 
