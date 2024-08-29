@@ -8,7 +8,6 @@ Sentry.init({
   dsn: import.meta.env.VITE_SENTRY_DSN,
   integrations: [
     Sentry.browserTracingIntegration(),
-    Sentry.browserProfilingIntegration(),
     Sentry.replayIntegration()
   ],
   tracesSampleRate: 1.0,
