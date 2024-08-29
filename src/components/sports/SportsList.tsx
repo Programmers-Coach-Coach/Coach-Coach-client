@@ -26,7 +26,6 @@ const SportsList = ({ sportsList }: Props) => {
 };
 
 const SportsSlider = ({ sportsList }: SportsSliderProps) => {
-  console.log(isMobile);
   const settings = {
     slidesToShow: 2.5,
     rows: 2,
@@ -74,7 +73,7 @@ const Sport = ({ item }: SportProps) => {
 
   return (
     <SportStyle $id={sportId} to={`/coach-list?${query}`}>
-      <img src={sportImageUrl} alt={sportName} />
+      <img src={sportImageUrl} alt={sportName} loading="lazy" />
       <p>{sportName}</p>
     </SportStyle>
   );
