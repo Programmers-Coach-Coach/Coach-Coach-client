@@ -84,7 +84,7 @@ const Coach = ({ coach }: CoachProps) => {
         alt={coach.coachName}
         loading="lazy"
       />
-      <LineClamp $line={1} className="b3">
+      <LineClamp $line={1} className="name">
         {coach.coachName}
       </LineClamp>
       <LineClamp $line={2} className="desc">
@@ -139,6 +139,8 @@ const CoachStyle = styled.div`
     border-radius: 5px;
   }
   .name {
+    font-size: 16px;
+    line-height: 32px;
     font-weight: 600;
   }
   .desc {
