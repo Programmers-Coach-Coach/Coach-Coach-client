@@ -29,8 +29,7 @@ export const useDeleteMember = () => {
     number
   >({
     mutationFn: deleteMatchMember,
-    onSuccess: (data) => {
-      console.log("Member successfully deleted: ", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getMatchMembers"] });
     },
     onError: (error) => {
@@ -53,8 +52,7 @@ export const usePatchMember = () => {
     number
   >({
     mutationFn: patchMatchMember,
-    onSuccess: (data) => {
-      console.log("Member successfully deleted: ", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getMatchMembers"] });
     },
     onError: (error) => {

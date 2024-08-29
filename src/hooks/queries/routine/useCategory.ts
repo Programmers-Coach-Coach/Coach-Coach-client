@@ -18,8 +18,7 @@ export const usePostCategory = () => {
   >({
     mutationFn: ({ payload, routineId }) =>
       postCategoryData(payload, routineId),
-    onSuccess: (data) => {
-      console.log("Category successfully posted: ", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
@@ -43,8 +42,7 @@ export const usePatchCategory = () => {
   >({
     mutationFn: ({ payload, categoryId }) =>
       patchCategoryData(payload, categoryId),
-    onSuccess: (data) => {
-      console.log("Category successfully patched: ", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
@@ -67,8 +65,7 @@ export const useDeleteCategory = () => {
     number
   >({
     mutationFn: deleteCategoryData,
-    onSuccess: (data) => {
-      console.log("Category successfully deleted: ", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutineData"] });
     },
     onError: (error) => {
@@ -91,8 +88,7 @@ export const usePostCompleted = () => {
     number
   >({
     mutationFn: postCompletedCategoryData,
-    onSuccess: (data) => {
-      console.log("Completed successfully posted: ", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["getRoutineData"]
       });
@@ -117,8 +113,7 @@ export const useDeleteCompleted = () => {
     number
   >({
     mutationFn: deleteCompletedCategoryData,
-    onSuccess: (data) => {
-      console.log("Completed successfully deleted: ", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["getRoutineData"]
       });

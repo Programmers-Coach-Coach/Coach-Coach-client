@@ -51,8 +51,7 @@ export const usePostRoutine = () => {
     Omit<IPostRoutine, "routineId">
   >({
     mutationFn: postRoutineData,
-    onSuccess: (data) => {
-      console.log("Routine successfully posted: ", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutinesData"] });
     },
     onError: (error) => {
@@ -76,8 +75,7 @@ export const usePatchRoutine = () => {
   >({
     mutationFn: ({ payload, routineId }) =>
       patchRoutineData(payload, routineId),
-    onSuccess: (data) => {
-      console.log("Routine successfully patched: ", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutinesData"] });
     },
     onError: (error) => {
@@ -100,8 +98,7 @@ export const useDeleteRoutine = () => {
     number
   >({
     mutationFn: deleteRoutineData,
-    onSuccess: (data) => {
-      console.log("Routine successfully deleted: ", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutinesData"] });
     },
     onError: (error) => {
