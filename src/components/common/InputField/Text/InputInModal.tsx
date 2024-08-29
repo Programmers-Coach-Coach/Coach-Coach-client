@@ -1,5 +1,5 @@
 import TextField from "@mui/material/TextField";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface InputModalProp {
   name?: string;
@@ -9,6 +9,7 @@ interface InputModalProp {
 
 const InputInModal = ({ name = "", content, setFn }: InputModalProp) => {
   const [inputValue, setInputValue] = useState<string>(name);
+  const [placeholder, setPlaceholder] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
 
   const textLimit = content === "운동 가이드" ? 29 : 12;
@@ -25,7 +26,17 @@ const InputInModal = ({ name = "", content, setFn }: InputModalProp) => {
     }
   };
 
-  const placeholder = `${content}을 입력하세요.`;
+  useEffect(() => {
+    if (content === "루틴") {
+      setPlaceholder("루틴 이름을 입력하세요.");
+    } else if (content === "카테고리") {
+      setPlaceholder("카테고리 이름을 입력하세요.");
+    } else if (content === "운동") {
+      setPlaceholder("운동 이름을 입력하세요.");
+    } else if (content === "운동 가이드") {
+      setPlaceholder("운동 가이드를 입력하세요.");
+    }
+  }, [content, placeholder]);
 
   return (
     <TextField
