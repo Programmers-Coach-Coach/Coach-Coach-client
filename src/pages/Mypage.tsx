@@ -28,11 +28,7 @@ const Mypage = () => {
       {isPasswordConfirmed ? (
         <Container>
           <BasicTabs value={tabValue} onTabChange={handleTabChange} />
-          {tabValue === 0 ? (
-            <ProfileSection />
-          ) : (
-            <CoachProfileSection onTabChange={handleTabChange} />
-          )}
+          {tabValue === 0 ? <ProfileSection /> : <CoachProfileSection />}
         </Container>
       ) : (
         <CheckPassword onPasswordCheck={handlePasswordCheck} />
