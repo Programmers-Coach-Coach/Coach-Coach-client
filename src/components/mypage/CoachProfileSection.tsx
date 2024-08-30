@@ -99,7 +99,7 @@ const CoachProfileSection = () => {
   return (
     <ProfileWrapper>
       {isModal && (
-        <Modal closeModal={closeModal} position="center">
+        <Modal closeModal={closeModal} position="center" overlayDisabled={true}>
           <DescWrapper>
             <SubtitleWrapper>코치로 전환하고 싶으신가요? </SubtitleWrapper>
             <div>코치로 등록하기 위해서는 아래 단계를 따라주세요</div>
