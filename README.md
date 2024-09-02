@@ -3,7 +3,7 @@
 ![coachcoach-overview](https://github.com/user-attachments/assets/5f2ed6af-f2b0-4a56-a376-4f13d430893c)
 
 - **🌐 배포 URL :** [https://coach-coach.site/](https://coach-coach.site/)
-- **🗓️ 전체 프로젝트 기간 :** 2024-06-24 ~ 2024-8-29
+- **🗓️ 전체 프로젝트 기간 :** 2024-07-24 ~ 2024-8-29
 - **📝 유지보수 기간 :** 2024-09-02 ~ 
 
 <br><br><br>
