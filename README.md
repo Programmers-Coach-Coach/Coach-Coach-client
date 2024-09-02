@@ -240,3 +240,10 @@
 |:--------------------------:|:--------------------------:|:--------------------------:|
 | [<img src="https://avatars.githubusercontent.com/u/30286303?v=4" height=150 width=150> <br/> @yoonsaeng](https://github.com/yoonsaeng) | [<img src="https://avatars.githubusercontent.com/u/83640773?v=4" height=150 width=150> <br/> @hcheorii](https://github.com/hcheorii) | [<img src="https://avatars.githubusercontent.com/u/92720304?v=4" height=150 width=150> <br/> @hazzuu123](https://github.com/hazzuu123) |
 
+# 개발 포인트
+- **트렁크 기반 전략**
+  - 트렁크 기반 전략은 ```main```이라는 주 브랜치 하나만 운영하며, ```git 전략```과 다르게 ```dev``` 브랜치를 두지 않고신규 기능 브랜치는 바로 ```main```브랜치로 머지합니다
+  - 작업 단위를 더 잘게 쪼개어, 더 자주 커밋하고 머지합니다
+  - 선택한 이유?
+      - 브랜치 관리에 드는 시간, 노력이 절약-> 6주간의 짧은 프로젝트에 적합하다고 판단
+      - 배포 프로세스가 간단해져서, 더욱 자주 배포가 가능
