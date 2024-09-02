@@ -197,12 +197,6 @@
 
 
 # 👥 팀원 회구성
-### ✨ BE
-|         **배지혜**          |         **임한비**          |         **차재현**          |
-|:--------------------------:|:--------------------------:|:--------------------------:|
-| [<img src="https://avatars.githubusercontent.com/u/154660538?v=4" height=150 width=150> <br/> @jeeehdev](https://github.com/jeeehdev) | [<img src="https://avatars.githubusercontent.com/u/80617446?v=4" height=150 width=150> <br/> @hanbirang](https://github.com/hanbirang) | [<img src="https://avatars.githubusercontent.com/u/69067860?v=4" height=150 width=150> <br/> @ckwogus37](https://github.com/ckwogus37) |
-
-### ✨ FE
 |         **고윤성**          |         **이현철**          |         **하주영**          |
 |:--------------------------:|:--------------------------:|:--------------------------:|
 | [<img src="https://avatars.githubusercontent.com/u/30286303?v=4" height=150 width=150> <br/> @yoonsaeng](https://github.com/yoonsaeng) | [<img src="https://avatars.githubusercontent.com/u/83640773?v=4" height=150 width=150> <br/> @hcheorii](https://github.com/hcheorii) | [<img src="https://avatars.githubusercontent.com/u/92720304?v=4" height=150 width=150> <br/> @hazzuu123](https://github.com/hazzuu123) |
