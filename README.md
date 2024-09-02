@@ -1,3 +1,40 @@
+## 역할 분담
+
+### 😛 하주영
+- **UI**
+  - 페이지: 홈, 코치 리스트 검색, 상세 코치, 알림 조회, 기록(달력, 선차트)
+  - 공통 컴포넌트: 드롭다운, 모달
+- **기능**
+  - 홈, 코치 리스트, 코치 상세 조회
+  - 무한 스크롤
+  - 좋아요 등록 및 해제
+  - 리뷰 조회, 등록, 수정, 삭제
+  - 배포, 커스텀 도메인
+  - MSW 세팅
+
+### 😎 고윤성
+- **UI**
+  - 페이지: 내 루틴, 내 코치 루틴, 루틴 작성, 수정 모달, 매칭 회원 리스트
+  - 공통 컴포넌트: 헤더, 푸터
+- **기능**
+  - 문의/매칭 회원 등록, 조회, 삭제
+  - 루틴 조회
+  - 루틴, 카테고리, 액션 추가, 수정 및 삭제
+  - Github actions
+  - Sentry, SEO 세팅
+  
+### 🙄 이현철
+- **UI**
+  - 페이지: 로그인, 회원가입, 마이 페이지, 코치 전용 마이 페이지
+  - 공통 컴포넌트: CSS 테마 
+- **기능**
+  - 회원가입, 로그인
+  - 마이페이지 조회, 수정
+  - 토큰 재발급
+  - 닉네임, 이메일 중복 확인
+  - 로그아웃, 회원탈퇴
+  - Storybook 세팅
+  
 # 📔 코치코치 서비스 소개 - 회원
 
 ![coachcoach-overview](https://github.com/user-attachments/assets/5f2ed6af-f2b0-4a56-a376-4f13d430893c)
@@ -200,3 +237,4 @@
 |         **고윤성**          |         **이현철**          |         **하주영**          |
 |:--------------------------:|:--------------------------:|:--------------------------:|
 | [<img src="https://avatars.githubusercontent.com/u/30286303?v=4" height=150 width=150> <br/> @yoonsaeng](https://github.com/yoonsaeng) | [<img src="https://avatars.githubusercontent.com/u/83640773?v=4" height=150 width=150> <br/> @hcheorii](https://github.com/hcheorii) | [<img src="https://avatars.githubusercontent.com/u/92720304?v=4" height=150 width=150> <br/> @hazzuu123](https://github.com/hazzuu123) |
+
