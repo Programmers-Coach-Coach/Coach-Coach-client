@@ -1,30 +1,37 @@
-# React + TypeScript + Vite
+## 역할 분담
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### 😛 하주영
+- **UI**
+  - 페이지: 홈, 코치 리스트 검색, 상세 코치, 알림 조회, 기록(달력, 선차트)
+  - 공통 컴포넌트: 드롭다운, 모달
+- **기능**
+  - 홈, 코치 리스트, 코치 상세 조회
+  - 무한 스크롤
+  - 좋아요 등록 및 해제
+  - 리뷰 조회, 등록, 수정, 삭제
+  - 배포, 커스텀 도메인
+  - MSW 세팅
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### 😎 고윤성
+- **UI**
+  - 페이지: 내 루틴, 내 코치 루틴, 루틴 작성, 수정 모달, 매칭 회원 리스트
+  - 공통 컴포넌트: 
+- **기능**
+  - 문의/매칭 회원 등록, 조회, 삭제
+  - 루틴 조회
+  - 루틴, 카테고리, 액션 추가, 수정 및 삭제
+  - Github actions
+  - Sentry, SEO 세팅
+  
+### 🙄 이현철
+- **UI**
+  - 페이지: 로그인, 회원가입, 마이 페이지, 코치 전용 마이 페이지
+  - 공통 컴포넌트: CSS 테마 
+- **기능**
+  - 회원가입, 로그인
+  - 마이페이지 조회, 수정
+  - 토큰 재발급
+  - 닉네임, 이메일 중복 확인
+  - 로그아웃, 회원탈퇴
+  - Storybook 세팅
+  
