@@ -28,7 +28,7 @@ const allowedExtensions = [
   "tif",
   "tiff"
 ];
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
 const ProfileSection = () => {
   const { profile, isFetchError, isLoading } = useFetchProfile();
@@ -73,7 +73,6 @@ const ProfileSection = () => {
 
     if (inputRef.current?.files?.[0]) {
       const file = inputRef.current.files[0];
-      console.log("Original File Size:", file.size / 1024, "KB");
 
       const fileExtension = file.name.split(".").pop()?.toLowerCase();
       if (fileExtension === "gif") {
@@ -86,7 +85,6 @@ const ProfileSection = () => {
           fileType: "image/webp"
         };
         const compressedFile = await imageCompression(file, options);
-        console.log("Compressed File Size:", compressedFile.size / 1024, "KB");
 
         const fileName = file.name.split(".")[0];
         const webpFile = new File([compressedFile], `${fileName}.webp`, {
@@ -128,17 +126,15 @@ const ProfileSection = () => {
       }
 
       if (fileExtension === "gif") {
-        setValue("profileImageUrl", file); // GIF는 그대로 설정
+        setValue("profileImageUrl", file);
       } else {
         const options = {
-          maxSizeMB: 0.5, // 최대 1MB로 제한
-          maxWidthOrHeight: 200, // 최대 너비나 높이
+          maxSizeMB: 0.5,
+          maxWidthOrHeight: 200,
           useWebWorker: true,
-          fileType: "image/webp" // WebP 형식으로 변환
+          fileType: "image/webp"
         };
         const compressedFile = await imageCompression(file, options);
-        console.log("Original File Size:", file.size / 1024, "KB");
-        console.log("Compressed File Size:", compressedFile.size / 1024, "KB");
 
         const fileName = file.name.split(".")[0];
         const webpFile = new File([compressedFile], `${fileName}.webp`, {
@@ -153,7 +149,7 @@ const ProfileSection = () => {
     if (profileImage instanceof File) {
       return URL.createObjectURL(profileImage);
     }
-    return profileImage || ""; // 기본 이미지 URL이나 빈 문자열로 대체
+    return profileImage || "";
   };
 
   const onInvalid = (errors: FieldErrors<IMyPageFormValues>) => {
@@ -264,7 +260,7 @@ const ProfileSection = () => {
             control={control}
             render={({ field }) => (
               <SelectBox
-                value={field.value || []} // null일 경우 빈 배열로 처리
+                value={field.value || []}
                 onChange={(event) =>
                   field.onChange(event.target.value as string[])
                 }
