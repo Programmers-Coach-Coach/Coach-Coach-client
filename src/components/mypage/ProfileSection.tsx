@@ -74,6 +74,7 @@ const ProfileSection = () => {
     if (inputRef.current?.files?.[0]) {
       const file = inputRef.current.files[0];
 
+
       const fileExtension = file.name.split(".").pop()?.toLowerCase();
       if (fileExtension === "gif") {
         formData.append("profileImage", file);
@@ -133,6 +134,15 @@ const ProfileSection = () => {
           maxWidthOrHeight: 200,
           useWebWorker: true,
           fileType: "image/webp"
+        };
+        const compressedFile = await imageCompression(file, options);
+        setValue("profileImageUrl", file); 
+      } else {
+        const options = {
+          maxSizeMB: 0.5, 
+          maxWidthOrHeight: 200, 
+          useWebWorker: true,
+          fileType: "image/webp" 
         };
         const compressedFile = await imageCompression(file, options);
 
