@@ -15,6 +15,7 @@ import CustomButton from "../common/Button/CustomButton";
 import SelectBox from "../common/InputField/Select/SelectBox";
 import Loading from "../loading/Loading";
 import AddressSearchField from "./AddressSearchField";
+import imageCompression from "browser-image-compression";
 
 const allowedExtensions = [
   "jpg",
@@ -51,7 +52,6 @@ const ProfileSection = () => {
   );
 
   const inputRef = useRef<HTMLInputElement>(null);
-
   const profileImage = watch("profileImageUrl");
 
   useEffect(() => {
@@ -72,7 +72,28 @@ const ProfileSection = () => {
     const formData = new FormData();
 
     if (inputRef.current?.files?.[0]) {
-      formData.append("profileImage", inputRef.current.files[0]);
+      const file = inputRef.current.files[0];
+      console.log("Original File Size:", file.size / 1024, "KB");
+
+      const fileExtension = file.name.split(".").pop()?.toLowerCase();
+      if (fileExtension === "gif") {
+        formData.append("profileImage", file);
+      } else {
+        const options = {
+          maxSizeMB: 0.5,
+          maxWidthOrHeight: 200,
+          useWebWorker: true,
+          fileType: "image/webp"
+        };
+        const compressedFile = await imageCompression(file, options);
+        console.log("Compressed File Size:", compressedFile.size / 1024, "KB");
+
+        const fileName = file.name.split(".")[0];
+        const webpFile = new File([compressedFile], `${fileName}.webp`, {
+          type: "image/webp"
+        });
+        formData.append("profileImage", webpFile);
+      }
     }
 
     const formattedSports = data.interestedSports.map((sport) => ({
@@ -92,7 +113,7 @@ const ProfileSection = () => {
     editUserProfile(formData);
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const fileExtension = file.name.split(".").pop()?.toLowerCase();
@@ -106,7 +127,25 @@ const ProfileSection = () => {
         return;
       }
 
-      setValue("profileImageUrl", file);
+      if (fileExtension === "gif") {
+        setValue("profileImageUrl", file); // GIF는 그대로 설정
+      } else {
+        const options = {
+          maxSizeMB: 0.5, // 최대 1MB로 제한
+          maxWidthOrHeight: 200, // 최대 너비나 높이
+          useWebWorker: true,
+          fileType: "image/webp" // WebP 형식으로 변환
+        };
+        const compressedFile = await imageCompression(file, options);
+        console.log("Original File Size:", file.size / 1024, "KB");
+        console.log("Compressed File Size:", compressedFile.size / 1024, "KB");
+
+        const fileName = file.name.split(".")[0];
+        const webpFile = new File([compressedFile], `${fileName}.webp`, {
+          type: "image/webp"
+        });
+        setValue("profileImageUrl", webpFile);
+      }
     }
   };
 
@@ -116,6 +155,7 @@ const ProfileSection = () => {
     }
     return profileImage || ""; // 기본 이미지 URL이나 빈 문자열로 대체
   };
+
   const onInvalid = (errors: FieldErrors<IMyPageFormValues>) => {
     if (errors.nickname?.type === "required") {
       toast.error("닉네임을 입력해주세요.");
