@@ -16,12 +16,11 @@ const CoachList = () => {
   const sportsIds = searchParams.get("sportsIds")?.split(",").map(Number) ?? [];
   const keyword = getKeyword() ?? "";
 
-  const debouncedSort = useDebounce(sort);
+  const debouncedSort = useDebounce(sort, 300);
   const debouncedSportsIds = useDebounce(sportsIds);
-  const debouncedKeyword = useDebounce(keyword);
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useCoachList(
-    debouncedKeyword,
+    keyword,
     debouncedSort,
     debouncedSportsIds
   );
