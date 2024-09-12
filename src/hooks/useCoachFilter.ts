@@ -1,10 +1,8 @@
 import { filterList } from "@/data/sportsList";
 import { useSearchParams } from "react-router-dom";
-import { useDebounce } from "./useDebounce";
 
 const useCoachFilter = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const debounced = useDebounce<number>(0);
 
   const singleFilter = (id: number) => {
     const sort =
