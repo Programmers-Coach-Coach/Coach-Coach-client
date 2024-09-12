@@ -8,6 +8,8 @@ import Empty from "../common/Empty/Empty";
 import Loading from "../loading/Loading";
 import Coach from "./Coach";
 
+const DEBOUNCE_DELAY = 300;
+
 const CoachList = () => {
   const { getKeyword } = useQueryString();
   const [searchParams] = useSearchParams();
@@ -16,7 +18,7 @@ const CoachList = () => {
   const sportsIds = searchParams.get("sportsIds")?.split(",").map(Number) ?? [];
   const keyword = getKeyword() ?? "";
 
-  const debouncedSort = useDebounce(sort, 300);
+  const debouncedSort = useDebounce(sort, DEBOUNCE_DELAY);
   const debouncedSportsIds = useDebounce(sportsIds);
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useCoachList(
