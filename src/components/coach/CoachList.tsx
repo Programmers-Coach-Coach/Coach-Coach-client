@@ -1,4 +1,5 @@
 import useCoachList from "@/hooks/useCoachList";
+import { useDebounce } from "@/hooks/useDebounce";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 import useQueryString from "@/hooks/useQueryString";
 import { useSearchParams } from "react-router-dom";
@@ -6,6 +7,8 @@ import styled from "styled-components";
 import Empty from "../common/Empty/Empty";
 import Loading from "../loading/Loading";
 import Coach from "./Coach";
+
+const DEBOUNCE_DELAY = 300;
 
 const CoachList = () => {
   const { getKeyword } = useQueryString();
@@ -15,10 +18,13 @@ const CoachList = () => {
   const sportsIds = searchParams.get("sportsIds")?.split(",").map(Number) ?? [];
   const keyword = getKeyword() ?? "";
 
+  const debouncedSort = useDebounce(sort, DEBOUNCE_DELAY);
+  const debouncedSportsIds = useDebounce(sportsIds);
+
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useCoachList(
     keyword,
-    sort,
-    sportsIds
+    debouncedSort,
+    debouncedSportsIds
   );
 
   const { setTarget } = useIntersectionObserver({
