@@ -15,8 +15,9 @@ const Coach = ({ coach }: Props) => {
 
   const profileImageUrl = coach.profileImageUrl
     ? getImgixUrl(coach.profileImageUrl, {
-        w: 228,
-        h: 228,
+        w: 114, // 최대 사이즈
+        h: 114,
+        dpr: window.devicePixelRatio > 1 ? 2 : 1, // 고해상도 기기에서 2배 크기로 이미지 요청
         auth: "format"
       })
     : profilePath;
