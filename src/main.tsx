@@ -2,7 +2,7 @@ import React from "react";
 import App from "./App.tsx";
 import { HelmetProvider } from "react-helmet-async";
 import * as Sentry from "@sentry/react";
-import ReactDOM from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 
 Sentry.init({
   dsn: import.meta.env.VITE_SENTRY_DSN,
@@ -25,11 +25,26 @@ async function enableMocking() {
 }
 
 enableMocking().then(() => {
-  ReactDOM.createRoot(document.getElementById("root")!).render(
-    <React.StrictMode>
-      <HelmetProvider>
-        <App />
-      </HelmetProvider>
-    </React.StrictMode>
-  );
+  const rootElement = document.getElementById("root");
+
+  if (rootElement?.hasChildNodes()) {
+    // SSR 환경일 때 hydrate 사용
+    hydrateRoot(
+      rootElement,
+      <React.StrictMode>
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
+      </React.StrictMode>
+    );
+  } else {
+    // 클라이언트 사이드 렌더링일 때 createRoot 사용
+    createRoot(rootElement!).render(
+      <React.StrictMode>
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
+      </React.StrictMode>
+    );
+  }
 });
