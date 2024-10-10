@@ -1,0 +1,47 @@
+<svg width="245" height="245" viewBox="0 0 245 245" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_1506_7897)">
+<g filter="url(#filter0_d_1506_7897)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M192.21 169.716L170.996 132.973L207.738 111.76C207.738 111.76 207.738 111.76 207.739 111.76C219.454 132.052 212.502 158 192.21 169.716Z" fill="#132C4D"/>
+</g>
+<g filter="url(#filter1_d_1506_7897)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M37.0953 128.153L73.838 106.939L52.625 70.1973C52.6249 70.1974 52.6247 70.1974 52.6246 70.1975C32.3324 81.9132 25.3798 107.861 37.0953 128.153Z" fill="#132C4D"/>
+</g>
+<rect x="100.106" y="38.8343" width="85.5832" height="146" rx="10" transform="rotate(15 100.106 38.8343)" stroke="white" stroke-width="4"/>
+<rect x="105.586" y="58.635" width="64.7499" height="110.583" rx="3" transform="rotate(15 105.586 58.635)" stroke="white" stroke-width="4"/>
+<circle cx="127.922" cy="56.0808" r="2.08333" transform="rotate(15 127.922 56.0808)" fill="white"/>
+<path d="M134.461 57.832L151.063 62.2805" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M69.2896 91.5941C63.5991 92.691 58.7447 96.9243 57.144 102.898C55.5922 108.69 57.5067 114.594 61.6158 118.407" stroke="#0075FF" stroke-width="4" stroke-linecap="round"/>
+<path d="M60.9763 78.0426C52.456 81.8903 45.667 89.3886 43.0586 99.1234C40.5617 108.442 42.4068 117.901 47.3539 125.352" stroke="#0075FF" stroke-width="4" stroke-linecap="round"/>
+<path d="M183.539 122.206C187.919 126.001 190.006 132.094 188.406 138.068C186.854 143.86 182.244 148.015 176.779 149.263" stroke="#0075FF" stroke-width="4" stroke-linecap="round"/>
+<path d="M197.515 114.629C202.97 122.221 205.101 132.109 202.492 141.844C199.995 151.163 193.668 158.432 185.658 162.411" stroke="#0075FF" stroke-width="4" stroke-linecap="round"/>
+<path d="M108.989 110.32C111.383 101.385 120.568 96.0818 129.504 98.4761C138.439 100.87 143.742 110.055 141.348 118.991L135.395 141.207L103.036 132.536L108.989 110.32Z" stroke="white" stroke-width="4"/>
+<rect x="97.0431" y="130.758" width="44.9583" height="8.49999" rx="4.24999" transform="rotate(15 97.0431 130.758)" stroke="white" stroke-width="4"/>
+<circle cx="5.20833" cy="5.20833" r="3.20833" transform="matrix(0.965926 0.258819 0.258819 -0.965926 123.914 99.2207)" stroke="white" stroke-width="4"/>
+<path d="M123.856 147.733C122.814 151.623 118.816 153.931 114.926 152.889C111.036 151.847 108.728 147.849 109.77 143.959" stroke="white" stroke-width="4"/>
+</g>
+<defs>
+<filter id="filter0_d_1506_7897" x="166.996" y="111.76" width="50.4336" height="65.9551" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1506_7897"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1506_7897" result="shape"/>
+</filter>
+<filter id="filter1_d_1506_7897" x="27.4062" y="70.1973" width="50.4336" height="65.9551" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1506_7897"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1506_7897" result="shape"/>
+</filter>
+<clipPath id="clip0_1506_7897">
+<rect width="200" height="200" fill="white" transform="translate(51.7656) rotate(15)"/>
+</clipPath>
+</defs>
+</svg>

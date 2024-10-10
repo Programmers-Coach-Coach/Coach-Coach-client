@@ -1,24 +1,27 @@
+import { useState } from "react";
 import {
   checkPassword,
   editCoachProfile,
   editProfile,
   login,
   logout,
-  withdraw
+  withdraw,
+  emailDuplicate,
+  nicknameDuplicate,
+  signup
 } from "@/api/auth.api";
-import { ICheckPassword, ILogin } from "@/models/auth.model";
+import {
+  ICheckPassword,
+  ILogin,
+  ISignup,
+  ICheckEmailDuplication,
+  ICheckNicknameDuplication
+} from "@/models/auth.model";
 import { useAuthStore } from "@/store/authStore";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { emailDuplicate, nicknameDuplicate, signup } from "@/api/auth.api";
-import {
-  ICheckEmailDuplication,
-  ICheckNicknameDuplication,
-  ISignup
-} from "@/models/auth.model";
-import { IMyPageCoachFormWithSports } from "@/models/coach.model";
 import axios, { AxiosError } from "axios";
+import { IMyPageCoachFormWithSports } from "@/models/coach.model";
 
 const useAuth = () => {
   const navigate = useNavigate();
@@ -26,12 +29,13 @@ const useAuth = () => {
   const [isNicknameError, setIsNicknameError] = useState<boolean>(false);
   const [emailChecked, setEmailChecked] = useState<boolean>(false);
   const [nicknameChecked, setNicknameChecked] = useState<boolean>(false);
+  const [step, setStep] = useState<"가입" | "가입성공">("가입"); // step 상태 추가
   const { storeLogin, storeLogout } = useAuthStore();
 
   const userSignup = (formData: ISignup) => {
     signup(formData)
       .then(() => {
-        navigate("/login");
+        setStep("가입성공"); // 회원가입 성공 시 step 변경
         toast.success("회원가입 성공");
       })
       .catch((error) => {
@@ -43,7 +47,7 @@ const useAuth = () => {
     login(formData)
       .then(() => {
         storeLogin();
-        navigate("/");
+        navigate("/home");
         toast.success("로그인 성공");
       })
       .catch((error) => {
@@ -157,7 +161,9 @@ const useAuth = () => {
     nicknameChecked,
     editUserCoachProfile,
     passwordCheck,
-    userLogout
+    userLogout,
+    step,
+    setStep
   };
 };
 

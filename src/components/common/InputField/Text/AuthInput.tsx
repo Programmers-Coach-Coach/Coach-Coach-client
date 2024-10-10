@@ -41,7 +41,7 @@ const TextFieldWrapper = styled(TextField)<{ width?: string }>`
   & .MuiFormHelperText-root {
     color: ${({ theme }) => theme.color.error};
   }
-  width: ${({ width }) => width || "314px"};
+  width: ${({ width }) => width || "342px"};
   text-align: center;
   &.css-1rv3ei8-MuiFormControl-root-MuiTextField-root {
     margin-top: 0;

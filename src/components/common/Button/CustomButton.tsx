@@ -16,7 +16,7 @@ const StyledButton = styled(Button)<CustomButtonProps>`
       theme.buttonVariant[variant].backgroundColor};
     color: ${({ variant, theme }) => theme.buttonVariant[variant].color};
     border: ${({ variant, theme }) => theme.buttonVariant[variant].border};
-    border-radius: ${({ theme }) => theme.borderRadius.default};
+    border-radius: 10px;
     padding: ${({ size, theme }) => theme.button[size].padding};
     height: ${({ size, theme }) => theme.button[size].height};
     width: ${({ size, theme }) => theme.button[size].width || "auto"};
