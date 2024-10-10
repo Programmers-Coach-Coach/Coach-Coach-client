@@ -22,6 +22,8 @@ import RoutineDetail from "./pages/Routine/RoutineDetail";
 import Signup from "./pages/Signup";
 import { GlobalStyle } from "./style/global";
 import { theme } from "./style/theme";
+import First from "./pages/First";
+import TotalLogin from "./pages/TotalLogin";
 
 function App() {
   const router = createBrowserRouter([
@@ -30,6 +32,14 @@ function App() {
       children: [
         {
           path: "/",
+          element: <First />
+        },
+        {
+          path: "/total-login",
+          element: <TotalLogin />
+        },
+        {
+          path: "home",
           element: <Home />
         },
         {
