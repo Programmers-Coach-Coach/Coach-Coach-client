@@ -33,6 +33,7 @@ export const getClickBackLink = (pathname: string) => {
   switch (pathname) {
     case "/login":
     case "/signup":
+      return "/total-login";
     case "/coach-list":
     case "/routine":
     case "/check-password":
