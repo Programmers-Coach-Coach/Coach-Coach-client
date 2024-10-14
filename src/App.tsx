@@ -22,6 +22,7 @@ import { theme } from "./style/theme";
 import Routine from "./pages/Routine/Routine";
 import First from "./pages/First";
 import TotalLogin from "./pages/TotalLogin";
+import AddRoutine from "./pages/Routine/AddRoutine";
 
 function App() {
   const router = createBrowserRouter([
@@ -59,6 +60,10 @@ function App() {
         {
           path: "routine",
           element: <Routine />
+        },
+        {
+          path: "routine/add",
+          element: <AddRoutine />
         },
         {
           path: "record",
