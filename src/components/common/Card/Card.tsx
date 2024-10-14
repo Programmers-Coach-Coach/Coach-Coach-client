@@ -1,22 +1,30 @@
 import { styled } from "styled-components";
 
 interface cardProp {
-  onClick?: () => void;
   children: React.ReactNode;
 }
 
-const Card = ({ onClick, children }: cardProp) => {
-  return <CardStyle onClick={onClick}>{children}</CardStyle>;
+const Card = ({ children }: cardProp) => {
+  return <CardStyle>{children}</CardStyle>;
 };
 
 const CardStyle = styled.div`
-  width: 100%;
-  max-width: 600px;
-  height: 100px;
-  margin: 5px auto;
+  min-height: 80px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+
+  @media (max-width: 375px) {
+    min-height: 50px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
   background-color: ${({ theme }) => theme.color.box};
   border-radius: ${({ theme }) => theme.borderRadius.default};
-  border: 1px solid ${({ theme }) => theme.color.border};
   box-shadow: ${({ theme }) => theme.boxShadow};
 `;
 
