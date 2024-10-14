@@ -32,11 +32,21 @@ const Completed = ({ isCompleted, categoryId }: CompletedProps) => {
         checked={isChecked}
         onClick={handleClick}
         inputProps={{ "aria-label": "controlled" }}
+        sx={{
+          padding: "0 5px 0 15px",
+          transform: "scale(1)",
+          "@media (max-width: 375px)": {
+            transform: "scale(0.8)"
+          }
+        }}
       />
     </CompletedStyle>
   );
 };
 
-const CompletedStyle = styled.div``;
+const CompletedStyle = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 export default Completed;
