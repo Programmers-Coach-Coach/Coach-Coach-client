@@ -1,5 +1,6 @@
 import IconButton from "@/components/Icon/IconButton";
 import { slideAnimation } from "@/utils/animation";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
 interface AddModalProps {
@@ -7,10 +8,18 @@ interface AddModalProps {
 }
 
 const AddModal = ({ openHandler }: AddModalProps) => {
+  const navigate = useNavigate();
+
+  const onClickAddHandler = () => {
+    navigate("/routine/add");
+  };
+
   return (
     <AddModalStyle>
       <AboveModal>
-        <AddModalCard>새 루틴 추가하기</AddModalCard>
+        <AddModalCard onClick={onClickAddHandler}>
+          새 루틴 추가하기
+        </AddModalCard>
         <AddModalCard>기존 루틴 복사하기</AddModalCard>
       </AboveModal>
       <IconButton
