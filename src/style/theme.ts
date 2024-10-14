@@ -96,7 +96,7 @@ interface Theme {
 export const theme: Theme = {
   color: {
     background: "#181A20",
-    box: "#3A3A3A",
+    box: "#F8F9FA",
     border: "#BDBDBD",
     primary: "#0075FF",
     secondary: "#9CABEF",
@@ -105,8 +105,8 @@ export const theme: Theme = {
     likes: "#ABDEE6",
     review: "#FEAF29",
     text: "#FFFFFF",
-    gray1: "rgba(17, 17, 17, 0.5)",
-    gray2: "#9B9B9B",
+    gray1: "#E1E1E1",
+    gray2: "#D9D9D9",
     gray3: "#808080",
     lightTransparentBlack: "rgba(0, 0, 0, 0.3)"
   },
@@ -122,8 +122,8 @@ export const theme: Theme = {
   button: {
     large: {
       padding: "16px",
-      height: "48px",
-      width: "314px"
+      height: "60px",
+      width: "342px"
     },
     small: {
       padding: "16px",
@@ -132,7 +132,7 @@ export const theme: Theme = {
     },
     full: {
       padding: "16px",
-      height: "48px",
+      height: "60px",
       width: "100%"
     },
     mini: {
@@ -212,16 +212,16 @@ export const theme: Theme = {
   },
   buttonVariant: {
     contained: {
-      backgroundColor: "#5271FF",
+      backgroundColor: "#0075FF",
       color: "#FFFFFF",
       border: "none",
-      borderHoverColor: "#5271FF"
+      borderHoverColor: "#0075FF"
     },
     outlined: {
       backgroundColor: "transparent",
-      color: "#5271FF",
-      border: "1px solid #5271FF",
-      borderHoverColor: "#5271FF"
+      color: "#0075FF",
+      border: "1px solid #0075FF",
+      borderHoverColor: "#0075FF"
     },
     containedError: {
       backgroundColor: "#e23636",

@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import Logo from "../assets/images/Logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LoginForm from "@/components/login/LoginForm";
 import { useAuthStore } from "@/store/authStore";
 import { useEffect } from "react";
@@ -11,7 +10,7 @@ function Login() {
   useEffect(() => {
     const unsubscribe = useAuthStore.subscribe((state) => {
       if (state.isLoggedIn) {
-        nav("/");
+        nav("/home");
       }
     });
     return () => unsubscribe();
@@ -19,22 +18,15 @@ function Login() {
 
   return (
     <Container>
-      <ImageWrapper className="logo" src={Logo} alt="Logo" />
       <LoginForm />
-      <LinkWrapper className="b1">
-        계정이 없으신가요?{" "}
-        <Link to="/signup">
-          <span className="signup b1">회원가입 하러가기</span>
-        </Link>
-      </LinkWrapper>
     </Container>
   );
 }
 
 const Container = styled.div`
   width: 100%;
+  height: calc(100vh - 76px); //헤더 길이만큼 제외
   max-width: 600px;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,21 +37,4 @@ const Container = styled.div`
   gap: 15px;
 `;
 
-const ImageWrapper = styled.img`
-  width: 314px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-`;
-
-const LinkWrapper = styled.div`
-  margin-top: 10px;
-  a {
-    text-decoration: none;
-  }
-  .signup {
-    color: ${({ theme }) => theme.color.primary};
-    text-decoration: none;
-  }
-`;
 export default Login;
