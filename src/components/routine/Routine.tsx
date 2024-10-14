@@ -129,7 +129,7 @@ const RoutineTitleStyle = styled.div<{
   }
 
   .sport {
-    color: ${({ theme }) => theme.color.gray2};
+    color: "#9B9B9B";
     margin-left: 10px;
   }
 

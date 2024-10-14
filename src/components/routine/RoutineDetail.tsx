@@ -40,7 +40,7 @@ const RoutineDetailCardStyle = styled.div`
   display: flex;
   align-items: center;
   height: 50px;
-  background-color: ${({ theme }) => theme.color.gray1};
+  background-color: "rgba(17, 17, 17, 0.5)";
   border-radius: ${({ theme }) => theme.borderRadius.default};
   width: calc(100% - 100px);
   padding: 0;
