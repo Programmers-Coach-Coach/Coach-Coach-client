@@ -18,11 +18,15 @@ import {
   IoPeopleOutline,
   IoPersonOutline,
   IoSearch,
-  IoTrendingDown
+  IoTrendingDown,
+  IoAddCircleSharp,
+  IoCloseCircle,
+  IoChatbubbleEllipsesSharp
 } from "react-icons/io5";
 import { LuPencilLine } from "react-icons/lu";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { TbArrowsExchange2 } from "react-icons/tb";
+import { CgDetailsMore } from "react-icons/cg";
 
 export const ICONS = {
   profile: IoPersonOutline,
@@ -46,5 +50,9 @@ export const ICONS = {
   fullStar: FaStar,
   heart: IoIosHeart,
   emptyHeart: IoIosHeartEmpty,
-  list: IoListOutline
+  list: IoListOutline,
+  add: IoAddCircleSharp,
+  close: IoCloseCircle,
+  chat: IoChatbubbleEllipsesSharp,
+  more: CgDetailsMore
 };

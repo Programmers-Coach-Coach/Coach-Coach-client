@@ -10,18 +10,16 @@ import CoachList from "./pages/CoachList";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import ManageMember from "./pages/ManageMember";
-import MyCoach from "./pages/MyCoach";
 import Mypage from "./pages/Mypage";
 import Notification from "./pages/Notification";
 import Record from "./pages/Record";
 import RecordDatail from "./pages/RecordDatail";
 import CoachRoutine from "./pages/Routine/CoachRoutine";
 import MemberRoutine from "./pages/Routine/MemberRoutine";
-import MyRoutine from "./pages/Routine/MyRoutine";
-import RoutineDetail from "./pages/Routine/RoutineDetail";
 import Signup from "./pages/Signup";
 import { GlobalStyle } from "./style/global";
 import { theme } from "./style/theme";
+import Routine from "./pages/Routine/Routine";
 import First from "./pages/First";
 import TotalLogin from "./pages/TotalLogin";
 
@@ -60,7 +58,7 @@ function App() {
         },
         {
           path: "routine",
-          element: <MyRoutine />
+          element: <Routine />
         },
         {
           path: "record",
@@ -79,10 +77,6 @@ function App() {
           element: <Notification />
         },
         {
-          path: "routine/my-coach",
-          element: <MyCoach />
-        },
-        {
           path: "routine/my-coach/:coachId",
           element: <CoachRoutine />
         },
@@ -93,10 +87,6 @@ function App() {
         {
           path: "routine/member/:userId",
           element: <MemberRoutine />
-        },
-        {
-          path: "routine/detail/:routineId",
-          element: <RoutineDetail />
         }
       ]
     }

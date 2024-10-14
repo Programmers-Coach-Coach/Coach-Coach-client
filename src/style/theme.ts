@@ -104,7 +104,7 @@ export const theme: Theme = {
     error: "#F22455",
     likes: "#ABDEE6",
     review: "#FEAF29",
-    text: "#ffffff",
+    text: "#FFFFFF",
     gray1: "#E1E1E1",
     gray2: "#D9D9D9",
     gray3: "#808080",
@@ -152,9 +152,9 @@ export const theme: Theme = {
     }
   },
   borderRadius: {
-    default: "20px"
+    default: "10px"
   },
-  boxShadow: "0 10px 40px 0 rgba(0, 0, 0, 0.1)",
+  boxShadow: "0 10px 40px 0 rgba(0, 0, 0, 0.5)",
   profileImage: {
     mini: {
       width: "60px",

@@ -1,14 +1,21 @@
 import { styled } from "styled-components";
-import Routine from "@/components/routine/Routine";
 import { IGetRoutine } from "@/models/routine.model";
 import Empty from "../common/Empty/Empty";
+import Routine from "./Routine";
 
 interface RoutineListProps {
   routines: IGetRoutine[];
   state?: string;
+  isCheck?: boolean; // 체크박스 필요한지
+  isModify?: boolean; // 수정, 삭제 아이콘 필요한지
 }
 
-const RoutineList = ({ routines, state }: RoutineListProps) => {
+const RoutineList = ({
+  routines,
+  state,
+  isCheck = true,
+  isModify = true
+}: RoutineListProps) => {
   const padding = state ? "180px" : "200px";
 
   const routinesArray = Array.isArray(routines) ? routines : [];
@@ -22,7 +29,8 @@ const RoutineList = ({ routines, state }: RoutineListProps) => {
               key={item.routineId}
               id={item.routineId}
               name={item.routineName}
-              sport={item.sportName}
+              isCheck={isCheck}
+              isModify={isModify}
             />
           ))}
         </>
