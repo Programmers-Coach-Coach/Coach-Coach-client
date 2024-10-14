@@ -27,6 +27,7 @@ import { LuPencilLine } from "react-icons/lu";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { TbArrowsExchange2 } from "react-icons/tb";
 import { CgDetailsMore } from "react-icons/cg";
+import { MdOutlineArrowDropUp } from "react-icons/md";
 
 export const ICONS = {
   profile: IoPersonOutline,
@@ -54,5 +55,6 @@ export const ICONS = {
   add: IoAddCircleSharp,
   close: IoCloseCircle,
   chat: IoChatbubbleEllipsesSharp,
-  more: CgDetailsMore
+  more: CgDetailsMore,
+  dropUp: MdOutlineArrowDropUp
 };
