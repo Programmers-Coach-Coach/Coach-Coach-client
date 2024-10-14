@@ -23,7 +23,7 @@ const CardStyle = styled.div`
     padding-bottom: 15px;
   }
 
-  background-color: "#3A3A3A";
+  background-color: #3a3a3a;
   border-radius: ${({ theme }) => theme.borderRadius.default};
   box-shadow: ${({ theme }) => theme.boxShadow};
 `;
