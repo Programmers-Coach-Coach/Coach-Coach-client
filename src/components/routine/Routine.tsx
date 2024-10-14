@@ -1,135 +1,185 @@
 import Card from "@/components/common/Card/Card";
-import ActionModalInner from "@/components/common/modal/contents/ActionModalInner";
-import RoutineContents from "@/components/common/modal/contents/RoutineContents";
 import Modal from "@/components/common/modal/Modal";
 import useModal from "@/hooks/useModal";
 import { useModalInfo } from "@/store/modalInfo.store";
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { styled } from "styled-components";
+import { keyframes, styled } from "styled-components";
 import RoutinePicker from "../common/modal/contents/RoutinePicker";
 import IconButton from "../Icon/IconButton";
+import Completed from "../common/InputField/CheckBox/Completed";
+import { useState } from "react";
+import RoutineDetail from "./RoutineDetail";
+import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
 
 interface RoutineProps {
   id: number;
   name: string;
-  sport: string;
+  isCheck: boolean;
+  isModify: boolean;
 }
 
-const Routine = ({ id, name, sport }: RoutineProps) => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const queryParams = new URLSearchParams(location.search);
+const ACTION = [
+  {
+    name: "렛풀다운",
+    count: "20회",
+    sets: "4세트"
+  },
+  {
+    name: "시티드 케이블 로우",
+    count: "20회",
+    sets: "4세트"
+  },
+  {
+    name: "비하인드 넥 풀 다운",
+    count: "20회",
+    sets: "4세트"
+  }
+];
 
-  const modifyModal = useModal();
+const Routine = ({ id, name, isCheck, isModify }: RoutineProps) => {
+  const [isToggleOpen, setIsToggleOpen] = useState(false);
   const deleteModal = useModal();
-  const [isSelect, setIsSelect] = useState<boolean>(false);
   const setRoutineId = useModalInfo((state) => state.setRoutineId);
-  const setRoutineName = useModalInfo((state) => state.setRoutineName);
 
-  const onClickModify = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setRoutineId(id);
-    setRoutineName(name);
-    modifyModal.openModal();
+  const onClickToggle = () => {
+    setIsToggleOpen(!isToggleOpen);
   };
 
-  const onClickDelete = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const onClickDelete = () => {
     setRoutineId(id);
     deleteModal.openModal();
   };
 
+  const iconSize = useResponsiveIconSize("15px", "20px", 375);
+
   return (
     <>
-      {modifyModal.isModal && (
-        <Modal
-          closeModal={modifyModal.closeModal}
-          overlayDisabled={isSelect}
-          position="center"
-        >
-          <ActionModalInner
-            schema="routine-modify"
-            closeModal={modifyModal.closeModal}
-          >
-            <RoutineContents
-              routineName={name}
-              sportName={sport}
-              setIsSelect={setIsSelect}
-            />
-          </ActionModalInner>
-        </Modal>
-      )}
       {deleteModal.isModal && (
         <Modal closeModal={deleteModal.closeModal} position="footer-above">
           <RoutinePicker schema="delete" closeModal={deleteModal.closeModal} />
         </Modal>
       )}
       <Card>
-        <RoutineStyle
-          onClick={() => {
-            navigate(`/routine/detail/${id}?routineName=${name}`);
-          }}
-        >
-          <RoutineTextStyle>
+        <RoutineStyle>
+          <RoutineTitleStyle $isCheck={isCheck} $isToggleOpen={isToggleOpen}>
+            {isCheck && <Completed isCompleted={true} categoryId={1} />}
             <h2>{name}</h2>
-            <p className="b2">{sport}</p>
-          </RoutineTextStyle>
-          {!queryParams.get("coach") && (
-            <RoutineIconStyle>
-              <IconButton
-                name="modify"
-                size="20px"
-                color="review"
-                onClick={onClickModify}
-              />
+            <h2 className="sport">|</h2>
+            <h2 className="sport">헬스</h2>
+            <IconButton
+              name="arrowDown"
+              color="text"
+              size={iconSize}
+              className="arrow-button"
+              onClick={onClickToggle}
+            />
+          </RoutineTitleStyle>
+          {isModify && (
+            <CRUDIconStyle>
+              <IconButton name="modify" size={iconSize} color="text" />
               <IconButton
                 name="delete"
-                size="20px"
-                color="error"
+                size={iconSize}
+                color="text"
                 onClick={onClickDelete}
               />
-            </RoutineIconStyle>
+            </CRUDIconStyle>
           )}
         </RoutineStyle>
+        {isToggleOpen && (
+          <RoutineDetailStyle $isToggleOpen={isToggleOpen}>
+            <Underline />
+            {ACTION.map((action) => (
+              <RoutineDetail
+                key={action.name}
+                name={action.name}
+                count={action.count}
+                sets={action.sets}
+              />
+            ))}
+          </RoutineDetailStyle>
+        )}
       </Card>
     </>
   );
 };
 
 const RoutineStyle = styled.div`
-  height: 100%;
   width: 100%;
   display: flex;
+  justify-content: space-between;
 `;
 
-const RoutineTextStyle = styled.div`
+const RoutineTitleStyle = styled.div<{
+  $isCheck: boolean;
+  $isToggleOpen: boolean;
+}>`
   display: flex;
-  flex-direction: column;
-  justify-content: end;
-  height: 100%;
-  width: 100%;
-  padding-left: 20px;
+  justify-content: center;
 
   h2 {
-    margin-bottom: 15px;
+    margin-left: ${({ $isCheck }) => ($isCheck ? "2px" : "20px")};
+
+    @media (max-width: 375px) {
+      font-size: 12px;
+    }
   }
-  p {
-    margin-bottom: 10px;
-    color: ${({ theme }) => theme.color.primary};
+
+  svg {
+    margin-left: 10px;
+  }
+
+  .sport {
+    color: ${({ theme }) => theme.color.gray2};
+    margin-left: 10px;
+  }
+
+  .arrow-button {
+    transform: rotateX(
+      ${({ $isToggleOpen }) => ($isToggleOpen ? "180deg" : "0")}
+    );
+    transition: transform 0.3s ease-in-out;
   }
 `;
 
-const RoutineIconStyle = styled.div`
+const CRUDIconStyle = styled.div`
   display: flex;
-  justify-content: end;
-  align-items: center;
-  height: 100%;
-  width: 100%;
+  margin-right: 10px;
 
   svg {
-    margin-right: 15px;
+    margin-right: 10px;
   }
+`;
+
+const RoutineDetailStyle = styled.ul<{ $isToggleOpen: boolean }>`
+  overflow: hidden;
+  animation: ${({ $isToggleOpen }) => ($isToggleOpen ? slideDown : slideUp)}
+    0.3s ease-in-out forwards;
+`;
+
+const slideDown = keyframes`
+  0% {
+    max-height: 0;
+  }
+  100% {
+    max-height: 1000px;
+  }
+`;
+
+const slideUp = keyframes`
+  0% {
+    max-height: 1000px;
+  }
+  100% {
+    max-height: 0;
+  }
+`;
+
+const Underline = styled.div`
+  display: inline-block;
+  padding: 0;
+  margin: 1.5vh 20px 1vh 20px;
+  width: calc(100% - 40px);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
 `;
 
 export default Routine;
