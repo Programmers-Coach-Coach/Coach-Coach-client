@@ -95,18 +95,18 @@ interface Theme {
 
 export const theme: Theme = {
   color: {
-    background: "#FFFFFF",
-    box: "#F8F9FA",
+    background: "#181A20",
+    box: "#3A3A3A",
     border: "#BDBDBD",
-    primary: "#5271FF",
+    primary: "#0075FF",
     secondary: "#9CABEF",
     third: "#AECDFF",
     error: "#F22455",
     likes: "#ABDEE6",
     review: "#FEAF29",
-    text: "#212121",
-    gray1: "#E1E1E1",
-    gray2: "#D9D9D9",
+    text: "#FFFFFF",
+    gray1: "rgba(17, 17, 17, 0.5)",
+    gray2: "#9B9B9B",
     gray3: "#808080",
     lightTransparentBlack: "rgba(0, 0, 0, 0.3)"
   },
@@ -152,9 +152,9 @@ export const theme: Theme = {
     }
   },
   borderRadius: {
-    default: "20px"
+    default: "10px"
   },
-  boxShadow: "0 10px 40px 0 rgba(0, 0, 0, 0.1)",
+  boxShadow: "0 10px 40px 0 rgba(0, 0, 0, 0.5)",
   profileImage: {
     mini: {
       width: "60px",
