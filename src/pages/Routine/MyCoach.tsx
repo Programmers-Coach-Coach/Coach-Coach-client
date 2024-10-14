@@ -38,7 +38,7 @@ const MyCoach = () => {
 };
 
 const MyCoachStyle = styled.div`
-  padding-bottom: 60px;
+  padding-bottom: 80px;
 `;
 
 const ProfileHeader = styled.div`
