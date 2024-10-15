@@ -2,13 +2,32 @@ import RoutineInput from "@/components/common/InputField/Text/RoutineInput";
 import AddAction from "@/components/routine/AddAction";
 import { WhiteSpace } from "@/style/global";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { styled } from "styled-components";
 
+interface IAction {
+  id: number;
+  name: string;
+  times: number;
+  sets: number;
+}
+
+const ACTION_COUNT = 4;
+
 const AddRoutine = () => {
-  const [actionCount, setActionCount] = useState<number>(0);
+  const [actionId, setActionId] = useState<number>(1);
+  const [actions, setActions] = useState<IAction[]>([]);
 
   const onClickAdd = () => {
-    setActionCount((prevCount) => prevCount + 1);
+    if (actions.length < ACTION_COUNT) {
+      setActionId((prevId) => prevId + 1);
+      setActions((prevActions) => [
+        ...prevActions,
+        { id: actionId, name: "", times: 0, sets: 0 }
+      ]);
+    } else {
+      toast.error(`운동은 ${ACTION_COUNT}가지 까지 입력가능합니다.`);
+    }
   };
 
   return (
@@ -23,8 +42,8 @@ const AddRoutine = () => {
       <WhiteSpace $height={20} />
       <UnderlineStyle />
       <p onClick={onClickAdd}>+운동 추가 하기</p>
-      {Array.from({ length: actionCount }).map((_, index) => (
-        <AddAction key={index} index={index} />
+      {actions.map((action, index) => (
+        <AddAction key={action.id} index={index} setActions={setActions} />
       ))}
     </AddRoutineStyle>
   );

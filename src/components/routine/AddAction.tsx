@@ -3,13 +3,29 @@ import RoutineInput from "../common/InputField/Text/RoutineInput";
 import { WhiteSpace } from "@/style/global";
 import { useState } from "react";
 
-interface AddActionProps {
-  index: number;
+interface IAction {
+  id: number;
+  name: string;
+  times: number;
+  sets: number;
 }
 
-const AddAction = ({ index }: AddActionProps) => {
+interface AddActionProps {
+  index: number;
+  setActions: React.Dispatch<React.SetStateAction<IAction[]>>;
+}
+
+const AddAction = ({ index, setActions }: AddActionProps) => {
   const [isToggleOpen, setIsToggleOpen] = useState(true);
   const label = `운동 ${index + 1}`;
+
+  const onClickDelete = () => {
+    setActions((prevActions) => {
+      prevActions.splice(index, 1);
+      return [...prevActions];
+    });
+  };
+
   return (
     <AddActionStyle>
       <RoutineInput
@@ -18,6 +34,7 @@ const AddAction = ({ index }: AddActionProps) => {
         isAction={true}
         isToggleOpen={isToggleOpen}
         setIsToggleOpen={setIsToggleOpen}
+        onClickDelete={onClickDelete}
       />
       {isToggleOpen && (
         <ActionDetailStyle $isToggleOpen={isToggleOpen}>
@@ -26,12 +43,14 @@ const AddAction = ({ index }: AddActionProps) => {
             label="반복"
             placeholder="운동 반복 기간을 설정해 주세요"
             isSelect={true}
+            isSmall={true}
           />
           <WhiteSpace $height={10} />
           <RoutineInput
             label="상세기록"
             placeholder="ex)운동 횟수/분, 세트"
             isSelect={true}
+            isSmall={true}
           />
         </ActionDetailStyle>
       )}
