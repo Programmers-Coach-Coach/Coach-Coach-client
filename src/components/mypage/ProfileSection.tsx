@@ -5,17 +5,21 @@ import useAuth from "@/hooks/useAuth";
 import useModal from "@/hooks/useModal";
 import { IMyPageFormValues } from "@/models/auth.model";
 import { getGenderLabel } from "@/utils/genderUtils";
-import { FormControlLabel, Radio, RadioGroup, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { useEffect, useRef } from "react";
 import { Controller, FieldErrors, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { FaCirclePlus } from "react-icons/fa6";
 import styled from "styled-components";
 import CustomButton from "../common/Button/CustomButton";
-import SelectBox from "../common/InputField/Select/SelectBox";
 import Loading from "../loading/Loading";
 import AddressSearchField from "./AddressSearchField";
 import imageCompression from "browser-image-compression";
+import EditIcon from "../../assets/images/edit-icon.svg";
+import HorizontalLine from "../common/HorizontalLine/HorizontalLine";
+import { AUTH_REGEX } from "@/constants/regex";
+import CommonInput from "../common/InputField/Text/CommonInput";
+import GenderSelectBox from "../common/InputField/Select/GenderSelectBox";
+import SportSelectBox from "../common/InputField/Select/SportSelectBox";
 
 const allowedExtensions = [
   "jpg",
@@ -192,7 +196,7 @@ const ProfileSection = () => {
       )}
       <ProfileImageWrapper>
         <ProfileImage src={getProfileImageUrl()} alt="Profile" />
-        <IconWrapper onClick={() => inputRef.current?.click()} />
+        <IconWrapper src={EditIcon} onClick={() => inputRef.current?.click()} />
         <input
           type="file"
           accept="image/*"
@@ -201,31 +205,32 @@ const ProfileSection = () => {
           onChange={handleImageChange}
         />
       </ProfileImageWrapper>
+      <HorizontalLine />
       <InfoWrapper>
         <BasicWrapper>
           <SubtitleWrapper>닉네임</SubtitleWrapper>
-          <Controller
-            name="nickname"
-            control={control}
-            rules={{
-              maxLength: 10,
-              pattern: {
-                value:
-                  /^(?!.*\s{2,})([0-9a-zA-Z가-힣][0-9a-zA-Z가-힣\s]{0,8}[0-9a-zA-Z가-힣])$/,
-                message: "닉네임은 공백을 포함하여 최대 10자 이내여야 합니다."
-              },
-              required: true
-            }}
-            render={({ field }) => (
-              <TextField
-                maxRows={1}
-                minRows={1}
-                {...field}
-                label="닉네임"
-                value={field.value || ""}
-              />
-            )}
-          />
+          <NicknameWrapper>
+            <Controller
+              name="nickname"
+              control={control}
+              rules={{
+                maxLength: 10,
+                pattern: {
+                  value: AUTH_REGEX.nickname,
+                  message: "닉네임은 공백을 포함하여 최대 10자 이내여야 합니다."
+                },
+                required: true
+              }}
+              render={({ field }) => (
+                <CommonInput
+                  {...field}
+                  inputHeight="36px"
+                  type="text"
+                  placeholder="닉네임을 입력해 주세요."
+                />
+              )}
+            />
+          </NicknameWrapper>
         </BasicWrapper>
         <BasicWrapper>
           <SubtitleWrapper>성별</SubtitleWrapper>
@@ -233,23 +238,12 @@ const ProfileSection = () => {
             name="gender"
             control={control}
             render={({ field }) => (
-              <RadioGroup
-                row
-                {...field}
-                onChange={(e) => field.onChange(e.target.value)}
-                value={field.value || ""}
-              >
-                <FormControlLabel
-                  value="남성"
-                  control={<Radio />}
-                  label="남성"
-                />
-                <FormControlLabel
-                  value="여성"
-                  control={<Radio />}
-                  label="여성"
-                />
-              </RadioGroup>
+              <GenderSelectBox
+                value={field.value}
+                onChange={(event) =>
+                  field.onChange(event.target.value as string)
+                }
+              />
             )}
           />
         </BasicWrapper>
@@ -259,7 +253,7 @@ const ProfileSection = () => {
             name="interestedSports"
             control={control}
             render={({ field }) => (
-              <SelectBox
+              <SportSelectBox
                 value={field.value || []}
                 onChange={(event) =>
                   field.onChange(event.target.value as string[])
@@ -268,19 +262,21 @@ const ProfileSection = () => {
             )}
           />
         </BasicWrapper>
-
-        <Controller
-          name="localAddress"
-          control={control}
-          render={({ field }) => (
-            <AddressSearchField
-              type="home"
-              label="지역"
-              value={field.value || ""}
-              onAddressSelect={(address) => field.onChange(address)}
-            />
-          )}
-        />
+        <AddrressWrapper>
+          <SubtitleWrapper>주소</SubtitleWrapper>
+          <Controller
+            name="localAddress"
+            control={control}
+            render={({ field }) => (
+              <AddressSearchField
+                type="home"
+                value={field.value || ""}
+                inputWidth="100%"
+                onAddressSelect={(address) => field.onChange(address)}
+              />
+            )}
+          />
+        </AddrressWrapper>
 
         <SubtitleWrapper>자기소개</SubtitleWrapper>
         <Controller
@@ -293,6 +289,15 @@ const ProfileSection = () => {
               minRows={3}
               maxRows={3}
               value={field.value || ""}
+              sx={{
+                "&": {
+                  backgroundColor: "#252932",
+                  borderRadius: "10px"
+                },
+                "& .MuiInputBase-input": {
+                  color: "#777c89"
+                }
+              }}
             />
           )}
         />
@@ -312,6 +317,11 @@ const ProfileSection = () => {
   );
 };
 
+const AddrressWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
 const ModalTitleWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -337,18 +347,21 @@ const ProfileImageWrapper = styled.div`
   position: relative;
   display: flex;
   margin: 0 auto 10px;
-  width: ${({ theme }) => theme.profileImage.small.width};
-  height: ${({ theme }) => theme.profileImage.small.height};
+  width: 120px;
+  height: 120px;
+  padding: 4px; /* Padding for the border */
+  background: linear-gradient(135deg, #00aaff, #a740ff);
+  border-radius: 50%;
 `;
 
-const IconWrapper = styled(FaCirclePlus)`
+const IconWrapper = styled.img`
   position: absolute;
-  bottom: -5px;
-  right: -5px;
-  width: 30px;
-  height: 30px;
+  bottom: 0px;
+  right: 5px;
+  width: 24px;
+  height: 24px;
   background-color: ${({ theme }) => theme.color.primary};
-  border-radius: 50%;
+  border-radius: 10px;
   padding: 2px;
   color: ${({ theme }) => theme.color.background};
   box-shadow: ${({ theme }) => theme.boxShadow};
@@ -358,7 +371,7 @@ const IconWrapper = styled(FaCirclePlus)`
 const ProfileImage = styled.img`
   width: 100%;
   height: 100%;
-  border-radius: 8px;
+  border-radius: 50%;
   background: ${({ theme }) => theme.color.gray1};
   object-fit: cover;
 `;
@@ -370,15 +383,15 @@ const BasicWrapper = styled.div`
 `;
 
 const SubtitleWrapper = styled.div`
+  width: 25%;
   font-size: ${({ theme }) => theme.titleSize.t2.fontSize};
-  font-weight: ${({ theme }) => theme.titleSize.t2.bold};
 `;
 
 const ProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 0 0 80px 0;
+  padding: 0 10px 80px 10px;
   margin-top: 20px;
 `;
 
@@ -388,6 +401,10 @@ const InfoWrapper = styled.div`
   gap: 20px;
   width: 100%;
   margin-top: 20px;
+`;
+
+const NicknameWrapper = styled.div`
+  width: 70%;
 `;
 
 export default ProfileSection;
