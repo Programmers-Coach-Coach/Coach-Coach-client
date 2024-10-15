@@ -66,7 +66,7 @@ const RoutineInput = ({
         endAdornment={
           isSelect ? (
             <IconWrapper>
-              <IconButton name="dropDown" color="text" size="24px" />
+              <IconButton name="dropDown" color="gray3" size="24px" />
             </IconWrapper>
           ) : null
         }
