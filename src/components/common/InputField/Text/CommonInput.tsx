@@ -3,17 +3,32 @@ import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 import styled from "styled-components";
 
 interface CommonInputProps {
-  placeholder: string;
-  name: string;
+  placeholder?: string;
+  name?: string;
   type: string;
-  label: string;
+  label?: string;
   icon?: string;
   value: string | undefined; // string | undefined로 변경
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  inputHeight?: string;
+  disabled?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const CommonInput = forwardRef<HTMLInputElement, CommonInputProps>(
-  ({ placeholder, name, type, label, icon, value, onChange }, ref) => {
+  (
+    {
+      placeholder,
+      name,
+      type,
+      label,
+      icon,
+      value,
+      onChange,
+      disabled,
+      inputHeight // 추가
+    },
+    ref
+  ) => {
     const [showPswd, setShowPswd] = useState<boolean>(false);
 
     const toggleHidePassword = () => {
@@ -21,8 +36,8 @@ const CommonInput = forwardRef<HTMLInputElement, CommonInputProps>(
     };
 
     return (
-      <PasswordWrapper>
-        <TitleWrapper>{label}</TitleWrapper>
+      <Container>
+        {label && <TitleWrapper>{label}</TitleWrapper>}
 
         <InsideWrapper>
           {icon && (
@@ -39,6 +54,8 @@ const CommonInput = forwardRef<HTMLInputElement, CommonInputProps>(
             hasLeftIcon={!!icon}
             value={value}
             onChange={onChange}
+            disabled={disabled}
+            height={inputHeight || "60px"} // 여기에서 inputHeight 적용
           />
 
           {type === "password" && (
@@ -47,7 +64,7 @@ const CommonInput = forwardRef<HTMLInputElement, CommonInputProps>(
             </RightIconWrapper>
           )}
         </InsideWrapper>
-      </PasswordWrapper>
+      </Container>
     );
   }
 );
@@ -58,12 +75,12 @@ const InsideWrapper = styled.div`
   align-items: center;
 `;
 
-const PasswordWrapper = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
   position: relative;
   width: 100%;
+  gap: 10px;
 `;
 
 const TitleWrapper = styled.div`
@@ -73,20 +90,17 @@ const TitleWrapper = styled.div`
   color: #777c89;
 `;
 
-const InputWrapper = styled.input<{ hasLeftIcon: boolean }>`
+const InputWrapper = styled.input<{ hasLeftIcon: boolean; height?: string }>`
   width: 100%;
-  height: 60px;
+  height: ${({ height }) => height}; // 동적으로 height 적용
   padding: ${({ hasLeftIcon }) =>
-    hasLeftIcon
-      ? "16px 100px 16px 40px"
-      : "16px"}; /* 아이콘이 있는 경우 여유 공간 확보 */
+    hasLeftIcon ? "16px 100px 16px 40px" : "16px"};
   background-color: #252932;
   border: none;
   border-radius: 10px;
   color: #777c89;
   font-size: 16px;
 `;
-
 const LeftIconWrapper = styled.div`
   position: absolute;
   top: 50%;
