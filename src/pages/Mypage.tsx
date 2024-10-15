@@ -12,15 +12,24 @@ import Loading from "@/components/loading/Loading";
 import profilePath from "@/assets/images/profile.png";
 
 const Mypage = () => {
-  const { userLogout } = useAuth();
+  const { userLogout, withdrawUser } = useAuth();
   const { profile, isLoading } = useFetchProfile();
   const logoutModal = useModal();
+  const deleteUserModal = useModal();
+
   const navigate = useNavigate();
   const onClickLogout = () => {
     if (logoutModal.isModal) {
       logoutModal.closeModal();
     } else {
       logoutModal.openModal();
+    }
+  };
+  const onClickDeleteUser = () => {
+    if (deleteUserModal.isModal) {
+      deleteUserModal.closeModal();
+    } else {
+      deleteUserModal.openModal();
     }
   };
 
@@ -71,6 +80,40 @@ const Mypage = () => {
           </ModalWrapper>
         </Modal>
       )}
+      {deleteUserModal.isModal && (
+        <Modal closeModal={logoutModal.closeModal} position="footer-above">
+          <ModalWrapper>
+            <LogoutModalWrapper>
+              <div
+                style={{
+                  color: "#0075FF",
+                  fontSize: "20px",
+                  fontWeight: "bold"
+                }}
+              >
+                회원탈퇴
+              </div>
+              <div>정말 회원탈퇴 할까요?</div>
+            </LogoutModalWrapper>
+            <ButtonWrapper>
+              <CloseButtonWrapper
+                onClick={onClickDeleteUser}
+                size={"medium"}
+                variant={"contained"}
+              >
+                닫기
+              </CloseButtonWrapper>
+              <CustomButton
+                onClick={withdrawUser}
+                size={"medium"}
+                variant={"contained"}
+              >
+                확인
+              </CustomButton>
+            </ButtonWrapper>
+          </ModalWrapper>
+        </Modal>
+      )}
 
       <Container>
         <FirstWrapper>
@@ -116,10 +159,10 @@ const Mypage = () => {
             <Text>로그아웃</Text>
             <img src={arrowIcon} />
           </LogoutWrapper>
-          <Wrapper to="/record-list">
+          <LogoutWrapper onClick={onClickDeleteUser}>
             <Text>회원탈퇴</Text>
             <img src={arrowIcon} />
-          </Wrapper>
+          </LogoutWrapper>
         </div>
       </Container>
     </>
