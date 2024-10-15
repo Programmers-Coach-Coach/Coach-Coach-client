@@ -1,21 +1,21 @@
 import { useState } from "react";
 import styled from "styled-components";
 import DaumPostcode, { Address } from "react-daum-postcode";
-import { TextField } from "@mui/material";
 import CustomButton from "../common/Button/CustomButton";
+import CommonInput from "../common/InputField/Text/CommonInput";
 
 interface AddressSearchFieldProps {
-  label: string;
   type: string;
   value: string;
   onAddressSelect: (address: string) => void;
+  inputWidth?: string;
 }
 
 const AddressSearchField = ({
-  label,
   value,
   type,
-  onAddressSelect
+  onAddressSelect,
+  inputWidth
 }: AddressSearchFieldProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -24,8 +24,8 @@ const AddressSearchField = ({
   };
 
   const completeHandler = (data: Address) => {
-    if (type == "home") {
-      onAddressSelect(data.sigungu + " " + data.bname);
+    if (type === "home") {
+      onAddressSelect(data.sigungu);
     } else {
       onAddressSelect(data.address);
     }
@@ -34,32 +34,63 @@ const AddressSearchField = ({
   };
 
   return (
-    <>
+    <Container>
       <BasicWrapper>
-        <SubtitleWrapper>{label}</SubtitleWrapper>
-        <CustomButton variant="outlined" size="small" onClick={handleOpen}>
-          주소 검색
-        </CustomButton>
+        <InputWrapper width={inputWidth}>
+          <CommonInput
+            placeholder="센터 주소"
+            type="text"
+            value={value}
+            disabled
+            inputHeight="40px"
+          />
+        </InputWrapper>
+        <ButtonWrapper>
+          <CustomButton
+            variant="outlined"
+            size="super-mini"
+            onClick={handleOpen}
+            fontSize="12px"
+          >
+            주소 검색
+          </CustomButton>
+        </ButtonWrapper>
       </BasicWrapper>
       {isOpen && (
         <div>
           <DaumPostcode onComplete={completeHandler} />
         </div>
       )}
-      <TextField value={value} maxRows={1} disabled fullWidth />
-    </>
+    </Container>
   );
 };
 
+const InputWrapper = styled.div<{ width?: string }>`
+  display: flex;
+  width: ${({ width }) => width || "70%"};
+`;
+
+const Container = styled.div`
+  width: 100%;
+`;
+
+const ButtonWrapper = styled.div`
+  position: absolute;
+  right: 5px;
+`;
+
 const BasicWrapper = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  position: relative;
 `;
 
 const SubtitleWrapper = styled.div`
+  width: 25%;
   font-size: ${({ theme }) => theme.titleSize.t2.fontSize};
-  font-weight: ${({ theme }) => theme.titleSize.t2.bold};
+  color: #fff;
 `;
 
 export default AddressSearchField;
