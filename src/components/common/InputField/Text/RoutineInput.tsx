@@ -9,8 +9,10 @@ interface RoutineInputProps {
   placeholder: string;
   isSelect?: boolean;
   isAction?: boolean;
+  isSmall?: boolean;
   isToggleOpen?: boolean;
   setIsToggleOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  onClickDelete?: () => void;
 }
 
 const RoutineInput = ({
@@ -18,8 +20,10 @@ const RoutineInput = ({
   placeholder,
   isSelect = false,
   isAction = false,
+  isSmall = false,
   isToggleOpen = true,
-  setIsToggleOpen = () => {}
+  setIsToggleOpen = () => {},
+  onClickDelete = () => {}
 }: RoutineInputProps) => {
   const onClickHandler = () => {
     alert("gd");
@@ -39,6 +43,7 @@ const RoutineInput = ({
         shrink
         htmlFor="bootstrap-input"
         $isToggleOpen={isToggleOpen}
+        $isSmall={isSmall}
       >
         {label}
         {isAction && (
@@ -50,7 +55,7 @@ const RoutineInput = ({
               className="drop-button"
               onClick={onClickToggle}
             />
-            <p>삭제하기</p>
+            <p onClick={onClickDelete}>삭제하기</p>
           </>
         )}
       </CustomInputLabel>
@@ -61,7 +66,7 @@ const RoutineInput = ({
         endAdornment={
           isSelect ? (
             <IconWrapper>
-              <IconButton name="arrowDown" color="text" size="24px" />
+              <IconButton name="dropDown" color="text" size="24px" />
             </IconWrapper>
           ) : null
         }
@@ -69,6 +74,7 @@ const RoutineInput = ({
           readOnly: isSelect
         }}
         isSelect={isSelect}
+        isSmall={isSmall}
       />
     </FormControl>
   );
@@ -76,11 +82,12 @@ const RoutineInput = ({
 
 interface BootstrapInputProps {
   isSelect: boolean;
+  isSmall: boolean;
 }
 
 const BootstrapInput = styled(InputBase, {
-  shouldForwardProp: (prop) => prop !== "isSelect"
-})<BootstrapInputProps>(({ theme, isSelect }) => ({
+  shouldForwardProp: (prop) => prop !== "isSelect" && prop !== "isSmall"
+})<BootstrapInputProps>(({ theme, isSelect, isSmall }) => ({
   marginLeft: 10,
 
   "label + &": {
@@ -94,10 +101,11 @@ const BootstrapInput = styled(InputBase, {
     borderColor: "#252932",
     color: "#FFFFFF",
     fontSize: "20px",
-    width: "480px",
+    width: isSmall ? "440px" : "480px",
     height: "60px",
     padding: "5px 20px",
     paddingRight: "40px",
+    marginLeft: isSmall ? "40px" : "0px",
     transition: theme.transitions.create([
       "border-color",
       "background-color",
@@ -137,34 +145,37 @@ const BootstrapInput = styled(InputBase, {
 }));
 
 const CustomInputLabel = styled(InputLabel, {
-  shouldForwardProp: (prop) => prop !== "$isToggleOpen" // $isToggleOpen이 DOM으로 전달되지 않도록 설정
-})<{ $isToggleOpen: boolean }>(({ $isToggleOpen }) => ({
-  display: "flex",
-  width: "100%",
-  color: "#9EA3B2",
-  fontSize: "18px",
-  fontWeight: "bold",
-  "&.Mui-focused": {
-    color: "#9EA3B2"
-  },
-  p: {
-    margin: "0 10px",
-    color: "#959AA8",
-    cursor: "pointer",
-    fontSize: "14px"
-  },
-  svg: {
-    fill: $isToggleOpen ? "#959AA8" : "#0075FF", // 회전 후 색상 변경
-    marginLeft: "10px",
-    transition: "fill 0.3s ease-in-out" // 색상 변경 애니메이션
-  },
-  ".drop-button": {
-    transform: $isToggleOpen ? "rotateX(0deg)" : "rotateX(180deg)", // 3D 회전
-    transition: "transform 0.3s ease-in-out",
-    transformStyle: "preserve-3d", // 3D 회전을 유지하도록 설정
-    perspective: "1000px" // 입체적인 효과를 위한 perspective 설정
-  }
-}));
+  shouldForwardProp: (prop) => prop !== "$isToggleOpen" && prop !== "$isSmall" // $isToggleOpen이 DOM으로 전달되지 않도록 설정
+})<{ $isToggleOpen: boolean; $isSmall: boolean }>(
+  ({ $isToggleOpen, $isSmall }) => ({
+    display: "flex",
+    width: "100%",
+    color: "#9EA3B2",
+    fontSize: "18px",
+    fontWeight: "bold",
+    marginLeft: $isSmall ? "40px" : "0px",
+    "&.Mui-focused": {
+      color: "#9EA3B2"
+    },
+    p: {
+      margin: "0 10px",
+      color: "#959AA8",
+      cursor: "pointer",
+      fontSize: "14px"
+    },
+    svg: {
+      fill: $isToggleOpen ? "#959AA8" : "#0075FF", // 회전 후 색상 변경
+      marginLeft: "10px",
+      transition: "fill 0.3s ease-in-out" // 색상 변경 애니메이션
+    },
+    ".drop-button": {
+      transform: $isToggleOpen ? "rotateX(0deg)" : "rotateX(180deg)", // 3D 회전
+      transition: "transform 0.3s ease-in-out",
+      transformStyle: "preserve-3d", // 3D 회전을 유지하도록 설정
+      perspective: "1000px" // 입체적인 효과를 위한 perspective 설정
+    }
+  })
+);
 
 const IconWrapper = styled("div")({
   display: "flex",
