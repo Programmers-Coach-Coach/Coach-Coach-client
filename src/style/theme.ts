@@ -108,7 +108,7 @@ export const theme: Theme = {
     text: "#FFFFFF",
     gray1: "#E1E1E1",
     gray2: "#D9D9D9",
-    gray3: "#808080",
+    gray3: "#959AA8",
     lightTransparentBlack: "rgba(0, 0, 0, 0.3)"
   },
   fontSize: {

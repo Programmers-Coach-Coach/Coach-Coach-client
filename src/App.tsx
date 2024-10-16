@@ -22,6 +22,7 @@ import { theme } from "./style/theme";
 import Routine from "./pages/Routine/Routine";
 import First from "./pages/First";
 import TotalLogin from "./pages/TotalLogin";
+import AddRoutine from "./pages/Routine/AddRoutine";
 import Profile from "./pages/Profile";
 
 function App() {
@@ -64,6 +65,10 @@ function App() {
         {
           path: "routine",
           element: <Routine />
+        },
+        {
+          path: "routine/add",
+          element: <AddRoutine />
         },
         {
           path: "record",

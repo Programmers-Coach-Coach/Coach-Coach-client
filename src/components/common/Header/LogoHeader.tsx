@@ -1,4 +1,4 @@
-import logoPath from "../../../assets/images/logo.svg";
+import logoPath from "@/assets/images/logo.svg";
 import { useFetchAuth } from "@/hooks/useFetchAuth";
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";

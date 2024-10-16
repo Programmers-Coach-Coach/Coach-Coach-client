@@ -15,7 +15,12 @@ const DefaultTab = ({ value, labels, onTabChange }: TabProps) => {
       onChange={(_, newValue) => onTabChange(newValue as number)}
     >
       {labels.map((label, index) => (
-        <StyledTab key={index} selected={value === index} label={label} />
+        <StyledTab
+          key={index}
+          selected={value === index}
+          label={label}
+          tabCount={labels.length}
+        />
       ))}
     </TabsWrapper>
   );
@@ -26,13 +31,15 @@ const TabsWrapper = styled(Tabs)`
   width: 100%;
 `;
 
-const StyledTab = styled(Tab)<{ selected: boolean }>`
+const StyledTab = styled(Tab).withConfig({
+  shouldForwardProp: (prop) => prop !== "tabCount" && prop !== "selected" // tabCount와 selected가 DOM으로 전달되지 않도록 필터링
+})<{ selected: boolean; tabCount: number }>`
+  width: ${({ tabCount }) => `calc(100% / ${tabCount})`};
   flex-grow: 1;
   position: relative;
   z-index: 1;
-  width: 50%;
-  color: ${({ selected, theme }) =>
-    selected ? theme.color.primary : "#FFFFFF !important"};
+  color: ${({ selected }) =>
+    selected ? "#0075FF !important" : "#FFFFFF !important"};
 
   /* 밑줄 효과 */
   &::before {
