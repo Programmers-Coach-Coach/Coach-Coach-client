@@ -50,6 +50,7 @@ const AddRoutine = () => {
 };
 
 const AddRoutineStyle = styled.div`
+  width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -57,11 +58,17 @@ const AddRoutineStyle = styled.div`
   padding-bottom: 80px;
 
   p {
-    margin: 10px;
+    margin: 2vw 4vw 1.3vw 0;
+    font-size: 3vw;
     color: #0075ff;
     font-weight: bold;
     align-self: flex-end;
     cursor: pointer;
+
+    @media (min-width: 600px) {
+      margin: 12px 16px 8px 0;
+      font-size: 14px;
+    }
   }
 `;
 

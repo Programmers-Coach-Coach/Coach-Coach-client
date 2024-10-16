@@ -100,12 +100,20 @@ const BootstrapInput = styled(InputBase, {
     border: "1px solid",
     borderColor: "#252932",
     color: "#FFFFFF",
-    fontSize: "20px",
-    width: isSmall ? "440px" : "480px",
-    height: "60px",
-    padding: "5px 20px",
-    paddingRight: "40px",
-    marginLeft: isSmall ? "40px" : "0px",
+    fontSize: "3.5vw",
+    width: isSmall ? "56vw" : "66vw",
+    height: "8vw",
+    padding: "5px 5vw",
+    paddingRight: "10vw",
+    marginLeft: isSmall ? "10vw" : "0px",
+    "@media (min-width: 600px)": {
+      fontSize: "20px",
+      width: isSmall ? "440px" : "480px",
+      height: "60px",
+      padding: "5px 20px",
+      paddingRight: "40px",
+      marginLeft: isSmall ? "40px" : "0px"
+    },
     transition: theme.transitions.create([
       "border-color",
       "background-color",
@@ -151,22 +159,33 @@ const CustomInputLabel = styled(InputLabel, {
     display: "flex",
     width: "100%",
     color: "#9EA3B2",
-    fontSize: "18px",
+    fontSize: "4vw",
     fontWeight: "bold",
-    marginLeft: $isSmall ? "40px" : "0px",
+    marginLeft: $isSmall ? "11vw" : "1vw",
+    "@media (min-width: 600px)": {
+      fontSize: "18px",
+      marginLeft: $isSmall ? "40px" : "0px"
+    },
     "&.Mui-focused": {
       color: "#9EA3B2"
     },
     p: {
-      margin: "0 10px",
+      margin: "0 1vw",
       color: "#959AA8",
       cursor: "pointer",
-      fontSize: "14px"
+      fontSize: "3.5vw",
+      "@media (min-width: 600px)": {
+        margin: "0 10px",
+        fontSize: "14px"
+      }
     },
     svg: {
       fill: $isToggleOpen ? "#959AA8" : "#0075FF", // 회전 후 색상 변경
-      marginLeft: "10px",
-      transition: "fill 0.3s ease-in-out" // 색상 변경 애니메이션
+      marginLeft: "1vw",
+      transition: "fill 0.3s ease-in-out", // 색상 변경 애니메이션
+      "@media (min-width: 600px)": {
+        marginLeft: "10px"
+      }
     },
     ".drop-button": {
       transform: $isToggleOpen ? "rotateX(0deg)" : "rotateX(180deg)", // 3D 회전
