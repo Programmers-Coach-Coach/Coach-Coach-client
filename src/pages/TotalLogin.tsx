@@ -23,18 +23,27 @@ const TotalLogin = () => {
     navigate("/login");
   };
 
+  const handleGoogleLogin = () => {
+    window.location.href =
+      "https://coach-coach.site/oauth2/authorization/google";
+  };
+
+  const handleKakaoLogin = () => {
+    window.location.href =
+      "https://coach-coach.site/oauth2/authorization/kakao";
+  };
   return (
     <Container>
       <ImageWrapper src={LogoImage} />
       <ButtonGroupWrapper>
         <ButtonWrapper>
-          <Button>
+          <Button onClick={handleGoogleLogin}>
             <img src={googleIcon} alt="Google Icon" />
             구글 로그인
           </Button>
         </ButtonWrapper>
         <ButtonWrapper>
-          <Button>
+          <Button onClick={handleKakaoLogin}>
             <img src={kakaoIcon} alt="Kakao Icon" />
             카카오 로그인
           </Button>
