@@ -1,5 +1,4 @@
 import profilePath from "@/assets/images/profile.png";
-
 import useFetchCoachProfile from "@/hooks/queries/useFetchCoachProfile";
 import useAuth from "@/hooks/useAuth";
 import { useFetchAuth } from "@/hooks/useFetchAuth";
@@ -12,12 +11,14 @@ import toast from "react-hot-toast";
 import styled from "styled-components";
 import CustomButton from "../common/Button/CustomButton";
 import CoachProfileReview from "../common/Card/ReviewCard.tsx/CoachProfileReview";
-import SelectBox from "../common/InputField/Select/SelectBox";
 import Loading from "../loading/Loading";
 import AddressSearchField from "./AddressSearchField";
 import { AUTH_REGEX } from "@/constants/regex";
 import useModal from "@/hooks/useModal";
 import Modal from "@/components/common/modal/Modal";
+import HorizontalLine from "../common/HorizontalLine/HorizontalLine";
+import SportSelectBox from "../common/InputField/Select/SportSelectBox";
+import CommonInput from "../common/InputField/Text/CommonInput";
 
 const CoachProfileSection = () => {
   const { data: userMeData, refetch: authRefetch } = useFetchAuth();
@@ -117,24 +118,24 @@ const CoachProfileSection = () => {
           </DescWrapper>
         </Modal>
       )}
-      <BasicInfoWrapper>
+
+      <ProfileImageWrapper>
         <ProfileImage
           src={userMeData?.profileImageUrl || profilePath}
           alt="Profile"
         />
-        <NameGenderWrapper className="b1">
-          <NameWrapper>
-            <SubtitleWrapper>성함</SubtitleWrapper>
-            <div>{userMeData?.nickname}</div>
-          </NameWrapper>
-          <GenderWrapper>
-            <SubtitleWrapper>성별</SubtitleWrapper>
-            <div>{getGenderLabel(userMeData?.gender)}</div>
-          </GenderWrapper>
-        </NameGenderWrapper>
-      </BasicInfoWrapper>
+      </ProfileImageWrapper>
+      <HorizontalLine />
 
       <InfoWrapper>
+        <NameWrapper>
+          <SubtitleWrapper>닉네임</SubtitleWrapper>
+          <TmpWrapper>{userMeData?.nickname}</TmpWrapper>
+        </NameWrapper>
+        <GenderWrapper>
+          <SubtitleWrapper>성별</SubtitleWrapper>
+          <TmpWrapper>{getGenderLabel(userMeData?.gender)}</TmpWrapper>
+        </GenderWrapper>
         <BasicWrapper>
           <SubtitleWrapper>코칭 종목</SubtitleWrapper>
           <Controller
@@ -142,7 +143,7 @@ const CoachProfileSection = () => {
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
-              <SelectBox
+              <SportSelectBox
                 value={field.value}
                 onChange={(event) =>
                   field.onChange(event.target.value as string[])
@@ -151,54 +152,101 @@ const CoachProfileSection = () => {
             )}
           />
         </BasicWrapper>
-        <SubtitleWrapper>자기소개</SubtitleWrapper>
-        <Controller
-          name="coachIntroduction"
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => (
-            <TextField {...field} multiline minRows={3} maxRows={3} />
-          )}
-        />
-        <Controller
-          name="activeCenter"
-          control={control}
-          render={({ field }) => (
-            <AddressSearchField
-              type="center"
-              label="활동중인 센터 (선택)"
-              value={field.value}
-              onAddressSelect={(address) => field.onChange(address)}
-            />
-          )}
-        />
-        <Controller
-          name="activeCenterDetail"
-          control={control}
-          render={({ field }) => <TextField {...field} maxRows={1} />}
-        />
+        <AddrressWrapper>
+          <SubtitleWrapper>시설 주소 (선택)</SubtitleWrapper>
+          <Controller
+            name="activeCenter"
+            control={control}
+            render={({ field }) => (
+              <AddressSearchField
+                type="center"
+                value={field.value}
+                onAddressSelect={(address) => field.onChange(address)}
+                inputWidth="100%"
+              />
+            )}
+          />
 
-        <SubtitleWrapper>문의 가능 시간</SubtitleWrapper>
-        <Controller
-          name="activeHours"
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => <TextField {...field} maxRows={1} />}
-        />
+          <Controller
+            name="activeCenterDetail"
+            control={control}
+            render={({ field }) => (
+              <CommonInput
+                {...field}
+                inputHeight="40px"
+                type="text"
+                placeholder="상세 주소"
+              />
+            )}
+          />
+        </AddrressWrapper>
 
-        <SubtitleWrapper>오픈 카카오톡 링크</SubtitleWrapper>
-        <Controller
-          name="chattingUrl"
-          control={control}
-          rules={{
-            required: true,
-            pattern: {
-              value: AUTH_REGEX.kakaoOpenChat,
-              message: "올바른 카카오톡 링크를 적어주세요."
-            }
-          }}
-          render={({ field }) => <TextField {...field} maxRows={1} />}
-        />
+        <AddrressWrapper>
+          <SubtitleWrapper>문의 가능 시간</SubtitleWrapper>
+          <Controller
+            name="activeHours"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <CommonInput
+                {...field}
+                inputHeight="40px"
+                type="text"
+                placeholder="문의 가능 시간"
+              />
+            )}
+          />
+        </AddrressWrapper>
+
+        <AddrressWrapper>
+          <SubtitleWrapper>오픈 카카오톡 링크</SubtitleWrapper>
+          <Controller
+            name="chattingUrl"
+            control={control}
+            rules={{
+              required: true,
+              pattern: {
+                value: AUTH_REGEX.kakaoOpenChat,
+                message: "올바른 카카오톡 링크를 적어주세요."
+              }
+            }}
+            render={({ field }) => (
+              <CommonInput
+                {...field}
+                inputHeight="40px"
+                type="text"
+                placeholder="문의 가능 시간"
+              />
+            )}
+          />
+        </AddrressWrapper>
+        <AddrressWrapper>
+          <SubtitleWrapper>자기소개</SubtitleWrapper>
+          <Controller
+            name="coachIntroduction"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                multiline
+                minRows={3}
+                maxRows={3}
+                value={field.value || ""}
+                sx={{
+                  "&": {
+                    backgroundColor: "#252932",
+                    borderRadius: "10px"
+                  },
+                  "& .MuiInputBase-input": {
+                    color: "#777c89"
+                  }
+                }}
+              />
+            )}
+          />
+        </AddrressWrapper>
+
         {userMeData?.isCoach && coachProfile && (
           <>
             <SubtitleWrapper>리뷰</SubtitleWrapper>
@@ -217,7 +265,6 @@ const CoachProfileSection = () => {
             </BasicWrapper>
           )}
         />
-
         <ButtonsWrapper>
           <CustomButton
             size="full"
@@ -232,6 +279,35 @@ const CoachProfileSection = () => {
   );
 };
 
+const AddrressWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const TmpWrapper = styled.div`
+  width: 69%;
+`;
+const ProfileImageWrapper = styled.div`
+  position: relative;
+  display: flex;
+  margin: 0 auto 10px;
+
+  width: 120px;
+  height: 120px;
+  padding: 4px; /* Padding for the border */
+  background: linear-gradient(135deg, #00aaff, #a740ff);
+  border-radius: 50%;
+`;
+
+const ProfileImage = styled.img`
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
+  background: ${({ theme }) => theme.color.gray1};
+`;
 const ConfirmBtnWrapper = styled.div`
   display: flex;
   justify-content: end;
@@ -241,6 +317,7 @@ const DescWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  color: black;
 `;
 
 const ButtonsWrapper = styled.div`
@@ -256,56 +333,32 @@ const BasicWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const NameGenderWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
-  width: 70%;
-`;
-
 const SubtitleWrapper = styled.div`
   font-size: ${({ theme }) => theme.titleSize.t2.fontSize};
-  font-weight: ${({ theme }) => theme.titleSize.t2.bold};
-`;
-
-const BasicInfoWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
 `;
 
 const ProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 0 0 80px 0;
+  padding: 0 10px 80px 10px;
   margin-top: 20px;
-`;
-
-const ProfileImage = styled.img`
-  width: 25%;
-  height: 25%;
-  border-radius: 8px;
-  object-fit: cover;
-  background: ${({ theme }) => theme.color.gray1};
-`;
-
-const NameWrapper = styled.div`
-  display: flex;
-  gap: 20px;
 `;
 
 const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
   width: 100%;
   margin-top: 20px;
 `;
 
 const GenderWrapper = styled.div`
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
 `;
-
+const NameWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 export default CoachProfileSection;

@@ -8,12 +8,15 @@ export const getTitle = (pathname: string): string => {
       return "로그인";
     case "/signup":
       return "회원가입";
+    case "/profile":
+    case "/Profile":
+      return "내 프로필";
     case "/coach-list":
       return "코치 리스트";
     case "/routine":
       return "루틴";
     case "/mypage":
-      return "내 프로필";
+      return "마이페이지";
     case "/record":
       return "내 기록";
     case "/record-list":
@@ -34,13 +37,15 @@ export const getClickBackLink = (pathname: string) => {
     case "/login":
     case "/signup":
       return "/total-login";
+    case "/profile":
+    case "/manage":
+    case "/record-list":
+      return "/mypage";
     case "/coach-list":
     case "/routine":
     case "/check-password":
-    case "/record-list":
     case "/notification":
     case "/routine/my-coach":
-    case "/manage":
       return "/";
 
     case "/record":
