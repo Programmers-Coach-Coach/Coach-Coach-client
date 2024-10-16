@@ -1,9 +1,9 @@
 import { useForm, Controller, FieldErrors } from "react-hook-form";
 import styled from "styled-components";
 import CustomButton from "@/components/common/Button/CustomButton";
-import AuthInput from "@/components/common/InputField/Text/AuthInput";
 import { ICheckPassword } from "@/models/auth.model";
 import toast from "react-hot-toast";
+import CommonInput from "@/components/common/InputField/Text/CommonInput";
 
 interface CheckPasswordProps {
   onPasswordCheck: (data: ICheckPassword) => void;
@@ -35,12 +35,11 @@ const CheckPassword = ({ onPasswordCheck }: CheckPasswordProps) => {
           defaultValue=""
           rules={{ required: true }}
           render={({ field }) => (
-            <AuthInput
+            <CommonInput
               {...field}
+              inputHeight="60px"
               type="password"
-              label="비밀번호"
-              name="password"
-              placeholder="비밀번호"
+              placeholder="비밀번호를 입력해주세요"
             />
           )}
         />

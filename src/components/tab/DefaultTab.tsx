@@ -36,6 +36,7 @@ const StyledTab = styled(Tab)<{ selected: boolean; tabCount: number }>`
   flex-grow: 1;
   position: relative;
   z-index: 1;
+  width: 50%;
   color: ${({ selected, theme }) =>
     selected ? theme.color.primary : "#FFFFFF !important"};
 

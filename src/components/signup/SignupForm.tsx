@@ -22,25 +22,13 @@ const SignupForm = () => {
     getValues
   } = useForm<ISignup>({ mode: "onChange" });
 
-  const {
-    userSignup,
-    emailDuplication,
-    nicknameDuplication,
-    emailChecked,
-    nicknameChecked,
-    step
-  } = useAuth();
+  const { userSignup, emailDuplication, emailChecked, step } = useAuth();
 
   const navigate = useNavigate();
 
   const handleEmailDuplicate = () => {
     const email = getValues("email");
     emailDuplication({ email });
-  };
-
-  const handleNicknameDuplicate = () => {
-    const nickname = getValues("nickname");
-    nicknameDuplication({ nickname });
   };
 
   const onSubmit = (data: ISignup) => {
@@ -53,12 +41,6 @@ const SignupForm = () => {
       toast.error("이메일 중복 확인을 해주세요.");
       return;
     }
-
-    if (!nicknameChecked) {
-      toast.error("닉네임 중복 확인을 해주세요.");
-      return;
-    }
-
     userSignup(signupData);
   };
 
@@ -122,15 +104,6 @@ const SignupForm = () => {
                 />
               )}
             />
-            <ButtonWrapper>
-              <CustomButton
-                size="mini"
-                variant="outlined"
-                onClick={handleNicknameDuplicate}
-              >
-                <span className="b2">중복확인</span>
-              </CustomButton>
-            </ButtonWrapper>
           </FlexContainer>
           <ErrorText className="b2">{errors.nickname?.message ?? ""}</ErrorText>
 

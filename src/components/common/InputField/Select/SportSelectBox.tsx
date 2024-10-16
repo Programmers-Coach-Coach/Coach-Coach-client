@@ -20,26 +20,27 @@ interface SelectBoxProps {
   onChange: (event: SelectChangeEvent<string[]>) => void;
 }
 
-const SelectBox = ({ value, onChange }: SelectBoxProps) => {
+const SportSelectBox = ({ value, onChange }: SelectBoxProps) => {
   return (
     <FormControl sx={{ width: "70%" }}>
       <Select
         multiple
         value={value}
         onChange={onChange}
-        input={
-          <OutlinedInput
-            sx={{
-              backgroundColor: theme.color.background,
-              height: "36px",
-              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                borderColor: theme.color.primary
-              }
-            }}
-          />
-        }
+        input={<OutlinedInput />}
         renderValue={(selected) => selected.join(", ")}
         MenuProps={MenuProps}
+        sx={{
+          "& .MuiSelect-icon": {
+            color: "#777c89" // 드롭다운 화살표 색상 변경
+          },
+          "&": {
+            backgroundColor: "#252932",
+            height: "36px",
+            color: "#777c89",
+            borderRadius: "10px"
+          }
+        }}
       >
         {SPORTS_NAMES.map((name: string) => (
           <MenuItem
@@ -66,4 +67,4 @@ const SelectBox = ({ value, onChange }: SelectBoxProps) => {
   );
 };
 
-export default SelectBox;
+export default SportSelectBox;

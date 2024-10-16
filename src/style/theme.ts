@@ -22,7 +22,8 @@ export type ButtonSize =
   | "full"
   | "mini"
   | "super-mini"
-  | "full-sharp";
+  | "full-sharp"
+  | "medium";
 export type CustomButtonType =
   | "contained"
   | "outlined"
@@ -129,6 +130,11 @@ export const theme: Theme = {
       padding: "16px",
       height: "32px",
       width: "105px"
+    },
+    medium: {
+      padding: "20px",
+      height: "60px",
+      width: "140px"
     },
     full: {
       padding: "16px",

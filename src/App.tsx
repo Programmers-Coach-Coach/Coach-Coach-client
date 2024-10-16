@@ -23,6 +23,7 @@ import Routine from "./pages/Routine/Routine";
 import First from "./pages/First";
 import TotalLogin from "./pages/TotalLogin";
 import AddRoutine from "./pages/Routine/AddRoutine";
+import Profile from "./pages/Profile";
 
 function App() {
   const router = createBrowserRouter([
@@ -32,6 +33,10 @@ function App() {
         {
           path: "/",
           element: <First />
+        },
+        {
+          path: "/profile",
+          element: <Profile />
         },
         {
           path: "/total-login",
