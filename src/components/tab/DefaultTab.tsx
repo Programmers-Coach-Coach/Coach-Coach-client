@@ -15,7 +15,12 @@ const DefaultTab = ({ value, labels, onTabChange }: TabProps) => {
       onChange={(_, newValue) => onTabChange(newValue as number)}
     >
       {labels.map((label, index) => (
-        <StyledTab key={index} selected={value === index} label={label} />
+        <StyledTab
+          key={index}
+          selected={value === index}
+          label={label}
+          tabCount={labels.length}
+        />
       ))}
     </TabsWrapper>
   );
@@ -26,7 +31,8 @@ const TabsWrapper = styled(Tabs)`
   width: 100%;
 `;
 
-const StyledTab = styled(Tab)<{ selected: boolean }>`
+const StyledTab = styled(Tab)<{ selected: boolean; tabCount: number }>`
+  width: ${({ tabCount }) => `calc(100% / ${tabCount})`};
   flex-grow: 1;
   position: relative;
   z-index: 1;
