@@ -1,5 +1,9 @@
 import RoutineInput from "@/components/common/InputField/Text/RoutineInput";
+import OneButtonContent from "@/components/common/modal/contents/OneButtonContent";
+import SportsContent from "@/components/common/modal/contents/SportsContent";
+import Modal from "@/components/common/modal/Modal";
 import AddAction from "@/components/routine/AddAction";
+import useModal from "@/hooks/useModal";
 import { WhiteSpace } from "@/style/global";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -17,6 +21,7 @@ const ACTION_COUNT = 4;
 const AddRoutine = () => {
   const [actionId, setActionId] = useState<number>(1);
   const [actions, setActions] = useState<IAction[]>([]);
+  const { isModal, openModal, closeModal } = useModal();
 
   const onClickAdd = () => {
     if (actions.length < ACTION_COUNT) {
@@ -31,21 +36,34 @@ const AddRoutine = () => {
   };
 
   return (
-    <AddRoutineStyle>
-      <RoutineInput label="루틴 이름" placeholder="루틴 이름을 입력해 주세요" />
-      <WhiteSpace $height={10} />
-      <RoutineInput
-        label="종목"
-        placeholder="운동 종목을 선택해 주세요"
-        isSelect={true}
-      />
-      <WhiteSpace $height={20} />
-      <UnderlineStyle />
-      <p onClick={onClickAdd}>+운동 추가 하기</p>
-      {actions.map((action, index) => (
-        <AddAction key={action.id} index={index} setActions={setActions} />
-      ))}
-    </AddRoutineStyle>
+    <>
+      {isModal && (
+        <Modal closeModal={closeModal} position="footer-above">
+          <OneButtonContent title="운동 종목 선택" buttonText="선택완료">
+            <SportsContent />
+          </OneButtonContent>
+        </Modal>
+      )}
+      <AddRoutineStyle>
+        <RoutineInput
+          label="루틴 이름"
+          placeholder="루틴 이름을 입력해 주세요"
+        />
+        <WhiteSpace $height={10} />
+        <RoutineInput
+          label="종목"
+          placeholder="운동 종목을 선택해 주세요"
+          isSelect={true}
+          onClickHandler={openModal}
+        />
+        <WhiteSpace $height={20} />
+        <UnderlineStyle />
+        <p onClick={onClickAdd}>+운동 추가 하기</p>
+        {actions.map((action, index) => (
+          <AddAction key={action.id} index={index} setActions={setActions} />
+        ))}
+      </AddRoutineStyle>
+    </>
   );
 };
 
