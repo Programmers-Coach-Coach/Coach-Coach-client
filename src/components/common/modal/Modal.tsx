@@ -23,7 +23,7 @@ const Modal = ({
   );
 
   return (
-    <ModalStyle position={position} onClick={overlayClick}>
+    <ModalStyle $position={position} onClick={overlayClick}>
       {position === "center" && (
         <CenterContents ref={modalRef}>{children}</CenterContents>
       )}
@@ -34,13 +34,16 @@ const Modal = ({
   );
 };
 
-const ModalStyle = styled.div<{ position: Position }>`
+// shouldForwardProp 사용하여 $position 필터링
+const ModalStyle = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "$position" // $position만 스타일에 사용, DOM에 전달되지 않음
+})<{ $position: Position }>`
   position: fixed;
   inset: 0;
   max-width: 600px;
   margin: 0 auto;
   height: 100vh;
-  z-index: ${({ position }) => (position === "center" ? 1002 : 1000)};
+  z-index: ${({ $position }) => ($position === "center" ? 1002 : 1000)};
   background: rgba(101, 104, 104, 0.5);
 `;
 
