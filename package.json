@@ -46,6 +46,7 @@
     "react-slick": "^0.30.2",
     "react-snap": "^1.23.0",
     "react-spinners": "^0.14.1",
+    "react-time-picker": "^7.0.0",
     "react-use": "^17.5.1",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.12",
