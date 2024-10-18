@@ -41,6 +41,15 @@ const LoginForm = () => {
     }
     userLogin(data);
   };
+  const handleGoogleLogin = () => {
+    window.location.href =
+      "https://coach-coach.site/oauth2/authorization/google";
+  };
+
+  const handleKakaoLogin = () => {
+    window.location.href =
+      "https://coach-coach.site/oauth2/authorization/kakao";
+  };
 
   return (
     <FormWrapper onSubmit={handleSubmit(onSubmit)}>
@@ -88,12 +97,12 @@ const LoginForm = () => {
       </CustomButton>
       <ButtonGroupWrapper>
         <ButtonWrapper>
-          <Button type="button">
+          <Button type="button" onClick={handleGoogleLogin}>
             <img src={googleIcon} alt="Google Icon" />
           </Button>
         </ButtonWrapper>
         <ButtonWrapper>
-          <Button type="button">
+          <Button type="button" onClick={handleKakaoLogin}>
             <img src={kakaoIcon} alt="Kakao Icon" />
           </Button>
         </ButtonWrapper>
