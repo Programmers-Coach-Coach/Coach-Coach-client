@@ -24,13 +24,11 @@ const MemberProfile = ({
   const dumbbellClickHandler = () => {
     if (isMatching) {
       setIsSet(true);
-      console.log(isSet);
     }
   };
 
   useEffect(() => {
     if (isSet) {
-      console.log(isSet);
       navigate("/member/routine");
     }
   }, [isSet, navigate]);
