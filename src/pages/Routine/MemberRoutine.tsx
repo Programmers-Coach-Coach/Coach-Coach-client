@@ -1,4 +1,6 @@
 import Progress from "@/components/common/InputField/Progress/Progress";
+import AddModal from "@/components/common/modal/AddModal";
+import DraggableIcon from "@/components/Icon/DraggableIcon";
 import IconButton from "@/components/Icon/IconButton";
 import SliderProfileList from "@/components/Profile/ProfileList/SliderProfileList";
 import RoutineList from "@/components/routine/RoutineList";
@@ -6,7 +8,7 @@ import { useGetRoutines } from "@/hooks/queries/routine/useRoutine";
 import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
 import { WhiteSpace } from "@/style/global";
 import { formatCurrentDate } from "@/utils/formatDate";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { styled } from "styled-components";
 
 const DATA = [
@@ -28,6 +30,8 @@ const DATA = [
 
 const MemberRoutine = () => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isDragging, setIsDragging] = useState<boolean>(false); // 드래그 상태 추가
   const iconSize = useResponsiveIconSize("3vw", "16px", 600);
   const { data, isLoading, isError } = useGetRoutines();
 
@@ -44,39 +48,72 @@ const MemberRoutine = () => {
     }
   };
 
+  // 드래그 중이 아닐 때만 openHandler 실행
+  const openHandler = () => {
+    if (!isDragging) {
+      setIsOpen(!isOpen);
+    }
+  };
+
   return (
-    <MemberRoutineStyle>
-      <div className="title">내 회원</div>
-      <SliderProfileList data={DATA} />
-      <Wrap>
-        <MemberDescriptionStyle>
-          <MemberTagsStyle>
-            <MemberTagStyle color="primary">#헬스</MemberTagStyle>
-            <MemberTagStyle color="review">#필라테스</MemberTagStyle>
-          </MemberTagsStyle>
-          <div className="date">트레이닝 시작일 : 2024. 10. 02.</div>
-        </MemberDescriptionStyle>
-        <ChatButtontyle>
-          <div className="chat">채팅하기</div>
-          <IconButton name="chat" size={iconSize} color="text" />
-        </ChatButtontyle>
-      </Wrap>
-      <UnderlinedInput
-        rows={1}
-        placeholder="회원님께 오늘의 한마디를 남겨주세요"
-        onKeyDown={handleKeyDown}
-        ref={textareaRef}
-      />
-      <RoutineTextStyle>
-        <h1>오늘의 루틴</h1>
-        <p className="b3">{currentDate}</p>
-      </RoutineTextStyle>
-      <Progress value={70} />
-      <RoutineList routines={data} isCheck={false} />
-      <WhiteSpace $height={80} />
-    </MemberRoutineStyle>
+    <>
+      {isOpen && <BlurStyle />}
+      <MemberRoutineStyle>
+        <div className="title">내 회원</div>
+        <SliderProfileList data={DATA} />
+        <Wrap>
+          <MemberDescriptionStyle>
+            <MemberTagsStyle>
+              <MemberTagStyle color="primary">#헬스</MemberTagStyle>
+              <MemberTagStyle color="review">#필라테스</MemberTagStyle>
+            </MemberTagsStyle>
+            <div className="date">트레이닝 시작일 : 2024. 10. 02.</div>
+          </MemberDescriptionStyle>
+          <ChatButtontyle>
+            <div className="chat">채팅하기</div>
+            <IconButton name="chat" size={iconSize} color="text" />
+          </ChatButtontyle>
+        </Wrap>
+        <UnderlinedInput
+          rows={1}
+          placeholder="회원님께 오늘의 한마디를 남겨주세요"
+          onKeyDown={handleKeyDown}
+          ref={textareaRef}
+        />
+        <RoutineTextStyle>
+          <h1>오늘의 루틴</h1>
+          <p className="b3">{currentDate}</p>
+        </RoutineTextStyle>
+        <Progress value={70} />
+        <RoutineList routines={data} isCheck={false} />
+        <WhiteSpace $height={80} />
+        <DraggableIcon isDraggingFn={setIsDragging}>
+          {isOpen ? (
+            <AddModal openHandler={openHandler} />
+          ) : (
+            <IconButton
+              name="add"
+              size="60px"
+              color="primary"
+              onClick={openHandler}
+            />
+          )}
+        </DraggableIcon>
+      </MemberRoutineStyle>
+    </>
   );
 };
+
+const BlurStyle = styled.div`
+  position: fixed;
+  inset: 0;
+  align-items: center;
+  max-width: 100vw;
+  height: 100vh;
+  background: rgba(24, 26, 32, 0.7);
+  backdrop-filter: blur(1px);
+  z-index: 1002;
+`;
 
 const MemberRoutineStyle = styled.div`
   .title {
