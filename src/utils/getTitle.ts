@@ -14,9 +14,12 @@ export const getTitle = (pathname: string): string => {
     case "/coach-list":
       return "코치 리스트";
     case "/routine":
+    case "/member/routine":
       return "루틴";
     case "/routine/add":
       return "새 루틴 추가";
+    case "/member":
+      return "회원 리스트";
     case "/mypage":
       return "마이페이지";
     case "/record":
@@ -55,6 +58,8 @@ export const getClickBackLink = (pathname: string) => {
 
     case "/routine/add":
       return "/routine";
+    case "/member/routine":
+      return "/member";
     default:
       return null;
   }
