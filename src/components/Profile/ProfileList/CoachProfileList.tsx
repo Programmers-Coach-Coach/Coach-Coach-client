@@ -3,30 +3,29 @@ import { styled } from "styled-components";
 import Empty from "@/components/common/Empty/Empty";
 import CoachProfile from "../CoachProfile";
 
-interface MyCoachesProfileListProps {
+interface CoachProfileListProps {
   data: ISimpleCoach[];
 }
 
-const InqueryCoachProfileList = ({ data }: MyCoachesProfileListProps) => {
-  const filteredData = data.filter((d) => d.isMatching === false);
+const CoachProfileList = ({ data }: CoachProfileListProps) => {
   return (
     <>
-      {filteredData.length ? (
-        <InqueryCoachProfileListStyle>
-          {filteredData.map((d) => (
+      {data.length ? (
+        <CoachProfileListSytle>
+          {data.map((d) => (
             <CoachProfile
               key={d.coachId}
               profileName={d.coachName}
               profileImageUrl={d.profileImageUrl}
             />
           ))}
-        </InqueryCoachProfileListStyle>
+        </CoachProfileListSytle>
       ) : (
         <Empty
           name="coach"
           size="80px"
           color="gray3"
-          descriptions="문의한 코치가 없습니다"
+          descriptions="나의 코치가 없습니다"
           padding="10px"
         />
       )}
@@ -34,8 +33,8 @@ const InqueryCoachProfileList = ({ data }: MyCoachesProfileListProps) => {
   );
 };
 
-const InqueryCoachProfileListStyle = styled.div`
+const CoachProfileListSytle = styled.div`
   justify-items: center;
 `;
 
-export default InqueryCoachProfileList;
+export default CoachProfileList;

@@ -1,6 +1,5 @@
 import IconButton from "@/components/Icon/IconButton";
-import InqueryCoachProfileList from "@/components/Profile/ProfileList/InqueryCoachProflieList";
-import MyCoachesProfileList from "@/components/Profile/ProfileList/MyCoachesProfileList";
+import CoachProfileList from "@/components/Profile/ProfileList/CoachProfileList";
 import { useMyCoachList } from "@/hooks/useCoachList";
 import { WhiteSpace } from "@/style/global";
 import { styled } from "styled-components";
@@ -10,6 +9,9 @@ const MyCoach = () => {
 
   if (isLoading) return <div>로딩 중...</div>;
   if (isError || !data) return <div>무언가 잘못됨</div>;
+
+  const matchData = data.filter((d) => d.isMatching === true);
+  const inquiryData = data.filter((d) => d.isMatching === false);
 
   return (
     <MyCoachStyle>
@@ -24,7 +26,7 @@ const MyCoach = () => {
           <IconButton name="chat" size="0.7rem" color="text" />
         </ChatCardStyle>
       </ProfileHeader>
-      <MyCoachesProfileList data={data} />
+      <CoachProfileList data={matchData} />
       <ProfileHeader>
         <SectionStyle>
           <p className="title">매칭 대기 중인 코치</p>
@@ -32,7 +34,7 @@ const MyCoach = () => {
           <p className="desc">곧 나와 함께 할 코치님이에요.</p>
         </SectionStyle>
       </ProfileHeader>
-      <InqueryCoachProfileList data={data} />
+      <CoachProfileList data={inquiryData} />
     </MyCoachStyle>
   );
 };
@@ -98,6 +100,7 @@ const ChatCardStyle = styled.div`
   height: 40px;
   background-color: ${({ theme }) => theme.color.primary};
   border-radius: ${({ theme }) => theme.borderRadius.default};
+  cursor: pointer;
 
   svg {
     margin-bottom: 10px;

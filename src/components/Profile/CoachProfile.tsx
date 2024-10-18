@@ -43,12 +43,8 @@ const CoachProfile = ({ profileName, profileImageUrl }: CoachProfileProps) => {
         </CoachNameStyle>
         <p className="address">서울시 마포구</p>
         <CoachTagsStyle>
-          <CoachTagStyle color="primary">
-            <p className="tag">#헬스</p>
-          </CoachTagStyle>
-          <CoachTagStyle color="review">
-            <p className="tag">#수영</p>
-          </CoachTagStyle>
+          <CoachTagStyle color="primary">#헬스</CoachTagStyle>
+          <CoachTagStyle color="review">#수영</CoachTagStyle>
         </CoachTagsStyle>
       </CoachProfileDetailStyle>
     </CoachProfileStyle>
@@ -80,19 +76,12 @@ const CoachProfileStyle = styled.div`
   }
 
   .address {
-    font-size: 14px;
     color: #808080;
-
-    @media (max-width: 375px) {
-      font-size: 10px;
-    }
-  }
-
-  .tag {
-    font-size: 16px;
-
-    @media (max-width: 375px) {
-      font-size: 12px;
+    font-size: 2vw;
+    margin: 0.8vw 0 4.8vw 0;
+    @media (min-width: 600px) {
+      font-size: 14px;
+      margin: 5px 0 30px 0;
     }
   }
 `;
@@ -110,9 +99,8 @@ const CoachProfileImageStyle = styled.img`
 
 const CoachProfileDetailStyle = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   width: 35vw;
   height: 35vw;
   padding: 0;
@@ -127,26 +115,33 @@ const CoachProfileDetailStyle = styled.div`
 
 const CoachNameStyle = styled.div`
   display: flex;
+  margin: 4.8vw 0 0.8vw 0;
+  @media (min-width: 600px) {
+    margin: 30px 0 5px 0;
+  }
 `;
 
 const CoachTagsStyle = styled.div`
   display: flex;
-  margin-top: 1vw;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
 `;
 
 const CoachTagStyle = styled.div<{ color: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80px;
-  height: 40px;
+  width: 13vw;
+  height: 6.5vw;
+  font-size: 2.5vw;
   background-color: ${({ theme, color }) => theme.color[color]};
   border-radius: 20px;
-  margin: 0 5px;
 
-  @media (max-width: 375px) {
-    width: 50px;
-    height: 30px;
+  @media (min-width: 600px) {
+    width: 80px;
+    height: 40px;
+    font-size: 16px;
   }
 `;
 
