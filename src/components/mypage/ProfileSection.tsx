@@ -1,8 +1,6 @@
 import profilePath from "@/assets/images/profile.png";
-import Modal from "@/components/common/modal/Modal";
 import useFetchProfile from "@/hooks/queries/useFetchUserProfile";
 import useAuth from "@/hooks/useAuth";
-import useModal from "@/hooks/useModal";
 import { IMyPageFormValues } from "@/models/auth.model";
 import { getGenderLabel } from "@/utils/genderUtils";
 import { TextField } from "@mui/material";
@@ -36,11 +34,8 @@ const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
 const ProfileSection = () => {
   const { profile, isFetchError, isLoading } = useFetchProfile();
-  const { isModal, openModal, closeModal } = useModal();
-  const onClickAdd = () => {
-    openModal();
-  };
-  const { withdrawUser, editUserProfile } = useAuth();
+
+  const { editUserProfile } = useAuth();
   const { control, handleSubmit, setValue, watch } = useForm<IMyPageFormValues>(
     {
       defaultValues: {
@@ -173,27 +168,6 @@ const ProfileSection = () => {
 
   return (
     <ProfileWrapper>
-      {isModal && (
-        <Modal closeModal={closeModal} position="center">
-          <ModalTitleWrapper>회원탈퇴를 하시겠습니까?</ModalTitleWrapper>
-          <ButtonWrapper>
-            <CustomButton
-              size="mini"
-              variant="containedError"
-              onClick={withdrawUser}
-            >
-              확인
-            </CustomButton>
-            <CustomButton
-              size="mini"
-              variant="containedCancel"
-              onClick={closeModal}
-            >
-              취소
-            </CustomButton>
-          </ButtonWrapper>
-        </Modal>
-      )}
       <ProfileImageWrapper>
         <ProfileImage src={getProfileImageUrl()} alt="Profile" />
         <IconWrapper src={EditIcon} onClick={() => inputRef.current?.click()} />
@@ -309,9 +283,6 @@ const ProfileSection = () => {
         >
           수정하기
         </CustomButton>
-        <AddTextStyle>
-          <span onClick={onClickAdd}>회원탈퇴</span>
-        </AddTextStyle>
       </InfoWrapper>
     </ProfileWrapper>
   );
@@ -321,27 +292,6 @@ const AddrressWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-`;
-const ModalTitleWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  cursor: pointer;
-`;
-const AddTextStyle = styled.div`
-  display: flex;
-  justify-content: center;
-  span {
-    color: ${({ theme }) => theme.color.primary};
-    text-decoration: none;
-    cursor: pointer;
-  }
 `;
 const ProfileImageWrapper = styled.div`
   position: relative;
