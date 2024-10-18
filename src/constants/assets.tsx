@@ -1,4 +1,4 @@
-import { FaRegStar } from "react-icons/fa";
+import { FaRegStar, FaCheck } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
 import {
   IoIosArrowBack,
@@ -57,5 +57,6 @@ export const ICONS = {
   chat: IoChatbubbleEllipsesSharp,
   more: CgDetailsMore,
   dropUp: MdOutlineArrowDropUp,
-  dropDown: MdOutlineArrowDropDown
+  dropDown: MdOutlineArrowDropDown,
+  check: FaCheck
 };

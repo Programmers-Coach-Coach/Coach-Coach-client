@@ -12,11 +12,16 @@ export type ColorKey =
   | "gray1"
   | "gray2"
   | "gray3"
+  | "blue"
   | "lightTransparentBlack";
 
 export type FontSize = "large" | "medium" | "small";
 export type FontWeight = "bold" | "normal";
 export type ButtonSize =
+  | "desktop"
+  | "mobile"
+  | "mini_desktop"
+  | "mini_mobile"
   | "large"
   | "small"
   | "full"
@@ -109,6 +114,7 @@ export const theme: Theme = {
     gray1: "#E1E1E1",
     gray2: "#D9D9D9",
     gray3: "#959AA8",
+    blue: "#0066FF",
     lightTransparentBlack: "rgba(0, 0, 0, 0.3)"
   },
   fontSize: {
@@ -121,6 +127,26 @@ export const theme: Theme = {
     normal: "400"
   },
   button: {
+    desktop: {
+      padding: "16px",
+      height: "60px",
+      width: "500px"
+    },
+    mobile: {
+      padding: "16px",
+      height: "12vw",
+      width: "90vw"
+    },
+    mini_desktop: {
+      padding: "16px",
+      height: "80px",
+      width: "250px"
+    },
+    mini_mobile: {
+      padding: "16px",
+      height: "18vw",
+      width: "44vw"
+    },
     large: {
       padding: "16px",
       height: "60px",
@@ -236,9 +262,9 @@ export const theme: Theme = {
       borderHoverColor: "#e23636"
     },
     containedCancel: {
-      backgroundColor: "transparent",
-      color: "#808080",
-      border: "1px solid #808080",
+      backgroundColor: "#252932",
+      color: "#9EA3B2",
+      border: "none",
       borderHoverColor: "#808080"
     }
   },

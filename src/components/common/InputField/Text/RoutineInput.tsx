@@ -13,6 +13,7 @@ interface RoutineInputProps {
   isToggleOpen?: boolean;
   setIsToggleOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   onClickDelete?: () => void;
+  onClickHandler?: () => void;
 }
 
 const RoutineInput = ({
@@ -23,12 +24,9 @@ const RoutineInput = ({
   isSmall = false,
   isToggleOpen = true,
   setIsToggleOpen = () => {},
-  onClickDelete = () => {}
+  onClickDelete = () => {},
+  onClickHandler = () => {}
 }: RoutineInputProps) => {
-  const onClickHandler = () => {
-    alert("gd");
-  };
-
   const onClickToggle = () => {
     setIsToggleOpen(!isToggleOpen);
   };
@@ -101,11 +99,11 @@ const BootstrapInput = styled(InputBase, {
     borderColor: "#252932",
     color: "#FFFFFF",
     fontSize: "3.5vw",
-    width: isSmall ? "56vw" : "66vw",
+    width: isSmall ? "56vw" : "70vw",
     height: "8vw",
     padding: "5px 5vw",
     paddingRight: "10vw",
-    marginLeft: isSmall ? "10vw" : "0px",
+    marginLeft: isSmall ? "14vw" : "0px",
     "@media (min-width: 600px)": {
       fontSize: "20px",
       width: isSmall ? "440px" : "480px",

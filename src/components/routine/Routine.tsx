@@ -1,14 +1,13 @@
 import Card from "@/components/common/Card/Card";
 import Modal from "@/components/common/modal/Modal";
 import useModal from "@/hooks/useModal";
-import { useModalInfo } from "@/store/modalInfo.store";
 import { keyframes, styled } from "styled-components";
-import RoutinePicker from "../common/modal/contents/RoutinePicker";
 import IconButton from "../Icon/IconButton";
 import Completed from "../common/InputField/CheckBox/Completed";
 import { useState } from "react";
 import RoutineDetail from "./RoutineDetail";
 import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
+import TwoButtonContent from "../common/modal/contents/TwoButtonContent";
 
 interface RoutineProps {
   id: number;
@@ -38,15 +37,13 @@ const ACTION = [
 const Routine = ({ id, name, isCheck, isModify }: RoutineProps) => {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
   const deleteModal = useModal();
-  const setRoutineId = useModalInfo((state) => state.setRoutineId);
 
   const onClickToggle = () => {
     setIsToggleOpen(!isToggleOpen);
   };
 
-  const onClickDelete = () => {
-    setRoutineId(id);
-    deleteModal.openModal();
+  const routineDeleteHandler = () => {
+    alert(id);
   };
 
   const iconSize = useResponsiveIconSize("15px", "20px", 375);
@@ -55,7 +52,16 @@ const Routine = ({ id, name, isCheck, isModify }: RoutineProps) => {
     <>
       {deleteModal.isModal && (
         <Modal closeModal={deleteModal.closeModal} position="footer-above">
-          <RoutinePicker schema="delete" closeModal={deleteModal.closeModal} />
+          <TwoButtonContent
+            title={name}
+            description="루틴을 삭제하시겠어요?"
+            cancelButtonText="돌아가기"
+            onCancel={() => {
+              deleteModal.closeModal();
+            }}
+            ConfirmButtonText="삭제하기"
+            onConfirm={routineDeleteHandler}
+          />
         </Modal>
       )}
       <Card>
@@ -80,7 +86,9 @@ const Routine = ({ id, name, isCheck, isModify }: RoutineProps) => {
                 name="delete"
                 size={iconSize}
                 color="text"
-                onClick={onClickDelete}
+                onClick={() => {
+                  deleteModal.openModal();
+                }}
               />
             </CRUDIconStyle>
           )}
