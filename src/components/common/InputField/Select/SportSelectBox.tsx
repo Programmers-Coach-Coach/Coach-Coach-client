@@ -21,6 +21,7 @@ interface SelectBoxProps {
 }
 
 const SportSelectBox = ({ value, onChange }: SelectBoxProps) => {
+  const maxSelection = 5;
   return (
     <FormControl sx={{ width: "70%" }}>
       <Select
@@ -49,6 +50,7 @@ const SportSelectBox = ({ value, onChange }: SelectBoxProps) => {
             sx={{
               height: 30
             }}
+            disabled={value.length >= maxSelection && !value.includes(name)}
           >
             <Checkbox
               checked={value.indexOf(name) > -1}
