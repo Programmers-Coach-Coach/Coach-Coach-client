@@ -1,4 +1,4 @@
-import IconButton from "@/components/Icon/IconButton";
+import SvgIcon from "@/components/Icon/SvgIcon";
 import { useLikePost, useUnLikePost } from "@/hooks/queries/useLikes";
 import { MouseEvent, useState } from "react";
 import styled from "styled-components";
@@ -34,18 +34,23 @@ const Heart = ({ id, checked, size }: Props) => {
   return (
     <HeartStyle>
       {isChecked ? (
-        <IconButton
-          size={size}
+        <SvgIcon
+          width={size}
+          height={size}
           name="heart"
-          color="likes"
+          stroke="primary"
+          fill="primary"
           onClick={(e) => handleHeart(e, id)}
+          isButton={true}
         />
       ) : (
-        <IconButton
-          size={size}
+        <SvgIcon
+          width={size}
+          height={size}
           name="emptyHeart"
-          color="likes"
+          stroke="primary"
           onClick={(e) => handleHeart(e, id)}
+          isButton={true}
         />
       )}
     </HeartStyle>
@@ -55,6 +60,7 @@ const Heart = ({ id, checked, size }: Props) => {
 const HeartStyle = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 export default Heart;
