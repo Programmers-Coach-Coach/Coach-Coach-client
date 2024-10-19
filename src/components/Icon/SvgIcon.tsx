@@ -1,9 +1,9 @@
 import { ICONS } from "@/constants/assets";
 import { ColorKey, theme } from "@/style/theme";
-import { ButtonHTMLAttributes } from "react";
+import { HTMLAttributes } from "react";
 import { styled } from "styled-components";
 
-interface IconProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface IconProps extends HTMLAttributes<HTMLDivElement> {
   name: keyof typeof ICONS;
   width?: string; // 너비
   height?: string; // 높이
@@ -18,7 +18,6 @@ const SvgIcon = ({
   height = "23px",
   stroke = "none",
   fill = "none",
-  isButton = false,
   ...props
 }: IconProps) => {
   const SelectedIcon = ICONS[name];
@@ -36,24 +35,10 @@ const SvgIcon = ({
     />
   );
 
-  return (
-    <>
-      {isButton ? (
-        <IconButtonStyle {...props}>{icon}</IconButtonStyle>
-      ) : (
-        <IconStyle>{icon}</IconStyle>
-      )}
-    </>
-  );
+  return <IconStyle {...props}>{icon}</IconStyle>;
 };
 
 const IconStyle = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const IconButtonStyle = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
