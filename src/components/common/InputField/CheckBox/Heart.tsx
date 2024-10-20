@@ -41,7 +41,6 @@ const Heart = ({ id, checked, size }: Props) => {
           stroke="primary"
           fill="primary"
           onClick={(e) => handleHeart(e, id)}
-          isButton={true}
         />
       ) : (
         <SvgIcon
@@ -50,7 +49,6 @@ const Heart = ({ id, checked, size }: Props) => {
           name="emptyHeart"
           stroke="primary"
           onClick={(e) => handleHeart(e, id)}
-          isButton={true}
         />
       )}
     </HeartStyle>
