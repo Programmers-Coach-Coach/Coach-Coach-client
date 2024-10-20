@@ -1,3 +1,12 @@
+import { FaRegStar, FaCheck, FaDumbbell } from "react-icons/fa";
+import { FaStar } from "react-icons/fa6";
+import {
+  IoIosArrowBack,
+  IoIosArrowDown,
+  IoIosHeart,
+  IoIosHeartEmpty,
+  IoMdMore
+} from "react-icons/io";
 import ArrowDown from "@/assets/images/arrow-down.svg?react";
 import EmptyHeart from "@/assets/images/empty-heart.svg?react";
 import FullHeart from "@/assets/images/full-heart.svg?react";
@@ -58,5 +67,6 @@ export const ICONS = {
   dropUp: MdOutlineArrowDropUp,
   dropDown: MdOutlineArrowDropDown,
   check: FaCheck,
+  dumbbell: FaDumbbell
   arrow: ArrowDown
 };

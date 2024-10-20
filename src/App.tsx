@@ -9,7 +9,6 @@ import Coach from "./pages/Coach";
 import CoachList from "./pages/CoachList";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import ManageMember from "./pages/ManageMember";
 import Mypage from "./pages/Mypage";
 import Notification from "./pages/Notification";
 import Record from "./pages/Record";
@@ -24,6 +23,7 @@ import First from "./pages/First";
 import TotalLogin from "./pages/TotalLogin";
 import AddRoutine from "./pages/Routine/AddRoutine";
 import Profile from "./pages/Profile";
+import MyMember from "./pages/Routine/MyMember";
 
 function App() {
   const router = createBrowserRouter([
@@ -71,6 +71,14 @@ function App() {
           element: <AddRoutine />
         },
         {
+          path: "member",
+          element: <MyMember />
+        },
+        {
+          path: "/member/routine",
+          element: <MemberRoutine />
+        },
+        {
           path: "record",
           element: <RecordDatail />
         },
@@ -89,14 +97,6 @@ function App() {
         {
           path: "routine/my-coach/:coachId",
           element: <CoachRoutine />
-        },
-        {
-          path: "manage",
-          element: <ManageMember />
-        },
-        {
-          path: "routine/member/:userId",
-          element: <MemberRoutine />
         }
       ]
     }
