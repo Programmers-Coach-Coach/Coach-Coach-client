@@ -9,7 +9,6 @@ interface IconProps extends HTMLAttributes<HTMLDivElement> {
   height?: string; // 높이
   stroke?: ColorKey | string; // 테두리 색상
   fill?: ColorKey | string; // 채우기 색상
-  isButton?: boolean; // 버튼 여부
 }
 
 const SvgIcon = ({
