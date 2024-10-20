@@ -7,9 +7,20 @@ import {
   IoIosHeartEmpty,
   IoMdMore
 } from "react-icons/io";
+import ArrowDown from "@/assets/images/arrow-down.svg?react";
+import EmptyHeart from "@/assets/images/empty-heart.svg?react";
+import FullHeart from "@/assets/images/full-heart.svg?react";
+import FullStar from "@/assets/images/full-star.svg?react";
+import Star from "@/assets/images/star.svg?react";
+import { CgDetailsMore } from "react-icons/cg";
+import { FaCheck, FaRegStar } from "react-icons/fa";
+import { IoIosArrowBack, IoIosArrowDown, IoMdMore } from "react-icons/io";
 import {
+  IoAddCircleSharp,
   IoBarbellOutline,
+  IoChatbubbleEllipsesSharp,
   IoClose,
+  IoCloseCircle,
   IoGlasses,
   IoHomeOutline,
   IoListOutline,
@@ -18,16 +29,12 @@ import {
   IoPeopleOutline,
   IoPersonOutline,
   IoSearch,
-  IoTrendingDown,
-  IoAddCircleSharp,
-  IoCloseCircle,
-  IoChatbubbleEllipsesSharp
+  IoTrendingDown
 } from "react-icons/io5";
 import { LuPencilLine } from "react-icons/lu";
+import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from "react-icons/md";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { TbArrowsExchange2 } from "react-icons/tb";
-import { CgDetailsMore } from "react-icons/cg";
-import { MdOutlineArrowDropUp, MdOutlineArrowDropDown } from "react-icons/md";
 
 export const ICONS = {
   profile: IoPersonOutline,
@@ -47,10 +54,11 @@ export const ICONS = {
   search: IoSearch,
   arrowDown: IoIosArrowDown,
   dots: IoMdMore,
+  star: Star,
   emptyStar: FaRegStar,
-  fullStar: FaStar,
-  heart: IoIosHeart,
-  emptyHeart: IoIosHeartEmpty,
+  fullStar: FullStar,
+  heart: FullHeart,
+  emptyHeart: EmptyHeart,
   list: IoListOutline,
   add: IoAddCircleSharp,
   close: IoCloseCircle,
@@ -60,4 +68,5 @@ export const ICONS = {
   dropDown: MdOutlineArrowDropDown,
   check: FaCheck,
   dumbbell: FaDumbbell
+  arrow: ArrowDown
 };

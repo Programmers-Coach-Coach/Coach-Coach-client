@@ -5,7 +5,6 @@ import { getImgixUrl } from "@/utils/imgix";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Heart from "../common/InputField/CheckBox/Heart";
-import { CoachingSports } from "./PopularCoaches";
 
 interface Props {
   coach: ICoach;
@@ -32,14 +31,14 @@ const Coach = ({ coach }: Props) => {
         <LineClamp $line={2} className="desc">
           {coach.coachIntroduction}
         </LineClamp>
-        <CoachingSportStyle className="coaching-sports">
+        <div className="coaching-sports">
           {coach.coachingSports.slice(0, 2).map((item) => (
             <li key={item.sportId}>#{item.sportName}</li>
           ))}
           {coach.coachingSports.length > 2 && (
             <span className="etc">외 {coach.coachingSports.length - 2}개</span>
           )}
-        </CoachingSportStyle>
+        </div>
       </Text>
       <Heart checked={coach.isLiked} size="24" id={coach.coachId} />
 
@@ -85,16 +84,6 @@ const Text = styled.div`
     font-size: 12px;
     margin-bottom: 10px;
     white-space: pre-line; /* 줄바꿈 처리 */
-  }
-`;
-
-const CoachingSportStyle = styled(CoachingSports)`
-  position: absolute;
-  bottom: 0;
-
-  .etc {
-    color: ${({ theme }) => theme.color.gray3};
-    font-size: 12px;
   }
 `;
 
