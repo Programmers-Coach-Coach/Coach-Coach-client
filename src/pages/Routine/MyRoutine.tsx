@@ -1,13 +1,13 @@
 import { useState } from "react";
 import DraggableIcon from "@/components/Icon/DraggableIcon";
-import IconButton from "@/components/Icon/IconButton";
 import RoutineList from "@/components/routine/RoutineList";
-import { useGetRoutines } from "@/hooks/queries/routine/useRoutine";
+import { useGetRoutines } from "@/hooks/queries/useRoutine";
 import { WhiteSpace } from "@/style/global";
 import { formatCurrentDate } from "@/utils/formatDate";
 import { styled } from "styled-components";
 import AddModal from "@/components/common/modal/AddModal";
 import Progress from "@/components/common/InputField/Progress/Progress";
+import SvgIcon from "@/components/Icon/SvgIcon";
 
 const MyRoutine = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -34,17 +34,18 @@ const MyRoutine = () => {
           <h1>오늘의 루틴</h1>
           <p className="b3">{currentDate}</p>
         </RoutineTextStyle>
-        <Progress value={70} />
-        <RoutineList routines={data} />
+        <Progress value={data.completionPercentage} />
+        <RoutineList routines={data.routines} />
         <WhiteSpace $height={80} />
         <DraggableIcon isDraggingFn={setIsDragging}>
           {isOpen ? (
             <AddModal openHandler={openHandler} />
           ) : (
-            <IconButton
-              name="add"
-              size="60px"
-              color="primary"
+            <SvgIcon
+              name="addRoutine"
+              width="60px"
+              height="60px"
+              fill="primary"
               onClick={openHandler}
             />
           )}
