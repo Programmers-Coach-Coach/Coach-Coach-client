@@ -1,6 +1,6 @@
+import { performLogout } from "@/utils/logoutUtil";
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { reissue } from "./auth.api";
-import { performLogout } from "@/utils/logoutUtil";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const DEFAULT_TIMEOUT = 30000;
@@ -9,7 +9,7 @@ type RequestMethod = "get" | "post" | "put" | "delete" | "patch";
 
 export const createClient = (config?: AxiosRequestConfig) => {
   const axiosInstance = axios.create({
-    baseURL: `${BASE_URL}/api/v1`,
+    baseURL: `${BASE_URL}/api`,
     timeout: DEFAULT_TIMEOUT,
     headers: {
       "Content-Type": "application/json"
