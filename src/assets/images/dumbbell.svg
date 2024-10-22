@@ -1,0 +1,9 @@
+<svg width="28" height="14" viewBox="0 0 28 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="8" y="5" width="12" height="4" fill="current"/>
+<path d="M25 5H26C27.1046 5 28 5.89543 28 7C28 8.10457 27.1046 9 26 9H25V5Z" fill="current"/>
+<rect x="22.5" y="0.5" width="13" height="3" rx="0.5" transform="rotate(90 22.5 0.5)" stroke="current"/>
+<rect x="24.5" y="2.5" width="9" height="2" rx="0.5" transform="rotate(90 24.5 2.5)" stroke="current"/>
+<path d="M3 5H2C0.895431 5 0 5.89543 0 7C0 8.10457 0.895431 9 2 9H3V5Z" fill="current"/>
+<rect x="0.5" y="0.5" width="13" height="3" rx="0.5" transform="matrix(4.37114e-08 1 1 -4.37114e-08 5 -2.18557e-08)" stroke="current"/>
+<rect x="0.5" y="0.5" width="9" height="2" rx="0.5" transform="matrix(4.37114e-08 1 1 -4.37114e-08 3 2)" stroke="current"/>
+</svg>
