@@ -4,6 +4,7 @@ import IconButton from "../Icon/IconButton";
 import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import SvgIcon from "../Icon/SvgIcon";
 
 interface MemberProfileProps {
   profileName: string;
@@ -17,7 +18,7 @@ const MemberProfile = ({
   isMatching
 }: MemberProfileProps) => {
   const imageUrl = profileImageUrl ? profileImageUrl : profile;
-  const iconSize = useResponsiveIconSize("2.5vw", "16px", 600);
+  const iconSize = useResponsiveIconSize("3.5vw", "24px", 600);
   const [isSet, setIsSet] = useState(false);
   const navigate = useNavigate();
 
@@ -53,7 +54,12 @@ const MemberProfile = ({
           <div className="chat">
             {isMatching ? "루틴 등록하기" : "매칭수락"}
           </div>
-          <IconButton name="dumbbell" size={iconSize} color="text" />
+          <SvgIcon
+            name="dumbbell"
+            width={iconSize}
+            height={iconSize}
+            fill="text"
+          />
         </RoutineButtontyle>
       </MemberProfileButtonStyle>
     </MemberProfileStyle>

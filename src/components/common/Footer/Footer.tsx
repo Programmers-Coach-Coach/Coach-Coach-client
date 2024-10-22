@@ -6,11 +6,11 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Modal from "../modal/Modal";
 import FooterPicker from "../modal/contents/FooterPicker";
+import SvgIcon from "@/components/Icon/SvgIcon";
 
 const Footer = () => {
   const { data } = useFetchAuth();
   const navigate = useNavigate();
-  const routineModal = useModal();
   const profileModal = useModal();
 
   const onClickHome = () => {
@@ -18,12 +18,7 @@ const Footer = () => {
   };
 
   const onClickRoutine = () => {
-    if (routineModal.isModal) {
-      routineModal.closeModal();
-    } else {
-      profileModal.closeModal();
-      routineModal.openModal();
-    }
+    navigate("routine");
   };
 
   const onClickAlarm = () => {
@@ -34,7 +29,6 @@ const Footer = () => {
     if (profileModal.isModal) {
       profileModal.closeModal();
     } else {
-      routineModal.closeModal();
       profileModal.openModal();
     }
   };
@@ -47,11 +41,6 @@ const Footer = () => {
 
   return (
     <>
-      {routineModal.isModal && (
-        <Modal closeModal={routineModal.closeModal} position="footer-above">
-          <FooterPicker closeModal={routineModal.closeModal} schema="routine" />
-        </Modal>
-      )}
       {profileModal.isModal && (
         <Modal closeModal={profileModal.closeModal} position="footer-above">
           <FooterPicker closeModal={profileModal.closeModal} schema="profile" />
@@ -68,12 +57,11 @@ const Footer = () => {
         </button>
 
         <button onClick={onClickRoutine}>
-          <Icon
-            name="routine"
-            size="25px"
-            color={
-              activePath("/routine", "/routine/my-coach") ? "primary" : "gray3"
-            }
+          <SvgIcon
+            name="dumbbell"
+            width="25px"
+            height="25px"
+            fill={activePath("/routine") ? "primary" : "gray3"}
           />
           루틴
         </button>
