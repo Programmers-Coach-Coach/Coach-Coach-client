@@ -3,8 +3,9 @@ import EmptyHeart from "@/assets/images/empty-heart.svg?react";
 import FullHeart from "@/assets/images/full-heart.svg?react";
 import FullStar from "@/assets/images/full-star.svg?react";
 import Star from "@/assets/images/star.svg?react";
+import Dumbbell from "@/assets/images/dumbbell.svg?react";
 import { CgDetailsMore } from "react-icons/cg";
-import { FaCheck, FaRegStar, FaDumbbell } from "react-icons/fa";
+import { FaCheck, FaRegStar } from "react-icons/fa";
 import { IoIosArrowBack, IoIosArrowDown, IoMdMore } from "react-icons/io";
 import {
   IoAddCircleSharp,
@@ -58,6 +59,6 @@ export const ICONS = {
   dropUp: MdOutlineArrowDropUp,
   dropDown: MdOutlineArrowDropDown,
   check: FaCheck,
-  dumbbell: FaDumbbell,
+  dumbbell: Dumbbell,
   arrow: ArrowDown
 };
