@@ -4,12 +4,14 @@ import FullHeart from "@/assets/images/full-heart.svg?react";
 import FullStar from "@/assets/images/full-star.svg?react";
 import Star from "@/assets/images/star.svg?react";
 import Dumbbell from "@/assets/images/dumbbell.svg?react";
+import Delete from "@/assets/images/delete.svg?react";
+import Modify from "@/assets/images/modify.svg?react";
+import AddRoutine from "@/assets/images/add-routine.svg?react";
 import { CgDetailsMore } from "react-icons/cg";
 import { FaCheck, FaRegStar } from "react-icons/fa";
-import { IoIosArrowBack, IoIosArrowDown, IoMdMore } from "react-icons/io";
+import { IoIosArrowBack, IoMdMore } from "react-icons/io";
 import {
-  IoAddCircleSharp,
-  IoBarbellOutline,
+  // IoBarbellOutline,
   IoChatbubbleEllipsesSharp,
   IoClose,
   IoCloseCircle,
@@ -23,15 +25,13 @@ import {
   IoSearch,
   IoTrendingDown
 } from "react-icons/io5";
-import { LuPencilLine } from "react-icons/lu";
 import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from "react-icons/md";
-import { RiDeleteBin5Line } from "react-icons/ri";
 import { TbArrowsExchange2 } from "react-icons/tb";
 
 export const ICONS = {
   profile: IoPersonOutline,
   alarm: IoNotificationsOutline,
-  routine: IoBarbellOutline,
+  // routine: IoBarbellOutline,
   home: IoHomeOutline,
   person: IoPersonOutline,
   twins: IoPeopleOutline,
@@ -39,12 +39,11 @@ export const ICONS = {
   record: IoTrendingDown,
   logout: IoLogOutOutline,
   back: IoIosArrowBack,
-  modify: LuPencilLine,
-  delete: RiDeleteBin5Line,
+  modify: Modify,
+  delete: Delete,
   filter: TbArrowsExchange2,
   x: IoClose,
   search: IoSearch,
-  arrowDown: IoIosArrowDown,
   dots: IoMdMore,
   star: Star,
   emptyStar: FaRegStar,
@@ -52,7 +51,7 @@ export const ICONS = {
   heart: FullHeart,
   emptyHeart: EmptyHeart,
   list: IoListOutline,
-  add: IoAddCircleSharp,
+  addRoutine: AddRoutine,
   close: IoCloseCircle,
   chat: IoChatbubbleEllipsesSharp,
   more: CgDetailsMore,
