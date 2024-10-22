@@ -51,7 +51,7 @@ export const getClickBackLink = (pathname: string) => {
     case "/check-password":
     case "/notification":
     case "/routine/my-coach":
-      return "/";
+      return "/home";
 
     case "/record":
       return "/record-list";

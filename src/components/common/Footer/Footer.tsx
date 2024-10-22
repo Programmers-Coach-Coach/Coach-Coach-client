@@ -14,7 +14,7 @@ const Footer = () => {
   const profileModal = useModal();
 
   const onClickHome = () => {
-    navigate(`/`);
+    navigate(`/home`);
   };
 
   const onClickRoutine = () => {

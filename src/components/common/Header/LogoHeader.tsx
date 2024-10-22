@@ -7,7 +7,7 @@ const LogoHeader = () => {
   const { data } = useFetchAuth();
   return (
     <LogoHeaderStyle>
-      <LogoLink to="/">
+      <LogoLink to="/home">
         <img src={logoPath} alt="Logo" />
       </LogoLink>
       {data?.nickname && (
