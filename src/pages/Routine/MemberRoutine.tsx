@@ -4,7 +4,7 @@ import DraggableIcon from "@/components/Icon/DraggableIcon";
 import IconButton from "@/components/Icon/IconButton";
 import SliderProfileList from "@/components/Profile/ProfileList/SliderProfileList";
 import RoutineList from "@/components/routine/RoutineList";
-import { useGetRoutines } from "@/hooks/queries/routine/useRoutine";
+import { useGetRoutines } from "@/hooks/queries/useRoutine";
 import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
 import { WhiteSpace } from "@/style/global";
 import { formatCurrentDate } from "@/utils/formatDate";
@@ -84,15 +84,15 @@ const MemberRoutine = () => {
           <h1>오늘의 루틴</h1>
           <p className="b3">{currentDate}</p>
         </RoutineTextStyle>
-        <Progress value={70} />
-        <RoutineList routines={data} isCheck={false} />
+        <Progress value={data.completionPercentage} />
+        <RoutineList routines={data.routines} isCheck={false} />
         <WhiteSpace $height={80} />
         <DraggableIcon isDraggingFn={setIsDragging}>
           {isOpen ? (
             <AddModal openHandler={openHandler} />
           ) : (
             <IconButton
-              name="add"
+              name="addRoutine"
               size="60px"
               color="primary"
               onClick={openHandler}
