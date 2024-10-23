@@ -1,4 +1,7 @@
+import { isNewRoutine } from "@/store/isNewRoutine.store";
+
 export const getTitle = (pathname: string): string => {
+  const isNew = isNewRoutine((set) => set.isNewRoutine);
   if (pathname.startsWith("/coach/")) {
     return "코치";
   }
@@ -17,7 +20,7 @@ export const getTitle = (pathname: string): string => {
     case "/member/routine":
       return "루틴";
     case "/routine/add":
-      return "새 루틴 추가";
+      return isNew ? "새 루틴 추가" : "루틴 수정";
     case "/member":
       return "회원 리스트";
     case "/mypage":
