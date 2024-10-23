@@ -8,10 +8,14 @@ import { styled } from "styled-components";
 import AddModal from "@/components/common/modal/AddModal";
 import Progress from "@/components/common/InputField/Progress/Progress";
 import SvgIcon from "@/components/Icon/SvgIcon";
+import { isNewRoutine } from "@/store/isNewRoutine.store";
+import { useRoutineStore } from "@/store/routine.store";
 
 const MyRoutine = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isDragging, setIsDragging] = useState<boolean>(false); // 드래그 상태 추가
+  const resetRoutine = useRoutineStore((set) => set.resetRoutine);
+  const setIsNewRoutine = isNewRoutine((set) => set.setIsNewRoutine);
   const { data, isLoading, isError } = useGetRoutines();
 
   if (isLoading) return <div>로딩 중...</div>;
@@ -23,6 +27,8 @@ const MyRoutine = () => {
   const openHandler = () => {
     if (!isDragging) {
       setIsOpen(!isOpen);
+      setIsNewRoutine(true);
+      resetRoutine();
     }
   };
 
