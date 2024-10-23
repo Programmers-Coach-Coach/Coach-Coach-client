@@ -1,8 +1,12 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import styled from "styled-components";
 import ScrollSelect from "../../InputField/Select/ScrollSelect";
+import { useRoutineStore } from "@/store/routine.store";
 
-interface TimeSetContentProps {}
+interface TimeSetContentProps {
+  index: number;
+  closeModal: () => void;
+}
 
 interface ChildComponentHandle {
   childFunction: () => void;
@@ -12,14 +16,16 @@ const TIMES = Array.from({ length: 60 }, (_, i) => i + 1); // 1부터 60까지�
 const SETS = Array.from({ length: 20 }, (_, i) => i + 1);
 
 const TimeSetContent = forwardRef<ChildComponentHandle, TimeSetContentProps>(
-  (_, ref) => {
+  ({ index, closeModal }, ref) => {
     const [time, setTime] = useState<number | string>(0);
     const [set, setSet] = useState<number | string>(0);
+    const setAction = useRoutineStore((set) => set.setAction);
 
     // 부모 컴포넌트에서 접근할 수 있는 함수 정의
     useImperativeHandle(ref, () => ({
       childFunction() {
-        alert(`time: ${time}, set: ${set}`);
+        setAction(index, { countsOrMinutes: time, sets: set });
+        closeModal();
       }
     }));
 
