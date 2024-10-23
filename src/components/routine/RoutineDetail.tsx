@@ -15,8 +15,8 @@ const RoutineDetail = ({ action }: RoutineDetailProps) => {
       <IconButton name="more" size={iconSize} color="gray1" />
       <RoutineDetailCardStyle>
         <ActionName>{action.actionName}</ActionName>
-        <ActionSets>{action.countsOrMinutes}</ActionSets>
-        <ActionSets>{action.sets}</ActionSets>
+        <ActionSets>{action.countsOrMinutes}회/분</ActionSets>
+        <ActionSets>{action.sets}세트</ActionSets>
       </RoutineDetailCardStyle>
     </RoutineDetailStyle>
   );
