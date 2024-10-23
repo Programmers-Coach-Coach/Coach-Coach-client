@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import profile from "@/assets/images/profile.png";
 import Heart from "../common/InputField/CheckBox/Heart";
-import { isSelectProfile } from "@/store/isSelectProfile";
+import { isSelectProfile } from "@/store/isSelectProfile.store";
 import { useProfileInfo } from "@/store/profileInfo.store";
 import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
 
