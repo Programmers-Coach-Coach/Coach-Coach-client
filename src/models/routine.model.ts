@@ -6,6 +6,7 @@ export interface IGetAction {
 }
 
 interface IPostPatchAction {
+  actionId?: number;
   actionName: string;
   sets: number;
   countsOrMinutes: number;
@@ -15,6 +16,7 @@ export interface IGetRoutine {
   routineId: number;
   routineName: string;
   sportName: string;
+  repeats: string[];
   isCompleted: boolean;
   actions: IGetAction[];
 }
@@ -23,6 +25,7 @@ export interface IPostPatchRoutine {
   userId?: number;
   routineName: string;
   sportId: number;
+  repeats: string[];
   actions: IPostPatchAction[];
 }
 
