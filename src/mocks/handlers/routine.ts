@@ -30,8 +30,6 @@ const getRoutinesData = http.get(
       );
     }
 
-    console.log(getRoutines);
-
     return HttpResponse.json({
       completionPercentage,
       routines: filterRoutines

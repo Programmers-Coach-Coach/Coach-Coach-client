@@ -91,7 +91,6 @@ const AddRoutine = () => {
   };
 
   const onClickPost = () => {
-    console.log(routine);
     const postActions = routine.actions.map((action) => ({
       actionName: action.actionName,
       sets: typeof action.sets === "string" ? 0 : action.sets,
@@ -111,7 +110,6 @@ const AddRoutine = () => {
   };
 
   const onClickPatch = () => {
-    console.log(routine);
     const patchActions = routine.actions.map((action) => {
       const baseAction = {
         actionName: action.actionName,
