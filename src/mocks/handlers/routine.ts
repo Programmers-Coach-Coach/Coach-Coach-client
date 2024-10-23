@@ -6,12 +6,36 @@ import { getRoutines } from "@/data/routine";
 import { sportList } from "@/data/sportsList";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-const API_V = "/api/v2";
+const API_V = "/api";
 
 const getRoutinesData = http.get(
   `${BASE_URL}${API_V}${API_PATH.routine}`,
   () => {
-    return HttpResponse.json(getRoutines);
+    const today = new Date();
+    const dayOfWeek = today.getDay();
+
+    const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+
+    const filterRoutines = getRoutines.routines.filter((routine) =>
+      routine.repeats.includes(days[dayOfWeek])
+    );
+
+    let completionPercentage = 0;
+    if (filterRoutines.length > 0) {
+      const completedRoutinesCount = filterRoutines.filter(
+        (routine) => routine.isCompleted
+      ).length;
+      completionPercentage = Math.floor(
+        (completedRoutinesCount / filterRoutines.length) * 100
+      );
+    }
+
+    console.log(getRoutines);
+
+    return HttpResponse.json({
+      completionPercentage,
+      routines: filterRoutines
+    });
   }
 );
 
@@ -31,9 +55,10 @@ const postRoutineData = http.post(
     }));
 
     const createdRoutine = {
-      routineId: ++getRoutines.routines.length,
+      routineId: getRoutines.routines.length * 100 + Math.random(),
       routineName: newRoutine.routineName,
       sportName: getSportNameById(newRoutine.sportId),
+      repeats: newRoutine.repeats,
       isCompleted: false,
       actions: createdActions
     };
@@ -51,7 +76,6 @@ const patchRoutineData = http.patch(
   async ({ request, params }) => {
     const { id } = params;
 
-    // 명시적으로 타입을 지정
     const updatedData = (await request.json()) as IPostPatchRoutine;
 
     const routineIndex = getRoutines.routines.findIndex(
@@ -62,7 +86,12 @@ const patchRoutineData = http.patch(
       getRoutines.routines[routineIndex] = {
         ...getRoutines.routines[routineIndex],
         routineName: updatedData.routineName,
-        sportName: getSportNameById(updatedData.sportId)
+        sportName: getSportNameById(updatedData.sportId),
+        repeats: updatedData.repeats,
+        actions: updatedData.actions.map((action) => ({
+          ...action,
+          actionId: action.actionId ? action.actionId : Math.random()
+        }))
       };
     }
 
