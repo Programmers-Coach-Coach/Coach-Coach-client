@@ -1,6 +1,5 @@
 import Progress from "@/components/common/InputField/Progress/Progress";
 import RoutineList from "@/components/routine/RoutineList";
-import { useGetRoutines } from "@/hooks/queries/routine/useRoutine";
 import { useProfileInfo } from "@/store/profileInfo.store";
 import { WhiteSpace } from "@/style/global";
 import { formatCurrentDate } from "@/utils/formatDate";
@@ -8,15 +7,16 @@ import { styled } from "styled-components";
 import profile from "@/assets/images/profile.png";
 import IconButton from "@/components/Icon/IconButton";
 import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
+import { useGetRoutines } from "@/hooks/queries/useRoutine";
 
 const CoachRoutine = () => {
-  const coachId = useProfileInfo((state) => state.coachId);
+  // const coachId = useProfileInfo((state) => state.coachId);
   const coachName = useProfileInfo((state) => state.profileName);
   const profileImageUrl = useProfileInfo((state) => state.profileImageUrl);
 
   const iconSize = useResponsiveIconSize("14px", "20px", 600);
 
-  const { data, isLoading, isError } = useGetRoutines({ coachId });
+  const { data, isLoading, isError } = useGetRoutines();
 
   if (isLoading) return <div>로딩 중...</div>;
   if (isError || !data) return <div>무언가 잘못됨</div>;
@@ -30,7 +30,7 @@ const CoachRoutine = () => {
         <h1>오늘의 내 코치 루틴</h1>
         <p className="b3">{currentDate}</p>
       </RoutineTextStyle>
-      <Progress value={70} />
+      <Progress value={data.completionPercentage} />
       <CoachProfileStyle>
         <CoachProfileImageStyle src={coachImage} alt={coachName} />
         <CoachDescriptionStyle>
@@ -44,7 +44,7 @@ const CoachRoutine = () => {
           내가 직접 그린 말풍선... 넘어가면 어떻게 되나..
         </SpeechBubble>
       </CoachProfileStyle>
-      <RoutineList routines={data} isModify={false} />
+      <RoutineList routines={data.routines} isModify={false} />
       <WhiteSpace $height={80} />
     </RoutineStyle>
   );

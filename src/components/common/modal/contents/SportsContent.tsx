@@ -1,38 +1,40 @@
 import IconButton from "@/components/Icon/IconButton";
 import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
+import { ISport } from "@/models/sports.model";
+import { useRoutineStore } from "@/store/routine.store";
 import { forwardRef, useImperativeHandle, useState } from "react";
 import styled from "styled-components";
 
-const SPORTS = [
-  "헬스",
-  "클라이밍",
-  "수영",
-  "발레",
-  "야구",
-  "축구",
-  "씨름",
-  "주짓수",
-  "유도",
-  "검도",
-  "태권도",
-  "합기도"
-];
-
-interface SportsContentProps {}
+interface SportsContentProps {
+  sportList: ISport[];
+  closeModal: () => void;
+}
 
 interface ChildComponentHandle {
   childFunction: () => void;
 }
 
 const SportsContent = forwardRef<ChildComponentHandle, SportsContentProps>(
-  (_, ref) => {
+  ({ sportList, closeModal }, ref) => {
     useImperativeHandle(ref, () => ({
       childFunction() {
-        alert(`운동 : ${selectedSport}`);
+        const sportName = selectedSport ? selectedSport : "";
+        setSportName(sportName);
+
+        const sport = sportList.find((sport) => sport.sportName === sportName);
+        const sportId = sport ? sport.sportId : 0;
+        setSportId(sportId);
+
+        closeModal();
       }
     }));
 
-    const [selectedSport, setSelectedSport] = useState<string | null>(null);
+    const routine = useRoutineStore((set) => set.routine);
+    const setSportId = useRoutineStore((set) => set.setSportId);
+    const setSportName = useRoutineStore((set) => set.setSportName);
+    const [selectedSport, setSelectedSport] = useState<string | null>(
+      routine.sportName
+    );
 
     const size = useResponsiveIconSize("4vw", "20px", 600);
 
@@ -43,14 +45,14 @@ const SportsContent = forwardRef<ChildComponentHandle, SportsContentProps>(
     return (
       <SportsContentStyle>
         <SportsList>
-          {SPORTS.map((sport, index) => (
+          {sportList.map((sport, index) => (
             <SportItem
               key={index}
-              onClick={() => handleClick(sport)}
-              isSelected={selectedSport === sport}
+              onClick={() => handleClick(sport.sportName)}
+              isSelected={selectedSport === sport.sportName}
             >
-              {sport}
-              {selectedSport === sport && (
+              {sport.sportName}
+              {selectedSport === sport.sportName && (
                 <IconButton name="check" size={size} color="blue" />
               )}
             </SportItem>

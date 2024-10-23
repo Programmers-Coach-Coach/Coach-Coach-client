@@ -60,7 +60,7 @@ const MyMember = () => {
         />
         <FilterStyle onClick={() => filterModal.openModal()}>
           {FILTER[filterIndex]}
-          <IconButton name="arrowDown" size={iconSize} color="gray3" />
+          <IconButton name="arrow" size={iconSize} color="gray3" />
         </FilterStyle>
         {tabValue === 0 ? (
           <MemberProfileList data={matchData} />

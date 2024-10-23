@@ -1,6 +1,6 @@
 export const API_PATH = {
   main: "/v1/main-info",
-  routine: "/v1/routines",
+  routine: "/v2/routines",
   userProfile: "/v1routines/user",
   category: "/v1/categories",
   action: "/v1/actions",

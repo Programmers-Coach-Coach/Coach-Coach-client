@@ -4,9 +4,18 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import IconButton from "@/components/Icon/IconButton";
 
+interface Action {
+  actionId: number | string;
+  actionName: string;
+  sets: number;
+  countsOrMinutes: number;
+}
+
 interface RoutineInputProps {
   label: string;
   placeholder: string;
+  value: string | number;
+  index?: number;
   isSelect?: boolean;
   isAction?: boolean;
   isSmall?: boolean;
@@ -14,21 +23,38 @@ interface RoutineInputProps {
   setIsToggleOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   onClickDelete?: () => void;
   onClickHandler?: () => void;
+  setRoutineName?: (name: string) => void;
+  setAction?: (index: number, updatedAction: Partial<Action>) => void;
 }
 
 const RoutineInput = ({
   label,
   placeholder,
+  value,
+  index = 0,
   isSelect = false,
   isAction = false,
   isSmall = false,
   isToggleOpen = true,
   setIsToggleOpen = () => {},
   onClickDelete = () => {},
-  onClickHandler = () => {}
+  onClickHandler = () => {},
+  setRoutineName = () => {},
+  setAction = () => {}
 }: RoutineInputProps) => {
   const onClickToggle = () => {
     setIsToggleOpen(!isToggleOpen);
+  };
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+
+    if (setRoutineName) {
+      setRoutineName(value);
+    }
+
+    if (setAction) {
+      setAction(index, { actionName: value });
+    }
   };
 
   return (
@@ -61,6 +87,8 @@ const RoutineInput = ({
       <BootstrapInput
         placeholder={placeholder}
         id="bootstrap-input"
+        value={value === 0 ? "" : value}
+        onChange={handleInputChange}
         endAdornment={
           isSelect ? (
             <IconWrapper>

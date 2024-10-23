@@ -1,23 +1,22 @@
 import { styled } from "styled-components";
 import IconButton from "../Icon/IconButton";
 import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
+import { IGetAction } from "@/models/routine.model";
 
 interface RoutineDetailProps {
-  name: string;
-  count: string;
-  sets: string;
+  action: IGetAction;
 }
 
-const RoutineDetail = ({ name, count, sets }: RoutineDetailProps) => {
+const RoutineDetail = ({ action }: RoutineDetailProps) => {
   const iconSize = useResponsiveIconSize("20px", "30px", 375);
 
   return (
     <RoutineDetailStyle>
       <IconButton name="more" size={iconSize} color="gray1" />
       <RoutineDetailCardStyle>
-        <ActionName>{name}</ActionName>
-        <ActionSets>{count}</ActionSets>
-        <ActionSets>{sets}</ActionSets>
+        <ActionName>{action.actionName}</ActionName>
+        <ActionSets>{action.countsOrMinutes}회/분</ActionSets>
+        <ActionSets>{action.sets}세트</ActionSets>
       </RoutineDetailCardStyle>
     </RoutineDetailStyle>
   );

@@ -1,28 +1,29 @@
-import { IGetRoutine, IRoutineDetails } from "@/models/routine.model";
+import { IGetRoutineList } from "@/models/routine.model";
 import * as faker from "@/utils/faker";
+import { sportList } from "./sportsList";
 
-export const PER_PAGE = 10;
+const DAYS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
-export const routines: IGetRoutine[] = Array.from({ length: 1 }).map(
-  (_, i) => ({
+// 랜덤한 요일 배열 생성 함수
+const getRandomDays = (): string[] => {
+  const numberOfDays = Math.floor(Math.random() * DAYS.length) + 1;
+  const shuffledDays = [...DAYS].sort(() => 0.5 - Math.random());
+  return shuffledDays.slice(0, numberOfDays);
+};
+
+export const getRoutines: IGetRoutineList = {
+  completionPercentage: 0,
+  routines: Array.from({ length: 5 }).map((_, i) => ({
     routineId: i + 1,
     routineName: faker.fullname(),
-    sportName: faker.fullname()
-  })
-);
-
-export const routineDetail: Omit<IRoutineDetails, "routineName"> = {
-  categoryList: Array.from({ length: 3 }).map((_, i) => ({
-    categoryId: i + 1,
-    categoryName: faker.fullname(),
-    isCompleted: false,
-    actionList: Array.from({ length: 4 }).map((_, j) => ({
+    sportName: sportList[Math.floor(Math.random() * 12)].sportName,
+    repeats: getRandomDays(),
+    isCompleted: Math.random() < 0.5,
+    actions: Array.from({ length: 3 }).map((_, j) => ({
       actionId: i * 100 + j * 100 + 1,
       actionName: faker.fullname(),
       sets: 3,
-      count: Math.floor(Math.random() * 12),
-      minutes: Math.floor(Math.random() * 12),
-      description: faker.fullname()
+      countsOrMinutes: Math.floor(Math.random() * 60)
     }))
   }))
 };

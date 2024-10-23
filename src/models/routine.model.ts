@@ -1,49 +1,44 @@
-interface IRoutine {
+export interface IGetAction {
+  actionId: number;
+  actionName: string;
+  sets: number;
+  countsOrMinutes: number;
+}
+
+interface IPostPatchAction {
+  actionId?: number;
+  actionName: string;
+  sets: number;
+  countsOrMinutes: number;
+}
+
+export interface IGetRoutine {
   routineId: number;
   routineName: string;
-}
-
-export interface IGetRoutine extends IRoutine {
   sportName: string;
+  repeats: string[];
+  isCompleted: boolean;
+  actions: IGetAction[];
 }
 
-export interface IPostRoutine extends IRoutine {
+export interface IPostPatchRoutine {
   userId?: number;
+  routineName: string;
   sportId: number;
+  repeats: string[];
+  actions: IPostPatchAction[];
 }
 
-export interface IGetQuery {
+export interface IGetRoutineList {
+  completionPercentage: number;
+  routines: IGetRoutine[];
+}
+
+export interface IRoutineQuery {
   coachId?: number;
   userId?: number;
 }
 
-export interface IAction {
-  actionId: number;
-  actionName: string;
-  sets?: number;
-  counts?: number;
-  minutes?: number;
-  description?: string;
-}
-
-export interface ICategoryName {
-  categoryName: string;
-}
-
-export interface ICategory extends ICategoryName {
-  categoryId: number;
-  isCompleted?: boolean;
-}
-
-export interface ICategoryList extends ICategory {
-  actionList: IAction[];
-}
-
-export interface IRoutineDetails {
-  routineName: string;
-  categoryList: ICategoryList[];
-}
-
-export interface ICompletedCategory {
-  completedCategoryId: number;
+export interface ICompletedRoutine {
+  completedRoutineId: number;
 }

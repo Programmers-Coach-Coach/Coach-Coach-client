@@ -1,5 +1,4 @@
 import Empty from "@/components/common/Empty/Empty";
-import CategoryDropdown from "@/components/common/InputField/dropdown/CategoryDropdown";
 import { IExerciseRoutine } from "@/models/record.model";
 import { LineClamp, WhiteSpace } from "@/style/global";
 import styled from "styled-components";
@@ -23,7 +22,7 @@ const ExerciseDetail = ({ routines }: Props) => {
               </LineClamp>
               <p className="small-text">{routine.coachName || "나"}</p>
             </CoachInfo>
-            {routine.completedCategories.map((category) => (
+            {/* {routine.completedCategories.map((category) => (
               <CategoryDropdown
                 category={{
                   categoryId: category.categoryId,
@@ -32,13 +31,13 @@ const ExerciseDetail = ({ routines }: Props) => {
                 actions={category.actions}
                 checkDisabled
               />
-            ))}
+            ))} */}
           </Routine>
         ))
       ) : (
         <>
           <Empty
-            name="routine"
+            name="dumbbell"
             size="64px"
             color="gray3"
             descriptions="이 날은 쉬어가는 시간을 가졌네요!"

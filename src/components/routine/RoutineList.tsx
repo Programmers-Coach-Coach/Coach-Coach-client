@@ -24,11 +24,10 @@ const RoutineList = ({
     <RoutineListStyle>
       {routinesArray.length ? (
         <>
-          {routinesArray.map((item) => (
+          {routinesArray.map((routine) => (
             <Routine
-              key={item.routineId}
-              id={item.routineId}
-              name={item.routineName}
+              key={routine.routineId}
+              routine={routine}
               isCheck={isCheck}
               isModify={isModify}
             />
@@ -36,7 +35,7 @@ const RoutineList = ({
         </>
       ) : (
         <Empty
-          name="routine"
+          name="dumbbell"
           size="150px"
           color="gray3"
           descriptions="운동 루틴이 없습니다"
