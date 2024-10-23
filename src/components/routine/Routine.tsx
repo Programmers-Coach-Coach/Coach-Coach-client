@@ -9,6 +9,10 @@ import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
 import TwoButtonContent from "../common/modal/contents/TwoButtonContent";
 import SvgIcon from "../Icon/SvgIcon";
 import { IGetRoutine } from "@/models/routine.model";
+import { useDeleteRoutine } from "@/hooks/queries/useRoutine";
+import { useRoutineStore } from "@/store/routine.store";
+import { isNewRoutine } from "@/store/isNewRoutine.store";
+import { useNavigate } from "react-router-dom";
 
 interface RoutineProps {
   routine: IGetRoutine;
@@ -18,20 +22,45 @@ interface RoutineProps {
 
 const Routine = ({ routine, isCheck, isModify }: RoutineProps) => {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
+  const setRoutine = useRoutineStore((set) => set.setRoutine);
+  const setIsNewRoutine = isNewRoutine((set) => set.setIsNewRoutine);
+  const modifyModal = useModal();
   const deleteModal = useModal();
+  const navigate = useNavigate();
+
+  const { mutate } = useDeleteRoutine();
 
   const onClickToggle = () => {
     setIsToggleOpen(!isToggleOpen);
   };
 
+  const routineModifyHandler = () => {
+    navigate("/routine/add");
+  };
+
   const routineDeleteHandler = () => {
-    alert(routine.routineId);
+    mutate(routine.routineId);
+    deleteModal.closeModal();
   };
 
   const iconSize = useResponsiveIconSize("15px", "20px", 375);
 
   return (
     <>
+      {modifyModal.isModal && (
+        <Modal closeModal={modifyModal.closeModal} position="footer-above">
+          <TwoButtonContent
+            title={routine.routineName}
+            description="루틴을 수정하시겠어요?"
+            cancelButtonText="돌아가기"
+            onCancel={() => {
+              modifyModal.closeModal();
+            }}
+            ConfirmButtonText="수정하기"
+            onConfirm={routineModifyHandler}
+          />
+        </Modal>
+      )}
       {deleteModal.isModal && (
         <Modal closeModal={deleteModal.closeModal} position="footer-above">
           <TwoButtonContent
@@ -69,6 +98,11 @@ const Routine = ({ routine, isCheck, isModify }: RoutineProps) => {
                 width={iconSize}
                 height={iconSize}
                 fill="text"
+                onClick={() => {
+                  setRoutine(routine);
+                  setIsNewRoutine(false);
+                  modifyModal.openModal();
+                }}
               />
               <SvgIcon
                 name="delete"
@@ -118,6 +152,7 @@ const RoutineTitleStyle = styled.div<{
 
   svg {
     margin-left: 10px;
+    cursor: pointer;
   }
 
   .sport {
@@ -139,6 +174,7 @@ const CRUDIconStyle = styled.div`
 
   svg {
     margin-right: 10px;
+    cursor: pointer;
   }
 `;
 
