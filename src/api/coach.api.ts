@@ -1,6 +1,6 @@
 import { API_PATH } from "@/constants/apiPath";
 import { ICoachDetail, ICoachList, IGetMyCoach } from "@/models/coach.model";
-import { IMatchMembers } from "@/models/member.model";
+import { IGetMyMember } from "@/models/member.model";
 import { IResponseMessage } from "@/models/responseMessage.model";
 import qs from "qs";
 import { requestHandler } from "./http";
@@ -54,7 +54,7 @@ export const getMyCoaches = async () => {
 };
 
 export const getMatchMembers = async () => {
-  return await requestHandler<IMatchMembers[]>("get", API_PATH.match);
+  return await requestHandler<IGetMyMember[]>("get", API_PATH.match);
 };
 
 export const deleteMatchMember = async (userId: number) => {
