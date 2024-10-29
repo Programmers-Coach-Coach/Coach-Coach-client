@@ -1,5 +1,5 @@
 import { API_PATH } from "@/constants/apiPath";
-import { ICoachDetail, ICoachList, ISimpleCoach } from "@/models/coach.model";
+import { ICoachDetail, ICoachList, IGetMyCoach } from "@/models/coach.model";
 import { IMatchMembers } from "@/models/member.model";
 import { IResponseMessage } from "@/models/responseMessage.model";
 import qs from "qs";
@@ -50,7 +50,7 @@ export const getCoachAll = (
 };
 
 export const getMyCoaches = async () => {
-  return await requestHandler<ISimpleCoach[]>("get", API_PATH.myCoaches);
+  return await requestHandler<IGetMyCoach[]>("get", API_PATH.myCoaches);
 };
 
 export const getMatchMembers = async () => {
