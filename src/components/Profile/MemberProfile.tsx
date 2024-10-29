@@ -5,25 +5,20 @@ import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SvgIcon from "../Icon/SvgIcon";
+import { IGetMyMember } from "@/models/member.model";
 
 interface MemberProfileProps {
-  profileName: string;
-  profileImageUrl: string | null;
-  isMatching: boolean;
+  member: IGetMyMember;
 }
 
-const MemberProfile = ({
-  profileName,
-  profileImageUrl,
-  isMatching
-}: MemberProfileProps) => {
-  const imageUrl = profileImageUrl ? profileImageUrl : profile;
+const MemberProfile = ({ member }: MemberProfileProps) => {
+  const imageUrl = member.profileImageUrl ? member.profileImageUrl : profile;
   const iconSize = useResponsiveIconSize("3.5vw", "24px", 600);
   const [isSet, setIsSet] = useState(false);
   const navigate = useNavigate();
 
   const dumbbellClickHandler = () => {
-    if (isMatching) {
+    if (member.isMatching) {
       setIsSet(true);
     }
   };
@@ -38,7 +33,7 @@ const MemberProfile = ({
     <MemberProfileStyle>
       <MemberProfileImageStyle src={imageUrl} alt="profile" />
       <MemberProfileDetailStyle>
-        <div className="name">{profileName}</div>
+        <div className="name">{member.userName}</div>
         <MemberTagsStyle>
           <MemberTagStyle color="primary">#헬스</MemberTagStyle>
           <MemberTagStyle color="review">#필라테스</MemberTagStyle>
@@ -52,7 +47,7 @@ const MemberProfile = ({
         </ChatButtontyle>
         <RoutineButtontyle onClick={dumbbellClickHandler}>
           <div className="chat">
-            {isMatching ? "루틴 등록하기" : "매칭수락"}
+            {member.isMatching ? "루틴 등록하기" : "매칭수락"}
           </div>
           <SvgIcon
             name="dumbbell"
