@@ -10,13 +10,13 @@ import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
 import { useGetRoutines } from "@/hooks/queries/useRoutine";
 
 const CoachRoutine = () => {
-  // const coachId = useProfileInfo((state) => state.coachId);
+  const coachId = useProfileInfo((state) => state.coachId);
   const coachName = useProfileInfo((state) => state.profileName);
   const profileImageUrl = useProfileInfo((state) => state.profileImageUrl);
 
   const iconSize = useResponsiveIconSize("14px", "20px", 600);
 
-  const { data, isLoading, isError } = useGetRoutines();
+  const { data, isLoading, isError } = useGetRoutines({ coachId });
 
   if (isLoading) return <div>로딩 중...</div>;
   if (isError || !data) return <div>무언가 잘못됨</div>;
