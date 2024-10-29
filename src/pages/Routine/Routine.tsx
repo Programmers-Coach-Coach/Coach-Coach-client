@@ -3,7 +3,7 @@ import { useState } from "react";
 import MyRoutine from "./MyRoutine";
 import DefaultTab from "@/components/tab/DefaultTab";
 import MyCoach from "./MyCoach";
-import { isSelectProfile } from "@/store/isSelectProfile";
+import { isSelectProfile } from "@/store/isSelectProfile.store";
 import CoachRoutine from "./CoachRoutine";
 
 const Routine = () => {

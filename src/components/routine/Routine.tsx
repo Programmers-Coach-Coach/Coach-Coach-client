@@ -2,58 +2,69 @@ import Card from "@/components/common/Card/Card";
 import Modal from "@/components/common/modal/Modal";
 import useModal from "@/hooks/useModal";
 import { keyframes, styled } from "styled-components";
-import IconButton from "../Icon/IconButton";
 import Completed from "../common/InputField/CheckBox/Completed";
 import { useState } from "react";
 import RoutineDetail from "./RoutineDetail";
 import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
 import TwoButtonContent from "../common/modal/contents/TwoButtonContent";
+import SvgIcon from "../Icon/SvgIcon";
+import { IGetRoutine } from "@/models/routine.model";
+import { useDeleteRoutine } from "@/hooks/queries/useRoutine";
+import { useRoutineStore } from "@/store/routine.store";
+import { isNewRoutine } from "@/store/isNewRoutine.store";
+import { useNavigate } from "react-router-dom";
 
 interface RoutineProps {
-  id: number;
-  name: string;
+  routine: IGetRoutine;
   isCheck: boolean;
   isModify: boolean;
 }
 
-const ACTION = [
-  {
-    name: "렛풀다운",
-    count: "20회",
-    sets: "4세트"
-  },
-  {
-    name: "시티드 케이블 로우",
-    count: "20회",
-    sets: "4세트"
-  },
-  {
-    name: "비하인드 넥 풀 다운",
-    count: "20회",
-    sets: "4세트"
-  }
-];
-
-const Routine = ({ id, name, isCheck, isModify }: RoutineProps) => {
+const Routine = ({ routine, isCheck, isModify }: RoutineProps) => {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
+  const setRoutine = useRoutineStore((set) => set.setRoutine);
+  const setIsNewRoutine = isNewRoutine((set) => set.setIsNewRoutine);
+  const modifyModal = useModal();
   const deleteModal = useModal();
+  const navigate = useNavigate();
+
+  const { mutate } = useDeleteRoutine();
 
   const onClickToggle = () => {
     setIsToggleOpen(!isToggleOpen);
   };
 
+  const routineModifyHandler = () => {
+    navigate("/routine/add");
+  };
+
   const routineDeleteHandler = () => {
-    alert(id);
+    mutate(routine.routineId);
+    deleteModal.closeModal();
   };
 
   const iconSize = useResponsiveIconSize("15px", "20px", 375);
 
   return (
     <>
+      {modifyModal.isModal && (
+        <Modal closeModal={modifyModal.closeModal} position="footer-above">
+          <TwoButtonContent
+            title={routine.routineName}
+            description="루틴을 수정하시겠어요?"
+            cancelButtonText="돌아가기"
+            onCancel={() => {
+              modifyModal.closeModal();
+            }}
+            ConfirmButtonText="수정하기"
+            onConfirm={routineModifyHandler}
+          />
+        </Modal>
+      )}
       {deleteModal.isModal && (
         <Modal closeModal={deleteModal.closeModal} position="footer-above">
           <TwoButtonContent
-            title={name}
+            title={routine.routineName}
             description="루틴을 삭제하시겠어요?"
             cancelButtonText="돌아가기"
             onCancel={() => {
@@ -67,25 +78,37 @@ const Routine = ({ id, name, isCheck, isModify }: RoutineProps) => {
       <Card>
         <RoutineStyle>
           <RoutineTitleStyle $isCheck={isCheck} $isToggleOpen={isToggleOpen}>
-            {isCheck && <Completed isCompleted={true} categoryId={1} />}
-            <h2>{name}</h2>
+            {isCheck && <Completed isCompleted={routine.isCompleted} />}
+            <h2>{routine.routineName}</h2>
             <h2 className="sport">|</h2>
-            <h2 className="sport">헬스</h2>
-            <IconButton
-              name="arrowDown"
-              color="text"
-              size={iconSize}
-              className="arrow-button"
+            <h2 className="sport">{routine.sportName}</h2>
+            <SvgIcon
+              name="arrow"
+              width={iconSize}
+              height={iconSize}
+              fill="text"
               onClick={onClickToggle}
+              className="arrow-button"
             />
           </RoutineTitleStyle>
           {isModify && (
             <CRUDIconStyle>
-              <IconButton name="modify" size={iconSize} color="text" />
-              <IconButton
+              <SvgIcon
+                name="modify"
+                width={iconSize}
+                height={iconSize}
+                fill="text"
+                onClick={() => {
+                  setRoutine(routine);
+                  setIsNewRoutine(false);
+                  modifyModal.openModal();
+                }}
+              />
+              <SvgIcon
                 name="delete"
-                size={iconSize}
-                color="text"
+                width={iconSize}
+                height={iconSize}
+                fill="text"
                 onClick={() => {
                   deleteModal.openModal();
                 }}
@@ -96,13 +119,8 @@ const Routine = ({ id, name, isCheck, isModify }: RoutineProps) => {
         {isToggleOpen && (
           <RoutineDetailStyle $isToggleOpen={isToggleOpen}>
             <Underline />
-            {ACTION.map((action) => (
-              <RoutineDetail
-                key={action.name}
-                name={action.name}
-                count={action.count}
-                sets={action.sets}
-              />
+            {routine.actions.map((action) => (
+              <RoutineDetail key={action.actionId} action={action} />
             ))}
           </RoutineDetailStyle>
         )}
@@ -134,6 +152,7 @@ const RoutineTitleStyle = styled.div<{
 
   svg {
     margin-left: 10px;
+    cursor: pointer;
   }
 
   .sport {
@@ -155,6 +174,7 @@ const CRUDIconStyle = styled.div`
 
   svg {
     margin-right: 10px;
+    cursor: pointer;
   }
 `;
 

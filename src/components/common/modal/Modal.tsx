@@ -43,7 +43,7 @@ const ModalStyle = styled.div.withConfig({
   max-width: 600px;
   margin: 0 auto;
   height: 100vh;
-  z-index: ${({ $position }) => ($position === "center" ? 1002 : 1000)};
+  z-index: ${({ $position }) => ($position === "center" ? 1002 : 1003)};
   background: rgba(101, 104, 104, 0.5);
 `;
 

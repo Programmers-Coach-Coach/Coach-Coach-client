@@ -1,23 +1,37 @@
+import { useRoutineStore } from "@/store/routine.store";
 import { forwardRef, useImperativeHandle, useState } from "react";
 import styled from "styled-components";
 
-const DAYS = ["일", "월", "화", "수", "목", "금", "토"];
+const DAYS = {
+  SUN: "일",
+  MON: "월",
+  TUE: "화",
+  WED: "수",
+  THU: "목",
+  FRI: "금",
+  SAT: "토"
+};
 
-interface RepeatContentProps {}
+interface RepeatContentProps {
+  repeats: string[];
+  closeModal: () => void;
+}
 
 interface ChildComponentHandle {
   childFunction: () => void;
 }
 
 const RepeatContent = forwardRef<ChildComponentHandle, RepeatContentProps>(
-  (_, ref) => {
+  ({ repeats, closeModal }, ref) => {
     useImperativeHandle(ref, () => ({
       childFunction() {
-        alert(selectedDays);
+        setRepeats(selectedDays);
+        closeModal();
       }
     }));
 
-    const [selectedDays, setSelectedDays] = useState<string[]>([]);
+    const [selectedDays, setSelectedDays] = useState<string[]>(repeats || []);
+    const setRepeats = useRoutineStore((set) => set.setRepeats);
 
     const handleClick = (day: string) => {
       setSelectedDays((prev) =>
@@ -29,13 +43,13 @@ const RepeatContent = forwardRef<ChildComponentHandle, RepeatContentProps>(
       <RepeatContentStyle>
         요일 반복
         <DaysStyle>
-          {DAYS.map((day, index) => (
+          {Object.entries(DAYS).map(([day, value]) => (
             <DayStyle
-              key={index}
+              key={day}
               onClick={() => handleClick(day)}
               isSelected={selectedDays.includes(day)}
             >
-              {day}
+              {value}
             </DayStyle>
           ))}
         </DaysStyle>
