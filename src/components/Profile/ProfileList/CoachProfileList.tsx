@@ -1,10 +1,10 @@
-import { ISimpleCoach } from "@/models/coach.model";
+import { IGetMyCoach } from "@/models/coach.model";
 import { styled } from "styled-components";
 import Empty from "@/components/common/Empty/Empty";
 import CoachProfile from "../CoachProfile";
 
 interface CoachProfileListProps {
-  data: ISimpleCoach[];
+  data: IGetMyCoach[];
 }
 
 const CoachProfileList = ({ data }: CoachProfileListProps) => {
@@ -13,11 +13,7 @@ const CoachProfileList = ({ data }: CoachProfileListProps) => {
       {data.length ? (
         <CoachProfileListSytle>
           {data.map((d) => (
-            <CoachProfile
-              key={d.coachId}
-              profileName={d.coachName}
-              profileImageUrl={d.profileImageUrl}
-            />
+            <CoachProfile key={d.coachId} coach={d} />
           ))}
         </CoachProfileListSytle>
       ) : (

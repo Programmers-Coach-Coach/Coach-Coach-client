@@ -4,47 +4,63 @@ import Heart from "../common/InputField/CheckBox/Heart";
 import { isSelectProfile } from "@/store/isSelectProfile.store";
 import { useProfileInfo } from "@/store/profileInfo.store";
 import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
+import { IGetMyCoach } from "@/models/coach.model";
 
 interface CoachProfileProps {
-  profileName: string;
-  profileImageUrl: string | null;
+  coach: IGetMyCoach;
 }
 
-const CoachProfile = ({ profileName, profileImageUrl }: CoachProfileProps) => {
+const CoachProfile = ({ coach }: CoachProfileProps) => {
   const setIsSelectProfile = isSelectProfile(
     (state) => state.setIsSelectProfile
   );
+  const setCoachId = useProfileInfo((state) => state.setCoachId);
   const setProfileName = useProfileInfo((state) => state.setProfileName);
   const setProfileImageUrl = useProfileInfo(
     (state) => state.setProfileImageUrl
   );
 
-  const imageUrl = profileImageUrl ? profileImageUrl : profile;
+  const imageUrl = coach.profileImageUrl ? coach.profileImageUrl : profile;
 
   const imgClickHandler = () => {
-    setIsSelectProfile(true);
-    setProfileName(profileName);
-    setProfileImageUrl(profileImageUrl);
+    if (coach.isMatching !== false) {
+      setIsSelectProfile(true);
+      setCoachId(coach.coachId);
+      setProfileName(coach.coachName);
+      setProfileImageUrl(coach.profileImageUrl);
+    }
   };
 
   const iconSize = useResponsiveIconSize("16px", "24px", 375);
 
   return (
     <CoachProfileStyle>
-      <CoachProfileImageStyle
-        src={imageUrl}
-        alt="profile"
+      <CoachProfileContainer
         onClick={imgClickHandler}
-      />
+        isInquiry={coach.isMatching === false}
+      >
+        <CoachProfileImageStyle src={imageUrl} alt="profile" />
+        {coach.isMatching === false && (
+          <>
+            <Overlay /> {/* 어두운 오버레이 */}
+            <OverlayText>{coach.coachName}</OverlayText>
+          </>
+        )}
+      </CoachProfileContainer>
       <CoachProfileDetailStyle>
         <CoachNameStyle>
-          <p className="name">{profileName}</p>
-          <Heart id={1} checked={true} size={iconSize} />
+          <p className="name">{coach.coachName}</p>
+          <Heart id={coach.coachId} checked={coach.isLiked} size={iconSize} />
         </CoachNameStyle>
-        <p className="address">서울시 마포구</p>
+        <p className="address">{coach.localAddress}</p>
         <CoachTagsStyle>
-          <CoachTagStyle color="primary">#헬스</CoachTagStyle>
-          <CoachTagStyle color="review">#수영</CoachTagStyle>
+          {coach.coachingSports?.map((sport) => {
+            return (
+              <CoachTagStyle key={sport.sportId} color="review">
+                #{sport.sportName}
+              </CoachTagStyle>
+            );
+          })}
         </CoachTagsStyle>
       </CoachProfileDetailStyle>
     </CoachProfileStyle>
@@ -86,15 +102,47 @@ const CoachProfileStyle = styled.div`
   }
 `;
 
-const CoachProfileImageStyle = styled.img`
+const CoachProfileContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "isInquiry"
+})<{ isInquiry: boolean }>`
+  position: relative;
   width: 35vw;
   height: 35vw;
-  border-radius: ${({ theme }) => theme.borderRadius.default};
+  cursor: ${({ isInquiry }) => (isInquiry ? "default" : "pointer")};
 
   @media (min-width: 600px) {
     width: 240px;
     height: 240px;
   }
+`;
+
+const CoachProfileImageStyle = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: ${({ theme }) => theme.borderRadius.default};
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(17, 17, 17, 0.8);
+  border-radius: ${({ theme }) => theme.borderRadius.default};
+`;
+
+const OverlayText = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #0075ff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
 `;
 
 const CoachProfileDetailStyle = styled.div`
