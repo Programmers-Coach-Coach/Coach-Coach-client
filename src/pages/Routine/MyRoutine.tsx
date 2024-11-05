@@ -10,12 +10,14 @@ import Progress from "@/components/common/InputField/Progress/Progress";
 import SvgIcon from "@/components/Icon/SvgIcon";
 import { isNewRoutine } from "@/store/isNewRoutine.store";
 import { useRoutineStore } from "@/store/routine.store";
+import { useProfileInfo } from "@/store/profileInfo.store";
 
 const MyRoutine = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isDragging, setIsDragging] = useState<boolean>(false); // 드래그 상태 추가
   const resetRoutine = useRoutineStore((set) => set.resetRoutine);
   const setIsNewRoutine = isNewRoutine((set) => set.setIsNewRoutine);
+  const setUserId = useProfileInfo((set) => set.setUserId);
   const { data, isLoading, isError } = useGetRoutines();
 
   if (isLoading) return <div>로딩 중...</div>;
@@ -29,6 +31,7 @@ const MyRoutine = () => {
       setIsOpen(!isOpen);
       setIsNewRoutine(true);
       resetRoutine();
+      setUserId(-1);
     }
   };
 
