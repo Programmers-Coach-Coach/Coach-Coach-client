@@ -42,8 +42,8 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
         <CoachProfileImageStyle src={imageUrl} alt="profile" />
         {coach.isMatching === false && (
           <>
-            <Overlay /> {/* 어두운 오버레이 */}
-            <OverlayText>{coach.coachName}</OverlayText>
+            <Overlay />
+            <OverlayText>매칭 대기중</OverlayText>
           </>
         )}
       </CoachProfileContainer>
