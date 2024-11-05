@@ -1,6 +1,5 @@
-import Icon from "@/components/Icon/Icon";
+import SvgIcon from "@/components/Icon/SvgIcon";
 import useQueryString from "@/hooks/useQueryString";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
@@ -11,28 +10,38 @@ interface FormInput {
 }
 
 const Search = ({ ...props }: Props) => {
-  const [isIconFocus, setIsIconFocus] = useState(false);
-  const { register, handleSubmit } = useForm<FormInput>();
+  const { register, handleSubmit, setValue } = useForm<FormInput>();
   const { setKeyword } = useQueryString();
 
   const onSubmit = (data: FormInput) => {
     setKeyword(data.keyword);
   };
 
+  const onDelete = () => {
+    console.log("delete");
+    setValue("keyword", "");
+  };
+
   return (
-    <SearchStyle
-      onSubmit={handleSubmit(onSubmit)}
-      onFocus={() => setIsIconFocus(true)}
-      onBlur={() => setIsIconFocus(false)}
-    >
+    <SearchStyle>
       <input {...register("keyword")} {...props} />
-      <button type="submit" className="search-button">
-        <Icon
-          name="search"
-          color={isIconFocus ? "primary" : "text"}
-          size="16px"
-        />
-      </button>
+      <SvgIcon
+        name="search"
+        width="22px"
+        height="22px"
+        stroke="#777C89"
+        className="search__btn"
+        onSubmit={handleSubmit(onSubmit)}
+      />
+      <SvgIcon
+        name="xCircle"
+        width="16px"
+        height="16px"
+        fill="#777C89"
+        stroke="white"
+        className="delete__btn"
+        onClick={onDelete}
+      />
     </SearchStyle>
   );
 };
@@ -43,24 +52,30 @@ const SearchStyle = styled.form`
 
   input {
     width: 100%;
-    border: 1px solid ${({ theme }) => theme.color.text};
+    padding: 20px 52px;
     border-radius: ${({ theme }) => theme.borderRadius.default};
-    padding: 12px 30px 12px 20px;
+    font-size: 14px;
+    letter-spacing: -0.35px;
+    line-height: 22px;
+    color: rgba(119, 124, 137, 0.9333);
+    background-color: #252932;
+    border: none;
     outline: none;
-    transition:
-      border 0.2s ease-in-out,
-      box-shadow 0.2s ease-in-out;
-
-    &:focus {
-      border-color: ${({ theme }) => theme.color.primary};
-      box-shadow: 0 0 0 1px ${({ theme }) => theme.color.primary};
-    }
   }
 
-  .search-button {
+  .search__btn {
     position: absolute;
     top: 50%;
-    right: 10px;
+    left: 20px;
+    transform: translate(0, -50%);
+    cursor: pointer;
+    outline: none;
+  }
+
+  .delete__btn {
+    position: absolute;
+    top: 50%;
+    right: 20px;
     transform: translate(0, -50%);
     cursor: pointer;
     outline: none;
