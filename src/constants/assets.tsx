@@ -1,19 +1,21 @@
+import AddRoutine from "@/assets/images/add-routine.svg?react";
 import ArrowDown from "@/assets/images/arrow-down.svg?react";
+import Delete from "@/assets/images/delete.svg?react";
+import Dumbbell from "@/assets/images/dumbbell.svg?react";
 import EmptyHeart from "@/assets/images/empty-heart.svg?react";
 import FullHeart from "@/assets/images/full-heart.svg?react";
 import FullStar from "@/assets/images/full-star.svg?react";
-import Star from "@/assets/images/star.svg?react";
-import Dumbbell from "@/assets/images/dumbbell.svg?react";
-import Delete from "@/assets/images/delete.svg?react";
 import Modify from "@/assets/images/modify.svg?react";
-import AddRoutine from "@/assets/images/add-routine.svg?react";
+import Search from "@/assets/images/search.svg?react";
+import Star from "@/assets/images/star.svg?react";
+import XCircle from "@/assets/images/x-circle.svg?react";
 import { CgDetailsMore } from "react-icons/cg";
 import { FaCheck, FaRegStar } from "react-icons/fa";
 import { IoIosArrowBack, IoMdMore } from "react-icons/io";
+
 import {
   // IoBarbellOutline,
   IoChatbubbleEllipsesSharp,
-  IoClose,
   IoCloseCircle,
   IoGlasses,
   IoHomeOutline,
@@ -22,7 +24,6 @@ import {
   IoNotificationsOutline,
   IoPeopleOutline,
   IoPersonOutline,
-  IoSearch,
   IoTrendingDown
 } from "react-icons/io5";
 import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from "react-icons/md";
@@ -42,8 +43,8 @@ export const ICONS = {
   modify: Modify,
   delete: Delete,
   filter: TbArrowsExchange2,
-  x: IoClose,
-  search: IoSearch,
+  xCircle: XCircle,
+  search: Search,
   dots: IoMdMore,
   star: Star,
   emptyStar: FaRegStar,
