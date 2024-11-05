@@ -6,6 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SvgIcon from "../Icon/SvgIcon";
 import { IGetMyMember } from "@/models/member.model";
+import useModal from "@/hooks/useModal";
+import Modal from "../common/modal/Modal";
+import TwoButtonContent from "../common/modal/contents/TwoButtonContent";
+import { useDeleteMember, usePatchMember } from "@/hooks/useMember";
+import { useProfileInfo } from "@/store/profileInfo.store";
 
 interface MemberProfileProps {
   member: IGetMyMember;
@@ -16,9 +21,14 @@ const MemberProfile = ({ member }: MemberProfileProps) => {
   const iconSize = useResponsiveIconSize("3.5vw", "24px", 600);
   const [isSet, setIsSet] = useState(false);
   const navigate = useNavigate();
+  const setUserId = useProfileInfo((state) => state.setUserId);
+  const inquiryModal = useModal();
+  const patchMemberRequest = usePatchMember();
+  const deleteMemberRequest = useDeleteMember();
 
   const dumbbellClickHandler = () => {
     if (member.isMatching) {
+      setUserId(member.userId);
       setIsSet(true);
     }
   };
@@ -30,34 +40,67 @@ const MemberProfile = ({ member }: MemberProfileProps) => {
   }, [isSet, navigate]);
 
   return (
-    <MemberProfileStyle>
-      <MemberProfileImageStyle src={imageUrl} alt="profile" />
-      <MemberProfileDetailStyle>
-        <div className="name">{member.userName}</div>
-        <MemberTagsStyle>
-          <MemberTagStyle color="primary">#헬스</MemberTagStyle>
-          <MemberTagStyle color="review">#필라테스</MemberTagStyle>
-        </MemberTagsStyle>
-        <div className="date">트레이닝 시작일 : 2024. 10. 02.</div>
-      </MemberProfileDetailStyle>
-      <MemberProfileButtonStyle>
-        <ChatButtontyle>
-          <div className="chat">채팅하기</div>
-          <IconButton name="chat" size={iconSize} color="text" />
-        </ChatButtontyle>
-        <RoutineButtontyle onClick={dumbbellClickHandler}>
-          <div className="chat">
-            {member.isMatching ? "루틴 등록하기" : "매칭수락"}
-          </div>
-          <SvgIcon
-            name="dumbbell"
-            width={iconSize}
-            height={iconSize}
-            fill="text"
+    <>
+      {inquiryModal.isModal && (
+        <Modal closeModal={inquiryModal.closeModal} position="footer-above">
+          <TwoButtonContent
+            title={member.userName}
+            description="매칭을 수락하시겠어요?"
+            cancelButtonText="거절하기"
+            onCancel={() => {
+              deleteMemberRequest.mutate(member.userId);
+              inquiryModal.closeModal();
+            }}
+            ConfirmButtonText="수락하기"
+            onConfirm={() => {
+              patchMemberRequest.mutate(member.userId);
+              inquiryModal.closeModal();
+            }}
           />
-        </RoutineButtontyle>
-      </MemberProfileButtonStyle>
-    </MemberProfileStyle>
+        </Modal>
+      )}
+      <MemberProfileStyle>
+        <MemberProfileImageStyle src={imageUrl} alt="profile" />
+        <MemberProfileDetailStyle>
+          <div className="name">{member.userName}</div>
+          <MemberTagsStyle>
+            {member.coachingSports?.map((sport) => {
+              return (
+                <MemberTagStyle key={sport.sportId} color="review">
+                  #{sport.sportName}
+                </MemberTagStyle>
+              );
+            })}
+          </MemberTagsStyle>
+          <div className="date">트레이닝 시작일 : {member.startDate}</div>
+        </MemberProfileDetailStyle>
+        <MemberProfileButtonStyle>
+          <ChatButtontyle>
+            <div className="chat">채팅하기</div>
+            <IconButton name="chat" size={iconSize} color="text" />
+          </ChatButtontyle>
+          <RoutineButtontyle
+            onClick={
+              member.isMatching
+                ? dumbbellClickHandler
+                : () => {
+                    inquiryModal.openModal();
+                  }
+            }
+          >
+            <div className="chat">
+              {member.isMatching ? "루틴 등록하기" : "매칭수락"}
+            </div>
+            <SvgIcon
+              name="dumbbell"
+              width={iconSize}
+              height={iconSize}
+              fill="text"
+            />
+          </RoutineButtontyle>
+        </MemberProfileButtonStyle>
+      </MemberProfileStyle>
+    </>
   );
 };
 
