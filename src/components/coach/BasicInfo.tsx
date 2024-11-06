@@ -3,7 +3,6 @@ import { ICoachDetail } from "@/models/coach.model";
 import styled from "styled-components";
 import Icon from "../Icon/Icon";
 import Heart from "../common/InputField/CheckBox/Heart";
-import { Local } from "./Coach";
 
 interface Props {
   coach: ICoachDetail;
@@ -31,7 +30,7 @@ const BasicInfo = ({ coach }: Props) => {
       <HeartWrapper>
         <Heart checked={coach.isLiked} size="24px" id={coach.coachId} />
       </HeartWrapper>
-      <Local>{coach.localAddress}</Local>
+      <div>{coach.localAddress}</div>
     </Wrapper>
   );
 };

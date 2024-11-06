@@ -60,7 +60,7 @@ const CoachList = () => {
 const CoachListStyle = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 8px;
 `;
 
 export default CoachList;
