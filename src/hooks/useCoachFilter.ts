@@ -1,14 +1,22 @@
 import { filterList } from "@/data/sportsList";
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const useCoachFilter = () => {
+  // TODO: searchParams가 변경된다고 상태가 재렌더링이 되지 않는걸로 블로그쓰기
   const [searchParams, setSearchParams] = useSearchParams();
+  const [sort, setSort] = useState<string>(
+    searchParams.get("sort") ?? "latest"
+  );
+  const [idListSports, setIdListSports] = useState<number[]>(
+    searchParams.get("sportsIds")?.split(",").map(Number) ?? []
+  );
 
   const singleFilter = (id: number) => {
-    const sort =
+    const a =
       filterList.find((filter) => filter.id === id)?.parameter ?? "latest";
-    searchParams.set("sort", sort);
-    setSearchParams(searchParams);
+    searchParams.set("sort", a);
+    setSort(a);
   };
 
   const multiFilter = (id: number) => {
@@ -36,12 +44,20 @@ const useCoachFilter = () => {
     } else {
       searchParams.set("sportsIds", newSportsIds.join(","));
     }
+    const a = searchParams.get("sportsIds")?.split(",").map(Number) ?? [];
+    setIdListSports(a);
+  };
+
+  const reflectChangesToUrl = () => {
     setSearchParams(searchParams);
   };
 
   return {
     singleFilter,
-    multiFilter
+    multiFilter,
+    reflectChangesToUrl,
+    sort,
+    idListSports
   };
 };
 

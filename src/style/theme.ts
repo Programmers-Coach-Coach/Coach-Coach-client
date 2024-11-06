@@ -251,7 +251,7 @@ export const theme: Theme = {
     },
     outlined: {
       backgroundColor: "transparent",
-      color: "#0075FF",
+      color: "#ffffff",
       border: "1px solid #0075FF",
       borderHoverColor: "#0075FF"
     },
