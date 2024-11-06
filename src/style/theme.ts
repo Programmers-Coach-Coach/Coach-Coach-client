@@ -34,6 +34,7 @@ export type CustomButtonType =
   | "outlined"
   | "containedError"
   | "containedCancel";
+export type SportChipType = "small";
 export type ProfileImageSize = "mini" | "small" | "medium" | "large";
 export type ModalSize = "default";
 export type PaddingSize = "default";
@@ -96,6 +97,16 @@ interface Theme {
   };
   sports: {
     [key in Sports]: string;
+  };
+  sportChip: {
+    [key in SportChipType]: {
+      fontSize: string;
+      fontWeight: string;
+      lineHeight: string;
+      letterSpacing: string;
+      padding: string;
+      borderRadius: string;
+    };
   };
 }
 
@@ -281,5 +292,15 @@ export const theme: Theme = {
     10: "#B2CBE7",
     11: "#0496D1",
     12: "#5A4097"
+  },
+  sportChip: {
+    small: {
+      fontSize: "10px",
+      fontWeight: "400",
+      lineHeight: "15px",
+      letterSpacing: "-0.25px",
+      padding: "1.5px 10px",
+      borderRadius: "20px"
+    }
   }
 };
