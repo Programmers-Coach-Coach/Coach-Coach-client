@@ -18,8 +18,8 @@ const Search = ({ ...props }: Props) => {
   };
 
   const onDelete = () => {
-    console.log("delete");
     setValue("keyword", "");
+    setKeyword("");
   };
 
   return (
