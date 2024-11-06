@@ -1,3 +1,4 @@
+import { sportsList } from "@/data/sportsList";
 import useModal from "@/hooks/useModal";
 import styled from "styled-components";
 import SvgIcon from "../Icon/SvgIcon";
@@ -22,10 +23,13 @@ const CoachListFilter = ({
 }: Props) => {
   const { isModal, closeModal, handleModal } = useModal();
 
-  // const SPORT_LIST_WITH_TOTAL = [
-  //   { sportId: 0, sportName: "전체" },
-  //   ...sportList
-  // ];
+  const sportNameFirst = sportsList.find(
+    (value) => value.sportId === idListSports[0]
+  )?.sportName;
+  const len = idListSports.length - 1;
+  const sportsText = sportNameFirst
+    ? `${sportNameFirst}${len ? ` 외 ${len}` : ""}`
+    : "운동";
 
   return (
     <CoachListFilterStyle>
@@ -33,8 +37,12 @@ const CoachListFilter = ({
         필터
         <SvgIcon name="filter" />
       </FilterBtn>
-      <FilterBtn className="sorting__sports" onClick={handleModal}>
-        운동
+      <FilterBtn
+        className="sorting__sports"
+        onClick={handleModal}
+        $isActive={!!sportNameFirst}
+      >
+        {sportsText}
         <SvgIcon name="arrow" stroke="#fff" width="16px" height="16px" />
       </FilterBtn>
       <FilterBtn className="sorting__gender">
@@ -69,20 +77,21 @@ const CoachListFilterStyle = styled.div`
   }
 `;
 
-const FilterBtn = styled.div`
+const FilterBtn = styled.div<{ $isActive?: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 5px;
-  width: 68px;
-  height: 32px;
+  padding: 6px 10px;
 
   font-size: 13px;
   font-weight: 600;
   line-height: 20px;
   letter-spacing: -0.325px;
-  background-color: #252932;
+  background-color: ${({ $isActive }) =>
+    $isActive ? "rgba(0, 117, 255, 0.3)" : "#252932"};
   border-radius: 5px;
+  border: 1px solid ${({ $isActive }) => ($isActive ? "#0075FF" : "none")};
 
   cursor: pointer;
 `;
