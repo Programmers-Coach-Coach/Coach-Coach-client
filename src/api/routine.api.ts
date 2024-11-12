@@ -50,3 +50,17 @@ export const deleteRoutineData = async (routineId: number) => {
     `${API_PATH.routine}/${routineId}`
   );
 };
+
+export const postRoutineComplete = async (routineId: number) => {
+  return await requestHandler<IResponseMessage>(
+    "post",
+    `${API_PATH.routine}/${routineId}/completed`
+  );
+};
+
+export const deleteRoutineComplete = async (routineId: number) => {
+  return await requestHandler<IResponseMessage>(
+    "delete",
+    `${API_PATH.routine}/${routineId}/completed`
+  );
+};

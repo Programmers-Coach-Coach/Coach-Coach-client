@@ -1,8 +1,10 @@
 import { queryClient } from "@/api/queryClient";
 import {
+  deleteRoutineComplete,
   deleteRoutineData,
   getRoutinesData,
   patchRoutineData,
+  postRoutineComplete,
   postRoutineData
 } from "@/api/routine.api";
 import { IResponseMessage } from "@/models/responseMessage.model";
@@ -90,6 +92,60 @@ export const useDeleteRoutine = () => {
     number
   >({
     mutationFn: deleteRoutineData,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["getRoutinesData"] });
+    },
+    onError: (error) => {
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data?.message || "요청 중 오류가 발생했습니다."
+        );
+      }
+    }
+  });
+
+  return {
+    mutate,
+    isLoading: isPending,
+    isError,
+    data
+  };
+};
+
+export const usePostCompleted = () => {
+  const { mutate, isPending, isError, data } = useMutation<
+    IResponseMessage,
+    Error,
+    number
+  >({
+    mutationFn: postRoutineComplete,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["getRoutinesData"] });
+    },
+    onError: (error) => {
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data?.message || "요청 중 오류가 발생했습니다."
+        );
+      }
+    }
+  });
+
+  return {
+    mutate,
+    isLoading: isPending,
+    isError,
+    data
+  };
+};
+
+export const useDeleteCompleted = () => {
+  const { mutate, isPending, isError, data } = useMutation<
+    IResponseMessage,
+    Error,
+    number
+  >({
+    mutationFn: deleteRoutineComplete,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getRoutinesData"] });
     },

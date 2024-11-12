@@ -78,7 +78,12 @@ const Routine = ({ routine, isCheck, isModify }: RoutineProps) => {
       <Card>
         <RoutineStyle>
           <RoutineTitleStyle $isCheck={isCheck} $isToggleOpen={isToggleOpen}>
-            {isCheck && <Completed isCompleted={routine.isCompleted} />}
+            {isCheck && (
+              <Completed
+                routineId={routine.routineId}
+                isCompleted={routine.isCompleted}
+              />
+            )}
             <h2>{routine.routineName}</h2>
             <h2 className="sport">|</h2>
             <h2 className="sport">{routine.sportName}</h2>
