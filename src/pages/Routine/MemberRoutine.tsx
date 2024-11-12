@@ -15,13 +15,12 @@ import { useProfileInfo } from "@/store/profileInfo.store";
 import { useRoutineStore } from "@/store/routine.store";
 import { WhiteSpace } from "@/style/global";
 import { formatCurrentDate } from "@/utils/formatDate";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { styled } from "styled-components";
 
 const MemberRoutine = () => {
   const { data: authData, isLoading: authLoading, refetch } = useFetchAuth();
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isDragging, setIsDragging] = useState<boolean>(false); // 드래그 상태 추가
   const [isCoach, setIsCoach] = useState(false);
@@ -32,6 +31,7 @@ const MemberRoutine = () => {
   const iconSize = useResponsiveIconSize("3vw", "16px", 600);
   const memberRoutineResponse = useGetRoutines({ userId });
   const { data = [], isLoading: memberLoading } = useMatchMember(isCoach);
+  console.log(userId);
 
   useEffect(() => {
     refetch().then(() => {
@@ -49,14 +49,6 @@ const MemberRoutine = () => {
   const memberData = matchData.find((d) => d.userId === userId);
 
   const currentDate = formatCurrentDate();
-
-  const handleKeyDown = () => {
-    const textarea = textareaRef.current;
-    if (textarea) {
-      textarea.style.height = "auto";
-      textarea.style.height = `${textarea.scrollHeight}px`; // 입력에 따라 높이 조정
-    }
-  };
 
   // 드래그 중이 아닐 때만 openHandler 실행
   const openHandler = () => {
@@ -96,12 +88,6 @@ const MemberRoutine = () => {
             <IconButton name="chat" size={iconSize} color="text" />
           </ChatButtontyle>
         </Wrap>
-        <UnderlinedInput
-          rows={1}
-          placeholder="회원님께 오늘의 한마디를 남겨주세요"
-          onKeyDown={handleKeyDown}
-          ref={textareaRef}
-        />
         <RoutineTextStyle>
           <h1>오늘의 루틴</h1>
           <p className="b3">{currentDate}</p>
@@ -239,19 +225,4 @@ const RoutineTextStyle = styled.div`
     }
   }
 `;
-
-const UnderlinedInput = styled.textarea`
-  border: none;
-  border-top: 2px solid #666666; /* 위쪽 선 */
-  border-bottom: 2px solid #666666; /* 아래쪽 선 */
-  background: none;
-  outline: none;
-  padding: 8px;
-  font-size: 16px;
-  width: 100%; /* 너비를 100%로 설정 */
-  resize: none; /* 사용자가 크기를 조절하지 못하도록 설정 */
-  overflow: hidden; /* 내용이 넘치지 않도록 설정 */
-  color: white;
-`;
-
 export default MemberRoutine;

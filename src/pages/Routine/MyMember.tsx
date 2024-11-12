@@ -12,7 +12,7 @@ import OneButtonContent from "@/components/common/modal/contents/OneButtonConten
 import MemberFilterContent from "@/components/common/modal/contents/MemberFilterContent";
 import SvgIcon from "@/components/Icon/SvgIcon";
 
-const FILTER = ["루틴 업데이트순", "트레이닝 시작일순", "회원 이름순"];
+const FILTER = ["트레이닝 시작일순", "회원 이름순"];
 
 const MyMember = () => {
   const { data: authData, isLoading: authLoading, refetch } = useFetchAuth();
