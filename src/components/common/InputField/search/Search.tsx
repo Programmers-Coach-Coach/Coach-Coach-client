@@ -1,5 +1,5 @@
 import SvgIcon from "@/components/Icon/SvgIcon";
-import useQueryString from "@/hooks/useQueryString";
+import useQueryString, { DEFAULT_KEYWORD } from "@/hooks/useQueryString";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
@@ -11,15 +11,15 @@ interface FormInput {
 
 const Search = ({ ...props }: Props) => {
   const { register, handleSubmit, setValue } = useForm<FormInput>();
-  const { setKeyword } = useQueryString();
+  const { setKeyword, removeKeyword } = useQueryString();
 
   const onSubmit = (data: FormInput) => {
     setKeyword(data.keyword);
   };
 
   const onDelete = () => {
-    setValue("keyword", "");
-    setKeyword("");
+    setValue("keyword", DEFAULT_KEYWORD);
+    removeKeyword();
   };
 
   return (

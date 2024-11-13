@@ -22,8 +22,10 @@ const useCoachList = (
       initialPageParam: 1
     });
 
+  const coaches = data?.pages.flatMap((page) => page.data) || [];
+
   return {
-    data,
+    coaches,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,

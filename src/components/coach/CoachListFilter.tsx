@@ -1,66 +1,63 @@
-import { sportsList } from "@/data/sportsList";
+import useCoachFilter from "@/hooks/useCoachFilter";
 import useModal from "@/hooks/useModal";
 import styled from "styled-components";
 import SvgIcon from "../Icon/SvgIcon";
 import Modal from "../common/modal/Modal";
 import OneButtonContent from "../common/modal/contents/OneButtonContent";
 import FilterPicker from "../common/modal/contents/filterPicker/FilterPicker";
+import GenderRadio from "../common/modal/contents/filterPicker/GenderRadio";
 
-interface Props {
-  singleFilter: (id: number) => void;
-  multiFilter: (id: number) => void;
-  reflectChangesToUrl: () => void;
-  sort: string;
-  idListSports: number[];
-}
+const CoachListFilter = () => {
+  const {
+    isModal: isFilterModal,
+    closeModal: closeFilterModal,
+    handleModal: handleFilterModal
+  } = useModal();
+  const {
+    isModal: isGenderModal,
+    closeModal: closeGenderModal,
+    handleModal: handleGenderModal
+  } = useModal();
 
-const CoachListFilter = ({
-  singleFilter,
-  multiFilter,
-  reflectChangesToUrl,
-  sort,
-  idListSports
-}: Props) => {
-  const { isModal, closeModal, handleModal } = useModal();
-
-  const sportNameFirst = sportsList.find(
-    (value) => value.sportId === idListSports[0]
-  )?.sportName;
-  const len = idListSports.length - 1;
-  const sportsText = sportNameFirst
-    ? `${sportNameFirst}${len ? ` 외 ${len}` : ""}`
-    : "운동";
+  const {
+    getSportsText,
+    getGenderText,
+    isSportFilterApplied,
+    isGenderApplied
+  } = useCoachFilter();
 
   return (
     <CoachListFilterStyle>
-      <FilterBtn className="sorting__filter" onClick={handleModal}>
+      <FilterBtn className="sorting__filter" onClick={handleFilterModal}>
         필터
         <SvgIcon name="filter" />
       </FilterBtn>
       <FilterBtn
         className="sorting__sports"
-        onClick={handleModal}
-        $isActive={!!sportNameFirst}
+        onClick={handleFilterModal}
+        $isActive={isSportFilterApplied}
       >
-        {sportsText}
+        {getSportsText()}
         <SvgIcon name="arrow" stroke="#fff" width="16px" height="16px" />
       </FilterBtn>
-      <FilterBtn className="sorting__gender">
-        성별
+      <FilterBtn
+        className="sorting__gender"
+        onClick={handleGenderModal}
+        $isActive={isGenderApplied}
+      >
+        {getGenderText()}
         <SvgIcon name="arrow" stroke="#fff" width="16px" height="16px" />
       </FilterBtn>
-      {isModal && (
-        <Modal position="footer-above" closeModal={closeModal}>
+      {isFilterModal && (
+        <Modal position="footer-above" closeModal={closeFilterModal}>
           <OneButtonContent title="필터 설정" buttonText="필터 설정 완료">
-            <FilterPicker
-              singleFilter={singleFilter}
-              multiFilter={multiFilter}
-              reflectChangesToUrl={reflectChangesToUrl}
-              closeModal={closeModal}
-              sort={sort}
-              idListSports={idListSports}
-            />
+            <FilterPicker closeModal={closeFilterModal} />
           </OneButtonContent>
+        </Modal>
+      )}
+      {isGenderModal && (
+        <Modal position="footer-above" closeModal={closeGenderModal}>
+          <GenderRadio onClose={closeGenderModal} />
         </Modal>
       )}
     </CoachListFilterStyle>

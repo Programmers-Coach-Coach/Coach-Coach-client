@@ -1,31 +1,24 @@
-import { sportsList } from "@/data/sportsList";
+import { SPORT_MAP } from "@/constants/filter";
 import { FilterButton, Filters } from "./FilterPicker.css";
 
 interface Props {
-  multiFilter: (id: number) => void;
+  pickSportOptions: (id: number) => void;
   idListSports: number[];
 }
-const SportsFilterList = ({ multiFilter, idListSports }: Props) => {
+const SportsFilterList = ({ pickSportOptions, idListSports }: Props) => {
   return (
     <Filters $numColumns={4}>
-      <FilterButton
-        $active={idListSports.length === 0}
-        onClick={() => multiFilter(0)}
-        className="total__selector bold__font"
-      >
-        전체 선택
-      </FilterButton>
-      {sportsList.map((sport) => (
+      {SPORT_MAP.map((sport, i) => (
         <FilterButton
-          key={sport.sportId}
+          key={i}
           $active={
-            idListSports.includes(sport.sportId) ||
-            (idListSports.length === 0 && sport.sportId === 0)
+            idListSports.includes(i) || (idListSports.length === 0 && i === 0)
           }
-          onClick={() => multiFilter(sport.sportId)}
+          $isTotalSelector={i === 0}
+          onClick={() => pickSportOptions(i)}
           className="medium__font"
         >
-          {sport.sportName}
+          {sport.screenName}
         </FilterButton>
       ))}
     </Filters>

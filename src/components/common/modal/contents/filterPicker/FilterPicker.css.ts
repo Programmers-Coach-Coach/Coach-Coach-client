@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Wrapper = styled.div`
   padding: 0 24px;
@@ -40,19 +40,19 @@ export const Filters = styled.div<{ $numColumns: number }>`
   gap: 13px;
   margin-bottom: 40px;
 
-  .total__selector {
-    grid-column: 1/5;
-  }
-
   .bold__font {
     font-weight: 700;
   }
+
   .medium__font {
     font-weight: 500;
   }
 `;
 
-export const FilterButton = styled.button<{ $active: boolean }>`
+export const FilterButton = styled.button<{
+  $active: boolean;
+  $isTotalSelector?: boolean;
+}>`
   height: 40px;
   font-size: 14px;
   line-height: 20px;
@@ -71,6 +71,17 @@ export const FilterButton = styled.button<{ $active: boolean }>`
       ? theme.buttonVariant.contained.border
       : theme.buttonVariant.outlined.border};
   border-radius: 20px;
+
+  ${({ theme, $active, $isTotalSelector }) =>
+    $isTotalSelector &&
+    css`
+      grid-column: 1 / 5;
+      background-color: ${$active
+        ? theme.buttonVariant.contained.backgroundColor
+        : "rgba(0, 117, 255, 0.2)"};
+      border: 1px solid #0075ff;
+      font-weight: 700;
+    `}
 `;
 
 export const GenderSelectButton = styled.button`

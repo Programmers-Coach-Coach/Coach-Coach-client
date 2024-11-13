@@ -1,21 +1,21 @@
-import { filterList } from "@/data/sportsList";
+import { SORT_MAP } from "@/constants/filter";
 import { FilterButton, Filters } from "./FilterPicker.css";
 
 interface Props {
-  sort: string;
-  singleFilter: (id: number) => void;
+  sort: number;
+  pickSortFilter: (id: number) => void;
 }
-const SortFilterList = ({ sort, singleFilter }: Props) => {
+const SortFilterList = ({ sort, pickSortFilter }: Props) => {
   return (
     <Filters $numColumns={2}>
-      {filterList.map((filter) => (
+      {SORT_MAP.map((filter, i) => (
         <FilterButton
-          key={filter.id}
-          $active={filter.parameter === sort}
-          onClick={() => singleFilter(filter.id)}
+          key={i}
+          $active={i === sort}
+          onClick={() => pickSortFilter(i)}
           className="bold__font"
         >
-          {filter.name}
+          {filter.screenName}
         </FilterButton>
       ))}
     </Filters>

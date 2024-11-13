@@ -17,8 +17,8 @@ const Coach = ({ coach }: Props) => {
 
   const profileImageUrl = coach.profileImageUrl
     ? getImgixUrl(coach.profileImageUrl, {
-        w: 114, // 최대 사이즈
-        h: 114,
+        w: 84, // 최대 사이즈
+        h: 84,
         dpr: window.devicePixelRatio > 1 ? 2 : 1, // 고해상도 기기에서 2배 크기로 이미지 요청
         auth: "format"
       })
@@ -40,6 +40,7 @@ const Coach = ({ coach }: Props) => {
           <span className="coaching-sports__info">
             {coach.coachingSports.slice(0, 2).map((sport) => (
               <SportChip
+                key={sport.sportId}
                 sportId={sport.sportId as Sports}
                 sportName={sport.sportName}
                 size="small"
