@@ -26,9 +26,6 @@ export interface UseCoachFilterReturns {
   isGenderApplied: boolean;
 }
 
-// TODO: 자식으로 넘겨줄 때 계속해서 각각 타입을 지정하는 것이 코드가 복잡해져
-// 타입을 지정해주는 것 블로그 작성!
-
 const useCoachFilter = (): UseCoachFilterReturns => {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -66,7 +63,6 @@ const useCoachFilter = (): UseCoachFilterReturns => {
     GENDER_MAP,
     searchParams.get(GENDER_KEY)
   );
-  // TODO: searchParams가 변경된다고 상태가 재렌더링이 되지 않는걸로 블로그쓰기
 
   const [sort, setSort] = useState<number>(
     returnOptionId(SORT_MAP, searchParams.get(SORT_KEY))
