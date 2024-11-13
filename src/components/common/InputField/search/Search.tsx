@@ -23,7 +23,7 @@ const Search = ({ ...props }: Props) => {
   };
 
   return (
-    <SearchStyle>
+    <SearchStyle onSubmit={handleSubmit(onSubmit)}>
       <input {...register("keyword")} {...props} />
       <SvgIcon
         name="search"
@@ -31,7 +31,7 @@ const Search = ({ ...props }: Props) => {
         height="22px"
         stroke="#777C89"
         className="search__btn"
-        onSubmit={handleSubmit(onSubmit)}
+        onClick={handleSubmit(onSubmit)}
       />
       <SvgIcon
         name="xCircle"
