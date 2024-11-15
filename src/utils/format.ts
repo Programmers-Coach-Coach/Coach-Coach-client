@@ -18,7 +18,7 @@ export const utcDatetoLocal = (utcDate: string): Dayjs => {
   return dayjs.utc(utcDate).local();
 };
 
-// UTC 시간을 로컬 시간대로 변환하고, "YYYY.MM.DD" 형식으로 포멧
+// UTC 시간을 로컬 시간대로 변환하고, "YYYY-MM-DD" 형식으로 포멧
 export const timeFormat = (utcDate: string): string => {
   return dayjs.utc(utcDate).local().format("YYYY-MM-DD");
 };
