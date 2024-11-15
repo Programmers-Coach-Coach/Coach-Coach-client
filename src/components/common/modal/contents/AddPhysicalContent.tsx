@@ -2,7 +2,6 @@ import { usePostPhysicalMetrics } from "@/hooks/queries/useRecord";
 import useQueryString from "@/hooks/useQueryString";
 import { IDetailPhysicalMetrics } from "@/models/record.model";
 import { todayFormat } from "@/utils/format";
-import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import styled from "styled-components";
 
@@ -43,31 +42,12 @@ const AddPhysicalContent = ({
   bmi,
   closeModal
 }: Props) => {
-  const formatValue = (value: number): number => {
-    const temp1 = value * 10;
-    const temp2 = Math.floor(temp1);
-    return temp2 / 10;
-  };
-
-  weight = weight ? formatValue(weight) : formatValue(0);
-  skeletalMuscle = skeletalMuscle
-    ? formatValue(skeletalMuscle)
-    : formatValue(0);
-  fatPercentage = fatPercentage ? formatValue(fatPercentage) : formatValue(0);
-  bmi = bmi ? formatValue(bmi) : formatValue(0);
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    formState: { dirtyFields }
-  } = useForm<FormPhysicsInputs>({
+  const { register, handleSubmit, setValue } = useForm<FormPhysicsInputs>({
     defaultValues: {
-      weight,
-      skeletalMuscle,
-      fatPercentage,
-      bmi
+      weight: weight ?? 0.0,
+      skeletalMuscle: skeletalMuscle ?? 0.0,
+      fatPercentage: fatPercentage ?? 0.0,
+      bmi: bmi ?? 0.0
     }
   });
 
@@ -82,49 +62,11 @@ const AddPhysicalContent = ({
     closeModal();
   };
 
-  const weightValue = watch(WEIGHT);
-  const skeletalMuscleValue = watch(SKELETAL_MUSCLE);
-  const fatPercentageValue = watch(FAT_PERCENTAGE);
-  const bmiValue = watch(BMI);
-
-  useEffect(() => {
-    if (weightValue && dirtyFields.weight) {
-      if (weightValue < 0) {
-        setValue(WEIGHT, formatValue(0));
-      } else {
-        setValue(WEIGHT, formatValue(weightValue));
-      }
-    }
-
-    if (skeletalMuscleValue && dirtyFields.skeletalMuscle) {
-      if (skeletalMuscleValue < 0) {
-        setValue(SKELETAL_MUSCLE, formatValue(0));
-      } else {
-        setValue(SKELETAL_MUSCLE, formatValue(skeletalMuscleValue));
-      }
-    }
-    if (fatPercentageValue && dirtyFields.fatPercentage) {
-      if (fatPercentageValue < 0) {
-        setValue(FAT_PERCENTAGE, formatValue(0));
-      } else {
-        setValue(FAT_PERCENTAGE, formatValue(fatPercentageValue));
-      }
-    }
-    if (bmiValue && dirtyFields.bmi) {
-      if (bmiValue < 0) {
-        setValue(BMI, formatValue(0));
-      } else {
-        setValue(BMI, formatValue(bmiValue));
-      }
-    }
-  }, [
-    weightValue,
-    skeletalMuscleValue,
-    fatPercentageValue,
-    bmiValue,
-    setValue,
-    dirtyFields
-  ]);
+  const handleInputChange = (field: keyof FormPhysicsInputs, value: number) => {
+    const [interger, decimal] = value.toFixed(1).split(".");
+    const formatted = `${interger}.${decimal}`;
+    setValue(field, parseFloat(formatted));
+  };
 
   return (
     <Wrapper onSubmit={handleSubmit(onSubmit)}>
@@ -144,6 +86,9 @@ const AddPhysicalContent = ({
             step="0.1"
             {...register(field.name, { valueAsNumber: true })}
             key={i}
+            onChange={(e) =>
+              handleInputChange(field.name, parseFloat(e.target.value || "0"))
+            }
           />
         ))}
       </Datas>

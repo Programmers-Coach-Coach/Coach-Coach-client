@@ -25,6 +25,9 @@ export const usePostPhysicalMetrics = () => {
     mutationFn: postPhysicalMetrics,
     onSuccess: () => {
       toast.success("신체 정보를 입력하였습니다");
+      queryClient.invalidateQueries({
+        queryKey: ["getDetailRecord"]
+      });
     },
     onError: () => {
       toast.error("신체 정보 입력에 실패하였습니다");
@@ -79,11 +82,12 @@ export const useGetStamps = (year: number, month: number) => {
   return { data, isError, isLoading };
 };
 
-export const useGetDetailRecord = (recordId: number | null) => {
+// TODO: enabled 처리에 대한 블로그 작성
+export const useGetDetailRecord = (recordDate: string | null) => {
   const { data, isError, isLoading, refetch } = useQuery({
-    queryKey: ["getDetailRecord", recordId],
-    queryFn: () => getDetailRecord(recordId as number),
-    enabled: recordId !== null // recordId가 없을 때 API 호출 막기
+    queryKey: ["getDetailRecord", recordDate],
+    queryFn: () => getDetailRecord(recordDate as string),
+    enabled: recordDate !== null // recordId가 없을 때 API 호출 막기
   });
 
   return { data, isError, isLoading, refetch };

@@ -26,3 +26,11 @@ export const timeFormat = (utcDate: string): string => {
 export const todayFormat = (): string => {
   return dayjs().local().format("YYYY-MM-DD");
 };
+
+export const addDay = (utcDate: string): string => {
+  return dayjs.utc(utcDate).local().add(1, "day").format("YYYY-MM-DD");
+};
+
+export const subtractDay = (utcDate: string): string => {
+  return dayjs.utc(utcDate).local().subtract(1, "day").format("YYYY-MM-DD");
+};

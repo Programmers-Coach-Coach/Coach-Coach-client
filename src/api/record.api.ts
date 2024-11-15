@@ -17,7 +17,7 @@ export const postPhysicalMetrics = async (data: IPhysicalMetricsWithDate) => {
 
   return await requestHandler<IResponseMessage>(
     "post",
-    `${API_PATH.addRecord}?${query}`,
+    `${API_PATH.recordV2}?${query}`,
     rest
   );
 };
@@ -42,10 +42,12 @@ export const getStamps = async (year: number, month: number) => {
   );
 };
 
-export const getDetailRecord = async (recordId: number) => {
+export const getDetailRecord = async (recordDate: string) => {
+  const query = qs.stringify({ record_date: recordDate });
+
   return await requestHandler<IDetailRecords>(
     "get",
-    `${API_PATH.record}/${recordId}`
+    `${API_PATH.recordV2}?${query}`
   );
 };
 

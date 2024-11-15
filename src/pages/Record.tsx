@@ -42,7 +42,7 @@ const Record = () => {
 
 const Wrapper = styled.div``;
 
-const HeaderWithDesc = styled.div`
+export const HeaderWithDesc = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
