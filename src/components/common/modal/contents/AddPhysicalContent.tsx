@@ -101,7 +101,7 @@ const Wrapper = styled.form`
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: 20px;
+  padding: 0 20px;
 `;
 
 const Header = styled.div`
