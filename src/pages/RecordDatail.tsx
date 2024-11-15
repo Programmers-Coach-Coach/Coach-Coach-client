@@ -1,24 +1,43 @@
+import SvgIcon from "@/components/Icon/SvgIcon";
 import Loading from "@/components/loading/Loading";
 import ExerciseDetail from "@/components/record/exerciseRecord/ExerciseDetail";
 import PhysicalRecord from "@/components/record/physicalRecord/PhysicalRecord";
 import { useGetDetailRecord } from "@/hooks/queries/useRecord";
 import useQueryString from "@/hooks/useQueryString";
-import { WhiteSpace } from "@/style/global";
+import { addDay, subtractDay } from "@/utils/format";
+import { useState } from "react";
 
 import styled from "styled-components";
 
 const RecordDatail = () => {
-  const { getRecordId, getRecordDate } = useQueryString();
-  const recordId = getRecordId();
-  const date = getRecordDate();
+  const { getRecordDate, setRecordDate } = useQueryString();
+  const [date, setDate] = useState<string | null>(getRecordDate());
 
-  const { data, isError, isLoading } = useGetDetailRecord(recordId);
+  const { data, isError, isLoading } = useGetDetailRecord(date);
+
+  const handleChangeDate = (dir: "prev" | "next") => {
+    const directions = {
+      prev: () => {
+        if (date) {
+          setRecordDate(subtractDay(date));
+          setDate(subtractDay(date));
+        }
+      },
+      next: () => {
+        if (date) {
+          setRecordDate(addDay(date));
+          setDate(addDay(date));
+        }
+      }
+    };
+    directions[dir]();
+  };
 
   if (isLoading) {
     return <Loading />;
   }
 
-  if (isError) {
+  if (!data || isError) {
     return (
       <div>
         페이지 일부를 불러오는 데 오류가 생겼어요. <br />
@@ -30,17 +49,31 @@ const RecordDatail = () => {
   return (
     <Wrapper>
       <DateWrapper>
+        <SvgIcon
+          name="arrow"
+          width="24px"
+          height="24px"
+          stroke="#fff"
+          className="prev-date__btn"
+          onClick={() => handleChangeDate("prev")}
+        />
         <h2>{date}</h2>
+        <SvgIcon
+          name="arrow"
+          width="24px"
+          height="24px"
+          stroke="#fff"
+          className="next_date__btn"
+          onClick={() => handleChangeDate("next")}
+        />
       </DateWrapper>
       <ExerciseDetail routines={data?.records || []} />
-      <WhiteSpace $height={30} />
       <PhysicalRecord
-        weight={data?.weight || null}
-        skeletalMuscle={data?.skeletalMuscle || null}
-        fatPercentage={data?.fatPercentage || null}
-        bmi={data?.bmi || null}
+        weight={data.weight}
+        skeletalMuscle={data.skeletalMuscle}
+        fatPercentage={data.fatPercentage}
+        bmi={data.bmi}
       />
-      <WhiteSpace $height={80} />
     </Wrapper>
   );
 };
@@ -53,6 +86,17 @@ const Wrapper = styled.div`
 const DateWrapper = styled.div`
   display: flex;
   justify-content: center;
+  gap: 30px;
   padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+
+  .prev-date__btn {
+    transform: rotate(90deg);
+    cursor: pointer;
+  }
+  .next_date__btn {
+    transform: rotate(-90deg);
+    cursor: pointer;
+  }
 `;
 export default RecordDatail;

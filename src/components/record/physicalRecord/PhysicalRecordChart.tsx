@@ -1,22 +1,24 @@
 import LineChart from "@/components/chart/LineChart";
-import PhysicalTabs from "@/components/tab/PhysicalTabs";
+import DefaultTab from "@/components/tab/DefaultTab";
 import { useState } from "react";
-import styled from "styled-components";
 
 const PhysicalRecordChart = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
 
-  const handleTab = (index: number) => {
-    setCurrentIndex(index);
+  const handleTabChange = (index: number) => {
+    setActiveTabIndex(index);
   };
 
   return (
-    <Wrapper>
-      <PhysicalTabs value={currentIndex} onTabChange={handleTab} />
-      <LineChart chartId={currentIndex} />
-    </Wrapper>
+    <div>
+      <DefaultTab
+        value={activeTabIndex}
+        onTabChange={handleTabChange}
+        labels={["체중", "골격근량", "체지방률", "BMI"]}
+      />
+      <LineChart chartId={activeTabIndex} />
+    </div>
   );
 };
 
-const Wrapper = styled.div``;
 export default PhysicalRecordChart;

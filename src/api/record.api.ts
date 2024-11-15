@@ -12,9 +12,17 @@ import qs from "qs";
 import { requestHandler } from "./http";
 
 export const postPhysicalMetrics = async (data: IPhysicalMetricsWithDate) => {
-  return await requestHandler<{ id: number }>("post", API_PATH.record, data);
+  const { recordDate, ...rest } = data;
+  const query = qs.stringify({ record_date: recordDate });
+
+  return await requestHandler<IResponseMessage>(
+    "post",
+    `${API_PATH.recordV2}?${query}`,
+    rest
+  );
 };
 
+// TODO: 삭제
 export const editPhysicalMetrics = async (
   recordId: number,
   data: IPhysicalMetrics
@@ -34,10 +42,12 @@ export const getStamps = async (year: number, month: number) => {
   );
 };
 
-export const getDetailRecord = async (recordId: number) => {
+export const getDetailRecord = async (recordDate: string) => {
+  const query = qs.stringify({ record_date: recordDate });
+
   return await requestHandler<IDetailRecords>(
     "get",
-    `${API_PATH.record}/${recordId}`
+    `${API_PATH.recordV2}?${query}`
   );
 };
 

@@ -1,8 +1,7 @@
 import { SORT_KEY, SPORT_KEY } from "@/constants/filter";
 import { useSearchParams } from "react-router-dom";
 
-const RECORD_ID = "recordId";
-const DATE = "date";
+export const DATE = "date";
 const KEYWORD = "keyword";
 
 const DEFAULT_SORT = "latest";
@@ -11,16 +10,6 @@ export const DEFAULT_KEYWORD = "";
 
 const useQueryString = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const getRecordId = (): number | null => {
-    const recordId = searchParams.get(RECORD_ID);
-    return recordId ? Number(recordId) : null;
-  };
-
-  const setRecordId = (id: number) => {
-    searchParams.set(RECORD_ID, String(id));
-    setSearchParams(searchParams);
-  };
 
   const getRecordDate = (): string | null => {
     return searchParams.get(DATE);
@@ -56,8 +45,6 @@ const useQueryString = () => {
   };
 
   return {
-    getRecordId,
-    setRecordId,
     getRecordDate,
     setRecordDate,
     setKeyword,
