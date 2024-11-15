@@ -8,6 +8,7 @@ import FullHeart from "@/assets/images/full-heart.svg?react";
 import FullStar from "@/assets/images/full-star.svg?react";
 import Modify from "@/assets/images/modify.svg?react";
 import Search from "@/assets/images/search.svg?react";
+import StarRounded from "@/assets/images/star-rounded.svg?react";
 import Star from "@/assets/images/star.svg?react";
 import XCircle from "@/assets/images/x-circle.svg?react";
 import { CgDetailsMore } from "react-icons/cg";
@@ -49,6 +50,7 @@ export const ICONS = {
   star: Star,
   emptyStar: FaRegStar,
   fullStar: FullStar,
+  starRounded: StarRounded,
   heart: FullHeart,
   emptyHeart: EmptyHeart,
   list: IoListOutline,
