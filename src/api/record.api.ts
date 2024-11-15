@@ -12,9 +12,17 @@ import qs from "qs";
 import { requestHandler } from "./http";
 
 export const postPhysicalMetrics = async (data: IPhysicalMetricsWithDate) => {
-  return await requestHandler<{ id: number }>("post", API_PATH.record, data);
+  const { recordDate, ...rest } = data;
+  const query = qs.stringify({ record_date: recordDate });
+
+  return await requestHandler<IResponseMessage>(
+    "post",
+    `${API_PATH.addRecord}?${query}`,
+    rest
+  );
 };
 
+// TODO: 삭제
 export const editPhysicalMetrics = async (
   recordId: number,
   data: IPhysicalMetrics

@@ -15,18 +15,15 @@ import { IResponseMessage } from "@/models/responseMessage.model";
 import { getChartSorted } from "@/utils/sort";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import useQueryString from "../useQueryString";
 
 export const usePostPhysicalMetrics = () => {
-  const { setRecordId } = useQueryString();
   const { mutate, isError, isSuccess } = useMutation<
-    { id: number },
+    IResponseMessage,
     Error,
     IPhysicalMetricsWithDate
   >({
     mutationFn: postPhysicalMetrics,
-    onSuccess: (data) => {
-      setRecordId(data.id);
+    onSuccess: () => {
       toast.success("신체 정보를 입력하였습니다");
     },
     onError: () => {

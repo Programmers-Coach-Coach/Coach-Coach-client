@@ -7,7 +7,6 @@ import useQueryString from "@/hooks/useQueryString";
 import { IDetailPhysicalMetrics } from "@/models/record.model";
 import { SubmitHandler, useForm } from "react-hook-form";
 import styled from "styled-components";
-import CustomButton from "../common/Button/CustomButton";
 import PhysicalRecordInputs from "../record/physicalRecord/PhysicalRecordInputs";
 
 export interface FormPhysicsInputs {
@@ -53,21 +52,7 @@ const PhysicalRecordInner = ({
 
   return (
     <Wrapper onSubmit={handleSubmit(onSubmit)}>
-      <Header>
-        <HeaderWithDesc>
-          <h2>오늘의 신체 기록</h2>
-          <p className="b2">소수점 첫째자리까지 입력할 수 있어요</p>
-        </HeaderWithDesc>
-        <CustomButton
-          size="super-mini"
-          variant="contained"
-          onClick={() => {}}
-          type="submit"
-          disabled={!isValid || isSubmitting}
-        >
-          저장
-        </CustomButton>
-      </Header>
+      <Header>신체 정보 입력</Header>
       <PhysicalRecordInputs
         register={register}
         weight={weight}
@@ -75,6 +60,7 @@ const PhysicalRecordInner = ({
         fatPercentage={fatPercentage}
         bmi={bmi}
       />
+      <Button onClick={() => {}}>입력 완료</Button>
     </Wrapper>
   );
 };
@@ -87,17 +73,29 @@ const Wrapper = styled.form`
   padding: 20px;
 `;
 
-const HeaderWithDesc = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 0 10px;
+const Header = styled.div`
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 23px;
+  text-align: center;
 `;
 
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+const Button = styled.button`
+  width: 100%;
+  height: 60px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 26px;
+  letter-spacing: -0.375px;
+  color: ${({ theme }) => theme.buttonVariant.contained.color};
+  background-color: ${({ theme }) =>
+    theme.buttonVariant.contained.backgroundColor};
+  border: ${({ theme }) => theme.buttonVariant.contained.border};
+  border-radius: 20px;
+  margin-bottom: 16px;
 `;
 
 export default PhysicalRecordInner;
