@@ -68,7 +68,7 @@ export interface ICoachDetail {
   activeCenterDetail: string | null;
   activeHours: string;
   chattingUrl: string;
-  reviews: IReview[];
+  // reviews: IReview[];
   isOpen: boolean;
   isContacted: boolean;
   isMatched: boolean;
