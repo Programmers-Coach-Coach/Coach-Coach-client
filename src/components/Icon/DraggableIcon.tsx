@@ -109,7 +109,7 @@ const DraggableIcon = ({ children, isDraggingFn }: DraggableIconProps) => {
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleDragEnd);
     };
-  }, [isDragging]); // isDragging 상태가 변경될 때마다 실행
+  }, [isDragging, handleMouseMove, handleDragEnd, handleTouchMove]); // isDragging 상태가 변경될 때마다 실행
 
   return (
     <IconWrapper
