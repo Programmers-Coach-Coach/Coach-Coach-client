@@ -64,7 +64,7 @@ const MemberProfile = ({ member }: MemberProfileProps) => {
         <MemberProfileDetailStyle>
           <div className="name">{member.userName}</div>
           <MemberTagsStyle>
-            {member.coachingSports?.map((sport) => {
+            {member.interestedSports?.map((sport) => {
               return (
                 <MemberTagStyle key={sport.sportId} color="review">
                   #{sport.sportName}

@@ -4,7 +4,7 @@ export interface IGetMyMember {
   profileImageUrl: string | null;
   isMatching: boolean;
   localAddress: string | null;
-  coachingSports: {
+  interestedSports: {
     sportId: number;
     sportName: string;
   }[];
