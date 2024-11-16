@@ -71,7 +71,7 @@ const MemberRoutine = () => {
         <Wrap>
           <MemberDescriptionStyle>
             <MemberTagsStyle>
-              {memberData?.coachingSports?.map((sport) => {
+              {memberData?.interestedSports?.map((sport) => {
                 return (
                   <MemberTagStyle key={sport.sportId} color="review">
                     #{sport.sportName}
