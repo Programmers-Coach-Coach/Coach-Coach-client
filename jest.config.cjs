@@ -1,5 +1,6 @@
 // package.json에서 type이 module 이므로 파일 확장명이 commonJs인 cjs로 사용
 module.exports = {
+  resolver: "jest-resolve",
   testEnvironment: "jest-environment-jsdom",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
   testMatch: [
