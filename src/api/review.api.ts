@@ -19,7 +19,7 @@ export const getReviews = async (
 export const postReview = async (coachId: number, data: IPostReview) => {
   return await requestHandler<IResponseMessage>(
     "post",
-    `coaches/${coachId}/reviews`,
+    `/v1/coaches/${coachId}/reviews`,
     data
   );
 };
@@ -27,7 +27,7 @@ export const postReview = async (coachId: number, data: IPostReview) => {
 export const editReview = async (reviewId: number, data: IPostReview) => {
   return await requestHandler<IResponseMessage>(
     "patch",
-    `coaches/reviews/${reviewId}`,
+    `/v1/coaches/reviews/${reviewId}`,
     data
   );
 };

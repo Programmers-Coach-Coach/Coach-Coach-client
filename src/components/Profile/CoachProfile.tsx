@@ -57,7 +57,7 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
           {coach.coachingSports?.map((sport) => {
             return (
               <CoachTagStyle key={sport.sportId} $id={sport.sportId as Sports}>
-                #{sport.sportName}
+                # {sport.sportName}
               </CoachTagStyle>
             );
           })}
@@ -196,6 +196,7 @@ const CoachTagsStyle = styled.div`
 const CoachTagStyle = styled.div<{ $id: Sports }>`
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 13vw;
   height: 6.5vw;
   font-size: 2.5vw;

@@ -33,7 +33,9 @@ const CoachDetails = ({ coach }: Props) => {
         {activeTabIndex === 1 && (
           <ActiveCenterMap roadNameAddress={coach.activeCenter} />
         )}
-        {activeTabIndex === 2 && <Review coachId={coach.coachId} />}
+        {activeTabIndex === 2 && (
+          <Review coachId={coach.coachId} isMatched={coach.isMatched} />
+        )}
       </Details>
     </div>
   );
