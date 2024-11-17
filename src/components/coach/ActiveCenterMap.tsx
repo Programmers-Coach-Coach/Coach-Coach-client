@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import styled from "styled-components";
-import Empty from "../common/Empty/Empty";
+import EmptyVersion2 from "../common/Empty/EmptyVersion2";
 
 interface Props {
   roadNameAddress: string | null;
@@ -72,12 +72,11 @@ const ActiveCenterMap = ({ roadNameAddress }: Props) => {
           <Map id="map"></Map>
         </>
       ) : (
-        <Empty
-          name="search"
-          color="review"
-          size="15px"
-          descriptions="코치님의 활동 센터 정보가 없어요"
-        />
+        <EmptyVersion2 imgName="noLocation" height="290px">
+          코치님의
+          <br />
+          활동 센터 정보가 없어요
+        </EmptyVersion2>
       )}
     </Wrapper>
   );

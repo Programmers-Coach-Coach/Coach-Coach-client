@@ -85,3 +85,5 @@ export const SPORT_MAP = [
 ];
 
 export const MAX_SPORT_SIZE = SPORT_MAP.length - 1;
+
+export const FILTER_VALUES = ["최신순", "별점 높은 순", "별점 낮은 순"];

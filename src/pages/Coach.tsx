@@ -1,17 +1,15 @@
 import CoachDetails from "@/components/coach/CoachDetails";
 import MatchButtons from "@/components/coach/MatchButtons";
+import Summary from "@/components/coach/Summary";
 import Loading from "@/components/loading/Loading";
 import CoachProfile from "@/components/Profile/CoachProfile";
 import useCoachDetail from "@/hooks/queries/useCoachDetail";
-import { useFetchAuth } from "@/hooks/useFetchAuth";
-import { WhiteSpace } from "@/style/global";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 const Coach = () => {
   const { id } = useParams();
   const { data, isError, isLoading } = useCoachDetail(Number(id));
-  const { data: myAuth } = useFetchAuth();
 
   if (isLoading) return <Loading />;
   if (isError || !data) {
@@ -41,10 +39,13 @@ const Coach = () => {
   return (
     <Wrapper>
       <CoachProfile coach={coach} />
-      {/* // TODO: 나 인지 확인 수정 (이유: 중복 이름 가능 변경) */}
-      {myAuth?.nickname !== data.coachName && (
+      <Summary
+        activeHours={data.activeHours}
+        reviewRating={data.reviewRating}
+        memberCount={data.totalUserCount}
+      />
+      {!data.isSelf && (
         <>
-          <WhiteSpace $height={30} />
           <MatchButtons
             coachId={data.coachId}
             chattingUrl={data.chattingUrl}

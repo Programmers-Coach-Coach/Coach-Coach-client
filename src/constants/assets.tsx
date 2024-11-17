@@ -7,9 +7,11 @@ import Filter from "@/assets/images/filter.svg?react";
 import FullHeart from "@/assets/images/full-heart.svg?react";
 import FullStar from "@/assets/images/full-star.svg?react";
 import Modify from "@/assets/images/modify.svg?react";
+import NoLocation from "@/assets/images/no-location.svg?react";
 import Search from "@/assets/images/search.svg?react";
 import StarRounded from "@/assets/images/star-rounded.svg?react";
 import Star from "@/assets/images/star.svg?react";
+import Warning from "@/assets/images/warning.svg?react";
 import XCircle from "@/assets/images/x-circle.svg?react";
 import { CgDetailsMore } from "react-icons/cg";
 import { FaCheck, FaRegStar } from "react-icons/fa";
@@ -62,5 +64,7 @@ export const ICONS = {
   dropDown: MdOutlineArrowDropDown,
   check: FaCheck,
   dumbbell: Dumbbell,
-  arrow: ArrowDown
+  arrow: ArrowDown,
+  noLocation: NoLocation,
+  warning: Warning
 };

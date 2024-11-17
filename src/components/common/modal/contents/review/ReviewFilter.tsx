@@ -1,25 +1,28 @@
+import { FILTER_VALUES } from "@/constants/filter";
+import { useState } from "react";
 import RadioContent from "../RadioContent";
-
-export type ReviewFilter = "latest" | "rating_desc" | "rating_asc";
 
 interface Props {
   activeFilter: number;
-  onPick: (id: number) => void;
+  onSubmit: (id: number) => void;
   onClose: () => void;
 }
 
-export const FILTER_VALUES = ["최신순", "별점 높은 순", "별점 낮은 순"];
+const ReviewFilter = ({ activeFilter, onSubmit, onClose }: Props) => {
+  const [id, setId] = useState(activeFilter);
 
-const ReviewFilter = ({ activeFilter, onPick, onClose }: Props) => {
   const handleSubmit = () => {
+    onSubmit(id);
     onClose();
   };
+  const handleTemp = (id: number) => setId(id);
+
   return (
     <RadioContent
       title="리뷰 정렬"
       items={FILTER_VALUES}
-      onPickNumber={onPick}
-      activeNumber={activeFilter}
+      onPickNumber={handleTemp}
+      activeNumber={id}
       onSubmit={handleSubmit}
     />
   );

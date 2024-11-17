@@ -2,6 +2,7 @@ import { ICoachDetail } from "@/models/coach.model";
 import { useState } from "react";
 import styled from "styled-components";
 import DefaultTab from "../tab/DefaultTab";
+import ActiveCenterMap from "./ActiveCenterMap";
 import Introduction from "./Introduction";
 import Review from "./Review";
 
@@ -30,17 +31,16 @@ const CoachDetails = ({ coach }: Props) => {
           />
         )}
         {activeTabIndex === 1 && (
-          <Introduction
-            coachingSports={coach.coachingSports}
-            introduction={coach.coachIntroduction}
-          />
+          <ActiveCenterMap roadNameAddress={coach.activeCenter} />
         )}
-        {activeTabIndex === 2 && <Review />}
+        {activeTabIndex === 2 && <Review coachId={coach.coachId} />}
       </Details>
     </div>
   );
 };
 
-const Details = styled.div``;
+const Details = styled.div`
+  margin-top: 20px;
+`;
 
 export default CoachDetails;
