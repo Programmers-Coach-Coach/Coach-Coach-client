@@ -87,10 +87,4 @@ const BasicWrapper = styled.div`
   position: relative;
 `;
 
-const SubtitleWrapper = styled.div`
-  width: 25%;
-  font-size: ${({ theme }) => theme.titleSize.t2.fontSize};
-  color: #fff;
-`;
-
 export default AddressSearchField;
