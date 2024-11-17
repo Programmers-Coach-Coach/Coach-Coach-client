@@ -105,7 +105,8 @@ const Info = styled.div`
 
 const Map = styled.div`
   width: 100%;
-  height: 180px;
+  height: 0;
+  padding-top: 60%;
 `;
 
 export default ActiveCenterMap;
