@@ -95,7 +95,6 @@
     "jest-transform-stub": "^2.0.0",
     "msw": "^2.3.5",
     "prettier": "^3.3.3",
-    "storybook": "^8.2.9",
     "ts-jest": "^29.2.3",
     "ts-jest-mock-import-meta": "^1.2.0",
     "typescript": "^5.2.2",
