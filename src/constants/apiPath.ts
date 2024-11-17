@@ -26,5 +26,6 @@ export const API_PATH = {
   record: "/v1/records",
   match: "/v1/coaches/matches",
   recordChart: "/v1/records/charts",
-  recordV2: "/v2/records"
+  recordV2: "/v2/records",
+  review: "/v1/coaches/reviews"
 };

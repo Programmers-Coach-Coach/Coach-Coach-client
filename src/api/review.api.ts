@@ -1,6 +1,20 @@
+import { API_PATH } from "@/constants/apiPath";
 import { IResponseMessage } from "@/models/responseMessage.model";
-import { IPostReview } from "@/models/review.model";
+import { IPostReview, IReviewList, TReviewFilter } from "@/models/review.model";
+import qs from "qs";
 import { requestHandler } from "./http";
+
+export const getReviews = async (
+  coachId: number,
+  sortOptions: TReviewFilter
+) => {
+  const query = qs.stringify({ coachId, sortOptions });
+
+  return await requestHandler<IReviewList>(
+    "get",
+    `${API_PATH.review}?${query}`
+  );
+};
 
 export const postReview = async (coachId: number, data: IPostReview) => {
   return await requestHandler<IResponseMessage>(

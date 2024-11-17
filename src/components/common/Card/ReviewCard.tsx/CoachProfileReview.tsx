@@ -1,9 +1,9 @@
 import { ICoachDetail } from "@/models/coach.model";
 import { theme } from "@/style/theme";
+import { formatDate } from "@/utils/formatDate";
 import { BsChatLeftTextFill } from "react-icons/bs";
 import { styled } from "styled-components";
 import RatingStars from "./RatingStars";
-import { formatDate } from "@/utils/formatDate";
 
 interface ReviewCardProps {
   coachProfile: ICoachDetail;
@@ -22,7 +22,7 @@ const CoachProfileReview = ({ coachProfile }: ReviewCardProps) => {
           <CardWrapper>
             <FisrstWrapper>
               <StarWrapper>
-                <RatingStars stars={review.stars} size="12" />
+                <RatingStars stars={review.stars} />
               </StarWrapper>
               <div className="small-text">{review.userName}</div>
               <div className="small-text">{formatDate(review.createdAt)}</div>

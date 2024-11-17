@@ -23,7 +23,7 @@ const ReviewCard = ({ coachProfile }: ReviewCardProps) => {
           <CardWrapper>
             <FisrstWrapper>
               <StarWrapper>
-                <RatingStars stars={review.stars} size="12" />
+                <RatingStars stars={review.stars} />
               </StarWrapper>
               <div className="small-text">{review.userName}</div>
               <div className="small-text">{timeAgo(review.createdAt)}</div>

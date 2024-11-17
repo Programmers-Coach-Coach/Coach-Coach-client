@@ -68,14 +68,16 @@ export interface ICoachDetail {
   activeCenterDetail: string | null;
   activeHours: string;
   chattingUrl: string;
-  reviews: IReview[];
   isOpen: boolean;
   isContacted: boolean;
   isMatched: boolean;
   countOfReviews: number;
   reviewRating: number;
   isLiked: boolean;
+  isSelf: boolean;
   countOfLikes: number;
+  totalUserCount: number;
+  reviews: IReview[];
 }
 
 export interface IReview {

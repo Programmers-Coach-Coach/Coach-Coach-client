@@ -1,4 +1,5 @@
 import { contact } from "@/api/coach.api";
+import { queryClient } from "@/api/queryClient";
 import { IResponseMessage } from "@/models/responseMessage.model";
 import { conflictError } from "@/utils/error";
 import { useMutation } from "@tanstack/react-query";
@@ -13,6 +14,7 @@ export const useContact = () => {
     mutationFn: (id: number) => contact(id),
     onSuccess: () => {
       toast.success("신청이 완료됐어요");
+      queryClient.invalidateQueries({ queryKey: ["getCoachDetail"] });
     },
     onError: (error) => {
       if (conflictError(error)) {
