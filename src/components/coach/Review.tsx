@@ -41,7 +41,7 @@ const Review = ({ coachId }: Props) => {
         <div className="review-rating">{reviews.reviewRating.toFixed(1)}</div>
         <div className="review-count">
           <StarWrapper>
-            <RatingStars stars={reviews.reviewRating} size="20px" />
+            <RatingStars stars={reviews.reviewRating} />
           </StarWrapper>
           <span>&nbsp;&nbsp;&nbsp;리뷰{reviews.countOfReviews}개</span>
         </div>

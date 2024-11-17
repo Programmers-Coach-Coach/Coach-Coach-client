@@ -4,12 +4,11 @@ const STAR_RATING = [1, 2, 3, 4, 5];
 
 interface Props {
   stars: number;
-  size: string;
   onClick?: (cnt: number) => void;
 }
 
 // TODO: size 삭제
-const RatingStars = ({ stars, size, onClick }: Props) => {
+const RatingStars = ({ stars, onClick }: Props) => {
   return (
     <>
       {STAR_RATING.map((cnt) => (
