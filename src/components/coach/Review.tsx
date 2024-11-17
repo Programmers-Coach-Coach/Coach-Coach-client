@@ -48,11 +48,13 @@ const Review = ({ coachId, isMatched }: Props) => {
           </StarWrapper>
           <span>&nbsp;&nbsp;&nbsp;리뷰{reviews.countOfReviews}개</span>
         </div>
-        <AddReview
-          coachId={coachId}
-          isMyReviewAdded={isMyReviewAdded}
-          isMatched={isMatched}
-        />
+        {isMatched && (
+          <AddReview
+            coachId={coachId}
+            isMyReviewAdded={isMyReviewAdded}
+            isMatched={isMatched}
+          />
+        )}
       </Header>
       <Filter onClick={handleModal} $isActive={!!isModal}>
         {FILTER_VALUES[filterId]}
