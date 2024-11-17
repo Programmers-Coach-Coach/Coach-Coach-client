@@ -1,28 +1,13 @@
 import PopularCoaches from "@/components/coaches/PopularCoaches";
-import Empty from "@/components/common/Empty/Empty";
 import SvgIcon from "@/components/Icon/SvgIcon";
-import Loading from "@/components/loading/Loading";
 import ReactHelmet from "@/components/SEO/ReactHelmet";
 import SportsList from "@/components/sports/SportsList";
-import useHome from "@/hooks/useHome";
 import { WhiteSpace } from "@/style/global";
 import { useState } from "react";
 import styled from "styled-components";
 
 const Home = () => {
-  const { data, isLoading, isError } = useHome();
   const [isOpen, setOpen] = useState(false);
-
-  if (isLoading) return <Loading />;
-  if (isError || !data)
-    return (
-      <Empty
-        name="home"
-        size="64px"
-        color="gray3"
-        descriptions="홈 화면을 가져오는 중 오류가 발생했어요."
-      />
-    );
 
   return (
     <HomeStyle>
@@ -50,7 +35,7 @@ const Home = () => {
         <Seperator />
       </SectionHeader>
       <WhiteSpace $height={30} />
-      <SportsList sportsList={data.sports} isOpen={isOpen} />
+      <SportsList isOpen={isOpen} />
       <WhiteSpace $height={55} />
       <SectionHeader>
         <Title>이번주 인기 코치</Title>
@@ -58,7 +43,7 @@ const Home = () => {
         <Seperator />
       </SectionHeader>
       <WhiteSpace $height={30} />
-      <PopularCoaches popularCoaches={data.coaches} />
+      <PopularCoaches />
       <WhiteSpace $height={20} />
     </HomeStyle>
   );

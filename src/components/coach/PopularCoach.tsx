@@ -39,7 +39,7 @@ const PopularCoach = ({ coach, index }: Props) => {
           <img src={topRanks[index]} alt={`Top${index + 1}`} />
         </div>
         <div className="heart-section">
-          <Heart checked={coach.isLiked} size="30px" id={coach.coachId} />
+          <Heart checked={coach.isLiked} size="28px" id={coach.coachId} />
         </div>
       </ProfileImage>
       <CoachDetails>

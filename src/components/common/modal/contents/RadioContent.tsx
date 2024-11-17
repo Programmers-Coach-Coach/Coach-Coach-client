@@ -79,12 +79,12 @@ const RadioInput = styled.input`
   }
 `;
 
-const RadioLabel = styled.span<{ $isActive: boolean }>`
+const RadioLabel = styled.p<{ $isActive: boolean }>`
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
   letter-spacing: -0.35px;
-  padding: 0.5em 1em;
+  padding: 0 1em;
   border-radius: 20px;
 `;
 

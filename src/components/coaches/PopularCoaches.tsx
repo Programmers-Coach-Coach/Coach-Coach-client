@@ -1,15 +1,25 @@
-import { IPopularCoach } from "@/models/coach.model";
+import { useGetPopularCoaches } from "@/hooks/useHome";
 import styled from "styled-components";
 import PopularCoach from "../coach/PopularCoach";
+import EmptyVersion2 from "../common/Empty/EmptyVersion2";
+import Loading from "../loading/Loading";
 
-interface Props {
-  popularCoaches: IPopularCoach[];
-}
+const PopularCoaches = () => {
+  const { data, isLoading, isError } = useGetPopularCoaches();
 
-const PopularCoaches = ({ popularCoaches }: Props) => {
+  if (isLoading) return <Loading />;
+  if (isError || !data)
+    return (
+      <EmptyVersion2 imgName="warning" height="100px">
+        서버가
+        <br />
+        죽었어요
+      </EmptyVersion2>
+    );
+
   return (
     <Wrapper>
-      {popularCoaches?.map((coach, i) => (
+      {data?.map((coach, i) => (
         <PopularCoach key={coach.coachId} coach={coach} index={i} />
       ))}
     </Wrapper>
