@@ -12,7 +12,6 @@ const CoachList = () => {
       <CoachListFilter />
       <WhiteSpace $height={14} />
       <Coaches />
-      <WhiteSpace $height={60} />
     </CoachListStyle>
   );
 };
