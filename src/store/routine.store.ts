@@ -124,8 +124,7 @@ export const useRoutineStore = create<RoutineStore>()(
         }))
     }),
     {
-      name: "routine-storage",
-      getStorage: () => localStorage
+      name: "routine-storage"
     }
   )
 );

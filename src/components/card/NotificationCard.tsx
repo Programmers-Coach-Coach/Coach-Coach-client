@@ -55,7 +55,7 @@ const NotificationCard = ({
       />
       <div className="message">{message}</div>
       <IconButton
-        name="x"
+        name="twins"
         size="18px"
         color="gray3"
         onClick={() => handleDelete(noticeId)}
