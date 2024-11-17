@@ -12,22 +12,29 @@ export type ColorKey =
   | "gray1"
   | "gray2"
   | "gray3"
+  | "blue"
   | "lightTransparentBlack";
 
 export type FontSize = "large" | "medium" | "small";
 export type FontWeight = "bold" | "normal";
 export type ButtonSize =
+  | "desktop"
+  | "mobile"
+  | "mini_desktop"
+  | "mini_mobile"
   | "large"
   | "small"
   | "full"
   | "mini"
   | "super-mini"
-  | "full-sharp";
+  | "full-sharp"
+  | "medium";
 export type CustomButtonType =
   | "contained"
   | "outlined"
   | "containedError"
   | "containedCancel";
+export type SportChipType = "small";
 export type ProfileImageSize = "mini" | "small" | "medium" | "large";
 export type ModalSize = "default";
 export type PaddingSize = "default";
@@ -91,23 +98,34 @@ interface Theme {
   sports: {
     [key in Sports]: string;
   };
+  sportChip: {
+    [key in SportChipType]: {
+      fontSize: string;
+      fontWeight: string;
+      lineHeight: string;
+      letterSpacing: string;
+      padding: string;
+      borderRadius: string;
+    };
+  };
 }
 
 export const theme: Theme = {
   color: {
-    background: "#FFFFFF",
+    background: "#181A20",
     box: "#F8F9FA",
     border: "#BDBDBD",
-    primary: "#5271FF",
+    primary: "#0075FF",
     secondary: "#9CABEF",
     third: "#AECDFF",
     error: "#F22455",
     likes: "#ABDEE6",
     review: "#FEAF29",
-    text: "#212121",
+    text: "#FFFFFF",
     gray1: "#E1E1E1",
     gray2: "#D9D9D9",
-    gray3: "#808080",
+    gray3: "#959AA8",
+    blue: "#0066FF",
     lightTransparentBlack: "rgba(0, 0, 0, 0.3)"
   },
   fontSize: {
@@ -120,19 +138,44 @@ export const theme: Theme = {
     normal: "400"
   },
   button: {
+    desktop: {
+      padding: "16px",
+      height: "60px",
+      width: "500px"
+    },
+    mobile: {
+      padding: "16px",
+      height: "12vw",
+      width: "90vw"
+    },
+    mini_desktop: {
+      padding: "16px",
+      height: "80px",
+      width: "250px"
+    },
+    mini_mobile: {
+      padding: "16px",
+      height: "18vw",
+      width: "44vw"
+    },
     large: {
       padding: "16px",
-      height: "48px",
-      width: "314px"
+      height: "60px",
+      width: "342px"
     },
     small: {
       padding: "16px",
       height: "32px",
       width: "105px"
     },
+    medium: {
+      padding: "20px",
+      height: "60px",
+      width: "140px"
+    },
     full: {
       padding: "16px",
-      height: "48px",
+      height: "60px",
       width: "100%"
     },
     mini: {
@@ -152,9 +195,9 @@ export const theme: Theme = {
     }
   },
   borderRadius: {
-    default: "20px"
+    default: "10px"
   },
-  boxShadow: "0 10px 40px 0 rgba(0, 0, 0, 0.1)",
+  boxShadow: "0 10px 40px 0 rgba(0, 0, 0, 0.5)",
   profileImage: {
     mini: {
       width: "60px",
@@ -212,16 +255,16 @@ export const theme: Theme = {
   },
   buttonVariant: {
     contained: {
-      backgroundColor: "#5271FF",
+      backgroundColor: "#0075FF",
       color: "#FFFFFF",
       border: "none",
-      borderHoverColor: "#5271FF"
+      borderHoverColor: "#0075FF"
     },
     outlined: {
       backgroundColor: "transparent",
-      color: "#5271FF",
-      border: "1px solid #5271FF",
-      borderHoverColor: "#5271FF"
+      color: "#ffffff",
+      border: "1px solid #0075FF",
+      borderHoverColor: "#0075FF"
     },
     containedError: {
       backgroundColor: "#e23636",
@@ -230,9 +273,9 @@ export const theme: Theme = {
       borderHoverColor: "#e23636"
     },
     containedCancel: {
-      backgroundColor: "transparent",
-      color: "#808080",
-      border: "1px solid #808080",
+      backgroundColor: "#252932",
+      color: "#9EA3B2",
+      border: "none",
       borderHoverColor: "#808080"
     }
   },
@@ -249,5 +292,15 @@ export const theme: Theme = {
     10: "#B2CBE7",
     11: "#0496D1",
     12: "#5A4097"
+  },
+  sportChip: {
+    small: {
+      fontSize: "10px",
+      fontWeight: "400",
+      lineHeight: "15px",
+      letterSpacing: "-0.25px",
+      padding: "1.5px 10px",
+      borderRadius: "20px"
+    }
   }
 };

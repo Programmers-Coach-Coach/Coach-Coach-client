@@ -1,5 +1,5 @@
 import { getCoachAll, getMyCoaches } from "@/api/coach.api";
-import { ICoachList, ISimpleCoach } from "@/models/coach.model";
+import { ICoachList, IGetMyCoach } from "@/models/coach.model";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
 const PER_PAGE = 20;
@@ -22,8 +22,10 @@ const useCoachList = (
       initialPageParam: 1
     });
 
+  const coaches = data?.pages.flatMap((page) => page.data) || [];
+
   return {
-    data,
+    coaches,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
@@ -34,7 +36,7 @@ const useCoachList = (
 export default useCoachList;
 
 export const useMyCoachList = () => {
-  const { data, isLoading, isError } = useQuery<ISimpleCoach[]>({
+  const { data, isLoading, isError } = useQuery<IGetMyCoach[]>({
     queryKey: ["getMyCoaches"],
     queryFn: getMyCoaches
   });

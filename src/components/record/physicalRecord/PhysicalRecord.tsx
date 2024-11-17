@@ -1,10 +1,10 @@
-import CustomButton from "@/components/common/Button/CustomButton";
 import Modal from "@/components/common/modal/Modal";
-import PhysicalRecordInner from "@/components/modal/PhysicalRecordInner";
+import AddPhysicalContent from "@/components/common/modal/contents/AddPhysicalContent";
 import useModal from "@/hooks/useModal";
 import { IDetailPhysicalMetrics } from "@/models/record.model";
+import { AddPhyisicalButton, HeaderWithDesc } from "@/pages/Record";
 import styled from "styled-components";
-import PhysicalRecordInputs from "./PhysicalRecordInputs";
+import PhysicalDetailRecord from "./PhysicalDetailRecord";
 
 interface Props extends IDetailPhysicalMetrics {}
 const PhysicalRecord = ({
@@ -13,28 +13,26 @@ const PhysicalRecord = ({
   fatPercentage,
   bmi
 }: Props) => {
-  const { isModal, openModal, closeModal } = useModal();
+  const { isModal, closeModal, handleModal } = useModal();
+
   return (
     <Wrapper>
-      <Header>
+      <HeaderWithDesc>
         <h2>오늘의 신체 정보</h2>
-        <CustomButton size="super-mini" variant="contained" onClick={openModal}>
-          변경
-        </CustomButton>
-      </Header>
-      <Main>
-        <PhysicalRecordInputs
-          disabled={true}
-          weight={weight}
-          skeletalMuscle={skeletalMuscle}
-          fatPercentage={fatPercentage}
-          bmi={bmi}
-        />
-      </Main>
+        <AddPhyisicalButton onClick={handleModal}>
+          오늘의 신체 정보 기록하기
+        </AddPhyisicalButton>
+      </HeaderWithDesc>
+      <PhysicalDetailRecord
+        weight={weight}
+        skeletalMuscle={skeletalMuscle}
+        fatPercentage={fatPercentage}
+        bmi={bmi}
+      />
 
       {isModal && (
         <Modal closeModal={closeModal} position="footer-above">
-          <PhysicalRecordInner
+          <AddPhysicalContent
             weight={weight}
             skeletalMuscle={skeletalMuscle}
             fatPercentage={fatPercentage}
@@ -50,18 +48,6 @@ const PhysicalRecord = ({
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 38px;
 `;
 
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px;
-`;
-
-const Main = styled.div`
-  border-radius: ${({ theme }) => theme.borderRadius.default};
-  box-shadow: ${({ theme }) => theme.boxShadow};
-`;
 export default PhysicalRecord;

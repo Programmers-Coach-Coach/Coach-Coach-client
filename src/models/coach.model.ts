@@ -87,3 +87,16 @@ export interface IReview {
   createdAt: string;
   isMyReview: boolean; // 내가 쓴 리뷰인지
 }
+
+export interface IGetMyCoach {
+  coachId: number;
+  coachName: string;
+  profileImageUrl: string | null;
+  localAddress: string | null;
+  coachingSports: {
+    sportId: number;
+    sportName: string;
+  }[];
+  isLiked: boolean;
+  isMatching: boolean;
+}

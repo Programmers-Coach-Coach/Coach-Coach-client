@@ -1,135 +1,213 @@
 import Card from "@/components/common/Card/Card";
-import ActionModalInner from "@/components/common/modal/contents/ActionModalInner";
-import RoutineContents from "@/components/common/modal/contents/RoutineContents";
 import Modal from "@/components/common/modal/Modal";
 import useModal from "@/hooks/useModal";
-import { useModalInfo } from "@/store/modalInfo.store";
+import { keyframes, styled } from "styled-components";
+import Completed from "../common/InputField/CheckBox/Completed";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { styled } from "styled-components";
-import RoutinePicker from "../common/modal/contents/RoutinePicker";
-import IconButton from "../Icon/IconButton";
+import RoutineDetail from "./RoutineDetail";
+import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
+import TwoButtonContent from "../common/modal/contents/TwoButtonContent";
+import SvgIcon from "../Icon/SvgIcon";
+import { IGetRoutine } from "@/models/routine.model";
+import { useDeleteRoutine } from "@/hooks/queries/useRoutine";
+import { useRoutineStore } from "@/store/routine.store";
+import { isNewRoutine } from "@/store/isNewRoutine.store";
+import { useNavigate } from "react-router-dom";
 
 interface RoutineProps {
-  id: number;
-  name: string;
-  sport: string;
+  routine: IGetRoutine;
+  isCheck: boolean;
+  isModify: boolean;
 }
 
-const Routine = ({ id, name, sport }: RoutineProps) => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const queryParams = new URLSearchParams(location.search);
-
+const Routine = ({ routine, isCheck, isModify }: RoutineProps) => {
+  const [isToggleOpen, setIsToggleOpen] = useState(false);
+  const setRoutine = useRoutineStore((set) => set.setRoutine);
+  const setIsNewRoutine = isNewRoutine((set) => set.setIsNewRoutine);
   const modifyModal = useModal();
   const deleteModal = useModal();
-  const [isSelect, setIsSelect] = useState<boolean>(false);
-  const setRoutineId = useModalInfo((state) => state.setRoutineId);
-  const setRoutineName = useModalInfo((state) => state.setRoutineName);
+  const navigate = useNavigate();
 
-  const onClickModify = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setRoutineId(id);
-    setRoutineName(name);
-    modifyModal.openModal();
+  const { mutate } = useDeleteRoutine();
+
+  const onClickToggle = () => {
+    setIsToggleOpen(!isToggleOpen);
   };
 
-  const onClickDelete = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setRoutineId(id);
-    deleteModal.openModal();
+  const routineModifyHandler = () => {
+    navigate("/routine/add");
   };
+
+  const routineDeleteHandler = () => {
+    mutate(routine.routineId);
+    deleteModal.closeModal();
+  };
+
+  const iconSize = useResponsiveIconSize("15px", "20px", 375);
 
   return (
     <>
       {modifyModal.isModal && (
-        <Modal
-          closeModal={modifyModal.closeModal}
-          overlayDisabled={isSelect}
-          position="center"
-        >
-          <ActionModalInner
-            schema="routine-modify"
-            closeModal={modifyModal.closeModal}
-          >
-            <RoutineContents
-              routineName={name}
-              sportName={sport}
-              setIsSelect={setIsSelect}
-            />
-          </ActionModalInner>
+        <Modal closeModal={modifyModal.closeModal} position="footer-above">
+          <TwoButtonContent
+            title={routine.routineName}
+            description="루틴을 수정하시겠어요?"
+            cancelButtonText="돌아가기"
+            onCancel={() => {
+              modifyModal.closeModal();
+            }}
+            ConfirmButtonText="수정하기"
+            onConfirm={routineModifyHandler}
+          />
         </Modal>
       )}
       {deleteModal.isModal && (
         <Modal closeModal={deleteModal.closeModal} position="footer-above">
-          <RoutinePicker schema="delete" closeModal={deleteModal.closeModal} />
+          <TwoButtonContent
+            title={routine.routineName}
+            description="루틴을 삭제하시겠어요?"
+            cancelButtonText="돌아가기"
+            onCancel={() => {
+              deleteModal.closeModal();
+            }}
+            ConfirmButtonText="삭제하기"
+            onConfirm={routineDeleteHandler}
+          />
         </Modal>
       )}
       <Card>
-        <RoutineStyle
-          onClick={() => {
-            navigate(`/routine/detail/${id}?routineName=${name}`);
-          }}
-        >
-          <RoutineTextStyle>
-            <h2>{name}</h2>
-            <p className="b2">{sport}</p>
-          </RoutineTextStyle>
-          {!queryParams.get("coach") && (
-            <RoutineIconStyle>
-              <IconButton
+        <RoutineStyle>
+          <RoutineTitleStyle $isCheck={isCheck} $isToggleOpen={isToggleOpen}>
+            {isCheck && <Completed isCompleted={routine.isCompleted} />}
+            <h2>{routine.routineName}</h2>
+            <h2 className="sport">|</h2>
+            <h2 className="sport">{routine.sportName}</h2>
+            <SvgIcon
+              name="arrow"
+              width={iconSize}
+              height={iconSize}
+              fill="text"
+              onClick={onClickToggle}
+              className="arrow-button"
+            />
+          </RoutineTitleStyle>
+          {isModify && (
+            <CRUDIconStyle>
+              <SvgIcon
                 name="modify"
-                size="20px"
-                color="review"
-                onClick={onClickModify}
+                width={iconSize}
+                height={iconSize}
+                fill="text"
+                onClick={() => {
+                  setRoutine(routine);
+                  setIsNewRoutine(false);
+                  modifyModal.openModal();
+                }}
               />
-              <IconButton
+              <SvgIcon
                 name="delete"
-                size="20px"
-                color="error"
-                onClick={onClickDelete}
+                width={iconSize}
+                height={iconSize}
+                fill="text"
+                onClick={() => {
+                  deleteModal.openModal();
+                }}
               />
-            </RoutineIconStyle>
+            </CRUDIconStyle>
           )}
         </RoutineStyle>
+        {isToggleOpen && (
+          <RoutineDetailStyle $isToggleOpen={isToggleOpen}>
+            <Underline />
+            {routine.actions.map((action) => (
+              <RoutineDetail key={action.actionId} action={action} />
+            ))}
+          </RoutineDetailStyle>
+        )}
       </Card>
     </>
   );
 };
 
 const RoutineStyle = styled.div`
-  height: 100%;
   width: 100%;
   display: flex;
+  justify-content: space-between;
 `;
 
-const RoutineTextStyle = styled.div`
+const RoutineTitleStyle = styled.div<{
+  $isCheck: boolean;
+  $isToggleOpen: boolean;
+}>`
   display: flex;
-  flex-direction: column;
-  justify-content: end;
-  height: 100%;
-  width: 100%;
-  padding-left: 20px;
+  justify-content: center;
 
   h2 {
-    margin-bottom: 15px;
+    margin-left: ${({ $isCheck }) => ($isCheck ? "2px" : "20px")};
+
+    @media (max-width: 375px) {
+      font-size: 12px;
+    }
   }
-  p {
-    margin-bottom: 10px;
-    color: ${({ theme }) => theme.color.primary};
+
+  svg {
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  .sport {
+    color: #9b9b9b;
+    margin-left: 10px;
+  }
+
+  .arrow-button {
+    transform: rotateX(
+      ${({ $isToggleOpen }) => ($isToggleOpen ? "180deg" : "0")}
+    );
+    transition: transform 0.3s ease-in-out;
   }
 `;
 
-const RoutineIconStyle = styled.div`
+const CRUDIconStyle = styled.div`
   display: flex;
-  justify-content: end;
-  align-items: center;
-  height: 100%;
-  width: 100%;
+  margin-right: 10px;
 
   svg {
-    margin-right: 15px;
+    margin-right: 10px;
+    cursor: pointer;
   }
+`;
+
+const RoutineDetailStyle = styled.ul<{ $isToggleOpen: boolean }>`
+  overflow: hidden;
+  animation: ${({ $isToggleOpen }) => ($isToggleOpen ? slideDown : slideUp)}
+    0.3s ease-in-out forwards;
+`;
+
+const slideDown = keyframes`
+  0% {
+    max-height: 0;
+  }
+  100% {
+    max-height: 1000px;
+  }
+`;
+
+const slideUp = keyframes`
+  0% {
+    max-height: 1000px;
+  }
+  100% {
+    max-height: 0;
+  }
+`;
+
+const Underline = styled.div`
+  display: inline-block;
+  padding: 0;
+  margin: 1.5vh 20px 1vh 20px;
+  width: calc(100% - 40px);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
 `;
 
 export default Routine;

@@ -1,19 +1,10 @@
 import SignupForm from "@/components/signup/SignupForm";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Logo from "../assets/images/Logo.png";
 
 const Signup = () => {
   return (
     <Container>
-      <ImageWrapper className="logo" src={Logo} />
       <SignupForm />
-      <LinkWrapper>
-        계정이 있으신가요?{" "}
-        <Link to="/login">
-          <span className="login">로그인 하러가기</span>
-        </Link>
-      </LinkWrapper>
     </Container>
   );
 };
@@ -30,22 +21,6 @@ const Container = styled.div`
   margin: 0 auto;
   box-sizing: border-box;
   gap: 10px;
-`;
-
-const ImageWrapper = styled.img`
-  width: 50%;
-`;
-
-const LinkWrapper = styled.div`
-  a {
-    text-decoration: none;
-  }
-  .login {
-    color: ${({ theme }) => theme.color.primary};
-    text-decoration: none;
-  }
-  color: ${({ theme }) => theme.color.text};
-  margin-top: 10px;
 `;
 
 export default Signup;

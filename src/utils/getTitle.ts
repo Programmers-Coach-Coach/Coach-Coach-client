@@ -1,4 +1,7 @@
+import { isNewRoutine } from "@/store/isNewRoutine.store";
+
 export const getTitle = (pathname: string): string => {
+  const isNew = isNewRoutine((set) => set.isNewRoutine);
   if (pathname.startsWith("/coach/")) {
     return "코치";
   }
@@ -8,12 +11,20 @@ export const getTitle = (pathname: string): string => {
       return "로그인";
     case "/signup":
       return "회원가입";
+    case "/profile":
+    case "/Profile":
+      return "내 프로필";
     case "/coach-list":
       return "코치 리스트";
     case "/routine":
+    case "/member/routine":
       return "루틴";
+    case "/routine/add":
+      return isNew ? "새 루틴 추가" : "루틴 수정";
+    case "/member":
+      return "회원 리스트";
     case "/mypage":
-      return "내 프로필";
+      return "마이페이지";
     case "/record":
       return "내 기록";
     case "/record-list":
@@ -33,18 +44,25 @@ export const getClickBackLink = (pathname: string) => {
   switch (pathname) {
     case "/login":
     case "/signup":
+      return "/total-login";
+    case "/profile":
+    case "/manage":
+    case "/record-list":
+      return "/mypage";
     case "/coach-list":
     case "/routine":
     case "/check-password":
-    case "/record-list":
     case "/notification":
     case "/routine/my-coach":
-    case "/manage":
-      return "/";
+      return "/home";
 
     case "/record":
       return "/record-list";
 
+    case "/routine/add":
+      return "/routine";
+    case "/member/routine":
+      return "/member";
     default:
       return null;
   }

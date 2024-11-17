@@ -1,10 +1,10 @@
 import { IProfile } from "@/models/profile.model";
 import { requestHandler } from "./http";
 import { API_PATH } from "@/constants/apiPath";
-import { IGetQuery } from "@/models/routine.model";
+import { IRoutineQuery } from "@/models/routine.model";
 import qs from "qs";
 
-export const getUserProfile = async ({ coachId, userId }: IGetQuery) => {
+export const getUserProfile = async ({ coachId, userId }: IRoutineQuery) => {
   const query = qs.stringify(
     {
       coachId,

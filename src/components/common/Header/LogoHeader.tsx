@@ -1,4 +1,4 @@
-import logoPath from "@/assets/images/Logo.png";
+import logoPath from "@/assets/images/logo.svg";
 import { useFetchAuth } from "@/hooks/useFetchAuth";
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
@@ -7,7 +7,7 @@ const LogoHeader = () => {
   const { data } = useFetchAuth();
   return (
     <LogoHeaderStyle>
-      <LogoLink to="/">
+      <LogoLink to="/home">
         <img src={logoPath} alt="Logo" />
       </LogoLink>
       {data?.nickname && (

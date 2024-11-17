@@ -1,11 +1,13 @@
 import profilePath from "@/assets/images/profile.png";
 import { ICoach } from "@/models/coach.model";
 import { LineClamp } from "@/style/global";
+import { Sports } from "@/style/theme";
 import { getImgixUrl } from "@/utils/imgix";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import SportChip from "../common/Chip/SportChip";
 import Heart from "../common/InputField/CheckBox/Heart";
-import { CoachingSports } from "./PopularCoaches";
+import SvgIcon from "../Icon/SvgIcon";
 
 interface Props {
   coach: ICoach;
@@ -15,95 +17,142 @@ const Coach = ({ coach }: Props) => {
 
   const profileImageUrl = coach.profileImageUrl
     ? getImgixUrl(coach.profileImageUrl, {
-        w: 114, // 최대 사이즈
-        h: 114,
+        w: 84, // 최대 사이즈
+        h: 84,
         dpr: window.devicePixelRatio > 1 ? 2 : 1, // 고해상도 기기에서 2배 크기로 이미지 요청
         auth: "format"
       })
     : profilePath;
 
   return (
-    <CoachStyle onClick={() => navigate(`/coach/${coach.coachId}`)}>
+    <Wrapper onClick={() => navigate(`/coach/${coach.coachId}`)}>
       <Image src={profileImageUrl} alt={coach.coachName} />
-      <Text>
-        <LineClamp $line={1} className="name">
-          {coach.coachName}
-        </LineClamp>
-        <LineClamp $line={2} className="desc">
-          {coach.coachIntroduction}
-        </LineClamp>
-        <CoachingSportStyle className="coaching-sports">
-          {coach.coachingSports.slice(0, 2).map((item) => (
-            <li key={item.sportId}>#{item.sportName}</li>
-          ))}
-          {coach.coachingSports.length > 2 && (
-            <span className="etc">외 {coach.coachingSports.length - 2}개</span>
-          )}
-        </CoachingSportStyle>
-      </Text>
-      <Heart checked={coach.isLiked} size="24" id={coach.coachId} />
-
-      <Local>{coach.localAddress}</Local>
-    </CoachStyle>
+      <InfoSection>
+        <Top>
+          <span className="name__info">{coach.coachName}</span>
+          <span className="review__info">
+            <SvgIcon name="star" fill="#FFC700" width="12px" height="12px" />
+            {coach.reviewRating.toFixed(1)} ({coach.countOfReviews})
+          </span>
+          <span className="address__info">{coach.localAddress}</span>
+        </Top>
+        <Middle>
+          <span className="coaching-sports__info">
+            {coach.coachingSports.slice(0, 2).map((sport) => (
+              <SportChip
+                key={sport.sportId}
+                sportId={sport.sportId as Sports}
+                sportName={sport.sportName}
+                size="small"
+              />
+            ))}
+            {coach.coachingSports.length > 2 && (
+              <span className="etc-sports__info">
+                외 {coach.coachingSports.length - 2}개
+              </span>
+            )}
+          </span>
+          <Heart checked={coach.isLiked} size="24" id={coach.coachId} />
+        </Middle>
+        <Bottom>
+          <LineClamp $line={1} className="description__info">
+            {coach.coachIntroduction}
+          </LineClamp>
+        </Bottom>
+      </InfoSection>
+    </Wrapper>
   );
 };
 
-const CoachStyle = styled.div`
+const Wrapper = styled.div`
   display: flex;
-  /* align-items: center; */
-  gap: 10px;
+  align-items: center;
+  gap: 17px;
+  padding: 18px;
   position: relative;
   cursor: pointer;
+  background-color: #252932;
+  border-radius: 24px;
 `;
 
 const Image = styled.img`
   flex-shrink: 0;
-  width: 114px;
-  height: 114px;
-  border-radius: 8px;
+  width: 87px;
+  height: 87px;
+  border-radius: 50%;
   object-fit: cover;
   background: ${({ theme }) => theme.color.gray1};
-
-  @media only screen and (max-width: 500px) {
-    width: 90px;
-    height: 90px;
-  }
 `;
 
-const Text = styled.div`
+const InfoSection = styled.div`
   overflow: hidden;
   flex: 1;
   height: 100%;
   padding: 4px;
+`;
 
-  .name {
-    font-weight: 600;
-    margin-bottom: 4px;
+const Top = styled.div`
+  display: flex;
+  gap: 8px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+
+  .name__info {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: -0.375px;
   }
 
-  .desc {
-    font-size: 12px;
-    margin-bottom: 10px;
-    white-space: pre-line; /* 줄바꿈 처리 */
+  .review__info {
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: -0.25px;
+
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .address__info {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.325px;
+    margin-left: auto;
   }
 `;
 
-const CoachingSportStyle = styled(CoachingSports)`
-  position: absolute;
-  bottom: 0;
+const Middle = styled.div`
+  display: flex;
+  align-items: center;
 
-  .etc {
-    color: ${({ theme }) => theme.color.gray3};
-    font-size: 12px;
+  .coaching-sports__info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: auto;
+  }
+
+  .etc-sports__info {
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: -0.25px;
+    margin-bottom: 3px;
+  }
+`;
+const Bottom = styled.div`
+  overflow: hidden;
+
+  .description__info {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.325px;
+    color: #808080;
   }
 `;
 
-export const Local = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 0;
-
-  font-size: 10px;
-  color: ${({ theme }) => theme.color.gray3};
-`;
 export default Coach;

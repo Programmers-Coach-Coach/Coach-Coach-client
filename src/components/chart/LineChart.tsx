@@ -109,7 +109,7 @@ const LineChart = ({ chartId }: Props) => {
       {
         label: "",
         data: chartData.map((point) => point.value),
-        borderColor: "#9CABEF",
+        borderColor: "#0075FF",
         backgroundColor: "#fff",
         lineTension: 0
       }
@@ -144,7 +144,7 @@ const LineChart = ({ chartId }: Props) => {
 };
 const ChartWrapper = styled.div`
   overflow-x: auto; /* 수평 스크롤을 활성화합니다. */
-  overflow-y: hidden; /* 수직 스크롤을 숨깁니다. (필요에 따라 조정) */
+  overflow-y: hidden;
   white-space: nowrap;
   height: 200px;
   display: flex;
@@ -153,8 +153,16 @@ const ChartWrapper = styled.div`
 
 const Wrapper = styled.div`
   overflow-x: auto;
-  border-radius: ${({ theme }) => theme.borderRadius.default};
-  box-shadow: ${({ theme }) => theme.boxShadow};
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
 `;
 
 export default LineChart;
