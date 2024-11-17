@@ -7,23 +7,23 @@ import { queryClient } from "./api/queryClient";
 import Layout from "./components/layout/Layout";
 import Coach from "./pages/Coach";
 import CoachList from "./pages/CoachList";
+import First from "./pages/First";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Mypage from "./pages/Mypage";
 import Notification from "./pages/Notification";
+import Profile from "./pages/Profile";
 import Record from "./pages/Record";
 import RecordDatail from "./pages/RecordDatail";
+import AddRoutine from "./pages/Routine/AddRoutine";
 import CoachRoutine from "./pages/Routine/CoachRoutine";
 import MemberRoutine from "./pages/Routine/MemberRoutine";
+import MyMember from "./pages/Routine/MyMember";
+import Routine from "./pages/Routine/Routine";
 import Signup from "./pages/Signup";
+import TotalLogin from "./pages/TotalLogin";
 import { GlobalStyle } from "./style/global";
 import { theme } from "./style/theme";
-import Routine from "./pages/Routine/Routine";
-import First from "./pages/First";
-import TotalLogin from "./pages/TotalLogin";
-import AddRoutine from "./pages/Routine/AddRoutine";
-import Profile from "./pages/Profile";
-import MyMember from "./pages/Routine/MyMember";
 
 function App() {
   const router = createBrowserRouter([
@@ -121,7 +121,7 @@ const Container = styled.div`
   width: 100%;
   max-width: 600px;
   min-height: 100vh;
-  margin: 0 auto;
+  margin: 0 auto 60px;
   background-color: ${({ theme }) => theme.color.background};
 `;
 

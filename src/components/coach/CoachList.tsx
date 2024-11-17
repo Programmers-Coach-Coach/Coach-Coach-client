@@ -2,7 +2,7 @@ import useCoachList from "@/hooks/useCoachList";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 import useQueryString from "@/hooks/useQueryString";
 import styled from "styled-components";
-import Empty from "../common/Empty/Empty";
+import EmptyVersion2 from "../common/Empty/EmptyVersion2";
 import Loading from "../loading/Loading";
 import Coach from "./Coach";
 
@@ -32,12 +32,11 @@ const CoachList = () => {
           {isFetchingNextPage && <Loading textDisabled />}
         </CoachListStyle>
       ) : (
-        <Empty
-          name="list"
-          size="64px"
-          color="gray3"
-          descriptions="다른 키워드로 검색해보세요!"
-        />
+        <EmptyVersion2 imgName="warning" height="500px">
+          다른 필터로
+          <br />
+          검색해보세요
+        </EmptyVersion2>
       )}
     </>
   );

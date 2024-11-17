@@ -1,5 +1,7 @@
 export const API_PATH = {
   main: "/v1/main-info",
+  popularCoaches: "/v1/popular-coaches",
+  sports: "/v1/sports",
   routine: "/v2/routines",
   userProfile: "/v1routines/user",
   category: "/v1/categories",

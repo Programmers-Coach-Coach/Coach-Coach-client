@@ -33,14 +33,16 @@ const CoachDetails = ({ coach }: Props) => {
         {activeTabIndex === 1 && (
           <ActiveCenterMap roadNameAddress={coach.activeCenter} />
         )}
-        {activeTabIndex === 2 && <Review coachId={coach.coachId} />}
+        {activeTabIndex === 2 && (
+          <Review coachId={coach.coachId} isMatched={coach.isMatched} />
+        )}
       </Details>
     </div>
   );
 };
 
 const Details = styled.div`
-  margin-top: 20px;
+  margin: 20px 0;
 `;
 
 export default CoachDetails;

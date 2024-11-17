@@ -1,5 +1,4 @@
 import profile from "@/assets/images/profile.png";
-import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
 import { IGetMyCoach } from "@/models/coach.model";
 import { isSelectProfile } from "@/store/isSelectProfile.store";
 import { useProfileInfo } from "@/store/profileInfo.store";
@@ -32,8 +31,6 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
     }
   };
 
-  const iconSize = useResponsiveIconSize("16px", "24px", 375);
-
   return (
     <CoachProfileStyle>
       <CoachProfileContainer
@@ -51,14 +48,16 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
       <CoachProfileDetailStyle>
         <CoachNameStyle>
           <p className="name">{coach.coachName}</p>
-          <Heart id={coach.coachId} checked={coach.isLiked} size={iconSize} />
+          <div className="heart-section">
+            <Heart checked={coach.isLiked} size="20px" id={coach.coachId} />
+          </div>
         </CoachNameStyle>
         <p className="address">{coach.localAddress}</p>
         <CoachTagsStyle>
           {coach.coachingSports?.map((sport) => {
             return (
               <CoachTagStyle key={sport.sportId} $id={sport.sportId as Sports}>
-                #{sport.sportName}
+                # {sport.sportName}
               </CoachTagStyle>
             );
           })}
@@ -89,6 +88,20 @@ const CoachProfileStyle = styled.div`
 
     @media (max-width: 375px) {
       font-size: 16px;
+    }
+  }
+
+  .heart-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #d9d9d9;
+
+    svg {
+      transform: translateY(1px);
     }
   }
 
@@ -164,6 +177,8 @@ const CoachProfileDetailStyle = styled.div`
 
 const CoachNameStyle = styled.div`
   display: flex;
+  align-items: center;
+  gap: 5px;
   margin: 4.8vw 0 0.8vw 0;
   @media (min-width: 600px) {
     margin: 30px 0 5px 0;
@@ -173,6 +188,7 @@ const CoachNameStyle = styled.div`
 const CoachTagsStyle = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   gap: 10px;
 `;

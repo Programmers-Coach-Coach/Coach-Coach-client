@@ -10,14 +10,17 @@ import ReviewFilter from "../common/modal/contents/review/ReviewFilter";
 import Modal from "../common/modal/Modal";
 import SvgIcon from "../Icon/SvgIcon";
 import Loading from "../loading/Loading";
+import AddReview from "./AddReview";
+import ReviewCardList from "./ReviewCardList";
 
 const sortOptions: TReviewFilter[] = ["LATEST", "RATING_DESC", "RATING_ASC"];
 
 interface Props {
   coachId: number;
+  isMatched: boolean;
 }
 
-const Review = ({ coachId }: Props) => {
+const Review = ({ coachId, isMatched }: Props) => {
   const { isModal, closeModal, handleModal } = useModal();
   const [filterId, setFilterId] = useState<number>(0);
   const {
@@ -30,10 +33,10 @@ const Review = ({ coachId }: Props) => {
     setFilterId(id);
   };
 
-  const handleEditReview = () => {};
-
   if (isLoading) return <Loading />;
   if (isError || !reviews) return <Wrapper></Wrapper>;
+
+  const isMyReviewAdded = reviews.reviews.some((review) => review.isMyReview);
 
   return (
     <Wrapper>
@@ -45,9 +48,13 @@ const Review = ({ coachId }: Props) => {
           </StarWrapper>
           <span>&nbsp;&nbsp;&nbsp;리뷰{reviews.countOfReviews}개</span>
         </div>
-        <div className="review-add__button" onClick={handleEditReview}>
-          내 코치님 리뷰 수정하기
-        </div>
+        {isMatched && (
+          <AddReview
+            coachId={coachId}
+            isMyReviewAdded={isMyReviewAdded}
+            isMatched={isMatched}
+          />
+        )}
       </Header>
       <Filter onClick={handleModal} $isActive={!!isModal}>
         {FILTER_VALUES[filterId]}
@@ -70,7 +77,7 @@ const Review = ({ coachId }: Props) => {
             등록된 리뷰가 없어요
           </EmptyVersion2>
         ) : (
-          <>hi</>
+          <ReviewCardList reviews={reviews.reviews} />
         )}
       </Contents>
     </Wrapper>
@@ -98,19 +105,6 @@ const Header = styled.div`
     line-height: 15px;
     letter-spacing: -0.5px;
   }
-
-  .review-add__button {
-    font-size: 10px;
-    font-weight: 600;
-    line-height: 16px;
-    letter-spacing: -0.5px;
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid #0075ff;
-    background-color: rgba(0, 117, 255, 0.4);
-    margin-left: auto;
-    cursor: pointer;
-  }
 `;
 
 const StarWrapper = styled.div`
@@ -119,14 +113,7 @@ const StarWrapper = styled.div`
   gap: 2px;
 `;
 
-const Contents = styled.div`
-  background-color: #111111;
-  border-radius: 24px;
-  padding: 20px;
-  min-height: 150px;
-
-  padding: 36px 0;
-`;
+const Contents = styled.div``;
 
 const Filter = styled.div<{ $isActive: boolean }>`
   display: flex;
@@ -138,6 +125,7 @@ const Filter = styled.div<{ $isActive: boolean }>`
   font-weight: 400;
   line-height: 16px;
   letter-spacing: -0.5px;
+  cursor: pointer;
 
   ${({ $isActive }) =>
     $isActive &&

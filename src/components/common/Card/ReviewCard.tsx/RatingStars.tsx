@@ -7,7 +7,6 @@ interface Props {
   onClick?: (cnt: number) => void;
 }
 
-// TODO: size 삭제
 const RatingStars = ({ stars, onClick }: Props) => {
   return (
     <>
