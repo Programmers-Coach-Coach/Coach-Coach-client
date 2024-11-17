@@ -42,16 +42,12 @@ const Home = () => {
         <SubTitle>평점 높은 TOP3 코치를 모았어요</SubTitle>
         <Seperator />
       </SectionHeader>
-      <WhiteSpace $height={30} />
       <PopularCoaches />
-      <WhiteSpace $height={20} />
     </HomeStyle>
   );
 };
 
-const HomeStyle = styled.div`
-  padding: 0 0 60px 0;
-`;
+const HomeStyle = styled.div``;
 
 const SectionHeader = styled.div`
   display: flex;

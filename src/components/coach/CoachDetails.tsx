@@ -42,7 +42,7 @@ const CoachDetails = ({ coach }: Props) => {
 };
 
 const Details = styled.div`
-  margin-top: 20px;
+  margin: 20px 0;
 `;
 
 export default CoachDetails;

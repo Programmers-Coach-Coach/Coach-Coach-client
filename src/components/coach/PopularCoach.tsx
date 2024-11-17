@@ -67,6 +67,7 @@ const PopularCoach = ({ coach, index }: Props) => {
 const Wrapper = styled.div`
   display: flex;
   gap: 20px;
+  cursor: pointer;
 `;
 
 const ProfileImage = styled.div`

@@ -31,6 +31,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 18px;
   overflow: hidden;
+  padding: 30px 0;
 `;
 
 export default PopularCoaches;
