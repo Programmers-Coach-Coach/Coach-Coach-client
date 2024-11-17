@@ -8,7 +8,7 @@ import { useDeleteNotification } from "@/hooks/queries/useNotification";
 import { TNotificationType } from "@/models/notification.model";
 import { timeAgo } from "@/utils/format";
 import styled from "styled-components";
-import IconButton from "../Icon/IconButton";
+import SvgIcon from "../Icon/SvgIcon";
 
 interface Props {
   noticeId: number;
@@ -53,15 +53,21 @@ const NotificationCard = ({
         src={getImageSrc()}
         alt={relationFunction}
       />
-      <div className="message">{message}</div>
-      <IconButton
-        name="twins"
-        size="18px"
-        color="gray3"
+      <Main>
+        <div className="name-wrapper">
+          {/* <div className="name"></div> */}
+          <div className="timestamp">· {timeAgo(createdAt)}</div>
+        </div>
+        <div className="message">{message}</div>
+      </Main>
+      <SvgIcon
+        name="x"
+        width="20px"
+        height="20px"
+        stroke="#767676"
         onClick={() => handleDelete(noticeId)}
         className="close-button"
       />
-      <div className="timestamp">{timeAgo(createdAt)}</div>
     </ReviewCardStyle>
   );
 };
@@ -72,28 +78,43 @@ const ReviewCardStyle = styled.div`
 
   gap: 14px;
   min-height: 90px;
-  padding: 0 10px;
+  padding: 33px 0;
   position: relative;
-  border-radius: ${({ theme }) => theme.borderRadius.default};
-  box-shadow: ${({ theme }) => theme.boxShadow};
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+  position: relative;
 
   .notification-img {
-    width: 27px;
-    height: 27px;
+    width: 49px;
+    height: 49px;
   }
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+`;
+
+const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 
   .message {
     flex: 1;
+    font-size: 13px;
+    font-weight: 200;
+    line-height: 19px;
+    letter-spacing: -0.65px;
     word-break: keep-all;
   }
-  .close-button {
-    margin-left: auto;
-  }
+
   .timestamp {
-    position: absolute;
-    bottom: 12px;
-    right: 40px;
-    font-size: 12px;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.25px;
     color: ${({ theme }) => theme.color.gray3};
   }
 `;

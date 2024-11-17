@@ -1,5 +1,5 @@
 import NotificationCard from "@/components/card/NotificationCard";
-import Empty from "@/components/common/Empty/Empty";
+import EmptyVersion2 from "@/components/common/Empty/EmptyVersion2";
 import Loading from "@/components/loading/Loading";
 import {
   useDeleteAllNotification,
@@ -18,11 +18,17 @@ const Notification = () => {
 
   if (isLoading) return <Loading />;
   if (isError || !data)
-    return <div>알림 정보를 가져오는 중 오류가 발생했어요.</div>;
+    return (
+      <EmptyVersion2 imgName="notification" height="500px">
+        알림 정보를 가져오는 중
+        <br />
+        오류가 발생했어요
+      </EmptyVersion2>
+    );
 
   return (
     <NotificationStyle>
-      <Button onClick={handleDelete}>전체 삭제</Button>
+      <Button onClick={handleDelete}>모두 읽기</Button>
       <div className="contents">
         {data.length ? (
           data.map((item) => (
@@ -35,12 +41,11 @@ const Notification = () => {
             />
           ))
         ) : (
-          <Empty
-            name="alarm"
-            size="150px"
-            color="gray3"
-            descriptions="모든 알림을 확인하였습니다."
-          />
+          <EmptyVersion2 imgName="notification" height="500px">
+            알림이
+            <br />
+            아직없어요
+          </EmptyVersion2>
         )}
       </div>
       <WhiteSpace $height={60} />
@@ -57,6 +62,7 @@ const NotificationStyle = styled.div`
     display: flex;
     flex-direction: column;
     gap: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
   }
 `;
 
