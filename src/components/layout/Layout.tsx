@@ -28,7 +28,7 @@ const Layout = () => {
   return (
     <ErrorBoundary>
       {title ? <DetailHeader title={title} /> : !isAuth && <LogoHeader />}
-      <LayoutStyle>
+      <LayoutStyle $isAuth={isAuth}>
         <Outlet />
       </LayoutStyle>
       {!isAuth && <Footer />}
@@ -36,9 +36,9 @@ const Layout = () => {
   );
 };
 
-const LayoutStyle = styled.main`
+const LayoutStyle = styled.main<{ $isAuth: boolean }>`
   width: 100%;
-  margin: 0 auto;
+  margin: ${({ $isAuth }) => ($isAuth ? "0 auto" : "0 auto 60px")};
   max-width: 600px;
   padding: 0 20px 0 20px; // 80px은 내용이 Footer 위까지만 위치하기 위해 설정
 `;

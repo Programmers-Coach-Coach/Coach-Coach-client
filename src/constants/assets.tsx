@@ -8,11 +8,13 @@ import FullHeart from "@/assets/images/full-heart.svg?react";
 import FullStar from "@/assets/images/full-star.svg?react";
 import Modify from "@/assets/images/modify.svg?react";
 import NoLocation from "@/assets/images/no-location.svg?react";
+import Notification from "@/assets/images/notification.svg?react";
 import Search from "@/assets/images/search.svg?react";
 import StarRounded from "@/assets/images/star-rounded.svg?react";
 import Star from "@/assets/images/star.svg?react";
 import Warning from "@/assets/images/warning.svg?react";
 import XCircle from "@/assets/images/x-circle.svg?react";
+import X from "@/assets/images/x.svg?react";
 import { CgDetailsMore } from "react-icons/cg";
 import { FaCheck, FaRegStar } from "react-icons/fa";
 import { IoIosArrowBack, IoMdMore } from "react-icons/io";
@@ -46,6 +48,7 @@ export const ICONS = {
   modify: Modify,
   delete: Delete,
   filter: Filter,
+  x: X,
   xCircle: XCircle,
   search: Search,
   dots: IoMdMore,
@@ -66,5 +69,6 @@ export const ICONS = {
   dumbbell: Dumbbell,
   arrow: ArrowDown,
   noLocation: NoLocation,
-  warning: Warning
+  warning: Warning,
+  notification: Notification
 };
