@@ -77,6 +77,7 @@ export interface ICoachDetail {
   isSelf: boolean;
   countOfLikes: number;
   totalUserCount: number;
+  reviews: IReview[];
 }
 
 export interface IReview {
