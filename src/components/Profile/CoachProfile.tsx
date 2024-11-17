@@ -1,5 +1,4 @@
 import profile from "@/assets/images/profile.png";
-import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
 import { IGetMyCoach } from "@/models/coach.model";
 import { isSelectProfile } from "@/store/isSelectProfile.store";
 import { useProfileInfo } from "@/store/profileInfo.store";
@@ -31,8 +30,6 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
       setProfileImageUrl(coach.profileImageUrl);
     }
   };
-
-  const iconSize = useResponsiveIconSize("16px", "24px", 375);
 
   return (
     <CoachProfileStyle>
