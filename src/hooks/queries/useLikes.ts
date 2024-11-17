@@ -14,6 +14,9 @@ export const useLikePost = (coachId: number) => {
     onSuccess: () => {
       toast.success("My 목록에 추가되었습니다!");
       queryClient.invalidateQueries({ queryKey: ["getCoachDetail", coachId] });
+      queryClient.invalidateQueries({ queryKey: ["coach-infiniteScroll"] });
+      queryClient.invalidateQueries({ queryKey: ["getPopularCoaches"] });
+      queryClient.invalidateQueries({ queryKey: ["getMyCoaches"] });
     }
   });
 
@@ -29,8 +32,10 @@ export const useUnLikePost = (coachId: number) => {
     mutationFn: (id: number) => unlikePost(id),
     onSuccess: () => {
       toast.success("My 목록에서 삭제되었습니다!");
-      queryClient.invalidateQueries({ queryKey: ["getHomeData"] });
       queryClient.invalidateQueries({ queryKey: ["getCoachDetail", coachId] });
+      queryClient.invalidateQueries({ queryKey: ["coach-infiniteScroll"] });
+      queryClient.invalidateQueries({ queryKey: ["getPopularCoaches"] });
+      queryClient.invalidateQueries({ queryKey: ["getMyCoaches"] });
     }
   });
 

@@ -20,14 +20,8 @@ const Heart = ({ id, checked, size }: Props) => {
       mutateUnlike(id);
       setIsChecked(false);
     } else {
-      mutateLike(id, {
-        onSuccess: () => {
-          setIsChecked(true);
-        },
-        onError: () => {
-          setIsChecked(false);
-        }
-      });
+      mutateLike(id);
+      setIsChecked(true);
     }
   };
 
