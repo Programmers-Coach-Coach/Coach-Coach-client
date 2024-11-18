@@ -8,22 +8,21 @@ import AlarmImage from "../assets/images/alarm-image.svg"; // 실제 이미지 �
 import RoutineImage from "../assets/images/routine-image.svg"; // 실제 이미지 경로
 import RecordImage from "../assets/images/record-image.svg"; // 실제 이미지 경로
 import CustomButton from "@/components/common/Button/CustomButton"; // 버튼 컴포넌트 경로
-import { useAuthStore } from "@/store/authStore";
 import LogoImage from "../assets/images/logo.svg";
 const First = () => {
-  const nav = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const unsubscribe = useAuthStore.subscribe((state) => {
+    const authStorage = localStorage.getItem("auth-storage");
+    if (authStorage) {
+      const { state } = JSON.parse(authStorage);
       if (state.isLoggedIn) {
-        nav("/home");
+        navigate("/home");
       }
-    });
-    return () => unsubscribe();
-  }, [nav]);
+    }
+  }, [navigate]);
 
   const [step, setStep] = useState<"first" | "second">("first");
-  const navigate = useNavigate();
 
   const sliderSettings = {
     dots: true,
