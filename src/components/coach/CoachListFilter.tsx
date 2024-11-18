@@ -50,7 +50,11 @@ const CoachListFilter = () => {
       </FilterBtn>
       {isFilterModal && (
         <Modal position="footer-above" closeModal={closeFilterModal}>
-          <OneButtonContent title="필터 설정" buttonText="필터 설정 완료">
+          <OneButtonContent
+            title="필터 설정"
+            buttonText="필터 설정 완료"
+            onClose={closeFilterModal}
+          >
             <FilterPicker closeModal={closeFilterModal} />
           </OneButtonContent>
         </Modal>

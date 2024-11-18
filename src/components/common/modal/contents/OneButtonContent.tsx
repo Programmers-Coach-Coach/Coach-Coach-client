@@ -1,18 +1,21 @@
-import React, { useRef, ReactNode, useState, useEffect } from "react";
+import SvgIcon from "@/components/Icon/SvgIcon";
+import { ButtonSize } from "@/style/theme";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 import { styled } from "styled-components";
 import CustomButton from "../../Button/CustomButton";
-import { ButtonSize } from "@/style/theme";
 
 interface OneButtonContentProps {
   children: ReactNode; // children으로 감싸진 컴포넌트를 받아옴
   title: string;
   buttonText: string;
+  onClose?: () => void;
 }
 
 const OneButtonContent = ({
   children,
   title,
-  buttonText
+  buttonText,
+  onClose
 }: OneButtonContentProps) => {
   const childRef = useRef<{ childFunction: () => void } | null>(null);
   const [size, setSize] = useState<ButtonSize>("desktop");
@@ -52,6 +55,16 @@ const OneButtonContent = ({
   return (
     <OneButtonContentStyle>
       <Header>{title}</Header>
+      {onClose && (
+        <SvgIcon
+          name="x"
+          width="30px"
+          height="30px"
+          stroke="#777C89"
+          onClick={onClose}
+          className="close__button"
+        />
+      )}
       {ChildWithRef}
       <Footer>
         <CustomButton
@@ -71,6 +84,16 @@ const OneButtonContentStyle = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  position: relative;
+
+  .close__button {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    margin-left: auto;
+    cursor: pointer;
+  }
 `;
 
 const Header = styled.div`
