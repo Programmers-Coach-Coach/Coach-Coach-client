@@ -15,6 +15,7 @@ const CoachListFilter = () => {
   } = useModal();
   const {
     isModal: isGenderModal,
+    openModal: openGenderModal,
     closeModal: closeGenderModal,
     handleModal: handleGenderModal
   } = useModal();
@@ -25,6 +26,11 @@ const CoachListFilter = () => {
     isSportFilterApplied,
     isGenderApplied
   } = useCoachFilter();
+
+  const changeModal = () => {
+    closeFilterModal();
+    openGenderModal();
+  };
 
   return (
     <CoachListFilterStyle>
@@ -55,7 +61,10 @@ const CoachListFilter = () => {
             buttonText="필터 설정 완료"
             onClose={closeFilterModal}
           >
-            <FilterPicker closeModal={closeFilterModal} />
+            <FilterPicker
+              closeModal={closeFilterModal}
+              changeModal={changeModal}
+            />
           </OneButtonContent>
         </Modal>
       )}

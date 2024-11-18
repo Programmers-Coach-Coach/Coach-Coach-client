@@ -7,6 +7,7 @@ import SportsFilterList from "./SportsFilterList";
 
 interface Props {
   closeModal: () => void;
+  changeModal: () => void;
 }
 
 interface ChildComponentHandle {
@@ -14,7 +15,7 @@ interface ChildComponentHandle {
 }
 
 const FilterPicker = forwardRef<ChildComponentHandle, Props>(
-  ({ closeModal }, ref) => {
+  ({ closeModal, changeModal }, ref) => {
     const {
       sort,
       pickSortFilter,
@@ -55,7 +56,7 @@ const FilterPicker = forwardRef<ChildComponentHandle, Props>(
             <Text>
               <h1>성별</h1>
             </Text>
-            <GenderFilter />
+            <GenderFilter onChangeModal={changeModal} />
           </Inner>
         </Section>
       </Wrapper>

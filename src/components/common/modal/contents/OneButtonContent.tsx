@@ -54,17 +54,20 @@ const OneButtonContent = ({
 
   return (
     <OneButtonContentStyle>
-      <Header>{title}</Header>
-      {onClose && (
-        <SvgIcon
-          name="x"
-          width="30px"
-          height="30px"
-          stroke="#777C89"
-          onClick={onClose}
-          className="close__button"
-        />
-      )}
+      <Header>
+        {title}
+        {onClose && (
+          <SvgIcon
+            name="x"
+            width="24px"
+            height="24px"
+            stroke="#777C89"
+            onClick={onClose}
+            className="close__button"
+          />
+        )}
+      </Header>
+
       {ChildWithRef}
       <Footer>
         <CustomButton
@@ -84,32 +87,35 @@ const OneButtonContentStyle = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-
-  position: relative;
-
-  .close__button {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    margin-left: auto;
-    cursor: pointer;
-  }
 `;
 
 const Header = styled.div`
   position: relative;
   font-size: 5vw;
   font-weight: bold;
-  margin: 3vh 0 6vh 0;
-  text-align: center;
+  padding: 23px 0;
+  /* padding: 3vh auto 6vh auto; */
+  /* text-align: center; */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  .close__button {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translate(0, -50%);
+    cursor: pointer;
+  }
 
   &::before {
     content: "";
     position: absolute;
-    bottom: -3vh;
-    left: 5%;
+    bottom: 0;
     width: 90%;
-    height: 2px;
+    height: 1px;
     background-color: #666666;
     @media (min-width: 600px) {
       bottom: -30px;

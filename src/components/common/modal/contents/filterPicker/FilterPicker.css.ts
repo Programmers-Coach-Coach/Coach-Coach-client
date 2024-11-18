@@ -4,7 +4,6 @@ export const Wrapper = styled.div`
   padding: 0 24px;
   display: flex;
   flex-direction: column;
-  margin-top: -30px;
 `;
 
 export const Section = styled.div`
