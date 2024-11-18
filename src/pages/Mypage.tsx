@@ -140,7 +140,7 @@ const Mypage = () => {
             <Text>내 기록</Text>
             <img src={arrowIcon} />
           </Wrapper>
-          <Wrapper to="/manage">
+          <Wrapper to="/member">
             <Text>매칭 회원 리스트</Text>
             <img src={arrowIcon} />
           </Wrapper>
