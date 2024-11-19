@@ -80,8 +80,18 @@ const FooterAboveContents = styled.div`
   background-color: ${({ theme }) => theme.color.background};
   z-index: 1000;
 
-  max-height: 98dvh;
+  max-height: 90dvh;
   overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
 `;
 
 export default Modal;
