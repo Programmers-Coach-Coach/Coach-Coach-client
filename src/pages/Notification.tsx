@@ -43,7 +43,7 @@ const Notification = () => {
             />
           ))
         ) : (
-          <EmptyVersion2 imgName="notification" height="500px">
+          <EmptyVersion2 imgName="notification" height="600px">
             알림이
             <br />
             아직없어요
@@ -58,7 +58,7 @@ const Notification = () => {
 const NotificationStyle = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 15px;
 
   .contents {
     display: flex;
@@ -71,6 +71,7 @@ const Button = styled.button`
   color: ${({ theme }) => theme.color.primary};
   display: flex;
   margin-left: auto;
+  margin-top: 15px;
 `;
 
 export default Notification;
