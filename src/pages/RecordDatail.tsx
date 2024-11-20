@@ -1,3 +1,4 @@
+import EmptyVersion2 from "@/components/common/Empty/EmptyVersion2";
 import SvgIcon from "@/components/Icon/SvgIcon";
 import Loading from "@/components/loading/Loading";
 import ExerciseDetail from "@/components/record/exerciseRecord/ExerciseDetail";
@@ -67,7 +68,16 @@ const RecordDatail = () => {
           onClick={() => handleChangeDate("next")}
         />
       </DateWrapper>
-      <ExerciseDetail routines={data?.records || []} />
+      {data.completedRoutines.length > 0 ? (
+        <ExerciseDetail routines={data.completedRoutines} />
+      ) : (
+        <EmptyVersion2 imgName="warning" height="300px">
+          오늘의 운동 기록이
+          <br />
+          없습니다
+        </EmptyVersion2>
+      )}
+
       <PhysicalRecord
         weight={data.weight}
         skeletalMuscle={data.skeletalMuscle}

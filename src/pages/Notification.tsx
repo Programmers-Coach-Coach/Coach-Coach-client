@@ -35,6 +35,8 @@ const Notification = () => {
             <NotificationCard
               key={item.notificationId}
               noticeId={item.notificationId}
+              nickname={item.nickname}
+              profileImageUrl={item.profileImageUrl}
               message={item.message}
               relationFunction={item.relationFunction}
               createdAt={item.createdAt}
@@ -61,7 +63,6 @@ const NotificationStyle = styled.div`
   .contents {
     display: flex;
     flex-direction: column;
-    gap: 25px;
     border-top: 1px solid rgba(255, 255, 255, 0.3);
   }
 `;

@@ -1,5 +1,5 @@
-import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
 import profile from "@/assets/images/profile.png";
+import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
 import { IGetMyCoach } from "@/models/coach.model";
 import { isSelectProfile } from "@/store/isSelectProfile.store";
 import { useProfileInfo } from "@/store/profileInfo.store";
@@ -9,9 +9,13 @@ import Heart from "../common/InputField/CheckBox/Heart";
 
 interface CoachProfileProps {
   coach: IGetMyCoach;
+  overlayDisabled?: boolean;
 }
 
-const CoachProfile = ({ coach }: CoachProfileProps) => {
+const CoachProfile = ({
+  coach,
+  overlayDisabled = false
+}: CoachProfileProps) => {
   const setIsSelectProfile = isSelectProfile(
     (state) => state.setIsSelectProfile
   );
@@ -41,7 +45,7 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
         isInquiry={coach.isMatching === false}
       >
         <CoachProfileImageStyle src={imageUrl} alt="profile" />
-        {coach.isMatching === false && (
+        {!overlayDisabled && coach.isMatching === false && (
           <>
             <Overlay />
             <OverlayText>매칭 대기중</OverlayText>

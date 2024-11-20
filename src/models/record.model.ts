@@ -37,7 +37,14 @@ export interface IExerciseRoutine {
 }
 
 export interface IDetailRecords extends IDetailPhysicalMetrics {
-  records: IExerciseRoutine[];
+  completedRoutines: ICompletedRoutine[];
+}
+
+export interface ICompletedRoutine {
+  routineId: number;
+  routineName: number;
+  sportName: string;
+  actions: IGetAction[];
 }
 
 export interface IExerciseCategory {

@@ -47,7 +47,7 @@ const Coach = () => {
 
   return (
     <Wrapper>
-      <CoachProfile coach={coach} />
+      <CoachProfile coach={coach} overlayDisabled={true} />
       {screenStatus === "showProfile" && (
         <>
           <Summary

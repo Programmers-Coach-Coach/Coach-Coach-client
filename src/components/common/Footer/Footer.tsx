@@ -1,7 +1,7 @@
 import Icon from "@/components/Icon/Icon";
+import SvgIcon from "@/components/Icon/SvgIcon";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import SvgIcon from "@/components/Icon/SvgIcon";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -89,10 +89,8 @@ const FooterStyle = styled.footer`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   align-items: center;
-  background-color: ${({ theme }) => theme.color.background};
-  border-top: 0.5px solid ${({ theme }) => theme.color.gray1};
-  border-left: 0.5px solid ${({ theme }) => theme.color.gray1};
-  border-right: 0.5px solid ${({ theme }) => theme.color.gray1};
+  background-color: #12355f;
+
   position: fixed;
   bottom: 0;
   width: 100%;
