@@ -31,5 +31,5 @@ export const API_PATH = {
   recordV2: "/v2/records",
   review: "/v1/coaches/reviews",
   memberChat: "/v1/users/chat-rooms",
-  coachChat: "v1/coaches/chat-rooms"
+  coachChat: "/v1/coaches/chat-rooms"
 };

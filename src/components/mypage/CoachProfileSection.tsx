@@ -34,8 +34,6 @@ const CoachProfileSection = () => {
     if (userMeData?.isCoach !== undefined) {
       if (userMeData?.isCoach) {
         setShouldFetchCoachProfile(true);
-      } else {
-        openModal();
       }
     }
   }, [userMeData, openModal]);
@@ -123,7 +121,9 @@ const CoachProfileSection = () => {
               <CustomButton
                 size="mini"
                 variant="contained"
-                onClick={closeModal}
+                onClick={() => {
+                  closeModal();
+                }}
               >
                 확인
               </CustomButton>
