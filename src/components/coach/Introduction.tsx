@@ -45,10 +45,10 @@ const Wrapper = styled.div`
   }
 
   .introduction__info {
-    font-size: 10px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 400;
     line-height: 20px;
-    letter-spacing: -0.75px;
+    letter-spacing: -0.65px;
   }
 `;
 export default Introduction;
