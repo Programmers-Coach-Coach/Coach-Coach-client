@@ -1,39 +1,25 @@
 import useCoachList from "@/hooks/useCoachList";
-import { useDebounce } from "@/hooks/useDebounce";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 import useQueryString from "@/hooks/useQueryString";
-import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
-import Empty from "../common/Empty/Empty";
+import EmptyVersion2 from "../common/Empty/EmptyVersion2";
 import Loading from "../loading/Loading";
 import Coach from "./Coach";
 
-const DEBOUNCE_DELAY = 300;
-
 const CoachList = () => {
-  const { getKeyword } = useQueryString();
-  const [searchParams] = useSearchParams();
+  const { getKeyword, getSort, getSports } = useQueryString();
 
-  const sort = searchParams.get("sort") ?? "latest";
-  const sportsIds = searchParams.get("sportsIds")?.split(",").map(Number) ?? [];
-  const keyword = getKeyword() ?? "";
+  const sort = getSort();
+  const sportsIds = getSports();
+  const keyword = getKeyword();
 
-  const debouncedSort = useDebounce(sort, DEBOUNCE_DELAY);
-  const debouncedSportsIds = useDebounce(sportsIds);
-
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useCoachList(
-    keyword,
-    debouncedSort,
-    debouncedSportsIds
-  );
+  const { coaches, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useCoachList(keyword, sort, sportsIds);
 
   const { setTarget } = useIntersectionObserver({
     hasNextPage,
     fetchNextPage
   });
-
-  // InfiniteData<ICoachList>의 데이터 접근 수정
-  const coaches = data?.pages.flatMap((page) => page.data) || []; // 각 페이지의 코치 데이터를 하나의 배열로 평탄화
 
   return (
     <>
@@ -46,12 +32,11 @@ const CoachList = () => {
           {isFetchingNextPage && <Loading textDisabled />}
         </CoachListStyle>
       ) : (
-        <Empty
-          name="list"
-          size="64px"
-          color="gray3"
-          descriptions="다른 키워드로 검색해보세요!"
-        />
+        <EmptyVersion2 imgName="warning" height="500px">
+          다른 필터로
+          <br />
+          검색해보세요
+        </EmptyVersion2>
       )}
     </>
   );
@@ -60,7 +45,7 @@ const CoachList = () => {
 const CoachListStyle = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 8px;
 `;
 
 export default CoachList;

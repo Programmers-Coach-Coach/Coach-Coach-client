@@ -39,14 +39,22 @@ const PopularCoach = ({ coach, index }: Props) => {
           <img src={topRanks[index]} alt={`Top${index + 1}`} />
         </div>
         <div className="heart-section">
+<<<<<<< HEAD
           <Heart checked={coach.isLiked} size="30px" id={coach.coachId} />
+=======
+          <Heart checked={coach.isLiked} size="28px" id={coach.coachId} />
+>>>>>>> main
         </div>
       </ProfileImage>
       <CoachDetails>
         <CoachProfileHeader>
           <CoachName>{coach.coachName}</CoachName>
           <CoachRating>
+<<<<<<< HEAD
             <SvgIcon name="star" fill="likes" width="16px" height="16px" />
+=======
+            <SvgIcon name="star" fill="review" width="16px" height="16px" />
+>>>>>>> main
             {coach.countOfLikes.toFixed(1)}
           </CoachRating>
         </CoachProfileHeader>
@@ -67,6 +75,10 @@ const PopularCoach = ({ coach, index }: Props) => {
 const Wrapper = styled.div`
   display: flex;
   gap: 20px;
+<<<<<<< HEAD
+=======
+  cursor: pointer;
+>>>>>>> main
 `;
 
 const ProfileImage = styled.div`

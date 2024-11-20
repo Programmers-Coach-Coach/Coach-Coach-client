@@ -67,6 +67,12 @@ export const GlobalStyle = createGlobalStyle`
         cursor: pointer;
     }
 
+    ul,li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
 `;
 
 export const WhiteSpace = styled.div<WhiteSpaceProps>`

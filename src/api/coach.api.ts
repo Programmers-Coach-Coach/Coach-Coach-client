@@ -82,6 +82,6 @@ export const getCoachDetail = async (id: number) => {
 export const contact = async (id: number) => {
   return await requestHandler<IResponseMessage>(
     "post",
-    `/coaches/${id}/contact`
+    `/v1/coaches/${id}/contact`
   );
 };

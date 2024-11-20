@@ -1,5 +1,7 @@
 export const API_PATH = {
   main: "/v1/main-info",
+  popularCoaches: "/v1/popular-coaches",
+  sports: "/v1/sports",
   routine: "/v2/routines",
   userProfile: "/v1routines/user",
   category: "/v1/categories",
@@ -25,5 +27,7 @@ export const API_PATH = {
   auth: "/v1/auth",
   record: "/v1/records",
   match: "/v1/coaches/matches",
-  recordChart: "/v1/records/charts"
+  recordChart: "/v1/records/charts",
+  recordV2: "/v2/records",
+  review: "/v1/coaches/reviews"
 };

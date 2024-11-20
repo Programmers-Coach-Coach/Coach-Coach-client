@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 interface DraggableIconProps {
@@ -26,65 +26,72 @@ const DraggableIcon = ({ children, isDraggingFn }: DraggableIconProps) => {
   };
 
   // 드래그가 끝날 때 호출되는 함수
-  const handleDragEnd = () => {
+  const handleDragEnd = useCallback(() => {
     setIsDragging(false); // 드래그 상태 비활성화
     if (requestRef.current) {
       cancelAnimationFrame(requestRef.current); // 예약된 애니메이션 프레임 취소
       requestRef.current = null; // 참조 초기화
     }
-    // 0.5초 후에 드래그 상태를 false로 설정하는 함수 호출
     setTimeout(() => {
       isDraggingFn(false); // 부모 컴포넌트에도 드래그 비활성화 알림
     }, 500);
-  };
+  }, [setIsDragging, isDraggingFn]); // 의존성 배열
 
   // 마우스 또는 터치 이동에 따라 위치를 업데이트하는 함수
-  const handleMove = (clientX: number, clientY: number) => {
-    if (isDragging) {
-      isDraggingFn(true);
-      // 드래그 중일 때만 위치를 업데이트
-      if (requestRef.current === null) {
-        // requestAnimationFrame으로 위치 업데이트 예약
-        requestRef.current = requestAnimationFrame(() => {
-          // 화면 경계 계산
-          const windowWidth = window.innerWidth; // 브라우저 창 너비
-          const windowHeight = window.innerHeight; // 브라우저 창 높이
+  const handleMove = useCallback(
+    (clientX: number, clientY: number) => {
+      if (isDragging) {
+        isDraggingFn(true);
+        // 드래그 중일 때만 위치를 업데이트
+        if (requestRef.current === null) {
+          // requestAnimationFrame으로 위치 업데이트 예약
+          requestRef.current = requestAnimationFrame(() => {
+            // 화면 경계 계산
+            const windowWidth = window.innerWidth; // 브라우저 창 너비
+            const windowHeight = window.innerHeight; // 브라우저 창 높이
 
-          // 아이콘이 화면 밖으로 나가지 않도록 경계 내에서만 이동하게 제한
-          const newX = Math.max(
-            ICON_SIZE / 2,
-            Math.min(clientX, windowWidth - ICON_SIZE / 2)
-          );
-          const newY = Math.max(
-            ICON_SIZE / 2,
-            Math.min(clientY, windowHeight - ICON_SIZE / 2)
-          );
+            // 아이콘이 화면 밖으로 나가지 않도록 경계 내에서만 이동하게 제한
+            const newX = Math.max(
+              ICON_SIZE / 2,
+              Math.min(clientX, windowWidth - ICON_SIZE / 2)
+            );
+            const newY = Math.max(
+              ICON_SIZE / 2,
+              Math.min(clientY, windowHeight - ICON_SIZE / 2)
+            );
 
-          // 위치 상태 업데이트
-          setPosition({
-            x: `${newX}px`,
-            y: `${newY}px`
+            // 위치 상태 업데이트
+            setPosition({
+              x: `${newX}px`,
+              y: `${newY}px`
+            });
+
+            // 애니메이션 프레임 처리 후 참조 초기화
+            requestRef.current = null;
           });
-
-          // 애니메이션 프레임 처리 후 참조 초기화
-          requestRef.current = null;
-        });
+        }
       }
-    }
-  };
+    },
+    [isDragging, isDraggingFn, setPosition] // 의존성 배열
+  );
 
-  // 마우스 이동 처리 함수
-  const handleMouseMove = (e: MouseEvent) => {
-    e.preventDefault(); // 기본 동작 방지 (예: 텍스트 선택 방지)
-    handleMove(e.clientX, e.clientY); // 마우스 좌표 기반으로 위치 업데이트
-  };
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      e.preventDefault(); // 기본 동작 방지
+      handleMove(e.clientX, e.clientY); // 마우스 좌표 업데이트
+    },
+    [handleMove] // handleMove가 바뀔 때만 새로 정의
+  );
 
   // 터치 이동 처리 함수
-  const handleTouchMove = (e: TouchEvent) => {
-    e.preventDefault(); // 기본 동작 방지 (예: 스크롤 방지)
-    const touch = e.touches[0]; // 첫 번째 터치 포인트 가져오기
-    handleMove(touch.clientX, touch.clientY); // 터치 좌표 기반으로 위치 업데이트
-  };
+  const handleTouchMove = useCallback(
+    (e: TouchEvent) => {
+      e.preventDefault(); // 기본 동작 방지
+      const touch = e.touches[0];
+      handleMove(touch.clientX, touch.clientY); // 터치 좌표 업데이트
+    },
+    [handleMove] // handleMove가 바뀔 때만 새로 정의
+  );
 
   // 드래그 상태에 따라 이벤트 리스너 추가 및 제거 관리
   useEffect(() => {
@@ -109,7 +116,7 @@ const DraggableIcon = ({ children, isDraggingFn }: DraggableIconProps) => {
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleDragEnd);
     };
-  }, [isDragging]); // isDragging 상태가 변경될 때마다 실행
+  }, [isDragging, handleMouseMove, handleDragEnd, handleTouchMove]); // isDragging 상태가 변경될 때마다 실행
 
   return (
     <IconWrapper

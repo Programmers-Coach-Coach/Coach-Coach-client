@@ -79,6 +79,9 @@ const FooterAboveContents = styled.div`
   border-radius: 20px 20px 0 0;
   background-color: ${({ theme }) => theme.color.background};
   z-index: 1000;
+
+  max-height: 98dvh;
+  overflow-y: auto;
 `;
 
 export default Modal;

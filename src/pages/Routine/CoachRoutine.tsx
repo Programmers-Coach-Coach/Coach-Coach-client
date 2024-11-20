@@ -79,7 +79,6 @@ const CoachProfileStyle = styled.div`
   p {
     margin: 0.1rem 0;
   }
-
   .name {
     font-size: 4.3vw;
     font-weight: bold;

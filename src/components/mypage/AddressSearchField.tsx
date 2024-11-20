@@ -1,6 +1,6 @@
 import { useState } from "react";
-import styled from "styled-components";
 import DaumPostcode, { Address } from "react-daum-postcode";
+import styled from "styled-components";
 import CustomButton from "../common/Button/CustomButton";
 import CommonInput from "../common/InputField/Text/CommonInput";
 
@@ -85,12 +85,6 @@ const BasicWrapper = styled.div`
   width: 100%;
   align-items: center;
   position: relative;
-`;
-
-const SubtitleWrapper = styled.div`
-  width: 25%;
-  font-size: ${({ theme }) => theme.titleSize.t2.fontSize};
-  color: #fff;
 `;
 
 export default AddressSearchField;

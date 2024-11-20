@@ -1,4 +1,4 @@
-import StampImage from "@/assets/images/stamp.png";
+import StampImage from "@/assets/images/stamp.svg";
 import Loading from "@/components/loading/Loading";
 import { useGetStamps } from "@/hooks/queries/useRecord";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -53,6 +53,8 @@ const ExerciseCalender = () => {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <ResponsiveDateCalendar
           value={value}
+          views={["year", "month", "day"]}
+          // reduceAnimations={true}
           onChange={(newValue) => {
             setValue(newValue);
             setYear(newValue.year());
@@ -93,6 +95,13 @@ const Wrapper = styled.div`
 const ResponsiveDateCalendar = styled(DateCalendar)`
   width: 100%;
   max-width: 100%;
+
+  &.MuiSvgIcon-root
+    MuiSvgIcon-fontSizeMedium
+    MuiPickersCalendarHeader-switchViewIcon
+    css-1tkx1wf-MuiSvgIcon-root-MuiPickersCalendarHeader-switchViewIcon {
+    fill: #fff !important;
+  }
 `;
 
 const StyledPickersDay = styled(PickersDay)<{
@@ -104,8 +113,7 @@ const StyledPickersDay = styled(PickersDay)<{
   justify-content: center;
   background-color: ${({ $isSelected, theme }) =>
     $isSelected ? theme.color.background : "transparent"};
-  color: ${({ $isSelected, theme }) =>
-    $isSelected ? theme.color.background : theme.color.text};
+  color: #fff !important;
 
   &:after {
     content: "";
@@ -118,11 +126,11 @@ const StyledPickersDay = styled(PickersDay)<{
     background-size: cover;
     background-position: center;
     z-index: 1;
-    transform: rotate(-200deg);
   }
 
   &.Mui-selected {
-    background-color: ${({ theme }) => theme.color.secondary} !important;
+    border: 1px solid #0075ff;
+    background-color: rgba(0, 117, 255, 0.2) !important;
   }
 `;
 

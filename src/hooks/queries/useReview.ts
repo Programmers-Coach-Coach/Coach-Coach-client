@@ -1,8 +1,13 @@
 import { queryClient } from "@/api/queryClient";
-import { deleteReview, editReview, postReview } from "@/api/review.api";
+import {
+  deleteReview,
+  editReview,
+  getReviews,
+  postReview
+} from "@/api/review.api";
 import { IResponseMessage } from "@/models/responseMessage.model";
-import { IPostReview } from "@/models/review.model";
-import { useMutation } from "@tanstack/react-query";
+import { IPostReview, TReviewFilter } from "@/models/review.model";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 interface IPostReviewVariables {
@@ -14,6 +19,15 @@ interface IEditReviewVariables {
   reviewId: number;
   data: IPostReview;
 }
+
+export const useReviewList = (coachId: number, sortOptions: TReviewFilter) => {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["getReviewList", coachId, sortOptions],
+    queryFn: () => getReviews(coachId, sortOptions)
+  });
+
+  return { data, isLoading, isError };
+};
 
 export const usePostReview = (coachId: number) => {
   const { mutate, isError } = useMutation<

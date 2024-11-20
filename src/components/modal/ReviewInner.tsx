@@ -41,11 +41,7 @@ const ReviewInner = ({ id, onClose, type, refetchCoachId }: Props) => {
           name="stars"
           rules={{ required: true }}
           render={({ field: { onChange, value } }) => (
-            <RatingStars
-              stars={value}
-              size="30"
-              onClick={(stars) => onChange(stars)}
-            />
+            <RatingStars stars={value} onClick={(stars) => onChange(stars)} />
           )}
         />
       </Stars>

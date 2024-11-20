@@ -70,5 +70,7 @@ export const coachProfile: ICoachDetail = {
   isLiked: true,
   countOfLikes: 1,
   isContacted: false, // 추가
-  isMatched: false // 추가
+  isMatched: false, // 추가
+  isSelf: true,
+  totalUserCount: 1
 };

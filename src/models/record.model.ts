@@ -1,4 +1,4 @@
-import { IAction } from "./routine.model";
+import { IGetAction } from "./routine.model";
 
 export interface IPhysicalMetrics {
   weight?: number;
@@ -43,7 +43,7 @@ export interface IDetailRecords extends IDetailPhysicalMetrics {
 export interface IExerciseCategory {
   categoryId: number;
   categoryName: string;
-  actions: IAction[];
+  actions: IGetAction[];
 }
 
 // export interface IAction {

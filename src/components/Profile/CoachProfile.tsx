@@ -1,10 +1,11 @@
-import { styled } from "styled-components";
+import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
 import profile from "@/assets/images/profile.png";
-import Heart from "../common/InputField/CheckBox/Heart";
+import { IGetMyCoach } from "@/models/coach.model";
 import { isSelectProfile } from "@/store/isSelectProfile.store";
 import { useProfileInfo } from "@/store/profileInfo.store";
-import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
-import { IGetMyCoach } from "@/models/coach.model";
+import { Sports } from "@/style/theme";
+import { styled } from "styled-components";
+import Heart from "../common/InputField/CheckBox/Heart";
 
 interface CoachProfileProps {
   coach: IGetMyCoach;
@@ -31,7 +32,7 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
     }
   };
 
-  const iconSize = useResponsiveIconSize("16px", "24px", 375);
+  const iconSize = useResponsiveIconSize("16px", "20px", 375);
 
   return (
     <CoachProfileStyle>
@@ -50,14 +51,16 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
       <CoachProfileDetailStyle>
         <CoachNameStyle>
           <p className="name">{coach.coachName}</p>
-          <Heart id={coach.coachId} checked={coach.isLiked} size={iconSize} />
+          <div className="heart-section">
+            <Heart checked={coach.isLiked} size={iconSize} id={coach.coachId} />
+          </div>
         </CoachNameStyle>
         <p className="address">{coach.localAddress}</p>
         <CoachTagsStyle>
           {coach.coachingSports?.map((sport) => {
             return (
-              <CoachTagStyle key={sport.sportId} color="review">
-                #{sport.sportName}
+              <CoachTagStyle key={sport.sportId} $id={sport.sportId as Sports}>
+                # {sport.sportName}
               </CoachTagStyle>
             );
           })}
@@ -91,6 +94,19 @@ const CoachProfileStyle = styled.div`
     }
   }
 
+  .heart-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #d9d9d9;
+
+    svg {
+      transform: translateY(1px);
+    }
+  }
   .address {
     color: #808080;
     font-size: 2vw;
@@ -163,6 +179,8 @@ const CoachProfileDetailStyle = styled.div`
 
 const CoachNameStyle = styled.div`
   display: flex;
+  align-items: center;
+  gap: 5px;
   margin: 4.8vw 0 0.8vw 0;
   @media (min-width: 600px) {
     margin: 30px 0 5px 0;
@@ -172,18 +190,19 @@ const CoachNameStyle = styled.div`
 const CoachTagsStyle = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   gap: 10px;
 `;
 
-const CoachTagStyle = styled.div<{ color: string }>`
+const CoachTagStyle = styled.div<{ $id: Sports }>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 13vw;
   height: 6.5vw;
   font-size: 2.5vw;
-  background-color: ${({ theme, color }) => theme.color[color]};
+  background-color: ${({ theme, $id }) => theme.sports[$id]};
   border-radius: 20px;
 
   @media (min-width: 600px) {

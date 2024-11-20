@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 import {
   useDeleteCompleted,
   usePostCompleted
 } from "@/hooks/queries/useRoutine";
+=======
+>>>>>>> main
 import Checkbox from "@mui/material/Checkbox";
 import { useState } from "react";
 import { styled } from "styled-components";
@@ -11,6 +14,7 @@ interface CompletedProps {
   isCompleted: boolean;
 }
 
+<<<<<<< HEAD
 const Completed = ({ routineId, isCompleted }: CompletedProps) => {
   const [isChecked, setIsChecked] = useState(isCompleted);
   const postCompleted = usePostCompleted();
@@ -23,6 +27,16 @@ const Completed = ({ routineId, isCompleted }: CompletedProps) => {
     } else {
       deleteCompleted.mutate(routineId);
     }
+=======
+const Completed = ({ isCompleted }: CompletedProps) => {
+  const [isChecked, setIsChecked] = useState(isCompleted);
+
+  const handleClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    // if (!isChecked) {
+    // } else {
+    // }
+>>>>>>> main
     setIsChecked(!isChecked);
   };
 
