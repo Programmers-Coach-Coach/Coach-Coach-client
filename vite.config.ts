@@ -6,6 +6,9 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 // https://vitejs.dev/config/s
 export default defineConfig({
+  define: {
+    global: "window" // 글로벌 객체를 브라우저 환경에 맞게 설정
+  },
   plugins: [
     react(),
     tsconfigPaths(),
