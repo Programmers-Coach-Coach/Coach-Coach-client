@@ -3,7 +3,6 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import styled from "styled-components";
 
 const DAYS = {
-<<<<<<< HEAD
   SUNDAY: "일",
   MONDAY: "월",
   TUESDAY: "화",
@@ -11,15 +10,6 @@ const DAYS = {
   THURSDAY: "목",
   FRIDAY: "금",
   SATURDAY: "토"
-=======
-  SUN: "일",
-  MON: "월",
-  TUE: "화",
-  WED: "수",
-  THU: "목",
-  FRI: "금",
-  SAT: "토"
->>>>>>> main
 };
 
 interface RepeatContentProps {

@@ -1,19 +1,10 @@
 import Icon from "@/components/Icon/Icon";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-<<<<<<< HEAD
-import Modal from "../modal/Modal";
-import FooterPicker from "../modal/contents/FooterPicker";
-=======
->>>>>>> main
 import SvgIcon from "@/components/Icon/SvgIcon";
 
 const Footer = () => {
   const navigate = useNavigate();
-<<<<<<< HEAD
-  const profileModal = useModal();
-=======
->>>>>>> main
 
   const onClickHome = () => {
     navigate(`/home`);
@@ -28,15 +19,7 @@ const Footer = () => {
   };
 
   const onClickProfile = () => {
-<<<<<<< HEAD
-    if (profileModal.isModal) {
-      profileModal.closeModal();
-    } else {
-      profileModal.openModal();
-    }
-=======
     navigate("/mypage");
->>>>>>> main
   };
 
   const onClickCoachList = () => {
@@ -47,14 +30,6 @@ const Footer = () => {
 
   return (
     <>
-<<<<<<< HEAD
-      {profileModal.isModal && (
-        <Modal closeModal={profileModal.closeModal} position="footer-above">
-          <FooterPicker closeModal={profileModal.closeModal} schema="profile" />
-        </Modal>
-      )}
-=======
->>>>>>> main
       <FooterStyle>
         <button onClick={onClickCoachList}>
           <Icon

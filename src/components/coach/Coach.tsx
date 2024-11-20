@@ -7,10 +7,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import SportChip from "../common/Chip/SportChip";
 import Heart from "../common/InputField/CheckBox/Heart";
-<<<<<<< HEAD
-=======
 import SvgIcon from "../Icon/SvgIcon";
->>>>>>> main
 
 interface Props {
   coach: ICoach;
@@ -30,28 +27,6 @@ const Coach = ({ coach }: Props) => {
   return (
     <Wrapper onClick={() => navigate(`/coach/${coach.coachId}`)}>
       <Image src={profileImageUrl} alt={coach.coachName} />
-<<<<<<< HEAD
-      <Text>
-        <LineClamp $line={1} className="name">
-          {coach.coachName}
-        </LineClamp>
-        <LineClamp $line={2} className="desc">
-          {coach.coachIntroduction}
-        </LineClamp>
-        <div className="coaching-sports">
-          {coach.coachingSports.slice(0, 2).map((item) => (
-            <li key={item.sportId}>#{item.sportName}</li>
-          ))}
-          {coach.coachingSports.length > 2 && (
-            <span className="etc">외 {coach.coachingSports.length - 2}개</span>
-          )}
-        </div>
-      </Text>
-      <Heart checked={coach.isLiked} size="24" id={coach.coachId} />
-
-      <Local>{coach.localAddress}</Local>
-    </CoachStyle>
-=======
       <InfoSection>
         <Top>
           <span className="name__info">{coach.coachName}</span>
@@ -86,7 +61,6 @@ const Coach = ({ coach }: Props) => {
         </Bottom>
       </InfoSection>
     </Wrapper>
->>>>>>> main
   );
 };
 
@@ -150,16 +124,6 @@ const Top = styled.div`
   }
 `;
 
-<<<<<<< HEAD
-export const Local = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 0;
-
-  font-size: 10px;
-  color: ${({ theme }) => theme.color.gray3};
-`;
-=======
 const Middle = styled.div`
   display: flex;
   align-items: center;
@@ -191,5 +155,4 @@ const Bottom = styled.div`
   }
 `;
 
->>>>>>> main
 export default Coach;
