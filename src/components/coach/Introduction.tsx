@@ -33,7 +33,6 @@ const Wrapper = styled.div`
   background-color: #111111;
   border-radius: 24px;
   padding: 20px;
-  min-height: 330px;
 
   .coaching-sports__info {
     display: flex;

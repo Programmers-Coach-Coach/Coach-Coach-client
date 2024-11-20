@@ -16,5 +16,7 @@ const CoachList = () => {
   );
 };
 
-const CoachListStyle = styled.div``;
+const CoachListStyle = styled.div`
+  padding: 15px 0;
+`;
 export default CoachList;

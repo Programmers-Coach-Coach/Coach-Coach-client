@@ -49,6 +49,7 @@ const CoachDetails = ({ coach, onChangeScreenStatus }: Props) => {
 
 const Details = styled.div`
   margin: 20px 0;
+  height: 100%;
 `;
 
 export default CoachDetails;
