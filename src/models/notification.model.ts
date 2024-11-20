@@ -8,6 +8,8 @@ export type TNotificationType =
 
 export interface INotification {
   notificationId: number;
+  nickname: string;
+  profileImageUrl: string;
   message: string;
   relationFunction: TNotificationType;
   createdAt: string;

@@ -1,9 +1,3 @@
-import Heart from "@/assets/images/notice-heart.png";
-import Match from "@/assets/images/notice-match.png";
-import Message from "@/assets/images/notice-message.png";
-import Speaker from "@/assets/images/notice-speaker.png";
-import Warning from "@/assets/images/notice-warning.png";
-
 import { useDeleteNotification } from "@/hooks/queries/useNotification";
 import { TNotificationType } from "@/models/notification.model";
 import { timeAgo } from "@/utils/format";
@@ -12,7 +6,9 @@ import SvgIcon from "../Icon/SvgIcon";
 
 interface Props {
   noticeId: number;
+  nickname: string;
   relationFunction: TNotificationType;
+  profileImageUrl: string;
   message: string;
   createdAt: string;
 }
@@ -21,24 +17,10 @@ const NotificationCard = ({
   noticeId,
   relationFunction,
   message,
-  createdAt
+  createdAt,
+  nickname,
+  profileImageUrl
 }: Props) => {
-  const getImageSrc = () => {
-    switch (relationFunction) {
-      case "like":
-        return Heart;
-      case "review":
-        return Message;
-      case "match":
-        return Match;
-      case "refusal":
-      case "cancel":
-        return Warning;
-      default:
-        return Speaker;
-    }
-  };
-
   const { mutate } = useDeleteNotification();
 
   const handleDelete = (id: number) => {
@@ -50,12 +32,12 @@ const NotificationCard = ({
       <img
         loading="lazy"
         className="notification-img"
-        src={getImageSrc()}
+        src={profileImageUrl}
         alt={relationFunction}
       />
       <Main>
         <div className="name-wrapper">
-          {/* <div className="name"></div> */}
+          <div className="name">{nickname}</div>
           <div className="timestamp">· {timeAgo(createdAt)}</div>
         </div>
         <div className="message">{message}</div>
@@ -93,6 +75,7 @@ const ReviewCardStyle = styled.div`
     position: absolute;
     top: 10px;
     right: 10px;
+    cursor: pointer;
   }
 `;
 
@@ -100,6 +83,12 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
+
+  .name-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
 
   .message {
     flex: 1;
