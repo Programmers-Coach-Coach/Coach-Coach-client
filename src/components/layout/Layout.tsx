@@ -19,8 +19,6 @@ const Layout = () => {
     title = queryParams.get("member");
   } else if (queryParams.get("routineName")) {
     title = queryParams.get("routineName");
-  } else if (queryParams.get("nickname")) {
-    title = queryParams.get("nickname");
   } else {
     title = getTitle(location.pathname);
   }

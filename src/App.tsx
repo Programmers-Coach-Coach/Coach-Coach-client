@@ -24,8 +24,6 @@ import TotalLogin from "./pages/TotalLogin";
 import AddRoutine from "./pages/Routine/AddRoutine";
 import Profile from "./pages/Profile";
 import MyMember from "./pages/Routine/MyMember";
-import Chat from "./pages/Chat";
-import ChatMessage from "./components/chat/ChatMessage";
 
 function App() {
   const router = createBrowserRouter([
@@ -99,9 +97,7 @@ function App() {
         {
           path: "routine/my-coach/:coachId",
           element: <CoachRoutine />
-        },
-        { path: "chat", element: <Chat /> },
-        { path: "chat-room", element: <ChatMessage /> }
+        }
       ]
     }
   ]);

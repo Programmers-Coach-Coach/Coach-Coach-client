@@ -40,16 +40,6 @@ const DetailHeaderStyle = styled.div`
     position: absolute;
     left: 20px;
   }
-
-  &::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 4%;
-    width: 92%;
-    height: 0.08rem;
-    background-color: rgba(255, 255, 255, 0.5);
-  }
 `;
 
 export default DetailHeader;

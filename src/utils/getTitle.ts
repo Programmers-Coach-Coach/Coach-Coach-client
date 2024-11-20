@@ -35,8 +35,6 @@ export const getTitle = (pathname: string): string => {
       return "내 코치";
     case "/manage":
       return "매칭 회원 리스트";
-    case "/chat":
-      return "채팅";
     default:
       return "";
   }
@@ -56,7 +54,6 @@ export const getClickBackLink = (pathname: string) => {
     case "/check-password":
     case "/notification":
     case "/routine/my-coach":
-    case "/chat":
       return "/home";
 
     case "/record":
@@ -66,8 +63,6 @@ export const getClickBackLink = (pathname: string) => {
       return "/routine";
     case "/member/routine":
       return "/member";
-    case "/chat-room":
-      return "/chat";
     default:
       return null;
   }

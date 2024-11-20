@@ -29,7 +29,5 @@ export const API_PATH = {
   match: "/v1/coaches/matches",
   recordChart: "/v1/records/charts",
   recordV2: "/v2/records",
-  review: "/v1/coaches/reviews",
-  memberChat: "/v1/users/chat-rooms",
-  coachChat: "v1/coaches/chat-rooms"
+  review: "/v1/coaches/reviews"
 };
