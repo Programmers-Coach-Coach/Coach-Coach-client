@@ -25,12 +25,12 @@ const TotalLogin = () => {
 
   const handleGoogleLogin = () => {
     window.location.href =
-      "https://coach-coach.site/oauth2/authorization/google";
+      "https://api.coach-coach.site/oauth2/authorization/google";
   };
 
   const handleKakaoLogin = () => {
     window.location.href =
-      "https://coach-coach.site/oauth2/authorization/kakao";
+      "https://api.coach-coach.site/oauth2/authorization/kakao";
   };
   return (
     <Container>
