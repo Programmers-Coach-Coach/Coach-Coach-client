@@ -57,7 +57,8 @@ const ReviewControl = ({ reviewId, coachId }: Props) => {
             onClose={closeEditModal}
             coachId={reviewId}
             type="edit"
-            refetchCoachId={coachId}
+            reviewId={null}
+            // refetchCoachId={coachId}
           />
         </Modal>
       )}
