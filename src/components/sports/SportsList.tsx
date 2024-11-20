@@ -13,7 +13,7 @@ interface Props {
 const SportsList = ({ isOpen }: Props) => {
   const { data, isLoading, isError } = useGetSports();
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <Loading textDisabled={true} />;
   if (isError || !data)
     return (
       <EmptyVersion2 imgName="warning" height="100px">

@@ -7,10 +7,10 @@ import Loading from "../loading/Loading";
 const PopularCoaches = () => {
   const { data, isLoading, isError } = useGetPopularCoaches();
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <Loading textDisabled={true} />;
   if (isError || !data)
     return (
-      <EmptyVersion2 imgName="warning" height="100px">
+      <EmptyVersion2 imgName="warning" height="300px">
         서버가
         <br />
         죽었어요

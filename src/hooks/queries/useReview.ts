@@ -39,6 +39,9 @@ export const usePostReview = (coachId: number) => {
       postReview(coachId, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["getCoachDetail", coachId] });
+      queryClient.invalidateQueries({
+        queryKey: ["getReviewList"]
+      });
     },
     onError: () => {
       toast.error("리뷰는 한번만 남길 수 있습니다");
@@ -63,6 +66,9 @@ export const useEditReview = (refetchCoachId: number | undefined) => {
       if (refetchCoachId) {
         queryClient.invalidateQueries({
           queryKey: ["getCoachDetail", refetchCoachId]
+        });
+        queryClient.invalidateQueries({
+          queryKey: ["getReviewList"]
         });
       }
     },

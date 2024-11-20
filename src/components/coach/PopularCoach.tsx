@@ -47,7 +47,7 @@ const PopularCoach = ({ coach, index }: Props) => {
           <CoachName>{coach.coachName}</CoachName>
           <CoachRating>
             <SvgIcon name="star" fill="review" width="16px" height="16px" />
-            {coach.countOfLikes.toFixed(1)}
+            {coach.reviewRating.toFixed(1)}
           </CoachRating>
         </CoachProfileHeader>
         <Seperator />

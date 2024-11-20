@@ -2,6 +2,7 @@ import { FILTER_VALUES } from "@/constants/filter";
 import { useReviewList } from "@/hooks/queries/useReview";
 import useModal from "@/hooks/useModal";
 import { TReviewFilter } from "@/models/review.model";
+import { ScreenStatus } from "@/pages/Coach";
 import { useState } from "react";
 import styled, { css } from "styled-components";
 import RatingStars from "../common/Card/ReviewCard.tsx/RatingStars";
@@ -18,9 +19,10 @@ const sortOptions: TReviewFilter[] = ["LATEST", "RATING_DESC", "RATING_ASC"];
 interface Props {
   coachId: number;
   isMatched: boolean;
+  onChangeScreenStatus: (status: ScreenStatus) => void;
 }
 
-const Review = ({ coachId, isMatched }: Props) => {
+const Review = ({ coachId, isMatched, onChangeScreenStatus }: Props) => {
   const { isModal, closeModal, handleModal } = useModal();
   const [filterId, setFilterId] = useState<number>(0);
   const {
@@ -38,6 +40,10 @@ const Review = ({ coachId, isMatched }: Props) => {
 
   const isMyReviewAdded = reviews.reviews.some((review) => review.isMyReview);
 
+  const reviewId =
+    reviews.reviews.find((review) => review.isMyReview === true)?.reviewId ??
+    null;
+
   return (
     <Wrapper>
       <Header>
@@ -50,9 +56,11 @@ const Review = ({ coachId, isMatched }: Props) => {
         </div>
         {isMatched && (
           <AddReview
-            coachId={coachId}
             isMyReviewAdded={isMyReviewAdded}
             isMatched={isMatched}
+            onChangeScreenStatus={onChangeScreenStatus}
+            reviewId={reviewId}
+            coachId={coachId}
           />
         )}
       </Header>
