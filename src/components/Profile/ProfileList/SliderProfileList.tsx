@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import styled from "styled-components";
 import SliderProfile from "../SliderProfile";
-import { useState } from "react";
 import { IGetMyMember } from "@/models/member.model";
 import { useProfileInfo } from "@/store/profileInfo.store";
 
@@ -13,12 +12,8 @@ interface SportsSliderProps {
 }
 
 const SliderProfileList = ({ data }: SportsSliderProps) => {
-  const [selected, setSelected] = useState(0);
+  const userId = useProfileInfo((state) => state.userId);
   const setUserId = useProfileInfo((state) => state.setUserId);
-
-  const handleSelect = (index: number) => {
-    setSelected(index);
-  };
 
   const settings = {
     slidesToShow: 2.5,
@@ -50,9 +45,8 @@ const SliderProfileList = ({ data }: SportsSliderProps) => {
           key={index}
           profileImageUrl={d.profileImageUrl ? d.profileImageUrl : ""}
           name={d.userName}
-          isSelected={index === selected}
+          isSelected={d.userId === userId}
           onClick={() => {
-            handleSelect(index);
             setUserId(d.userId);
           }}
         />

@@ -35,6 +35,12 @@ const MyMember = () => {
   const matchData = data.filter((d) => d.isMatching === true);
   const inquiryData = data.filter((d) => d.isMatching === false);
 
+  if (filterIndex === 0) {
+    matchData.sort((a, b) => a.startDate.localeCompare(b.startDate));
+  } else if (filterIndex === 1) {
+    matchData.sort((a, b) => a.userName.localeCompare(b.userName));
+  }
+
   const handleTabChange = (newValue: number) => {
     setTabValue(newValue);
   };

@@ -11,6 +11,8 @@ import Modal from "../common/modal/Modal";
 import TwoButtonContent from "../common/modal/contents/TwoButtonContent";
 import { useDeleteMember, usePatchMember } from "@/hooks/useMember";
 import { useProfileInfo } from "@/store/profileInfo.store";
+import { Sports } from "@/style/theme";
+import { formatTimeDifference } from "@/utils/formatDate";
 
 interface MemberProfileProps {
   member: IGetMyMember;
@@ -39,6 +41,11 @@ const MemberProfile = ({ member }: MemberProfileProps) => {
     }
   }, [isSet, navigate]);
 
+  const startTrainingDate = `${member.startDate.slice(0, 4)}. ${member.startDate.slice(5, 7)}. ${member.startDate.slice(8, 10)}.`;
+  const startMatchDate = `${member.startDate.slice(0, 4)}년 ${member.startDate.slice(5, 7)}월 ${member.startDate.slice(8, 10)}일 | ${member.startDate.slice(11, 16)}`;
+
+  const timeAlarm = formatTimeDifference(member.startDate);
+
   return (
     <>
       {inquiryModal.isModal && (
@@ -62,17 +69,27 @@ const MemberProfile = ({ member }: MemberProfileProps) => {
       <MemberProfileStyle>
         <MemberProfileImageStyle src={imageUrl} alt="profile" />
         <MemberProfileDetailStyle>
-          <div className="name">{member.userName}</div>
+          <MemberNameStyle>
+            <div className="name">{member.userName}</div>
+            {!member.isMatching && <div className="time">{timeAlarm}</div>}
+          </MemberNameStyle>
           <MemberTagsStyle>
             {member.interestedSports?.map((sport) => {
               return (
-                <MemberTagStyle key={sport.sportId} color="review">
+                <MemberTagStyle
+                  key={sport.sportId}
+                  $id={sport.sportId as Sports}
+                >
                   #{sport.sportName}
                 </MemberTagStyle>
               );
             })}
           </MemberTagsStyle>
-          <div className="date">트레이닝 시작일 : {member.startDate}</div>
+          <div className="date">
+            {member.isMatching
+              ? `트레이닝 시작일 : ${startTrainingDate}`
+              : startMatchDate}
+          </div>
         </MemberProfileDetailStyle>
         <MemberProfileButtonStyle>
           <ChatButtontyle>
@@ -158,6 +175,15 @@ const MemberProfileDetailStyle = styled.div`
     }
   }
 
+  .time {
+    font-size: 1.6vw;
+    margin: 1.5vw 0 0.8vw 1.6vw;
+    @media (min-width: 600px) {
+      font-size: 13px;
+      margin: 9px 0 5px 10px;
+    }
+  }
+
   .date {
     font-size: 2vw;
     margin: 0.8vw 0;
@@ -166,6 +192,10 @@ const MemberProfileDetailStyle = styled.div`
       margin: 5px 0;
     }
   }
+`;
+
+const MemberNameStyle = styled.div`
+  display: flex;
 `;
 
 const MemberProfileButtonStyle = styled.div`
@@ -190,13 +220,13 @@ const MemberTagsStyle = styled.div`
   align-items: end;
 `;
 
-const MemberTagStyle = styled.div<{ color: string }>`
+const MemberTagStyle = styled.div<{ $id: Sports }>`
   display: inline-flex;
   justify-content: center;
   align-items: center;
   white-space: nowrap;
   width: auto;
-  background-color: ${({ theme, color }) => theme.color[color]};
+  background-color: ${({ theme, $id }) => theme.sports[$id]};
   border-radius: 20px;
   padding: 5px 10px;
   font-size: 2vw;
