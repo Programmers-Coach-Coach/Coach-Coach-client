@@ -259,7 +259,7 @@ const CoachProfileSection = () => {
           />
         </AddrressWrapper>
 
-        {userMeData?.isCoach && coachProfile && (
+        {userMeData?.isCoach && coachProfile && coachProfile.reviews && (
           <>
             <SubtitleWrapper>리뷰</SubtitleWrapper>
             <CoachProfileReview coachProfile={coachProfile} />

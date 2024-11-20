@@ -8,7 +8,7 @@ interface CommonInputProps {
   type: string;
   label?: string;
   icon?: string;
-  value: string | undefined; // string | undefined로 변경
+  value: string | undefined;
   inputHeight?: string;
   disabled?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -25,7 +25,7 @@ const CommonInput = forwardRef<HTMLInputElement, CommonInputProps>(
       value,
       onChange,
       disabled,
-      inputHeight // 추가
+      inputHeight
     },
     ref
   ) => {
@@ -51,11 +51,11 @@ const CommonInput = forwardRef<HTMLInputElement, CommonInputProps>(
             type={type === "password" && showPswd ? "text" : type}
             name={name}
             placeholder={placeholder}
-            hasLeftIcon={!!icon}
+            $hasLeftIcon={!!icon}
             value={value}
             onChange={onChange}
             disabled={disabled}
-            height={inputHeight || "60px"} // 여기에서 inputHeight 적용
+            height={inputHeight || "60px"}
           />
 
           {type === "password" && (
@@ -90,17 +90,18 @@ const TitleWrapper = styled.div`
   color: #777c89;
 `;
 
-const InputWrapper = styled.input<{ hasLeftIcon: boolean; height?: string }>`
+const InputWrapper = styled.input<{ $hasLeftIcon: boolean; height?: string }>`
   width: 100%;
-  height: ${({ height }) => height}; // 동적으로 height 적용
-  padding: ${({ hasLeftIcon }) =>
-    hasLeftIcon ? "16px 100px 16px 40px" : "16px"};
+  height: ${({ height }) => height};
+  padding: ${({ $hasLeftIcon }) =>
+    $hasLeftIcon ? "16px 100px 16px 40px" : "16px"};
   background-color: #252932;
   border: none;
   border-radius: 10px;
   color: #777c89;
   font-size: 16px;
 `;
+
 const LeftIconWrapper = styled.div`
   position: absolute;
   top: 50%;
