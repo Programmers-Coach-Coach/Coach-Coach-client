@@ -14,6 +14,7 @@ import { isNewRoutine } from "@/store/isNewRoutine.store";
 import { useProfileInfo } from "@/store/profileInfo.store";
 import { useRoutineStore } from "@/store/routine.store";
 import { WhiteSpace } from "@/style/global";
+import { Sports } from "@/style/theme";
 import { formatCurrentDate } from "@/utils/formatDate";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -31,7 +32,6 @@ const MemberRoutine = () => {
   const iconSize = useResponsiveIconSize("3vw", "16px", 600);
   const memberRoutineResponse = useGetRoutines({ userId });
   const { data = [], isLoading: memberLoading } = useMatchMember(isCoach);
-  console.log(userId);
 
   useEffect(() => {
     refetch().then(() => {
@@ -47,6 +47,8 @@ const MemberRoutine = () => {
 
   const matchData = data.filter((d) => d.isMatching === true);
   const memberData = matchData.find((d) => d.userId === userId);
+
+  const startTrainingDate = `${memberData?.startDate.slice(0, 4)}. ${memberData?.startDate.slice(5, 7)}. ${memberData?.startDate.slice(8, 10)}.`;
 
   const currentDate = formatCurrentDate();
 
@@ -73,15 +75,16 @@ const MemberRoutine = () => {
             <MemberTagsStyle>
               {memberData?.interestedSports?.map((sport) => {
                 return (
-                  <MemberTagStyle key={sport.sportId} color="review">
+                  <MemberTagStyle
+                    key={sport.sportId}
+                    $id={sport.sportId as Sports}
+                  >
                     #{sport.sportName}
                   </MemberTagStyle>
                 );
               })}
             </MemberTagsStyle>
-            <div className="date">
-              트레이닝 시작일 : {memberData?.startDate}
-            </div>
+            <div className="date">트레이닝 시작일 : {startTrainingDate}</div>
           </MemberDescriptionStyle>
           <ChatButtontyle>
             <div className="chat">채팅하기</div>
@@ -164,12 +167,12 @@ const MemberTagsStyle = styled.div`
   display: flex;
 `;
 
-const MemberTagStyle = styled.div<{ color: string }>`
+const MemberTagStyle = styled.div<{ $id: Sports }>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: auto;
-  background-color: ${({ theme, color }) => theme.color[color]};
+  background-color: ${({ theme, $id }) => theme.sports[$id]};
   border-radius: 20px;
   padding: 1vw 1.5vw;
   margin-right: 1.3vw;
