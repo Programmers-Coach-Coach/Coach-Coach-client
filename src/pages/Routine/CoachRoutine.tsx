@@ -33,16 +33,11 @@ const CoachRoutine = () => {
       <Progress value={data.completionPercentage} />
       <CoachProfileStyle>
         <CoachProfileImageStyle src={coachImage} alt={coachName} />
-        <CoachDescriptionStyle>
-          <p className="name">{coachName}</p>
-          <ChatCardStyle>
-            <p>채팅하기</p>
-            <IconButton name="chat" size={iconSize} color="text" />
-          </ChatCardStyle>
-        </CoachDescriptionStyle>
-        <SpeechBubble>
-          내가 직접 그린 말풍선... 넘어가면 어떻게 되나..
-        </SpeechBubble>
+        <p className="name">{coachName}</p>
+        <ChatCardStyle>
+          <p>채팅하기</p>
+          <IconButton name="chat" size={iconSize} color="text" />
+        </ChatCardStyle>
       </CoachProfileStyle>
       <RoutineList routines={data.routines} isModify={false} />
       <WhiteSpace $height={80} />
@@ -84,6 +79,14 @@ const CoachProfileStyle = styled.div`
   p {
     margin: 0.1rem 0;
   }
+  .name {
+    font-size: 4.3vw;
+    font-weight: bold;
+
+    @media (min-width: 600px) {
+      font-size: 24px;
+    }
+  }
 `;
 
 const CoachProfileImageStyle = styled.img`
@@ -97,33 +100,17 @@ const CoachProfileImageStyle = styled.img`
   }
 `;
 
-const CoachDescriptionStyle = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  .name {
-    font-size: 4vw;
-    font-weight: bold;
-
-    @media (min-width: 600px) {
-      font-size: 20px;
-    }
-  }
-`;
-
 const ChatCardStyle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 1vh;
-  width: 20vw;
-  height: 8vw;
+  width: 40vw;
+  height: 12vw;
   background-color: ${({ theme }) => theme.color.primary};
   border-radius: ${({ theme }) => theme.borderRadius.default};
   p {
-    font-size: 3vw;
+    font-size: 3.5vw;
   }
 
   svg {
@@ -131,47 +118,10 @@ const ChatCardStyle = styled.div`
   }
 
   @media (min-width: 600px) {
-    width: 100px;
-    height: 40px;
+    width: 230px;
+    height: 60px;
     p {
-      font-size: 16px;
-    }
-  }
-`;
-
-const SpeechBubble = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  background-color: rgba(0, 117, 255, 0.5);
-  border-radius: ${({ theme }) => theme.borderRadius.default};
-  padding: 1vh 1vw;
-  width: 30vw;
-  height: 20vw;
-  font-size: 3vw;
-
-  @media (min-width: 600px) {
-    padding: 16px 24px;
-    width: 200px;
-    height: 120px;
-    font-size: 16px;
-  }
-
-  /* 말풍선 꼬리 - before 사용 */
-  &::before {
-    content: "";
-    position: absolute;
-    top: 30%;
-    left: -5vw;
-    transform: translateY(-50%);
-    border-style: solid;
-    border-color: transparent rgba(0, 117, 255, 0.5);
-    border-width: 10px 5vw 10px 0;
-
-    @media (min-width: 600px) {
-      left: -35px;
-      border-width: 10px 35px 10px 0;
+      font-size: 20px;
     }
   }
 `;

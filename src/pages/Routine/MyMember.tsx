@@ -5,14 +5,14 @@ import MemberProfileList from "@/components/Profile/ProfileList/MemberProfileLis
 import { useFetchAuth } from "@/hooks/useFetchAuth";
 import { useMatchMember } from "@/hooks/useMember";
 import Loading from "@/components/loading/Loading";
-import IconButton from "@/components/Icon/IconButton";
 import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
 import useModal from "@/hooks/useModal";
 import Modal from "@/components/common/modal/Modal";
 import OneButtonContent from "@/components/common/modal/contents/OneButtonContent";
 import MemberFilterContent from "@/components/common/modal/contents/MemberFilterContent";
+import SvgIcon from "@/components/Icon/SvgIcon";
 
-const FILTER = ["루틴 업데이트순", "트레이닝 시작일순", "회원 이름순"];
+const FILTER = ["트레이닝 시작일순", "회원 이름순"];
 
 const MyMember = () => {
   const { data: authData, isLoading: authLoading, refetch } = useFetchAuth();
@@ -58,10 +58,17 @@ const MyMember = () => {
           labels={["내 회원", "매칭 대기 회원"]}
           onTabChange={handleTabChange}
         />
-        <FilterStyle onClick={() => filterModal.openModal()}>
-          {FILTER[filterIndex]}
-          <IconButton name="arrow" size={iconSize} color="gray3" />
-        </FilterStyle>
+        {tabValue === 0 && (
+          <FilterStyle onClick={() => filterModal.openModal()}>
+            {FILTER[filterIndex]}
+            <SvgIcon
+              name="arrow"
+              width={iconSize}
+              height={iconSize}
+              fill="gray3"
+            />{" "}
+          </FilterStyle>
+        )}
         {tabValue === 0 ? (
           <MemberProfileList data={matchData} />
         ) : (

@@ -10,6 +10,7 @@ import { usePatchRoutine, usePostRoutine } from "@/hooks/queries/useRoutine";
 import useHome from "@/hooks/useHome";
 import useModal from "@/hooks/useModal";
 import { isNewRoutine } from "@/store/isNewRoutine.store";
+import { useProfileInfo } from "@/store/profileInfo.store";
 import { useRoutineStore } from "@/store/routine.store";
 import { WhiteSpace } from "@/style/global";
 import { ButtonSize } from "@/style/theme";
@@ -22,13 +23,13 @@ import { v4 as uuidv4 } from "uuid";
 const ACTION_COUNT = 4;
 const DAYS_ORDER = ["일", "월", "화", "수", "목", "금", "토"];
 const DAYS = {
-  SUN: "일",
-  MON: "월",
-  TUE: "화",
-  WED: "수",
-  THU: "목",
-  FRI: "금",
-  SAT: "토"
+  SUNDAY: "일",
+  MONDAY: "월",
+  TUESDAY: "화",
+  WEDNESDAY: "수",
+  THURSDAY: "목",
+  FRIDAY: "금",
+  SATURDAY: "토"
 };
 
 const AddRoutine = () => {
@@ -38,6 +39,7 @@ const AddRoutine = () => {
   const setRoutineName = useRoutineStore((set) => set.setRoutineName);
   const addAction = useRoutineStore((set) => set.addAction);
   const isNew = isNewRoutine((set) => set.isNewRoutine);
+  const userId = useProfileInfo((set) => set.userId);
   const [size, setSize] = useState<ButtonSize>("desktop");
   const [fontSize, setFontSize] = useState<string>("22px");
   const navigate = useNavigate();
@@ -98,12 +100,24 @@ const AddRoutine = () => {
         typeof action.countsOrMinutes === "string" ? 0 : action.countsOrMinutes
     }));
 
-    const postRoutine = {
-      routineName: routine.routineName,
-      sportId: routine.sportId ? routine.sportId : 0,
-      repeats: routine.repeats,
-      actions: postActions
+    const setPostRoutine = () => {
+      const baseRoutine = {
+        routineName: routine.routineName,
+        sportId: routine.sportId ? routine.sportId : 0,
+        repeats: routine.repeats,
+        actions: postActions
+      };
+      if (userId !== -1) {
+        return {
+          ...baseRoutine,
+          userId
+        };
+      }
+
+      return baseRoutine;
     };
+
+    const postRoutine = setPostRoutine();
 
     postRequest.mutate(postRoutine);
     navigate(-1);

@@ -67,7 +67,6 @@ const OneButtonContent = ({
           />
         )}
       </Header>
-
       {ChildWithRef}
       <Footer>
         <CustomButton

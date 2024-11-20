@@ -1,10 +1,10 @@
 import { styled } from "styled-components";
 import Empty from "@/components/common/Empty/Empty";
-import { IMatchMembers } from "@/models/member.model";
+import { IGetMyMember } from "@/models/member.model";
 import MemberProfile from "../MemberProfile";
 
 interface MatchingProfileListProps {
-  data: IMatchMembers[];
+  data: IGetMyMember[];
 }
 
 const MemberProfileList = ({ data }: MatchingProfileListProps) => {
@@ -13,12 +13,7 @@ const MemberProfileList = ({ data }: MatchingProfileListProps) => {
       {data.length ? (
         <MemberProfileListStyle>
           {data.map((d) => (
-            <MemberProfile
-              key={d.userId}
-              profileName={d.userName}
-              profileImageUrl={d.profileImageUrl}
-              isMatching={d.isMatching}
-            />
+            <MemberProfile key={d.userId} member={d} />
           ))}
         </MemberProfileListStyle>
       ) : (

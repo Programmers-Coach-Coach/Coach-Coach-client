@@ -4,14 +4,14 @@ import {
   patchMatchMember
 } from "@/api/coach.api";
 import { queryClient } from "@/api/queryClient";
-import { IMatchMembers } from "@/models/member.model";
+import { IGetMyMember } from "@/models/member.model";
 import { IResponseMessage } from "@/models/responseMessage.model";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 export const useMatchMember = (isCoach: boolean) => {
-  const { data, isLoading, isError } = useQuery<IMatchMembers[]>({
+  const { data, isLoading, isError } = useQuery<IGetMyMember[]>({
     queryKey: ["getMatchMembers"],
     queryFn: getMatchMembers,
     enabled: isCoach // isCoach가 true일 때만 쿼리를 실행

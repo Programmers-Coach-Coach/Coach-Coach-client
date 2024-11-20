@@ -2,56 +2,63 @@ import Progress from "@/components/common/InputField/Progress/Progress";
 import AddModal from "@/components/common/modal/AddModal";
 import DraggableIcon from "@/components/Icon/DraggableIcon";
 import IconButton from "@/components/Icon/IconButton";
+import SvgIcon from "@/components/Icon/SvgIcon";
+import Loading from "@/components/loading/Loading";
 import SliderProfileList from "@/components/Profile/ProfileList/SliderProfileList";
 import RoutineList from "@/components/routine/RoutineList";
 import { useGetRoutines } from "@/hooks/queries/useRoutine";
+import { useFetchAuth } from "@/hooks/useFetchAuth";
+import { useMatchMember } from "@/hooks/useMember";
 import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
+import { isNewRoutine } from "@/store/isNewRoutine.store";
+import { useProfileInfo } from "@/store/profileInfo.store";
+import { useRoutineStore } from "@/store/routine.store";
 import { WhiteSpace } from "@/style/global";
 import { formatCurrentDate } from "@/utils/formatDate";
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { styled } from "styled-components";
 
-const DATA = [
-  { profileImageUrl: "", name: "가가가" },
-  { profileImageUrl: "", name: "나나나" },
-  { profileImageUrl: "", name: "다다다" },
-  { profileImageUrl: "", name: "라라라" },
-  { profileImageUrl: "", name: "마마마" },
-  { profileImageUrl: "", name: "바바바" },
-  { profileImageUrl: "", name: "사사사" },
-  { profileImageUrl: "", name: "아아아" },
-  { profileImageUrl: "", name: "자자자" },
-  { profileImageUrl: "", name: "차차차" },
-  { profileImageUrl: "", name: "카카카" },
-  { profileImageUrl: "", name: "타타타" },
-  { profileImageUrl: "", name: "파파파" },
-  { profileImageUrl: "", name: "하하하" }
-];
-
 const MemberRoutine = () => {
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const { data: authData, isLoading: authLoading, refetch } = useFetchAuth();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isDragging, setIsDragging] = useState<boolean>(false); // 드래그 상태 추가
+  const [isCoach, setIsCoach] = useState(false);
+  const resetRoutine = useRoutineStore((set) => set.resetRoutine);
+  const setIsNewRoutine = isNewRoutine((set) => set.setIsNewRoutine);
+  const setUserId = useProfileInfo((set) => set.setUserId);
+  const userId = useProfileInfo((state) => state.userId);
   const iconSize = useResponsiveIconSize("3vw", "16px", 600);
-  const { data, isLoading, isError } = useGetRoutines();
+  const memberRoutineResponse = useGetRoutines({ userId });
+  const { data = [], isLoading: memberLoading } = useMatchMember(isCoach);
+  console.log(userId);
 
-  if (isLoading) return <div>로딩 중...</div>;
-  if (isError || !data) return <div>무언가 잘못됨</div>;
+  useEffect(() => {
+    refetch().then(() => {
+      setIsCoach(authData?.isCoach || false);
+    });
+  }, [authData, refetch]);
+
+  if (authLoading || memberLoading) return <Loading />;
+
+  if (memberRoutineResponse.isLoading) return <div>로딩 중...</div>;
+  if (memberRoutineResponse.isError || !memberRoutineResponse.data)
+    return <div>무언가 잘못됨</div>;
+
+  const matchData = data.filter((d) => d.isMatching === true);
+  const memberData = matchData.find((d) => d.userId === userId);
 
   const currentDate = formatCurrentDate();
 
-  const handleKeyDown = () => {
-    const textarea = textareaRef.current;
-    if (textarea) {
-      textarea.style.height = "auto";
-      textarea.style.height = `${textarea.scrollHeight}px`; // 입력에 따라 높이 조정
-    }
-  };
-
   // 드래그 중이 아닐 때만 openHandler 실행
   const openHandler = () => {
-    if (!isDragging) {
+    if (memberData === undefined) {
+      toast.error("유저 정보를 찾을 수 없습니다.");
+    } else if (!isDragging) {
       setIsOpen(!isOpen);
+      setIsNewRoutine(true);
+      resetRoutine();
+      setUserId(memberData.userId);
     }
   };
 
@@ -60,41 +67,46 @@ const MemberRoutine = () => {
       {isOpen && <BlurStyle />}
       <MemberRoutineStyle>
         <div className="title">내 회원</div>
-        <SliderProfileList data={DATA} />
+        <SliderProfileList data={matchData} />
         <Wrap>
           <MemberDescriptionStyle>
             <MemberTagsStyle>
-              <MemberTagStyle color="primary">#헬스</MemberTagStyle>
-              <MemberTagStyle color="review">#필라테스</MemberTagStyle>
+              {memberData?.interestedSports?.map((sport) => {
+                return (
+                  <MemberTagStyle key={sport.sportId} color="review">
+                    #{sport.sportName}
+                  </MemberTagStyle>
+                );
+              })}
             </MemberTagsStyle>
-            <div className="date">트레이닝 시작일 : 2024. 10. 02.</div>
+            <div className="date">
+              트레이닝 시작일 : {memberData?.startDate}
+            </div>
           </MemberDescriptionStyle>
           <ChatButtontyle>
             <div className="chat">채팅하기</div>
             <IconButton name="chat" size={iconSize} color="text" />
           </ChatButtontyle>
         </Wrap>
-        <UnderlinedInput
-          rows={1}
-          placeholder="회원님께 오늘의 한마디를 남겨주세요"
-          onKeyDown={handleKeyDown}
-          ref={textareaRef}
-        />
         <RoutineTextStyle>
           <h1>오늘의 루틴</h1>
           <p className="b3">{currentDate}</p>
         </RoutineTextStyle>
-        <Progress value={data.completionPercentage} />
-        <RoutineList routines={data.routines} isCheck={false} />
+        <Progress value={memberRoutineResponse.data.completionPercentage} />
+        <RoutineList
+          routines={memberRoutineResponse.data.routines}
+          isCheck={false}
+        />
         <WhiteSpace $height={80} />
         <DraggableIcon isDraggingFn={setIsDragging}>
           {isOpen ? (
             <AddModal openHandler={openHandler} />
           ) : (
-            <IconButton
+            <SvgIcon
               name="addRoutine"
-              size="60px"
-              color="primary"
+              width="60px"
+              height="60px"
+              fill="primary"
               onClick={openHandler}
             />
           )}
@@ -213,19 +225,4 @@ const RoutineTextStyle = styled.div`
     }
   }
 `;
-
-const UnderlinedInput = styled.textarea`
-  border: none;
-  border-top: 2px solid #666666; /* 위쪽 선 */
-  border-bottom: 2px solid #666666; /* 아래쪽 선 */
-  background: none;
-  outline: none;
-  padding: 8px;
-  font-size: 16px;
-  width: 100%; /* 너비를 100%로 설정 */
-  resize: none; /* 사용자가 크기를 조절하지 못하도록 설정 */
-  overflow: hidden; /* 내용이 넘치지 않도록 설정 */
-  color: white;
-`;
-
 export default MemberRoutine;

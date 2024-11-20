@@ -38,7 +38,3 @@ export interface IRoutineQuery {
   coachId?: number;
   userId?: number;
 }
-
-export interface ICompletedRoutine {
-  completedRoutineId: number;
-}

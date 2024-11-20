@@ -1,3 +1,4 @@
+import useResponsiveIconSize from "@/hooks/useResponsiveIconSize";
 import profile from "@/assets/images/profile.png";
 import { IGetMyCoach } from "@/models/coach.model";
 import { isSelectProfile } from "@/store/isSelectProfile.store";
@@ -31,6 +32,8 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
     }
   };
 
+  const iconSize = useResponsiveIconSize("16px", "20px", 375);
+
   return (
     <CoachProfileStyle>
       <CoachProfileContainer
@@ -40,8 +43,8 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
         <CoachProfileImageStyle src={imageUrl} alt="profile" />
         {coach.isMatching === false && (
           <>
-            <Overlay /> {/* 어두운 오버레이 */}
-            <OverlayText>{coach.coachName}</OverlayText>
+            <Overlay />
+            <OverlayText>매칭 대기중</OverlayText>
           </>
         )}
       </CoachProfileContainer>
@@ -49,7 +52,7 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
         <CoachNameStyle>
           <p className="name">{coach.coachName}</p>
           <div className="heart-section">
-            <Heart checked={coach.isLiked} size="20px" id={coach.coachId} />
+            <Heart checked={coach.isLiked} size={iconSize} id={coach.coachId} />
           </div>
         </CoachNameStyle>
         <p className="address">{coach.localAddress}</p>
@@ -104,7 +107,6 @@ const CoachProfileStyle = styled.div`
       transform: translateY(1px);
     }
   }
-
   .address {
     color: #808080;
     font-size: 2vw;
