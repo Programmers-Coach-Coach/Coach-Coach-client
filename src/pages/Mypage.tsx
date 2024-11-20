@@ -260,6 +260,7 @@ const Container = styled.div`
   margin: 0 auto;
   box-sizing: border-box;
   gap: 15px;
+  margin-top: 15px;
 `;
 
 export default Mypage;
