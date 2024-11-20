@@ -28,7 +28,7 @@ export const SORT_MAP = [
   },
   {
     screenName: "리뷰순",
-    urlName: "reivew"
+    urlName: "review"
   },
   {
     screenName: "좋아요순",
