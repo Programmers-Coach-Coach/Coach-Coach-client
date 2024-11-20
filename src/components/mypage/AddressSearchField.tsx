@@ -7,8 +7,9 @@ import CommonInput from "../common/InputField/Text/CommonInput";
 interface AddressSearchFieldProps {
   type: string;
   value: string;
-  onAddressSelect: (address: string) => void;
+  label?: string; // label prop을 옵셔널로 추가
   inputWidth?: string;
+  onAddressSelect: (address: string) => void;
 }
 
 const AddressSearchField = ({
