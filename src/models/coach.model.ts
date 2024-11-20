@@ -6,6 +6,7 @@ export interface IPopularCoach {
   profileImageUrl: string;
   description: string;
   countOfLikes: number;
+  reviewRating: number;
   isLiked: boolean;
   coachingSports: ICoachingSports[];
 }

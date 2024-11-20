@@ -4,35 +4,34 @@ import { Controller, useForm } from "react-hook-form";
 import styled from "styled-components";
 import RatingStars from "../common/Card/ReviewCard.tsx/RatingStars";
 
-export type TReviewMethod = "enroll" | "edit";
-
 interface Props {
-  coachId: number; //  리뷰 작성 시 코치 아이디, 리뷰 수정 시 리뷰 아이디
-  onClose: () => void;
+  coachId: number;
+  coachName: string;
   type: TReviewMethod;
-  reviewId: number | null;
-  // refetchCoachId?: number;
 }
 
-const ReviewInner = ({ coachId, onClose, type, reviewId }: Props) => {
+export type TReviewMethod = "enroll" | "edit";
+
+const AddReviewInner = ({ coachId, coachName, type }: Props) => {
   const { mutate: postMutate } = usePostReview(coachId);
   const { mutate: editMutate } = useEditReview(coachId);
-
   const { control, handleSubmit } = useForm<IPostReview>();
 
   const onSubmit = (data: IPostReview) => {
     if (type === "enroll") {
       postMutate({ coachId, data });
+      // onClose();
     } else {
-      if (reviewId) editMutate({ reviewId, data });
+      console.log("수정");
+      editMutate({ reviewId: coachId, data });
+      // onClose();
     }
-    onClose();
   };
 
   return (
     <Wrapper onSubmit={handleSubmit(onSubmit)}>
       <StarSection>
-        <p className="title__input">하주영님을 추천하시겠어요?</p>
+        <p className="title__input">{coachName}님을 추천하시겠어요?</p>
         <div className="stars__input">
           <Controller
             control={control}
@@ -48,13 +47,13 @@ const ReviewInner = ({ coachId, onClose, type, reviewId }: Props) => {
         <p className="title__input">자세한 후기를 남겨주세요</p>
         <TextInput>
           {/* <NameWrapper>
-          <span className="name">{nameMasking("하주영")}</span>
-          <CoachRating>
-            <SvgIcon name="star" fill="review" width="16px" height="16px" />
-            {Number(1).toFixed(1)}
-          </CoachRating>
-        </NameWrapper>
-        <CreatedAt className="created-at">{"hihihi"}</CreatedAt> */}
+            <span className="name">{nameMasking("하주영")}</span>
+            <CoachRating>
+              <SvgIcon name="star" fill="review" width="16px" height="16px" />
+              {Number(1).toFixed(1)}
+            </CoachRating>
+          </NameWrapper>
+          <CreatedAt className="created-at">{"hihihi"}</CreatedAt> */}
           <ReviewText
             placeholder="코치에 대한 리뷰를 적어주세요"
             {...control.register("contents", {
@@ -74,7 +73,6 @@ const Wrapper = styled.form`
   font-weight: 600;
   line-height: 26px;
   letter-spacing: -0.375px;
-  padding: 20px;
 `;
 
 const StarSection = styled.div`
@@ -94,12 +92,7 @@ const StarSection = styled.div`
   }
 `;
 
-const TextSection = styled.div`
-  .title__input {
-    text-align: center;
-    padding: 15px 0;
-  }
-`;
+const TextSection = styled.div``;
 
 const TextInput = styled.div`
   background-color: #111111;
@@ -176,4 +169,4 @@ const Button = styled.button`
   margin-bottom: 16px;
 `;
 
-export default ReviewInner;
+export default AddReviewInner;

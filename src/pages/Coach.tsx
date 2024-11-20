@@ -4,12 +4,21 @@ import Summary from "@/components/coach/Summary";
 import Loading from "@/components/loading/Loading";
 import CoachProfile from "@/components/Profile/CoachProfile";
 import useCoachDetail from "@/hooks/queries/useCoachDetail";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+
+export type ScreenStatus = "addReview" | "showProfile";
 
 const Coach = () => {
   const { id } = useParams();
   const { data, isError, isLoading } = useCoachDetail(Number(id));
+
+  const [screenStatus, setScreenStatus] = useState<ScreenStatus>("showProfile");
+
+  const handleScreenChange = (status: ScreenStatus) => {
+    setScreenStatus(status);
+  };
 
   if (isLoading) return <Loading />;
   if (isError || !data) {
@@ -39,22 +48,28 @@ const Coach = () => {
   return (
     <Wrapper>
       <CoachProfile coach={coach} />
-      <Summary
-        activeHours={data.activeHours}
-        reviewRating={data.reviewRating}
-        memberCount={data.totalUserCount}
-      />
-      {!data.isSelf && (
+      {screenStatus === "showProfile" && (
         <>
-          <MatchButtons
-            coachId={data.coachId}
-            chattingUrl={data.chattingUrl}
-            matchButtonDisabled={data.isContacted || data.isMatched}
+          <Summary
+            activeHours={data.activeHours}
+            reviewRating={data.reviewRating}
+            memberCount={data.totalUserCount}
+          />
+          {!data.isSelf && (
+            <>
+              <MatchButtons
+                coachId={data.coachId}
+                chattingUrl={data.chattingUrl}
+                matchButtonDisabled={data.isContacted || data.isMatched}
+              />
+            </>
+          )}
+          <CoachDetails
+            coach={data}
+            onChangeScreenStatus={handleScreenChange}
           />
         </>
       )}
-      <CoachDetails coach={data} />
-      {/* <DetailInfo coach={data} /> */}
     </Wrapper>
   );
 };

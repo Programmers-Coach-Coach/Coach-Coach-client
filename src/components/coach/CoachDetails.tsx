@@ -1,4 +1,5 @@
 import { ICoachDetail } from "@/models/coach.model";
+import { ScreenStatus } from "@/pages/Coach";
 import { useState } from "react";
 import styled from "styled-components";
 import DefaultTab from "../tab/DefaultTab";
@@ -8,8 +9,9 @@ import Review from "./Review";
 
 interface Props {
   coach: ICoachDetail;
+  onChangeScreenStatus: (status: ScreenStatus) => void;
 }
-const CoachDetails = ({ coach }: Props) => {
+const CoachDetails = ({ coach, onChangeScreenStatus }: Props) => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
 
   const handleTabChange = (index: number) => {
@@ -34,7 +36,11 @@ const CoachDetails = ({ coach }: Props) => {
           <ActiveCenterMap roadNameAddress={coach.activeCenter} />
         )}
         {activeTabIndex === 2 && (
-          <Review coachId={coach.coachId} isMatched={coach.isMatched} />
+          <Review
+            coachId={coach.coachId}
+            isMatched={coach.isMatched}
+            onChangeScreenStatus={onChangeScreenStatus}
+          />
         )}
       </Details>
     </div>
