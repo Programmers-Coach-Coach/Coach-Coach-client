@@ -3,7 +3,7 @@ export const API_PATH = {
   popularCoaches: "/v1/popular-coaches",
   sports: "/v1/sports",
   routine: "/v2/routines",
-  userProfile: "/v1routines/user",
+  userProfile: "/v1/routines/user",
   category: "/v1/categories",
   action: "/v1/actions",
   getCoachAll: "/v1/coaches-all",
@@ -29,5 +29,7 @@ export const API_PATH = {
   match: "/v1/coaches/matches",
   recordChart: "/v1/records/charts",
   recordV2: "/v2/records",
-  review: "/v1/coaches/reviews"
+  review: "/v1/coaches/reviews",
+  memberChat: "/v1/users/chat-rooms",
+  coachChat: "v1/coaches/chat-rooms"
 };

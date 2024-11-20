@@ -10,11 +10,11 @@ const Progress = ({ value }: ProgressProps) => {
     <>
       <ProgressStyle>
         <p>달성률</p>
-        <p className="percent">{value}%</p>
+        <p className="percent">{value * 100}%</p>
       </ProgressStyle>
       <LinearProgress
         variant="determinate"
-        value={value}
+        value={value * 100}
         sx={{
           height: 30,
           borderRadius: 2,

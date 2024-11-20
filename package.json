@@ -23,6 +23,7 @@
     "@mui/x-date-pickers": "^7.13.0",
     "@sentry/react": "^8.22.0",
     "@sentry/vite-plugin": "^2.21.1",
+    "@stomp/stompjs": "^7.0.0",
     "@tanstack/react-query": "^5.51.23",
     "@tanstack/react-query-devtools": "^5.51.16",
     "axios": "^1.7.2",
@@ -49,6 +50,7 @@
     "react-time-picker": "^7.0.0",
     "react-use": "^17.5.1",
     "slick-carousel": "^1.8.1",
+    "sockjs-client": "^1.6.1",
     "styled-components": "^6.1.12",
     "uuid": "^10.0.0",
     "zustand": "^4.5.4"
@@ -76,6 +78,7 @@
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@types/react-slick": "^0.23.13",
+    "@types/sockjs-client": "^1.5.4",
     "@typescript-eslint/eslint-plugin": "^7.16.1",
     "@typescript-eslint/parser": "^7.16.1",
     "@vitejs/plugin-react": "^4.2.1",
