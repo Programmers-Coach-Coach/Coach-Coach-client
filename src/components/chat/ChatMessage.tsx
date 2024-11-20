@@ -20,24 +20,12 @@ const ChatMessage = () => {
   const [messages, setMessages] = useState<Message[]>([]); // 메시지 상태
   const [inputValue, setInputValue] = useState(""); // 입력 필드 상태
 
-  const initialMessages = [
-    { content: "안녕하세요.", sender: "나" },
-    { content: "제가 지금 재활치료를 받고 있는데요", sender: "나" },
-    { content: "병행해서 트레이닝 가능할까요?", sender: "나" },
-    { content: "반갑습니다, 정회원님😄", sender: nickname },
-    { content: "물론입니다!", sender: nickname },
-    {
-      content:
-        "저는 헬스트레이너 지도사 1급과 함께 운동 처방사 1급 자격증도 보유하고 있어서 안전하고 효율적인 트레이닝이 가능합니다.",
-      sender: nickname
-    }
-  ];
-  // 입력 필드 변경 핸들러
+  const initialMessages: Message[] = []; // 빈 배열로 초기화
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
-  // 메시지 전송
   const sendMessage = () => {
     if (inputValue) {
       const newMessage: Message = {
@@ -50,7 +38,7 @@ const ChatMessage = () => {
   };
 
   useEffect(() => {
-    setMessages(initialMessages); // 기존 메시지 가져오기
+    setMessages(initialMessages); // 초기 메시지 가져오기
   }, [chatRoomId]);
 
   const title = (() => {
