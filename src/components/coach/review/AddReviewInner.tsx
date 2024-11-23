@@ -1,8 +1,8 @@
+import RatingStars from "@/components/common/Card/ReviewCard.tsx/RatingStars";
 import { useEditReview, usePostReview } from "@/hooks/queries/useReview";
 import { IPostReview } from "@/models/review.model";
 import { Controller, useForm } from "react-hook-form";
 import styled from "styled-components";
-import RatingStars from "../common/Card/ReviewCard.tsx/RatingStars";
 
 interface Props {
   coachId: number;

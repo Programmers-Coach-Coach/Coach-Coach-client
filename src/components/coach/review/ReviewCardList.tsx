@@ -1,4 +1,4 @@
-import ReviewCard from "@/components/coach/detail/ReviewCard";
+import ReviewCard from "@/components/coach/review/ReviewCard.tsx";
 import { IReview } from "@/models/coach.model";
 import styled from "styled-components";
 
