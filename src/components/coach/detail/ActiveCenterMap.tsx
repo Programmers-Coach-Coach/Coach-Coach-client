@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import styled from "styled-components";
-import EmptyVersion2 from "../common/Empty/EmptyVersion2";
+import EmptyVersion2 from "../../common/Empty/EmptyVersion2";
 
 interface Props {
   roadNameAddress: string | null;

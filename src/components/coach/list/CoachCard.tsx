@@ -5,9 +5,9 @@ import { Sports } from "@/style/theme";
 import { getImgixUrl } from "@/utils/imgix";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import SportChip from "../common/Chip/SportChip";
-import Heart from "../common/InputField/CheckBox/Heart";
-import SvgIcon from "../Icon/SvgIcon";
+import SportChip from "../../common/Chip/SportChip";
+import Heart from "../../common/InputField/CheckBox/Heart";
+import SvgIcon from "../../Icon/SvgIcon";
 
 interface Props {
   coach: ICoach;
@@ -17,9 +17,9 @@ const Coach = ({ coach }: Props) => {
 
   const profileImageUrl = coach.profileImageUrl
     ? getImgixUrl(coach.profileImageUrl, {
-        w: 84, // 최대 사이즈
+        w: 84,
         h: 84,
-        dpr: window.devicePixelRatio > 1 ? 2 : 1, // 고해상도 기기에서 2배 크기로 이미지 요청
+        dpr: window.devicePixelRatio > 1 ? 2 : 1,
         auth: "format"
       })
     : profilePath;

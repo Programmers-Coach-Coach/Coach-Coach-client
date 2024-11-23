@@ -1,5 +1,5 @@
-import Coaches from "@/components/coach/CoachList";
-import CoachListFilter from "@/components/coach/CoachListFilter";
+import Coaches from "@/components/coach/list/CoachList";
+import CoachListFilter from "@/components/coach/list/CoachListFilter";
 import Search from "@/components/common/InputField/search/Search";
 import { WhiteSpace } from "@/style/global";
 import styled from "styled-components";

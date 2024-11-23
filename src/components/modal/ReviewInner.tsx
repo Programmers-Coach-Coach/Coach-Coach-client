@@ -11,7 +11,6 @@ interface Props {
   onClose: () => void;
   type: TReviewMethod;
   reviewId: number | null;
-  // refetchCoachId?: number;
 }
 
 const ReviewInner = ({ coachId, onClose, type, reviewId }: Props) => {

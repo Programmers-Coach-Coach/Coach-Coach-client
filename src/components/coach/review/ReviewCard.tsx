@@ -2,7 +2,7 @@ import { IReview } from "@/models/coach.model";
 import { timeFormat } from "@/utils/format";
 import { nameMasking } from "@/utils/masking";
 import styled from "styled-components";
-import SvgIcon from "../Icon/SvgIcon";
+import SvgIcon from "../../Icon/SvgIcon";
 
 interface Props {
   review: IReview;

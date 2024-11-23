@@ -1,6 +1,6 @@
+import ReviewCard from "@/components/coach/review/ReviewCard.tsx";
 import { IReview } from "@/models/coach.model";
 import styled from "styled-components";
-import ReviewCard from "./ReviewCard";
 
 interface Props {
   reviews: IReview[];
