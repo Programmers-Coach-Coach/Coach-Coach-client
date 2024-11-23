@@ -1,7 +1,7 @@
+import CustomButton from "@/components/common/Button/CustomButton";
 import { useContact } from "@/hooks/queries/useContact";
 import toast from "react-hot-toast";
 import styled from "styled-components";
-import CustomButton from "../common/Button/CustomButton";
 
 interface Props {
   coachId: number;

@@ -1,9 +1,9 @@
+import TwoButtonContent from "@/components/common/modal/contents/TwoButtonContent";
+import Modal from "@/components/common/modal/Modal";
+import ReviewInner from "@/components/modal/ReviewInner";
 import useModal from "@/hooks/useModal";
 import { ScreenStatus } from "@/pages/Coach";
 import styled from "styled-components";
-import TwoButtonContent from "../common/modal/contents/TwoButtonContent";
-import Modal from "../common/modal/Modal";
-import ReviewInner from "../modal/ReviewInner";
 
 interface Props {
   isMyReviewAdded: boolean;

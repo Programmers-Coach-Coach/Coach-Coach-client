@@ -1,11 +1,11 @@
+import SvgIcon from "@/components/Icon/SvgIcon";
+import Modal from "@/components/common/modal/Modal";
+import OneButtonContent from "@/components/common/modal/contents/OneButtonContent";
+import FilterPicker from "@/components/common/modal/contents/filterPicker/FilterPicker";
+import GenderRadio from "@/components/common/modal/contents/filterPicker/GenderRadio";
 import useCoachFilter from "@/hooks/useCoachFilter";
 import useModal from "@/hooks/useModal";
 import styled from "styled-components";
-import SvgIcon from "../Icon/SvgIcon";
-import Modal from "../common/modal/Modal";
-import OneButtonContent from "../common/modal/contents/OneButtonContent";
-import FilterPicker from "../common/modal/contents/filterPicker/FilterPicker";
-import GenderRadio from "../common/modal/contents/filterPicker/GenderRadio";
 
 const CoachListFilter = () => {
   const {

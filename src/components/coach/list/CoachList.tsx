@@ -1,10 +1,10 @@
+import EmptyVersion2 from "@/components/common/Empty/EmptyVersion2";
+import Loading from "@/components/loading/Loading";
 import useCoachList from "@/hooks/useCoachList";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 import useQueryString from "@/hooks/useQueryString";
 import styled from "styled-components";
-import EmptyVersion2 from "../common/Empty/EmptyVersion2";
-import Loading from "../loading/Loading";
-import Coach from "./Coach";
+import CoachCard from "./CoachCard";
 
 const CoachList = () => {
   const { getKeyword, getSort, getSports } = useQueryString();
@@ -26,7 +26,7 @@ const CoachList = () => {
       {coaches.length > 0 ? (
         <CoachListStyle>
           {coaches.map((coach) => (
-            <Coach coach={coach} key={coach.coachId} />
+            <CoachCard coach={coach} key={coach.coachId} />
           ))}
           <div ref={setTarget}></div>
           {isFetchingNextPage && <Loading textDisabled />}

@@ -5,9 +5,9 @@ import { Sports } from "@/style/theme";
 import { getImgixUrl } from "@/utils/imgix";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import SportChip from "../common/Chip/SportChip";
-import Heart from "../common/InputField/CheckBox/Heart";
-import SvgIcon from "../Icon/SvgIcon";
+import SportChip from "../../common/Chip/SportChip";
+import Heart from "../../common/InputField/CheckBox/Heart";
+import SvgIcon from "../../Icon/SvgIcon";
 
 interface Props {
   coach: ICoach;

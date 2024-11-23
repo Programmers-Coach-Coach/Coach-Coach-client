@@ -1,7 +1,7 @@
+import SportChip from "@/components/common/Chip/SportChip";
 import { ICoachingSports } from "@/models/sports.model";
 import { Sports } from "@/style/theme";
 import styled from "styled-components";
-import SportChip from "../common/Chip/SportChip";
 
 interface Props {
   introduction: string;

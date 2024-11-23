@@ -1,4 +1,4 @@
-import PopularCoaches from "@/components/coaches/PopularCoaches";
+import PopularCoaches from "@/components/coach/list/PopularCoaches";
 import SvgIcon from "@/components/Icon/SvgIcon";
 import ReactHelmet from "@/components/SEO/ReactHelmet";
 import SportsList from "@/components/sports/SportsList";

@@ -1,8 +1,8 @@
+import EmptyVersion2 from "@/components/common/Empty/EmptyVersion2";
+import Loading from "@/components/loading/Loading";
 import { useGetPopularCoaches } from "@/hooks/useHome";
 import styled from "styled-components";
-import PopularCoach from "../coach/PopularCoach";
-import EmptyVersion2 from "../common/Empty/EmptyVersion2";
-import Loading from "../loading/Loading";
+import PopularCoach from "./PopularCoach";
 
 const PopularCoaches = () => {
   const { data, isLoading, isError } = useGetPopularCoaches();

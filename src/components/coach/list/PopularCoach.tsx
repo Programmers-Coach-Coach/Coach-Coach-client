@@ -2,13 +2,13 @@ import profilePath from "@/assets/images/profile.png";
 import top1 from "@/assets/images/topRanks/top-rank-1.svg";
 import top2 from "@/assets/images/topRanks/top-rank-2.svg";
 import top3 from "@/assets/images/topRanks/top-rank-3.svg";
+import Heart from "@/components/common/InputField/CheckBox/Heart";
+import SvgIcon from "@/components/Icon/SvgIcon";
 import { IPopularCoach } from "@/models/coach.model";
 import { LineClamp } from "@/style/global";
 import { Sports } from "@/style/theme";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Heart from "../common/InputField/CheckBox/Heart";
-import SvgIcon from "../Icon/SvgIcon";
 
 interface Props {
   coach: IPopularCoach;

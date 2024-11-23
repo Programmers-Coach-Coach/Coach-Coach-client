@@ -4,28 +4,28 @@ import { Toaster } from "react-hot-toast";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import { queryClient } from "./api/queryClient";
+import ChatMessage from "./components/chat/ChatMessage";
 import Layout from "./components/layout/Layout";
+import Chat from "./pages/Chat";
 import Coach from "./pages/Coach";
 import CoachList from "./pages/CoachList";
+import First from "./pages/First";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Mypage from "./pages/Mypage";
 import Notification from "./pages/Notification";
+import Profile from "./pages/Profile";
 import Record from "./pages/Record";
 import RecordDatail from "./pages/RecordDatail";
+import AddRoutine from "./pages/Routine/AddRoutine";
 import CoachRoutine from "./pages/Routine/CoachRoutine";
 import MemberRoutine from "./pages/Routine/MemberRoutine";
+import MyMember from "./pages/Routine/MyMember";
+import Routine from "./pages/Routine/Routine";
 import Signup from "./pages/Signup";
+import TotalLogin from "./pages/TotalLogin";
 import { GlobalStyle } from "./style/global";
 import { theme } from "./style/theme";
-import Routine from "./pages/Routine/Routine";
-import First from "./pages/First";
-import TotalLogin from "./pages/TotalLogin";
-import AddRoutine from "./pages/Routine/AddRoutine";
-import Profile from "./pages/Profile";
-import MyMember from "./pages/Routine/MyMember";
-import Chat from "./pages/Chat";
-import ChatMessage from "./components/chat/ChatMessage";
 
 function App() {
   const router = createBrowserRouter([

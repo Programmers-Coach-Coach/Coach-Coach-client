@@ -1,11 +1,11 @@
+import Review from "@/components/coach/review/Review";
+import DefaultTab from "@/components/tab/DefaultTab";
 import { ICoachDetail } from "@/models/coach.model";
 import { ScreenStatus } from "@/pages/Coach";
 import { useState } from "react";
 import styled from "styled-components";
-import DefaultTab from "../tab/DefaultTab";
 import ActiveCenterMap from "./ActiveCenterMap";
 import Introduction from "./Introduction";
-import Review from "./Review";
 
 interface Props {
   coach: ICoachDetail;
