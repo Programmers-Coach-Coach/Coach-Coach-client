@@ -30,7 +30,6 @@ const Review = ({ coachId, isMatched, onChangeScreenStatus }: Props) => {
     isLoading,
     isError
   } = useReviewList(coachId, sortOptions[filterId]);
-
   const handlePickFilter = (id: number) => {
     setFilterId(id);
   };

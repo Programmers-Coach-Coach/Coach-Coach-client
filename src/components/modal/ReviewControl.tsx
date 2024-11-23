@@ -58,7 +58,6 @@ const ReviewControl = ({ reviewId, coachId }: Props) => {
             coachId={reviewId}
             type="edit"
             reviewId={null}
-            // refetchCoachId={coachId}
           />
         </Modal>
       )}
