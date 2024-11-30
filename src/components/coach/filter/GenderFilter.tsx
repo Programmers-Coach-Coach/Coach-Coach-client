@@ -1,7 +1,7 @@
 import SvgIcon from "@/components/Icon/SvgIcon";
 import { GENDER_VALUES } from "@/constants/filter";
 import useCoachFilter from "@/hooks/useCoachFilter";
-import { GenderSelectButton } from "./FilterPicker.css";
+import { GenderSelectButton } from "@/style/Filter.css";
 
 interface Props {
   onChangeModal: () => void;

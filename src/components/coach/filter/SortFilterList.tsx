@@ -1,5 +1,5 @@
 import { SORT_MAP } from "@/constants/filter";
-import { FilterButton, Filters } from "./FilterPicker.css";
+import { FilterButton, Filters } from "@/style/Filter.css.ts";
 
 interface Props {
   sort: number;

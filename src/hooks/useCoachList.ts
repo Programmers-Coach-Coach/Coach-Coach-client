@@ -6,13 +6,14 @@ const PER_PAGE = 20;
 const useCoachList = (
   search: string | null,
   sort: string,
-  sportsIds: number[]
+  sportsIds: number[],
+  gender: string | null
 ) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } =
     useInfiniteQuery<ICoachList>({
-      queryKey: ["coach-infiniteScroll", search, sort, sportsIds],
+      queryKey: ["coach-infiniteScroll", search, sort, sportsIds, gender],
       queryFn: ({ pageParam }) =>
-        getCoachAll(pageParam as number, search, sort, sportsIds),
+        getCoachAll(pageParam as number, search, sort, sportsIds, gender),
       getNextPageParam: (lastPage) => {
         const nextPage = lastPage.currentPage + 1;
         return lastPage.totalCount > lastPage.currentPage * PER_PAGE
