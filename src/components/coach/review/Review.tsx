@@ -7,7 +7,7 @@ import { useState } from "react";
 import styled, { css } from "styled-components";
 import RatingStars from "../../common/Card/ReviewCard.tsx/RatingStars";
 import EmptyVersion2 from "../../common/Empty/EmptyVersion2";
-import ReviewFilter from "../../common/modal/contents/review/ReviewFilter";
+import ReviewFilter from "../../common/modal/contents/filter/ReviewFilter";
 import Modal from "../../common/modal/Modal";
 import SvgIcon from "../../Icon/SvgIcon";
 import Loading from "../../loading/Loading";
