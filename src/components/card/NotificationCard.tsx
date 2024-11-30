@@ -27,6 +27,8 @@ const NotificationCard = ({
     mutate(id);
   };
 
+  const formattedMessage = message.replace(/([!.])\s*/g, "$1\n");
+
   return (
     <ReviewCardStyle>
       <img
@@ -37,10 +39,10 @@ const NotificationCard = ({
       />
       <Main>
         <div className="name-wrapper">
-          <div className="name">{nickname}</div>
+          <div className="name">{nickname}</div>&nbsp;
           <div className="timestamp">· {timeAgo(createdAt)}</div>
         </div>
-        <div className="message">{message}</div>
+        <div className="message">{formattedMessage}</div>
       </Main>
       <SvgIcon
         name="x"
@@ -96,7 +98,7 @@ const Main = styled.div`
     font-weight: 200;
     line-height: 19px;
     letter-spacing: -0.65px;
-    word-break: keep-all;
+    white-space: pre-line;
   }
 
   .timestamp {

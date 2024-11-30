@@ -28,7 +28,7 @@ const Notification = () => {
 
   return (
     <NotificationStyle>
-      <Button onClick={handleDelete}>모두 읽기</Button>
+      <Button onClick={handleDelete}>모두 삭제</Button>
       <div className="contents">
         {data.length ? (
           data.map((item) => (
@@ -58,7 +58,6 @@ const Notification = () => {
 const NotificationStyle = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 30px;
 
   .contents {
     display: flex;
@@ -68,9 +67,9 @@ const NotificationStyle = styled.div`
 `;
 
 const Button = styled.button`
-  color: ${({ theme }) => theme.color.primary};
+  color: #767676;
   display: flex;
-  margin-left: auto;
+  margin: 10px 0 10px auto;
 `;
 
 export default Notification;
