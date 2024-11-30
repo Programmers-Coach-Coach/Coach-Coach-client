@@ -1,6 +1,6 @@
 import SvgIcon from "@/components/Icon/SvgIcon";
 import { useLikePost, useUnLikePost } from "@/hooks/queries/useLikes";
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import styled from "styled-components";
 
 interface Props {
@@ -13,6 +13,10 @@ const Heart = ({ id, checked, size }: Props) => {
   const [isChecked, setIsChecked] = useState(checked);
   const { mutate: mutateLike } = useLikePost(id);
   const { mutate: mutateUnlike } = useUnLikePost(id);
+
+  useEffect(() => {
+    setIsChecked(checked);
+  }, [checked]);
 
   const handleHeart = async (e: MouseEvent, id: number) => {
     e.stopPropagation();
