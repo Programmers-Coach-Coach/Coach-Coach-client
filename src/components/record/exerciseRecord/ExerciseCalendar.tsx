@@ -91,6 +91,14 @@ const Wrapper = styled.div`
 `;
 
 const ResponsiveDateCalendar = styled(DateCalendar)`
+  width: 100% !important;
+
+  .MuiPickersCalendarHeader-root {
+    .MuiIconButton-root {
+      color: #fff;
+    }
+  }
+
   &.MuiSvgIcon-root
     MuiSvgIcon-fontSizeMedium
     MuiPickersCalendarHeader-switchViewIcon
