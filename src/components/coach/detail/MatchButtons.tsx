@@ -31,7 +31,7 @@ const MatchButtons = ({ coachId, chattingUrl, matchButtonDisabled }: Props) => {
         variant="outlined"
         onClick={handleKaKaoLink}
       >
-        카카오톡 문의하기
+        채팅 문의하기
       </CustomButton>
       <CustomButton
         size="full-sharp"

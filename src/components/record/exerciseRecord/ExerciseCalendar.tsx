@@ -91,6 +91,14 @@ const Wrapper = styled.div`
 `;
 
 const ResponsiveDateCalendar = styled(DateCalendar)`
+  width: 100% !important;
+
+  .MuiPickersCalendarHeader-root {
+    .MuiIconButton-root {
+      color: #878686; // 그레이 색상 추가
+    }
+  }
+
   &.MuiSvgIcon-root
     MuiSvgIcon-fontSizeMedium
     MuiPickersCalendarHeader-switchViewIcon
