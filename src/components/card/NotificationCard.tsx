@@ -1,3 +1,4 @@
+import profile from "@/assets/images/profile.png";
 import { useDeleteNotification } from "@/hooks/queries/useNotification";
 import { TNotificationType } from "@/models/notification.model";
 import { timeAgo } from "@/utils/format";
@@ -28,13 +29,12 @@ const NotificationCard = ({
   };
 
   const formattedMessage = message.replace(/([!.])\s*/g, "$1\n");
-
   return (
     <ReviewCardStyle>
       <img
         loading="lazy"
         className="notification-img"
-        src={profileImageUrl}
+        src={profileImageUrl ?? profile}
         alt={relationFunction}
       />
       <Main>
@@ -69,8 +69,9 @@ const ReviewCardStyle = styled.div`
   position: relative;
 
   .notification-img {
-    width: 49px;
-    height: 49px;
+    width: 50px;
+    height: 50px;
+    background-color: #878787;
   }
 
   .close-button {
