@@ -48,7 +48,6 @@ const Wrapper = styled.div`
     font-weight: 400;
     line-height: 20px;
     letter-spacing: -0.65px;
-    white-space: pre-line;
   }
 `;
 export default Introduction;
