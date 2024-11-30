@@ -54,7 +54,6 @@ const ExerciseCalender = () => {
         <ResponsiveDateCalendar
           value={value}
           views={["year", "month", "day"]}
-          // reduceAnimations={true}
           onChange={(newValue) => {
             setValue(newValue);
             setYear(newValue.year());
@@ -87,20 +86,28 @@ const ExerciseCalender = () => {
 const Wrapper = styled.div`
   width: 100%;
   margin: 0 auto;
-  box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: ${({ theme }) => theme.borderRadius.default};
   padding: 0;
 `;
 
 const ResponsiveDateCalendar = styled(DateCalendar)`
-  width: 100%;
-  max-width: 100%;
-
   &.MuiSvgIcon-root
     MuiSvgIcon-fontSizeMedium
     MuiPickersCalendarHeader-switchViewIcon
     css-1tkx1wf-MuiSvgIcon-root-MuiPickersCalendarHeader-switchViewIcon {
     fill: #fff !important;
+  }
+
+  .MuiTypography-root.MuiDayCalendar-weekDayLabel {
+    color: #878686;
+
+    &[aria-label="일요일"] {
+      color: #ff4d4d;
+    }
+
+    &[aria-label="토요일"] {
+      color: #4d79ff;
+    }
   }
 `;
 
@@ -113,7 +120,16 @@ const StyledPickersDay = styled(PickersDay)<{
   justify-content: center;
   background-color: ${({ $isSelected, theme }) =>
     $isSelected ? theme.color.background : "transparent"};
-  color: #fff !important;
+
+  &[aria-colindex="1"] {
+    color: #ff4d4d !important;
+  }
+  &[aria-colindex="7"] {
+    color: #4d79ff !important;
+  }
+  &:not([aria-colindex="1"]):not([aria-colindex="7"]) {
+    color: #fff !important; // 평일
+  }
 
   &:after {
     content: "";
