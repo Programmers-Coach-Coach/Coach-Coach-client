@@ -3,9 +3,10 @@ import { useSearchParams } from "react-router-dom";
 
 export const DATE = "date";
 const KEYWORD = "keyword";
-
+const GENDER = "gender";
 const DEFAULT_SORT = "latest";
 const DEFAULT_SPORTS: number[] = [];
+
 export const DEFAULT_KEYWORD = "";
 
 const useQueryString = () => {
@@ -39,6 +40,10 @@ const useQueryString = () => {
     );
   };
 
+  const getGender = (): string | null => {
+    return searchParams.get(GENDER);
+  };
+
   const removeKeyword = () => {
     searchParams.delete(KEYWORD);
     setSearchParams(searchParams);
@@ -51,6 +56,7 @@ const useQueryString = () => {
     getKeyword,
     getSort,
     getSports,
+    getGender,
     removeKeyword
   };
 };

@@ -9,7 +9,8 @@ export const getCoachAll = (
   page: number,
   search: string | null,
   sort: string,
-  sportsIds: number[]
+  sportsIds: number[],
+  gender: string | null
 ) => {
   let latest: boolean | undefined;
   let review: boolean | undefined;
@@ -39,6 +40,7 @@ export const getCoachAll = (
       review,
       liked,
       my,
+      gender,
       page
     },
     {

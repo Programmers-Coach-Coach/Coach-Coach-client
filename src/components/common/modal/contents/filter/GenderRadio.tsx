@@ -1,6 +1,6 @@
+import RadioContent from "@/components/common/modal/contents/RadioContent";
 import { GENDER_VALUES } from "@/constants/filter";
 import useCoachFilter from "@/hooks/useCoachFilter";
-import RadioContent from "../RadioContent";
 
 interface Props {
   onClose: () => void;

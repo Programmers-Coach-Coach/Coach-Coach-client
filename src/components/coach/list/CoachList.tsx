@@ -7,14 +7,15 @@ import styled from "styled-components";
 import CoachCard from "./CoachCard";
 
 const CoachList = () => {
-  const { getKeyword, getSort, getSports } = useQueryString();
+  const { getKeyword, getSort, getSports, getGender } = useQueryString();
 
   const sort = getSort();
   const sportsIds = getSports();
   const keyword = getKeyword();
+  const gender = getGender();
 
   const { coaches, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useCoachList(keyword, sort, sportsIds);
+    useCoachList(keyword, sort, sportsIds, gender);
 
   const { setTarget } = useIntersectionObserver({
     hasNextPage,

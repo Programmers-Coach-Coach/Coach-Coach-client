@@ -1,3 +1,4 @@
+import profile from "@/assets/images/profile.png";
 import { useDeleteNotification } from "@/hooks/queries/useNotification";
 import { TNotificationType } from "@/models/notification.model";
 import { timeAgo } from "@/utils/format";
@@ -27,20 +28,21 @@ const NotificationCard = ({
     mutate(id);
   };
 
+  const formattedMessage = message.replace(/([!.])\s*/g, "$1\n");
   return (
     <ReviewCardStyle>
       <img
         loading="lazy"
         className="notification-img"
-        src={profileImageUrl}
+        src={profileImageUrl ?? profile}
         alt={relationFunction}
       />
       <Main>
         <div className="name-wrapper">
-          <div className="name">{nickname}</div>
+          <div className="name">{nickname}</div>&nbsp;
           <div className="timestamp">· {timeAgo(createdAt)}</div>
         </div>
-        <div className="message">{message}</div>
+        <div className="message">{formattedMessage}</div>
       </Main>
       <SvgIcon
         name="x"
@@ -67,8 +69,9 @@ const ReviewCardStyle = styled.div`
   position: relative;
 
   .notification-img {
-    width: 49px;
-    height: 49px;
+    width: 50px;
+    height: 50px;
+    background-color: #878787;
   }
 
   .close-button {
@@ -96,7 +99,7 @@ const Main = styled.div`
     font-weight: 200;
     line-height: 19px;
     letter-spacing: -0.65px;
-    word-break: keep-all;
+    white-space: pre-line;
   }
 
   .timestamp {

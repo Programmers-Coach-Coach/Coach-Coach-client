@@ -1,9 +1,9 @@
+import SortFilterList from "@/components/coach/filter/SortFilterList";
+import SportsFilterList from "@/components/coach/filter/SportsFilterList";
 import useCoachFilter from "@/hooks/useCoachFilter";
+import { Inner, Section, Text, Wrapper } from "@/style/Filter.css";
 import { forwardRef, useImperativeHandle } from "react";
-import { Inner, Section, Text, Wrapper } from "./FilterPicker.css";
-import GenderFilter from "./GenderFilter";
-import SortFilterList from "./SortFilterList";
-import SportsFilterList from "./SportsFilterList";
+import GenderFilter from "../../../../coach/filter/GenderFilter";
 
 interface Props {
   closeModal: () => void;

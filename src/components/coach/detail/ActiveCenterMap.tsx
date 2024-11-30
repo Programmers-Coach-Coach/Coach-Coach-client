@@ -1,3 +1,4 @@
+import CustomButton from "@/components/common/Button/CustomButton";
 import { useEffect } from "react";
 import styled from "styled-components";
 import EmptyVersion2 from "../../common/Empty/EmptyVersion2";
@@ -62,6 +63,11 @@ const ActiveCenterMap = ({ roadNameAddress }: Props) => {
     });
   };
 
+  const openKakaoMap = (address: string) => {
+    const kakaoMapUrl = `https://map.kakao.com/link/search/${address}`;
+    window.open(kakaoMapUrl, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <Wrapper>
       {roadNameAddress ? (
@@ -69,7 +75,16 @@ const ActiveCenterMap = ({ roadNameAddress }: Props) => {
           <Info>
             <div className="center-address">{roadNameAddress}</div>
           </Info>
-          <Map id="map"></Map>
+          <Map id="map" onClick={() => openKakaoMap(roadNameAddress)}></Map>
+          <CustomButton
+            className="find-route-button"
+            size="full-sharp"
+            variant="contained"
+            fontSize="12px"
+            onClick={() => openKakaoMap(roadNameAddress)}
+          >
+            길찾기
+          </CustomButton>
         </>
       ) : (
         <EmptyVersion2 imgName="noLocation" height="290px">
@@ -87,13 +102,18 @@ const Wrapper = styled.div`
   border-radius: 24px;
   padding: 20px;
   min-height: 330px;
+
+  .find-route-button {
+    margin-top: 20px;
+    width: 100%;
+  }
 `;
 
 const Info = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 
   .center-address {
     font-size: 13px;

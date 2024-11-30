@@ -1,9 +1,8 @@
 import logoPath from "@/assets/images/logo.svg";
+import SvgIcon from "@/components/Icon/SvgIcon";
 import { useFetchAuth } from "@/hooks/useFetchAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-import Icon from "@/components/Icon/Icon";
-import NotificationBadge from "@/components/badge/NotificationBadge";
 
 const LogoHeader = () => {
   const { data } = useFetchAuth();
@@ -12,8 +11,6 @@ const LogoHeader = () => {
   const onClickAlarm = () => {
     navigate("/notification");
   };
-
-  const activePath = (...paths: string[]) => paths.includes(location.pathname);
 
   return (
     <LogoHeaderStyle>
@@ -30,13 +27,9 @@ const LogoHeader = () => {
         )}
         <NotificationButton onClick={onClickAlarm}>
           <NotificationWrapper>
-            <Icon
-              name="alarm"
-              size="25px"
-              color={activePath("/notification") ? "primary" : "gray3"}
-            />
+            <SvgIcon name="alarm" width="18px" height="18px" fill="#fff" />
             {data && data.countOfNotifications > 0 && (
-              <NotificationBadge count={data?.countOfNotifications} />
+              <div className="notification-active"></div>
             )}
           </NotificationWrapper>
         </NotificationButton>
@@ -73,7 +66,9 @@ const RightSection = styled.div`
   h2 {
     display: flex;
     gap: 6px;
+    align-items: flex-end;
   }
+
   span {
     font-size: 12px;
   }
@@ -88,6 +83,16 @@ const NotificationButton = styled.button`
 
 const NotificationWrapper = styled.div`
   position: relative;
+
+  .notification-active {
+    position: absolute;
+    top: -2px;
+    right: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #ff0000;
+  }
 `;
 
 export default LogoHeader;
