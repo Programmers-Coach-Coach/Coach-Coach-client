@@ -1,4 +1,6 @@
+import SendButton from "@/assets/images/SendButton.svg?react";
 import AddRoutine from "@/assets/images/add-routine.svg?react";
+import Alarm from "@/assets/images/alarm.svg?react";
 import ArrowDown from "@/assets/images/arrow-down.svg?react";
 import Delete from "@/assets/images/delete.svg?react";
 import Dumbbell from "@/assets/images/dumbbell.svg?react";
@@ -15,7 +17,6 @@ import Star from "@/assets/images/star.svg?react";
 import Warning from "@/assets/images/warning.svg?react";
 import XCircle from "@/assets/images/x-circle.svg?react";
 import X from "@/assets/images/x.svg?react";
-import SendButton from "@/assets/images/SendButton.svg?react";
 import { CgDetailsMore } from "react-icons/cg";
 import { FaCheck, FaRegStar } from "react-icons/fa";
 import { IoIosArrowBack, IoMdMore } from "react-icons/io";
@@ -28,7 +29,6 @@ import {
   IoHomeOutline,
   IoListOutline,
   IoLogOutOutline,
-  IoNotificationsOutline,
   IoPeopleOutline,
   IoPersonOutline,
   IoTrendingDown
@@ -37,8 +37,7 @@ import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from "react-icons/md";
 
 export const ICONS = {
   profile: IoPersonOutline,
-  alarm: IoNotificationsOutline,
-  // routine: IoBarbellOutline,
+  alarm: Alarm,
   home: IoHomeOutline,
   person: IoPersonOutline,
   twins: IoPeopleOutline,
